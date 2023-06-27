@@ -3,8 +3,13 @@ import styled from "styled-components";
 export const ImgStyled = styled.img`
   height: 200px;
   width: auto;
+
   &:hover {
     transform: scale(1.5);
+  }
+
+  @media (max-width: 768px) {
+    height: 100px;
   }
 `;
 
@@ -22,13 +27,10 @@ export const RotateImgBody = styled.div`
 
   & > .container > .carousel {
     position: absolute;
-    width: 100%;
+    width: 80%;
     height: 100%;
     transform-style: preserve-3d;
     animation: rotate360 60s infinite forwards linear;
-    /* &:hover {
-      animation: paused;
-    } */
   }
 
   & > .container > .carousel > .logoImage {
@@ -69,6 +71,19 @@ export const RotateImgBody = styled.div`
     }
     &:nth-child(9) {
       transform: rotateY(320deg) translateZ(350px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    height: 200px;
+
+    & > .container {
+      width: 80%;
+    }
+
+    & > .container > .carousel > .logoImage {
+      width: 50%;
+      top: 0px;
     }
   }
 

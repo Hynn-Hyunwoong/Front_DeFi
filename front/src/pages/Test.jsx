@@ -43,10 +43,10 @@ export const Test = () => {
           {account}
           <Button colors={"blue"} onClick={handleLogin}>
             {/* {isLogin ? "로그인 됨!" : "로그인 안됨"} */}
-            메타마스크
+            MetaMask 연결하기
           </Button>
-          <Button colors={"green"}>트러스트 월렛</Button>
-          <Button colors={"yellow"}>월렛 커넥트</Button>
+          <Button colors={"green"}>TrustWallet 연결하기</Button>
+          <Button colors={"yellow"}>WalletConnect 연결하기</Button>
           {/* {loading && <Loader />} */}
         </div>
       )}

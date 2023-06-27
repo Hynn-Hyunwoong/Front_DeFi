@@ -17,8 +17,8 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 :root {
-	--size: 80;
-	--coefficient: 1px;
+	--size: 50vmin;
+	--coefficient: 1vim;
 	--timeline: 2.6s;
 	--delay: 0.65s;
   --rotation-y: -24;
