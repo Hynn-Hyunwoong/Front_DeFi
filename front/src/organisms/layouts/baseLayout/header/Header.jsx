@@ -66,10 +66,6 @@ export const Header = () => {
   return (
     <HeaderWrap>
       <HeaderTop>
-        <div>
-          <span>KO ▼</span>
-          <span>HELP ▼</span>
-        </div>
       </HeaderTop>
       <HeaderBottom>
         <div>

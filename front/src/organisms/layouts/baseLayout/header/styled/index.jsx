@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const HeaderWrap = styled.header`
   width: 100%;
-  min-width: 1000px;
   height: 136px;
   position: sticky;
   top: 0;
@@ -18,8 +17,8 @@ export const HeaderTop = styled.section`
 
   & > div {
     margin: 0 auto;
-    width: 1000px;
-    /* display: flex; */
+    width: 100%;
+    max-width: 1000px;
   }
 
   & > div > span {
@@ -39,7 +38,8 @@ export const HeaderBottom = styled.section`
 
   & > div {
     margin: 0 auto;
-    width: 1000px;
+    width: 100%;
+    max-width: 1000px;
     display: flex;
     flex-direction: row;
   }

@@ -3,16 +3,24 @@ import styled from "styled-components";
 export const Wrapped = styled.section`
   margin-top: 100px;
   width: 100%;
-  min-width: 1000px;
   text-align: center;
 `;
 
 export const MainArticle = styled.article`
   margin-bottom: 100px;
+  
+  & > img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const H1 = styled.h1`
   font-size: 35px;
+
+  @media (max-width: 768px) {
+    font-size: 28px;
+  }
 
   & > strong {
     color: #6d962c;
@@ -26,11 +34,17 @@ export const LightP = styled.p`
 `;
 
 export const Div = styled.div`
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 200px auto;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
 
   & > .text {
     display: flex;
@@ -38,12 +52,13 @@ export const Div = styled.div`
     margin: auto 0;
   }
 
-  & > .left {
-    float: left;
-    text-align: left;
-  }
-  & > .right {
-    float: right;
-    text-align: right;
+
+  @media (min-width: 769px) {
+    & > .left {
+      text-align: left;
+    }
+    & > .right {
+      text-align: right;
+    }
   }
 `;
