@@ -1,14 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { HeaderWrap, HeaderTop, HeaderBottom } from "./styled";
 import { Navigation, Logo, Button, Popup } from "../../../components";
-import { loginState, accountState, networkState } from "../../../store";
+import {
+  loginState,
+  accountState,
+  networkState,
+  popupState,
+} from "../../../store";
+import { Wallet } from "../../../contents/wallet/Wallet";
 
 export const Header = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
   const [network, setNetwork] = useRecoilState(networkState);
-  const [popup, setPopup] = useState(false);
+  const [popup, setPopup] = useRecoilState(popupState);
 
   const popupHandler = (e) => {
     e.preventDefault();
@@ -91,7 +97,11 @@ export const Header = () => {
             </Button>
           </div>
         </HeaderBottom>
-        {popup && <Popup>안농</Popup>}
+        {popup && (
+          <Popup>
+            <Wallet />
+          </Popup>
+        )}
       </HeaderWrap>
     </>
   );

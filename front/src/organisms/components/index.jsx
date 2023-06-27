@@ -4,3 +4,4 @@ export * from "./navigation/Navigation";
 export * from "./logo/Logo";
 export * from "./loader/Loader";
 export * from "./popup/Popup";
+export * from "./walletList";

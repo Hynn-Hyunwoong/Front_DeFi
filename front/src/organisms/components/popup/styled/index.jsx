@@ -8,8 +8,8 @@ export const Wrap = styled.div`
 
 export const ContentWrap = styled.div`
   margin: auto;
-  width: 400px;
-  height: 460px;
+  width: 370px;
+  height: 420px;
   background: white;
   padding: 50px;
 `;
