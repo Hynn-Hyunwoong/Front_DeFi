@@ -1,13 +1,19 @@
-import { HeaderWrap, HeaderTop, HeaderBottom } from "./styled";
-import { Navigation, Logo, Button } from "../../../components";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import { HeaderWrap, HeaderTop, HeaderBottom } from "./styled";
+import { Navigation, Logo, Button, Popup } from "../../../components";
 import { loginState, accountState, networkState } from "../../../store";
-import { useEffect } from "react";
 
 export const Header = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
   const [network, setNetwork] = useRecoilState(networkState);
+  const [popup, setPopup] = useState(false);
+
+  const popupHandler = (e) => {
+    e.preventDefault();
+    setPopup(!popup);
+  };
 
   useEffect(() => {
     const handleAccountsChanged = (accounts) => {
@@ -64,22 +70,29 @@ export const Header = () => {
   });
 
   return (
-    <HeaderWrap>
-      <HeaderTop>
-      </HeaderTop>
-      <HeaderBottom>
-        <div>
-          <Logo />
-          <Navigation />
-          <Button colors="blue" width="150px" height="40px">
-            {isLogin
-              ? account && network
-                ? account
-                : "wrong network"
-              : "지갑 연결"}
-          </Button>
-        </div>
-      </HeaderBottom>
-    </HeaderWrap>
+    <>
+      <HeaderWrap>
+        <HeaderTop></HeaderTop>
+        <HeaderBottom>
+          <div>
+            <Logo />
+            <Navigation />
+            <Button
+              colors="blue"
+              width="150px"
+              height="40px"
+              onClick={popupHandler}
+            >
+              {isLogin
+                ? account && network
+                  ? account
+                  : "wrong network"
+                : "지갑 연결"}
+            </Button>
+          </div>
+        </HeaderBottom>
+        {popup && <Popup>안농</Popup>}
+      </HeaderWrap>
+    </>
   );
 };

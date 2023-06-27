@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const ButtonStyled = styled.button`
+  overflow: hidden;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
 

@@ -1,4 +1,4 @@
-export const colorChip = {
+const colorChip = {
   yellow: {
     background: "#FFC107",
     color: "#FFFFFF",
@@ -21,4 +21,15 @@ export const colorChip = {
     background: "#ffe7e7",
     color: "#0194FF",
   },
+};
+
+const size = {
+  mobile: "768px",
+  desktop: "1000px",
+};
+
+export const theme = {
+  ...colorChip,
+  mobile: `(max-width:${size.mobile})`,
+  destop: `(max-width:${size.desktop})`,
 };

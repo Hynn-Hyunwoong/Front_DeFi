@@ -8,7 +8,7 @@ import { RecoilRoot } from "recoil";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { colorChip } from "./utils";
+import { theme } from "./utils";
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -17,7 +17,7 @@ root.render(
     <BrowserRouter>
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider theme={colorChip}>
+          <ThemeProvider theme={theme}>
             <App />
             <ReactQueryDevtools />
           </ThemeProvider>
