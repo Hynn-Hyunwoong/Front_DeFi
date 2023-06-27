@@ -3,3 +3,4 @@ export * from "./rotateImg/RotateImg";
 export * from "./navigation/Navigation";
 export * from "./logo/Logo";
 export * from "./loader/Loader";
+export * from "./WriteTopic/Writepreview";

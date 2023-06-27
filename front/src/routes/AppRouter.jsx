@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Main, Test } from "../pages";
+import { Main, Test, Topic } from "../pages";
 import { Header, Footer } from "../organisms/layouts/baseLayout";
 
 export const AppRouter = () => {
@@ -11,6 +11,7 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/test" element={<Test />} />
+        <Route path="/topic" element={<Topic />} />
         {/* <Route path="/" element={<MainPage />} /> */}
       </Routes>
       <Routes>
