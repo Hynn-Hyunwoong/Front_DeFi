@@ -41,3 +41,14 @@
     transform: rotate(360deg);
   }
 }
+
+
+.bold1 {
+  font-weight: bold;
+  color: #0194FF;
+}
+
+.bold2{
+  font-weight: bold;
+  color: #94CA0D;
+}

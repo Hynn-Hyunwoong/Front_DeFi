@@ -1,10 +1,27 @@
 import styled from "styled-components";
 
+const res = {
+    mobile : '@media (max-width: 768px)'
+}
+
 export const WritePreviewWrap = styled.div`
     display:center;
     width: 900px;
     margin : 100px auto;
     padding : 10px auto;
+
+    ${res.mobile} {
+        width: 100%;
+        margin : 50px auto;
+        padding: 10px;
+    }
+`
+
+export const BackspaceWrap = styled.div`
+    width: 100%;
+    border: 1px solid #9da7b0;
+    display:flex;
+    justify-content : start;
 `
 
 export const TokenStateWrap = styled.div`
@@ -20,7 +37,14 @@ export const TokenStateWrap = styled.div`
     justify-content:space-between;
     align-items:center;
     
-    /* text-align: center; */
+    ${res.mobile} {
+        flex-direction:column;
+        height: auto;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+
+    }
 `
 
 export const TokenLeftWrap = styled.div`
@@ -35,6 +59,14 @@ export const TokenLeftWrap = styled.div`
     line-height : 1.738;
     letter-spacing : -0.6px;
     color : #767C83;
+
+    ${res.mobile} {
+        width: 50%;
+        margin : 10px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 `
 
 export const TokenRightWrap = styled.div`
@@ -48,6 +80,14 @@ export const TokenRightWrap = styled.div`
     line-height : 1.738;
     letter-spacing : -0.6px;
     color : #767C83;
+
+    ${res.mobile} {
+        width: 50%;
+        margin : 10px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 `
 
 export const TokenStateAlignLeft = styled.div`
@@ -88,6 +128,10 @@ export const TokenLine = styled.div`
     height : 50px;
     margin :  25px;
     width : 0;
+
+    ${res.mobile} {
+        display: none;
+    }
 `
 
 export const WriteFormWrap = styled.div`
@@ -99,6 +143,14 @@ export const WriteFormWrap = styled.div`
     justify-content : center;
     flex-direction: column;
     align-items : center;
+
+    ${res.mobile} {
+        width: 100%;
+        margin : 10px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 `
 
 export const WriteInputTitle = styled.input`
@@ -108,6 +160,11 @@ export const WriteInputTitle = styled.input`
     border-bottom : 1px solid #9da7b0;
     background-color: #f7f8fa;
     font-size: 14px;
+
+    ${res.mobile} {
+        width: 95%;
+        margin : 10px auto;
+    }
 `
 
 export const WriteInputBody = styled.input`
@@ -116,9 +173,9 @@ export const WriteInputBody = styled.input`
     height : 70%;
     background-color: #f7f8fa;
     font-size: 12px;
+
+    ${res.mobile} {
+        width: 95%;
+        margin : 10px auto;
+    }
 `
-
-
-
-
-

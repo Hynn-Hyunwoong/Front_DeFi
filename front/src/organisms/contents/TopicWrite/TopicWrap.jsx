@@ -1,14 +1,16 @@
 import { TopicDefine,TopicTokenState,TopicWrite } from "./index"
-import {WritePreviewWrap} from "../../components/WriteTopic/Writepreview"
+import {WritePreviewWrap, BackspaceWrap} from "../../components"
 
 export const TopicWrap = () => {
     return (
-        <>
+    <>
         <WritePreviewWrap>
+            <div>👈Back</div>
+            <BackspaceWrap />
             <TopicDefine /> 
             <TopicTokenState />
             <TopicWrite />
-            </WritePreviewWrap>
-        </>
+        </WritePreviewWrap>
+    </>
     )
 }
