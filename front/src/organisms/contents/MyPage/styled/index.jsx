@@ -4,6 +4,19 @@ const res = {
     mobile : '@media(max-width: 768px)'
 }
 
+export const ContentWrap = styled.div`
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap : 20px;
+    margin : 20px auto;
+
+    ${res.mobile}{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+    }
+`
+
 export const MyPageWrapper = styled.div`
     width : 1000px;
     margin : 20px auto;
@@ -42,6 +55,7 @@ export const Img = styled.div`
         border-radius: 50%;
         width: 4rem;
         min-width: 1rem;
+        max-height: 64px;
     }
     div {
         font-size : .8rem;
