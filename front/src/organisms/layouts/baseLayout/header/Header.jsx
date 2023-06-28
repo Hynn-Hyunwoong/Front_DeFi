@@ -1,13 +1,25 @@
-import { HeaderWrap, HeaderTop, HeaderBottom } from "./styled";
-import { Navigation, Logo, Button } from "../../../components";
-import { useRecoilState } from "recoil";
-import { loginState, accountState, networkState } from "../../../store";
 import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { HeaderWrap, HeaderTop, HeaderBottom } from "./styled";
+import { Navigation, Logo, Button, Popup } from "../../../components";
+import {
+  loginState,
+  accountState,
+  networkState,
+  popupState,
+} from "../../../store";
+import { Wallet } from "../../../contents/wallet/Wallet";
 
 export const Header = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
   const [network, setNetwork] = useRecoilState(networkState);
+  const [popup, setPopup] = useRecoilState(popupState);
+
+  const popupHandler = (e) => {
+    e.preventDefault();
+    setPopup(!popup);
+  };
 
   useEffect(() => {
     const handleAccountsChanged = (accounts) => {
@@ -64,22 +76,33 @@ export const Header = () => {
   });
 
   return (
-    <HeaderWrap>
-      <HeaderTop>
-      </HeaderTop>
-      <HeaderBottom>
-        <div>
-          <Logo />
-          <Navigation />
-          <Button colors="blue" width="150px" height="40px">
-            {isLogin
-              ? account && network
-                ? account
-                : "wrong network"
-              : "지갑 연결"}
-          </Button>
-        </div>
-      </HeaderBottom>
-    </HeaderWrap>
+    <>
+      <HeaderWrap>
+        <HeaderTop></HeaderTop>
+        <HeaderBottom>
+          <div>
+            <Logo />
+            <Navigation />
+            <Button
+              colors="blue"
+              width="150px"
+              height="40px"
+              onClick={popupHandler}
+            >
+              {isLogin
+                ? account && network
+                  ? account
+                  : "wrong network"
+                : "지갑 연결"}
+            </Button>
+          </div>
+        </HeaderBottom>
+        {popup && (
+          <Popup>
+            <Wallet />
+          </Popup>
+        )}
+      </HeaderWrap>
+    </>
   );
 };

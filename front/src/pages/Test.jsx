@@ -1,9 +1,17 @@
 import { useRecoilState } from "recoil";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { loginState, accountState, loadingState } from "../organisms/store";
-import { Button, Loader } from "../organisms/components";
+import { Button, Loader, Popup } from "../organisms/components";
 
 export const Test = () => {
+  return (
+    <>
+      <Popup>안농!~~!!</Popup>
+    </>
+  );
+};
+
+/* 메타마스크 로그인
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
   const [isLoading, setIsloading] = useRecoilState(loadingState);
@@ -24,9 +32,6 @@ export const Test = () => {
         setAccount(data);
         setIsLogin(true);
         setIsloading(false);
-      } else {
-        alert("로그인 햇자나!");
-      }
     } catch (e) {
       console.log(e);
       setIsloading(false);
@@ -42,14 +47,12 @@ export const Test = () => {
         <div className="TEST">
           {account}
           <Button colors={"blue"} onClick={handleLogin}>
-            {/* {isLogin ? "로그인 됨!" : "로그인 안됨"} */}
             MetaMask 연결하기
           </Button>
           <Button colors={"green"}>TrustWallet 연결하기</Button>
           <Button colors={"yellow"}>WalletConnect 연결하기</Button>
-          {/* {loading && <Loader />} */}
         </div>
       )}
     </>
   );
-};
+*/

@@ -1,7 +1,6 @@
 import { NavWrap, NavLi, NavUl, SubLi } from "./styled";
 import { useState } from "react";
-import { MenuIcon, XIcon } from "@heroicons/react/solid";
-
+// import { MenuIcon, XIcon } from "@heroicons/react/solid";
 
 export const Navigation = () => {
   const [isOpen, setMenu] = useState(false);
