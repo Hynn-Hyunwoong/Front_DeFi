@@ -15,18 +15,13 @@ export const accountState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const networkState = atom({
-  key: "networkState",
-  default: false,
-  effects_UNSTABLE: [persistAtom],
-});
-
 export const loadingState = atom({
   key: "loadingState",
   default: false,
 });
 
-export const popupState = atom({
-  key: "popupState",
+export const networkState = atom({
+  key: "networkState",
   default: false,
+  effects_UNSTABLE: [persistAtom],
 });
