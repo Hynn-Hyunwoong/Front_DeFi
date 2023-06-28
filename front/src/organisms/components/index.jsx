@@ -5,3 +5,4 @@ export * from "./logo/Logo";
 export * from "./loader/Loader";
 export * from "./popup/Popup";
 export * from "./walletList";
+export * from "./WriteTopic/Writepreview";
