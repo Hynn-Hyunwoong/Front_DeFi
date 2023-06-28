@@ -3,19 +3,10 @@ import { Button } from "../../components"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
-const getMarketAPI = async(coinId) => {
-    const res = await axios.get(`https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest`, 
-    {
-        headers : {
-            'X-CMC_PRO_API_KEY' : process.env.REACT_APP_CoinAPI,
-        },
-        params :{
-            id : coinId
-        }
-    });
-    console.log(res.data)
-    return res.data
-}
+
+const APIKEY = process.env.REACT_APP_API_KEY
+console.log(APIKEY)
+
 
 export const MypageTable = () => {
 

@@ -5,6 +5,7 @@ const res = {
 }
 
 export const ContentWrap = styled.div`
+    width: 80rem;
     display:grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -14,11 +15,12 @@ export const ContentWrap = styled.div`
     ${res.mobile}{
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr 1fr 1fr;
+        width:100%;
     }
 `
 
 export const MyPageWrapper = styled.div`
-    width : 1000px;
+    width : 80rem;
     margin : 20px auto;
 
     ${res.mobile}{
