@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
+const res = {
+  mobile: "@media(max-width:768px)",
+};
+
 export const NavWrap = styled.div`
   margin-left: 30px;
   width: 500px;
   height: 100%;
 
-  @media (max-width: 768px) {
+  ${res.mobile} {
     margin-left: 10px;
     width: 80%;
   }
