@@ -5,6 +5,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^1.0.6",
+    "@metamask/detect-provider": "^2.0.0",
     "@tanstack/react-query": "^4.29.17",
     "@tanstack/react-query-devtools": "^4.29.17",
     "@testing-library/jest-dom": "^5.16.5",
