@@ -8,8 +8,8 @@ import {
   loadingState,
   popupState,
   providerState,
+  selectedWallet,
 } from "../../../organisms/store";
-import { Loader } from "../loader/Loader";
 
 export const Metamask = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
@@ -17,6 +17,7 @@ export const Metamask = () => {
   const [isLoading, setIsloading] = useRecoilState(loadingState);
   const [popup, setPopup] = useRecoilState(popupState);
   const [provider, setProvider] = useRecoilState(providerState);
+  const [wallet, setWallet] = useRecoilState(selectedWallet);
 
   const handleLogin = async () => {
     setIsloading(true);
@@ -33,6 +34,7 @@ export const Metamask = () => {
       console.log("Connected", accounts[0]);
       setAccount(accounts[0]);
       setIsLogin(true);
+      setWallet("metamask");
 
       const provider = new ethers.BrowserProvider(window.ethereum);
       setProvider(provider);

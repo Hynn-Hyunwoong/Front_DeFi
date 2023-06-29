@@ -7,6 +7,7 @@ import {
   accountState,
   networkState,
   popupState,
+  selectedWallet,
 } from "../../../store";
 import { Wallet } from "../../../contents/wallet/Wallet";
 import { useQuery } from "@tanstack/react-query";
@@ -16,6 +17,7 @@ export const Header = () => {
   const [account, setAccount] = useRecoilState(accountState);
   const [network, setNetwork] = useRecoilState(networkState);
   const [popup, setPopup] = useRecoilState(popupState);
+  const [wallet, setWallet] = useRecoilState(selectedWallet);
 
   const fetchNetwork = async () => {
     const networkId = await window.ethereum.request({
@@ -101,10 +103,18 @@ export const Header = () => {
               height="40px"
               onClick={popupHandler}
             >
+              {(wallet === "metamask" && (
+                <img
+                  src="/images/logo-metamask.png"
+                  style={{ width: "15px" }}
+                />
+              )) || (
+                <img src="/images/logo-TWT.png" style={{ width: "15px" }} />
+              )}
               {isLogin
                 ? account && network
                   ? account
-                  : "wrong network"
+                  : " wrong network"
                 : "지갑 연결"}
             </Button>
           </div>

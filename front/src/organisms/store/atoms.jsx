@@ -36,3 +36,9 @@ export const providerState = atom({
   default: null,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const selectedWallet = atom({
+  key: "selectedWalletState",
+  default: null,
+  effects_UNSTABLE: [persistAtom],
+});
