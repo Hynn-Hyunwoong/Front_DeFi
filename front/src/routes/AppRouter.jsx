@@ -13,7 +13,7 @@ export const AppRouter = () => {
         <Route path="/test" element={<Test />} />
         <Route path="/topic" element={<Topic />} />
         {/* <Route path="/" element={<MainPage />} /> */}
-        <Route path="MyPage" element={<MyPage />} />
+        <Route path="/MyPage" element={<MyPage />} />
       </Routes>
       <Routes>
         <Route path="/" element={<Footer />} />
