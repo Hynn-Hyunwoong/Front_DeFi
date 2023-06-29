@@ -100,3 +100,10 @@ export const Links = styled.div`
         border: none;
     }
 `;
+
+export const GraphWrap = styled.div`
+    display: flex;
+    justify-content: end;
+    width : 100%;
+    height : 60px;
+`
