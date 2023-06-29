@@ -1,58 +1,110 @@
-import { useRecoilState } from "recoil";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { loginState, accountState, loadingState } from "../organisms/store";
-import { Button, Loader, Popup } from "../organisms/components";
+import React from "react";
+
+// This is the same implementation presented in the previous sections.
+import { getTrustWalletInjectedProvider } from "../utils/trustWallet";
 
 export const Test = () => {
+  const [initializing, setInitializing] = React.useState(true);
+  const [injectedProvider, setInjectedProvider] = React.useState(null);
+  const [initializationError, setInitializationError] = React.useState("");
+
+  const [connected, setConnected] = React.useState(false);
+  const [selectedAccount, setSelectedAccount] = React.useState("");
+  const [chainId, setChainId] = React.useState("");
+  const [error, setError] = React.useState("");
+
+  React.useEffect(() => {
+    const initializeInjectedProvider = async () => {
+      const trustWallet = await getTrustWalletInjectedProvider();
+
+      if (!trustWallet) {
+        setInitializationError("Trust Wallet is not installed.");
+        setInitializing(false);
+        return;
+      }
+
+      setInjectedProvider(trustWallet);
+      setInitializing(false);
+    };
+
+    initializeInjectedProvider();
+  }, []);
+
+  const connect = async () => {
+    try {
+      setError("");
+
+      const accounts = await injectedProvider.request({
+        method: "eth_requestAccounts",
+      });
+
+      const chainId = await injectedProvider.request({ method: "eth_chainId" });
+
+      setSelectedAccount(accounts[0]);
+      setChainId(chainId);
+      setConnected(true);
+
+      injectedProvider.addListener("chainChanged", setChainId);
+
+      injectedProvider.addListener("accountsChanged", (accounts) => {
+        if (accounts.length === 0) {
+          setConnected(false);
+          setSelectedAccount("");
+          setChainId("");
+        } else {
+          const connectedAccount = accounts[0];
+          setSelectedAccount(connectedAccount);
+        }
+      });
+    } catch (e) {
+      console.error(e);
+      if (e.code === 4001) {
+        setError("User denied connection.");
+      }
+    }
+  };
+
+  const switchChain = async () => {
+    try {
+      await injectedProvider.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: "0x1" }],
+      });
+    } catch (e) {
+      console.error(e);
+      if (e.code === 4001) {
+        setError("User rejected switching chains.");
+      }
+    }
+  };
+
+  if (initializing) {
+    return <p>Waiting for provider...</p>;
+  }
+
+  if (initializationError) {
+    return <p style={{ color: "red" }}>{initializationError}</p>;
+  }
+
+  if (connected) {
+    return (
+      <div>
+        <p style={{ color: "red" }}>{error}</p>
+        <p>Selected account: {selectedAccount}</p>
+        <p>Selected chainId: {chainId}</p>
+        {chainId !== "0x1" && (
+          <button onClick={switchChain}>Switch to Ethereum</button>
+        )}
+      </div>
+    );
+  }
+
   return (
-    <>
-      <Popup>안농!~~!!</Popup>
-    </>
+    <div>
+      <p style={{ color: "red" }}>{error}</p>
+      <button onClick={connect}>Connect</button>
+    </div>
   );
 };
 
-/* 메타마스크 로그인
-  const [isLogin, setIsLogin] = useRecoilState(loginState);
-  const [account, setAccount] = useRecoilState(accountState);
-  const [isLoading, setIsloading] = useRecoilState(loadingState);
-  const queryClient = useQueryClient();
-
-  const fetchAccount = async () => {
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    return accounts[0];
-  };
-
-  const handleLogin = async () => {
-    try {
-      if (!account) {
-        setIsloading(true);
-        const data = await queryClient.fetchQuery(["account"], fetchAccount);
-        setAccount(data);
-        setIsLogin(true);
-        setIsloading(false);
-    } catch (e) {
-      console.log(e);
-      setIsloading(false);
-    }
-  };
-  // 연결을 끊는 건 없고, 지갑 변경을 눌렀을 때 다른 지갑으로 요청 보내면 될 것 같음
-
-  return (
-    <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div className="TEST">
-          {account}
-          <Button colors={"blue"} onClick={handleLogin}>
-            MetaMask 연결하기
-          </Button>
-          <Button colors={"green"}>TrustWallet 연결하기</Button>
-          <Button colors={"yellow"}>WalletConnect 연결하기</Button>
-        </div>
-      )}
-    </>
-  );
-*/
+export default Test;

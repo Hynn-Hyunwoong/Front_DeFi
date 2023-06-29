@@ -30,3 +30,15 @@ export const popupState = atom({
   key: "popupState",
   default: false,
 });
+
+export const providerState = atom({
+  key: "providerState",
+  default: null,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const selectedWallet = atom({
+  key: "selectedWalletState",
+  default: null,
+  effects_UNSTABLE: [persistAtom],
+});
