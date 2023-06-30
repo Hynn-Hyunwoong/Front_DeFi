@@ -8,7 +8,7 @@ export const Wrapped = styled.section`
 
 export const MainArticle = styled.article`
   margin-bottom: 100px;
-  
+
   & > img {
     width: 100%;
     height: auto;
@@ -23,7 +23,7 @@ export const H1 = styled.h1`
   }
 
   & > strong {
-    color: #6d962c;
+    color: #94ca0d;
   }
 `;
 
@@ -51,7 +51,6 @@ export const Div = styled.div`
     flex-direction: column;
     margin: auto 0;
   }
-
 
   @media (min-width: 769px) {
     & > .left {
