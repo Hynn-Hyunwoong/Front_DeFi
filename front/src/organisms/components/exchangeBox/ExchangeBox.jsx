@@ -1,14 +1,3 @@
-/* <section>
-<div>
-  <strong>From :</strong>
-</div>
-<div>
-  <input />
-  <div>ASD</div>
-</div>
-<div>보유 : 0</div>
-</section> */
-
 import {
   LabelStyled,
   InputBoxWrap,
@@ -16,29 +5,29 @@ import {
   TokenBox,
   RightItem,
   BalanceStyled,
+  SectionStyled,
 } from "./styled";
 
-export const Label = ({ children }) => {
+export const InputBox = ({ logo, token, balance, children }) => {
   return (
-    <LabelStyled>
-      <strong>{children}</strong>
-    </LabelStyled>
-  );
-};
-
-export const InputBox = ({ children }) => {
-  return (
-    <>
+    <SectionStyled>
+      <LabelStyled>
+        <strong>{children}</strong>
+      </LabelStyled>
       <InputBoxWrap>
         <InputStyled type="number" min={1} placeholder="0" />
         <RightItem>
-          <TokenBox>{children}</TokenBox>
+          <TokenBox logo={logo} token={token}>
+            <img
+              src={`/images/logo-${logo}.png`}
+              style={{ width: "30px" }}
+              alt="tokenLogo"
+            />
+            <p>{token}</p>
+          </TokenBox>
         </RightItem>
       </InputBoxWrap>
-    </>
+      <BalanceStyled balance={balance}>보유 : {balance}</BalanceStyled>
+    </SectionStyled>
   );
-};
-
-export const Balance = ({ children }) => {
-  return <BalanceStyled>보유 : {children}</BalanceStyled>;
 };

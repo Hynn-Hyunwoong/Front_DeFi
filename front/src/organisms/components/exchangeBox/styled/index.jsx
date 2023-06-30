@@ -54,3 +54,7 @@ export const BalanceStyled = styled.p`
   font-weight: lighter;
   font-size: 12px;
 `;
+
+export const SectionStyled = styled.section`
+  width: 80%;
+`;

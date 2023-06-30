@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^1.0.6",
     "@metamask/detect-provider": "^2.0.0",
