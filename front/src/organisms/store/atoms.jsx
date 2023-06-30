@@ -42,3 +42,21 @@ export const selectedWallet = atom({
   default: null,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const metamaskLoginState = atom({
+  key: "metamaskLoginState",
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const trustwalletLoginState = atom({
+  key: "trustwalletLoginState",
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const walletconnectLoginState = atom({
+  key: "walletconnectLoginState",
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+})
