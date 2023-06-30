@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Main, Test, Topic, Assets, Swap } from "../pages";
+import { Main, Test, GovernanceCreate, Assets, Swap } from "../pages";
 import { Header, Footer } from "../organisms/layouts/baseLayout";
 
 export const AppRouter = () => {
@@ -11,10 +11,10 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/test" element={<Test />} />
-        <Route path="/topic" element={<Topic />} />
+        <Route path="/governance/create" element={<GovernanceCreate />} />
         {/* <Route path="/" element={<MainPage />} /> */}
         <Route path="/assets" element={<Assets />} />
-        <Route path="/exchange" element={<Swap />} />
+        <Route path="/exchange/swap" element={<Swap />} />
       </Routes>
       <Routes>
         <Route path="/" element={<Footer />} />

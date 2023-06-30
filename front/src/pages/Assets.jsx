@@ -1,19 +1,20 @@
 import { useRecoilState } from "recoil";
 import { loadingState } from "../organisms/store";
-import { MypageTitle, MypageTable} from "../organisms/contents/AssetPage";
+import { MypageTitle, MypageTable } from "../organisms/contents/assert";
 import { Loader } from "../organisms/components";
 
 export const Assets = () => {
-    const [isLoading] = useRecoilState(loadingState);
-    return (
+  const [isLoading] = useRecoilState(loadingState);
+  return (
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
         <>
-            {isLoading ? (<Loader />) : 
-            (
-                <>
-                    <MypageTitle />
-                    <MypageTable />
-                </>
-            )}
+          <MypageTitle />
+          <MypageTable />
         </>
-    )
-}
+      )}
+    </>
+  );
+};
