@@ -14,7 +14,7 @@ export const ExchangeBottom = () => {
             </div>
           </Div>
           <Div>
-            <p>최소 거래 수량 </p>from값 설정시
+            <p>최소 거래 수량 </p> <p>from값 설정시</p>
             {/* <h4>최대 전송 수량</h4> : to값 설정시 => 상태값에 따라 바껴야 함*/}
           </Div>
           <Div>
@@ -23,7 +23,7 @@ export const ExchangeBottom = () => {
           </Div>
           <Div>
             <p>교환 경로 </p>
-            <p>KLAY ➤ KDAI</p>{" "}
+            <p>KLAY ➤ KDAI</p>
             {/*원래대로라면 최적경로 탐색, 근데 우리는 별로 업스니까 그냥 맞교환?*/}
           </Div>
         </div>
