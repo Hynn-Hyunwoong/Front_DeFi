@@ -11,26 +11,40 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@walletconnect/client": "^1.8.0-rc.0",
+    "@walletconnect/ethereum-provider": "^2.8.6",
+    "@walletconnect/modal": "^2.5.9",
+    "@walletconnect/qrcode-modal": "^1.8.0",
+    "@walletconnect/web3-provider": "^1.8.0",
+    "assert": "^2.0.0",
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
+    "buffer": "^6.0.3",
     "dotenv": "^16.3.1",
     "ethers": "^6.6.2",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
     "postcss-cli": "^10.1.0",
+    "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.13.0",
     "react-scripts": "5.0.1",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.0.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
     "styled-components": "^5.3.10",
     "tailwindcss": "^3.3.2",
-    "typescript": "^5.1.6",
+    "typescript": "^4.9.5",
+    "url": "^0.11.1",
     "web-vitals": "^2.1.4",
-    "web3": "^4.0.1"
+    "web3": "^4.0.1",
+    "web3modal": "^1.9.12"
   },
   "scripts": {
-    "start": "npm run build:css && react-scripts start",
-    "build": "npm run build:css && react-scripts build",
+    "start": "npm run build:css && react-app-rewired start",
+    "build": "npm run build:css && react-app-rewired build",
     "build:css": "postcss src/index.css -o src/tailwind.css",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -52,5 +66,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "react-app-rewired": "^2.2.1"
   }
 }

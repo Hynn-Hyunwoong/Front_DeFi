@@ -1,6 +1,5 @@
 import { WalletList } from "./styled";
-import { ethers } from "ethers";
-// import { useQueryClient } from "@tanstack/react-query";
+import  {ethers}  from "ethers";
 import { useRecoilState } from "recoil";
 import {
   loginState,
@@ -9,15 +8,19 @@ import {
   popupState,
   providerState,
   selectedWallet,
+  trustwalletLoginState,
+  walletconnectLoginState
 } from "../../../organisms/store";
 
 export const Metamask = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
   const [isLoading, setIsloading] = useRecoilState(loadingState);
-  const [popup, setPopup] = useRecoilState(popupState);
-  const [provider, setProvider] = useRecoilState(providerState);
   const [wallet, setWallet] = useRecoilState(selectedWallet);
+  const [provider,setProvider] = useRecoilState(providerState);
+  const [popupOpen, setPopupOpen] = useRecoilState(popupState);
+  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(trustwalletLoginState);
+  const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(walletconnectLoginState);
 
   const handleLogin = async () => {
     setIsloading(true);
@@ -26,70 +29,45 @@ export const Metamask = () => {
         alert("Get MetaMask!");
         return;
       }
+      
+      const networkDetails = {
+        chainId : '0x66eed',
+        chainName : 'Arbitrum Testnet',
+        nativeCurrency : {
+          name : 'ETH',
+          symbol : 'ETH',
+          decimals : 18
+        },
+        rpcUrls : 'bridge.arbitrum.io/rpc',
+        blockExplorerUrls : 'https://goerli.arbiscan.io/'
+      }
 
       const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
+        method: "eth_requestAccounts", "wallet_addEthereumChain" : networkDetails,
 
-      console.log("Connected", accounts[0]);
+      });
+  
+      setIsTrustwalletLogin(false);
+      setIsWalletconnectLogin(false);
       setAccount(accounts[0]);
       setIsLogin(true);
       setWallet("metamask");
-
+  
       const provider = new ethers.BrowserProvider(window.ethereum);
       setProvider(provider);
-      setPopup(false);
-      console.log(provider);
+      setPopupOpen(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     setIsloading(false);
   };
 
   return (
     <>
-      {isLoading ? (
-        <p>metamask 연결중</p>
-      ) : (
-        <WalletList onClick={handleLogin}>
-          <img src="images/logo-metaMask.png" />
-          <p>Metamask</p>
-        </WalletList>
-      )}
+      <WalletList onClick={handleLogin}>
+        <img src="images/logo-metaMask.png" />
+        <p>{isLogin && wallet === "metamask" ? "Metamask 연결됨" : "Metamask"}</p>
+      </WalletList>
     </>
   );
 };
-
-/*
-  // const queryClient = useQueryClient();
-
-  // const fetchAccount = async () => {
-  //   const accounts = await window.ethereum.request({
-  //     method: "eth_requestAccounts",
-  //   });
-  //   return accounts[0];
-  // };
-
-  // const handleLogin = async () => {
-  //   try {
-  //     setIsloading(true);
-  //     const data = await queryClient.fetchQuery(["account"], fetchAccount);
-  //     setAccount(data);
-  //     setIsLogin(true);
-  //     setIsloading(false);
-  //     setPopup(false);
-  //   } catch (e) {
-  //     console.log(e);
-  //     setIsloading(false);
-  //   }
-  // };
-
-        // const signer = provider.getSigner();
-      // const wavePortalContract = new ethers.Contract(
-      //   contractAddress,
-      //   contractABI,
-      //   signer
-      // );
-
-      // let count = await wavePortalContract.getTotalWaves();
-*/

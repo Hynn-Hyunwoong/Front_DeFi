@@ -9,7 +9,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { theme } from "./utils";
-import './tailwind.css'
+import './tailwind.css';
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));

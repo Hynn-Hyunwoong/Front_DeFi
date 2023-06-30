@@ -1,9 +1,8 @@
 import { NavWrap, NavLi, NavUl, SubLi } from "./styled";
 import { useState } from "react";
-// import { MenuIcon, XIcon } from "@heroicons/react/solid";
 
 export const Navigation = () => {
-  const [isOpen, setMenu] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const category = [
     { label: "내자산", path: "/assets" },
@@ -22,26 +21,25 @@ export const Navigation = () => {
 
   const overEvent = (e) => {
     e.preventDefault();
-    setMenu(true);
+    setIsOpen(true);
   };
+
   const outEvent = (e) => {
     e.preventDefault();
-    setMenu(false);
+    setIsOpen(false);
   };
 
-  const [subMenuMap] = category
-    .filter((item) => item.hasOwnProperty("subMenu"))
-    .map((v) => v.subMenu);
+  const categoryMap = category.map((item, index) => {
+    const subMenu = item.subMenu?.map((subItem, subIndex) => (
+      <SubLi key={`${item.label}-${subIndex}`} className="sub">
+        {subItem.label}
+      </SubLi>
+    ));
 
-  const subMenu = subMenuMap.map((v) => (
-    <SubLi className="sub">{v.label}</SubLi>
-  ));
-
-  const categoryMap = category.map((v, index) => {
     return (
-      <NavLi key={index} onMouseOver={overEvent} onMouseOut={outEvent}>
-        {v.label}
-        {isOpen ? <div className="subBox">{v.subMenu && subMenu}</div> : null}
+      <NavLi key={item.label} onMouseOver={overEvent} onMouseOut={outEvent}>
+        {item.label}
+        {isOpen ? <div className="subBox">{item.subMenu && <ul>{subMenu}</ul>}</div> : null}
       </NavLi>
     );
   });
