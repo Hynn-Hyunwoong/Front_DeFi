@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const SectionWrap = styled.section`
+  width: 800px;
+  margin: 80px auto;
+`;
+
 export const BoxWrap = styled.section`
   margin: 0 auto;
   border-radius: 20px;
@@ -10,7 +15,7 @@ export const BoxWrap = styled.section`
   justify-content: space-between;
   background-color: white;
 
-  box-shadow: 5px 5px 20px 0px #ebecf0;
+  box-shadow: 20px 20px 30px 0px #e6eaed;
 `;
 
 export const BoxArticle = styled.article`
@@ -41,4 +46,17 @@ export const ButtonArticle = styled.article`
     height: 50%;
     margin: 55px 20px;
   }
+`;
+
+export const ExpectedArticle = styled.article`
+  margin: 0 auto;
+  width: 85%;
+  color: #767c83;
+`;
+
+export const Div = styled.div`
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  text-align: right;
 `;
