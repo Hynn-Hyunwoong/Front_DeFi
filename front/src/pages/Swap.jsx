@@ -1,6 +1,7 @@
 import { useRecoilState } from "recoil";
 import { loadingState } from "../organisms/store";
 import { Loader } from "../organisms/components";
+import { SwapTest } from "../organisms/contents/exchangeSwap";
 
 export const Swap = () => {
   const [isLoading] = useRecoilState(loadingState);
@@ -11,7 +12,7 @@ export const Swap = () => {
         <Loader />
       ) : (
         <>
-          <div> test 123</div>
+          <SwapTest />
         </>
       )}
     </>
