@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { ethers } from "ethers";
-import { WalletList } from "./styled";
-import { useRecoilState } from "recoil";
+import { useState } from 'react';
+import { ethers } from 'ethers';
+import { WalletList } from './styled';
+import { useRecoilState } from 'recoil';
 import {
   loginState,
   accountState,
@@ -11,8 +11,8 @@ import {
   selectedWallet,
   metamaskLoginState,
   trustwalletLoginState,
-} from "../../../organisms/store";
-import { EthereumProvider } from "@walletconnect/ethereum-provider";
+} from '../../../organisms/store';
+import { EthereumProvider } from '@walletconnect/ethereum-provider';
 
 const APIKEY = process.env.REACT_APP_INFURA_ID;
 
@@ -24,20 +24,31 @@ export const WalletConnect = () => {
   const [wallet, setWallet] = useRecoilState(selectedWallet);
   const [qrCodeUri, setQrCodeUri] = useState(null);
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
-  const [isMetamaskLogin, setIsMetamaskLogin] = useRecoilState(metamaskLoginState);
-  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(trustwalletLoginState);
+  const [isMetamaskLogin, setIsMetamaskLogin] =
+    useRecoilState(metamaskLoginState);
+  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
+    trustwalletLoginState,
+  );
 
   const handleLogin = async () => {
     setIsloading(true);
     try {
       const walletConnectProvider = await EthereumProvider.init({
-        projectId : APIKEY,
-        chains :[421613],
-        showQrModal : true,
+        projectId: APIKEY,
+        chains: [421613],
+        showQrModal: true,
         methods: ['eth_accounts', 'eth_sendTransaction'],
-        events: ['session_request', 'session_update', 'session_reject','call_request', 'disconnect', 'connect', 'reset'],
-      })
-      
+        events: [
+          'session_request',
+          'session_update',
+          'session_reject',
+          'call_request',
+          'disconnect',
+          'connect',
+          'reset',
+        ],
+      });
+
       walletConnectProvider.on('connect', () => {
         setQrCodeUri(null);
       });
@@ -49,11 +60,10 @@ export const WalletConnect = () => {
       const signer = provider.getSigner();
       setAccount((await signer).address);
       setIsLogin(true);
-      setWallet("walletconnect");
+      setWallet('walletconnect');
       setIsMetamaskLogin(false);
       setIsTrustwalletLogin(false);
       setPopupOpen(false);
-
     } catch (error) {
       if (error.message === 'User closed modal') {
         console.log('WalletConnect Closed');
@@ -63,12 +73,16 @@ export const WalletConnect = () => {
     }
     setIsloading(false);
   };
-  
+
   return (
     <>
       <WalletList onClick={handleLogin}>
         <img src="images/logo-walletconnect.png" />
-        <p>{isLogin && wallet === "walletconnect" ? "WalletConnect 연결됨" : "WalletConnect"}</p>
+        <p>
+          {isLogin && wallet === 'walletconnect'
+            ? 'WalletConnect 연결됨'
+            : 'WalletConnect'}
+        </p>
       </WalletList>
     </>
   );

@@ -1,4 +1,4 @@
-import { SectionWrap, ExpectedArticle, Div } from "./styled";
+import { SectionWrap, ExpectedArticle, Div } from './styled';
 
 export const ExchangeBottom = () => {
   return (

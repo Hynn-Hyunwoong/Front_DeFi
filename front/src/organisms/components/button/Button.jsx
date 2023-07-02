@@ -1,4 +1,4 @@
-import { ButtonStyled } from "./styled";
+import { ButtonStyled } from './styled';
 
 export const Button = ({ children, colors, width, height, size, onClick }) => {
   // const width = basic && "150px";

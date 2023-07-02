@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrap = styled.div`
   width: 100%;
@@ -21,7 +21,7 @@ export const Xbutton = styled.button`
     position: absolute;
     right: 7px;
     top: 6px;
-    content: "";
+    content: '';
     height: 20px;
     width: 2px;
     background-color: #222;

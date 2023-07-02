@@ -1,7 +1,7 @@
-import { useRecoilState } from "recoil";
-import { Wrapped, MainArticle, H1 } from "./styled";
-import { Button, RotateImg } from "../../components";
-import { popupState } from "../../store";
+import { useRecoilState } from 'recoil';
+import { Wrapped, MainArticle, H1 } from './styled';
+import { Button, RotateImg } from '../../components';
+import { popupState } from '../../store';
 
 export const SectionFirst = () => {
   const [popup, setPopup] = useRecoilState(popupState);

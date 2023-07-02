@@ -1,8 +1,8 @@
-import { useRecoilState } from "recoil";
-import { popupState, loadingState } from "../../store";
-import { Wrap, Top, Xbutton, Bottom, Notice } from "./styled";
-import { Loader, Metamask, TrustWallet, WalletConnect } from "../../components";
-import { useEffect } from "react";
+import { useRecoilState } from 'recoil';
+import { popupState, loadingState } from '../../store';
+import { Wrap, Top, Xbutton, Bottom, Notice } from './styled';
+import { Loader, Metamask, TrustWallet, WalletConnect } from '../../components';
+import { useEffect } from 'react';
 
 export const Wallet = () => {
   const [isLoading, setIsloading] = useRecoilState(loadingState);

@@ -6,7 +6,7 @@ import {
   RightItem,
   BalanceStyled,
   SectionStyled,
-} from "./styled";
+} from './styled';
 
 export const InputBox = ({ logo, token, balance, children }) => {
   return (
@@ -20,7 +20,7 @@ export const InputBox = ({ logo, token, balance, children }) => {
           <TokenBox logo={logo} token={token}>
             <img
               src={`/images/logo-${logo}.png`}
-              style={{ width: "30px" }}
+              style={{ width: '30px' }}
               alt="tokenLogo"
             />
             <p>{token}</p>

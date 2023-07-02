@@ -1,5 +1,5 @@
 export async function getTrustWalletInjectedProvider(
-  { timeout } = { timeout: 3000 }
+  { timeout } = { timeout: 3000 },
 ) {
   const provider = getTrustWalletFromWindow();
 
@@ -11,22 +11,22 @@ export async function getTrustWalletInjectedProvider(
 }
 
 async function listenForTrustWalletInitialized(
-  { timeout } = { timeout: 3000 }
+  { timeout } = { timeout: 3000 },
 ) {
   return new Promise((resolve) => {
     const handleInitialization = () => {
       resolve(getTrustWalletFromWindow());
     };
 
-    window.addEventListener("trustwallet#initialized", handleInitialization, {
+    window.addEventListener('trustwallet#initialized', handleInitialization, {
       once: true,
     });
 
     setTimeout(() => {
       window.removeEventListener(
-        "trustwallet#initialized",
+        'trustwallet#initialized',
         handleInitialization,
-        { once: true }
+        { once: true },
       );
       resolve(null);
     }, timeout);
@@ -42,7 +42,7 @@ function getTrustWalletFromWindow() {
   };
 
   const injectedProviderExist =
-    typeof window !== "undefined" && typeof window.ethereum !== "undefined";
+    typeof window !== 'undefined' && typeof window.ethereum !== 'undefined';
 
   // No injected providers exist.
   if (!injectedProviderExist) {
@@ -68,5 +68,5 @@ function getTrustWalletFromWindow() {
   // without updating the ethereum.providers array. To prevent issues where
   // the TW connector does not recognize the provider when TW extension is installed,
   // we begin our checks by relying on TW's global object.
-  return window["trustwallet"] ?? null;
+  return window['trustwallet'] ?? null;
 }

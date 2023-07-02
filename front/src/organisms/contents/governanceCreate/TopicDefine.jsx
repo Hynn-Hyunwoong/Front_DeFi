@@ -1,4 +1,4 @@
-import { TopicH1, Topicspan } from "../../components";
+import { TopicH1, Topicspan } from '../../components';
 
 export const TopicDefine = () => {
   return (
@@ -23,15 +23,15 @@ export const TopicDefine = () => {
       <Topicspan>- 투표 시 가결과 부결의 기준은 아래와 같습니다.</Topicspan>
       <Topicspan>- A. 가결 기준</Topicspan>
       <Topicspan>
-        {" "}
+        {' '}
         1. 총 투표자가 최소 참여 기준 이상인 경우 ** 투표 참여기준은 투표
         시작시점에 총 GovToken의 51% 이상
       </Topicspan>
       <Topicspan> 2. 총 투표자의 과반수 이상이 찬성하는 경우</Topicspan>
       <Topicspan>- B. 부결 기준</Topicspan>
       <Topicspan>
-        {" "}
-        1. 투표기간(2일) 종료까지 최소 참여 투표미만으로 참여된 경우{" "}
+        {' '}
+        1. 투표기간(2일) 종료까지 최소 참여 투표미만으로 참여된 경우{' '}
       </Topicspan>
       <Topicspan> 2. 과반수가 찬성하지 않은 경우</Topicspan>
     </>

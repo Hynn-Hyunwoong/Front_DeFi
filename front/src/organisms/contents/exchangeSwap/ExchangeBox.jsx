@@ -1,6 +1,6 @@
-import { BoxWrap, BoxArticle, Exchange, ButtonArticle } from "./styled";
-import { LightP } from "../main/styled";
-import { InputBox } from "../../components";
+import { BoxWrap, BoxArticle, Exchange, ButtonArticle } from './styled';
+import { LightP } from '../main/styled';
+import { InputBox } from '../../components';
 
 export const ExchangeBox = () => {
   // 필요한 상태값
