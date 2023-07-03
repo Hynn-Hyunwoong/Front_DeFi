@@ -1,4 +1,5 @@
 export * from "./button/Button";
+export * from "./button/Xbutton";
 export * from "./rotateImg/RotateImg";
 export * from "./navigation/Navigation";
 export * from "./logo/Logo";
@@ -6,4 +7,6 @@ export * from "./loader/Loader";
 export * from "./popup/Popup";
 export * from "./walletList";
 export * from "./WriteTopic/Writepreview";
-export * from "./exchangeBox/ExchangeBox";
+export * from "./selectTokenBox/SelectTokenBox";
+export * from "./exchangeExpected/ExchangeExpected";
+export * from "./txHistory/TXHistory";

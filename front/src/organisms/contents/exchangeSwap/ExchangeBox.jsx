@@ -1,6 +1,6 @@
 import { BoxWrap, BoxArticle, Exchange, ButtonArticle } from "./styled";
 import { LightP } from "../main/styled";
-import { InputBox } from "../../components";
+import { SelectTokenBox } from "../../components";
 
 export const ExchangeBox = () => {
   // 필요한 상태값
@@ -16,11 +16,21 @@ export const ExchangeBox = () => {
       <BoxWrap className="swapBox">
         <BoxArticle>
           {/*선택된 토큰에 따라 로고, 토큰, 잔액은 각각의 props로 넘겨주면 됩니다!*/}
-          <InputBox children="From" logo="null" token="ASD" balance="100" />
+          <SelectTokenBox
+            children="From"
+            // logo="null"
+            // token="ASD"
+            // balance="100"
+          />
           <Exchange>
             <span>↑↓</span>
           </Exchange>
-          <InputBox children="To" logo="arbitrum" token="ARB" balance="100" />
+          <SelectTokenBox
+            children="To"
+            // logo="arbitrum"
+            // token="ARB"
+            // balance="100"
+          />
         </BoxArticle>
 
         <ButtonArticle onClick={test}>

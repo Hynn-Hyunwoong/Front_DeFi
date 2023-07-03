@@ -1,26 +1,31 @@
 import { useRecoilState } from "recoil";
-import { loadingState } from "../organisms/store";
-import { Loader } from "../organisms/components";
+import { loadingState, tokenListPopupState } from "../organisms/store";
+import { Loader, Popup } from "../organisms/components";
 import {
   ExchangeBottom,
   ExchangeBox,
   ExchangeTop,
 } from "../organisms/contents/exchangeSwap";
+import { TokenList } from "../organisms/contents/popupTokenList/TokenList";
 
 export const Swap = () => {
+  // 관리해야 할 상태 : 로딩중인지 아닌지, input에 입력된 값이 from인지 to인지, amount값, token1이 뭔지(from), token2가 뭔지(to)
   const [isLoading] = useRecoilState(loadingState);
+  const [tokenList] = useRecoilState(tokenListPopupState);
 
   return (
-    <>
-      {isLoading ? (
-        <Loader />
+    <div className="swap" style={{ position: "relative" }}>
+      {tokenList ? (
+        <Popup>
+          <TokenList />
+        </Popup>
       ) : (
-        <div className="swap">
+        <>
           <ExchangeTop />
           <ExchangeBox />
           <ExchangeBottom />
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 };
