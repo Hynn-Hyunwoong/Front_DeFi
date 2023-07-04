@@ -13,10 +13,12 @@ export const ButtonStyled = styled.button`
   }
 
   font-size: ${({ size }) => size};
-  margin-top: 20px;
+  margin-top: ${({ marginTop }) => marginTop};
+
+  /* 20px; */
 
   border-radius: 5px;
-  border: none;
+  border: ${({ theme, colors }) => theme[colors].border};
 `;
 
 // width, height, background, color, hover

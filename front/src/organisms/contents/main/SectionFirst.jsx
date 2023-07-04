@@ -18,11 +18,12 @@ export const SectionFirst = () => {
           <br /> 솔라스왑에서 찾아가세요
         </H1>
         <Button
-          colors="green"
-          width="200px"
-          height="60px"
-          size="18px"
+          colors='green'
+          width='200px'
+          height='60px'
+          size='18px'
           onClick={popupHandler}
+          marginTop='20px'
         >
           지갑 연결
         </Button>
