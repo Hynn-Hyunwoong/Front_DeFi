@@ -27,7 +27,7 @@ react-app-rewired : Eject 사용 안할 수 있도록 도와줌?
 solarswap.com
              / (메인) - 그리기 완료
              /assets (내자산) - 그리기 완료
-             /exchange/swap (스왑) - 그리기 진행중
+             /exchange/swap (스왑) - 그리기 진행중 (오류 수정해야 함)
                       /pool (일반페어예치)
              /staking (스테이킹)
              /governance/ (의제투표)

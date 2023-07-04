@@ -4,3 +4,4 @@ export * from './GovernanceCreate';
 export * from './Assets';
 export * from './Swap';
 export * from './Dashboard';
+export * from './Governance';

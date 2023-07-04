@@ -1,28 +1,28 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState } from 'recoil';
 import {
   loadingState,
   tokenListPopupState,
   FromTokenState,
   ToTokenState,
-} from "../organisms/store";
-import { Popup } from "../organisms/components";
+} from '../organisms/store';
+import { Popup } from '../organisms/components';
 
 import {
   ExchangeBottom,
   ExchangeBox,
   ExchangeTop,
-} from "../organisms/contents/exchangeSwap";
-import { TokenList } from "../organisms/contents/popupTokenList/TokenList";
+  PopupTokenList,
+} from '../organisms/contents/exchangeSwap';
 
 export const Swap = () => {
   const [isLoading] = useRecoilState(loadingState);
   const [tokenList] = useRecoilState(tokenListPopupState);
 
   return (
-    <div className="swap" style={{ position: "relative" }}>
+    <div className='swap' style={{ position: 'relative' }}>
       {tokenList ? (
         <Popup>
-          <TokenList />
+          <PopupTokenList />
         </Popup>
       ) : (
         <>
