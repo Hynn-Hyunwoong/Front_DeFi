@@ -1,13 +1,42 @@
 import { useRecoilState } from 'recoil';
-import { popupState, loadingState } from '../../store';
+import {
+  popupState,
+  loadingState,
+  loginState,
+  trustwalletLoginState,
+  walletconnectLoginState,
+  metamaskLoginState,
+  selectedWallet,
+} from '../../store';
 import { Wrap, Top, Xbutton, Bottom, Notice } from './styled';
-import { Metamask, TrustWallet, WalletConnect } from '../../components';
+import { Button, Metamask, TrustWallet, WalletConnect } from '../../components';
 
 export const Wallet = () => {
   const [isLoading, setIsloading] = useRecoilState(loadingState);
+  const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [popup, setPopup] = useRecoilState(popupState);
+  const [wallet, setWallet] = useRecoilState(selectedWallet);
+  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
+    trustwalletLoginState,
+  );
+  const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(
+    walletconnectLoginState,
+  );
+  const [isMetamaskLogin, setIsMetamaskLogin] =
+    useRecoilState(metamaskLoginState);
+
   const closePopup = () => {
     setPopup(false);
+  };
+
+  const disconnectWallet = () => {
+    setIsLogin(false);
+    setPopup(false);
+    setIsloading(false);
+    setWallet(null);
+    setIsTrustwalletLogin(false);
+    setIsMetamaskLogin(false);
+    setIsWalletconnectLogin(false);
   };
 
   return (
@@ -24,6 +53,16 @@ export const Wallet = () => {
           ✩ 위 지갑 중 하나로 연결하여 시작하세요. 개인키 또는 시드 문구를
           안전하게 저장해야 합니다. 절대로 누구와도 공유하지 마세요.
         </Notice>
+        {isLogin && (
+          <Button
+            width={'100%'}
+            height={'50px'}
+            colors={'blue'}
+            onClick={disconnectWallet}
+          >
+            연결해제
+          </Button>
+        )}
       </Bottom>
     </Wrap>
   );

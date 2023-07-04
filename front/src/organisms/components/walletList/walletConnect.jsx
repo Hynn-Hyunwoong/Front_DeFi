@@ -26,7 +26,9 @@ export const WalletConnect = () => {
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
   const [isMetamaskLogin, setIsMetamaskLogin] =
     useRecoilState(metamaskLoginState);
-  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(trustwalletLoginState);
+  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
+    trustwalletLoginState,
+  );
 
   const handleLogin = async () => {
     setIsloading(true);
@@ -62,9 +64,12 @@ export const WalletConnect = () => {
       setIsMetamaskLogin(false);
       setIsTrustwalletLogin(false);
       setPopupOpen(false);
+      const wei = await provider.getBalance(account);
+      const balance = ethers.formatEther(wei);
+      console.log(balance);
     } catch (error) {
-      if (error.message === "User closed modal") {
-        console.log("WalletConnect Closed");
+      if (error.message === 'User closed modal') {
+        console.log('WalletConnect Closed');
       } else {
         console.error(error);
       }
@@ -77,9 +82,9 @@ export const WalletConnect = () => {
       <WalletList onClick={handleLogin}>
         <img src="/images/logo-walletconnect.png" />
         <p>
-          {isLogin && wallet === "walletconnect"
-            ? "WalletConnect 연결됨"
-            : "WalletConnect"}
+          {isLogin && wallet === 'walletconnect'
+            ? 'WalletConnect 연결됨'
+            : 'WalletConnect'}
         </p>
       </WalletList>
     </>
