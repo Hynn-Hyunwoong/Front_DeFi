@@ -45,7 +45,7 @@ export const Dashboard = () => {
               dataKey="uv"
               stroke="#8884d8"
               fill="#8884d8"
-            />{' '}
+            />{'12351231'}
             // Line 대신 Area 사용
             <Area
               type="monotone"

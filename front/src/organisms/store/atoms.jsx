@@ -60,3 +60,8 @@ export const walletconnectLoginState = atom({
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const balanceState = atom({
+  key: 'balanceState',
+  default: { ETH: '0', USDT: '0', Arbitrum: '0', ASD: '0' },  
+});

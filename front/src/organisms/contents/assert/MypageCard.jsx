@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Card, Img, Infos, Text, Stats, Links, GraphWrap } from './styled';
-import { Button, Loader } from '../../components';
+import { Button, Loader, GraphData } from '../../components';
 import axios from 'axios';
 
 const APIURL = process.env.REACT_APP_AXIOS_URL;
@@ -17,7 +17,6 @@ const getTokenValue = async (symbol) => {
 
   const usdPrice = data?.USD?.data?.[symbol]?.quote?.USD?.price;
   const krwPrice = data?.KRW?.data?.[symbol]?.quote?.KRW?.price;
-
   return {
     usdPrice,
     krwPrice,
@@ -40,35 +39,27 @@ export const MyCard = ({ item }) => {
 
   try {
     const { usdPrice, krwPrice } = priceQuery.data;
-    const formattedUSDPrice = usdPrice.toFixed(2).toLocaleString();
-    const formattedKRWPrice = krwPrice.toFixed(2).toLocaleString();
+    const formattedUSDPrice = Number(usdPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const formattedKRWPrice = Number(krwPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return (
       <Card>
         <Img>
-          <img src={logoQuery.data} alt={item.name} />
+          <img src={logoQuery.data} alt={item.name} /></Img>
           <GraphWrap>
-            <coingecko-coin-price-chart-widget
-              coin-id={item.name}
-              currency="usd"
-              height="50"
-              width="100"
-              locale="ko"
-            ></coingecko-coin-price-chart-widget>
+            <GraphData symbol={item.symbol} />
           </GraphWrap>
-        </Img>
         <Infos>
           <h2>{item.name}</h2>
           <h4>{item.description}</h4>
         </Infos>
+        
         <Text>내 보유수량 :</Text>
         <Stats>
           <li>
-            <h3>{formattedUSDPrice}</h3>
-            <h4>$ USD</h4>
+            <h3>USD $ {formattedUSDPrice}</h3>
           </li>
           <li>
-            <h3>{formattedKRWPrice}</h3>
-            <h4>￦ KRW</h4>
+            <h3>KRW ￦ {formattedKRWPrice}</h3>
           </li>
         </Stats>
         <Links>

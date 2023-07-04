@@ -10,7 +10,9 @@ import {
   selectedWallet,
   trustwalletLoginState,
   walletconnectLoginState,
+  balanceState
 } from '../../../organisms/store';
+import { getWalletBalance } from '../../../utils/getBlanceFromWallet';
 
 export const Metamask = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
@@ -60,6 +62,17 @@ export const Metamask = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       setProvider(provider);
       setPopupOpen(false);
+
+      if(provider) {
+        const balances = await getWalletBalance(
+          accounts[0],
+          provider,
+          "",
+          "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
+          ""
+        )
+        console.log(balances)
+      } 
     } catch (error) {
       console.error(error);
     }
