@@ -19,7 +19,7 @@ export const NavUl = styled.ul`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding-top: 30px;
+  /* padding-top: 30px; */
 
   @media (max-width: 768px) {
     flex-direction: column;

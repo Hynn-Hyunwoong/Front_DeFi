@@ -8,9 +8,9 @@ import {
   networkState,
   popupState,
   selectedWallet,
-} from "../../../store";
-import { Wallet } from "../../../contents/popupWallet/Wallet";
-import { useQuery } from "@tanstack/react-query";
+} from '../../../store';
+import { Wallet } from '../../../contents/popupWallet/Wallet';
+import { useQuery } from '@tanstack/react-query';
 
 export const Header = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
@@ -98,18 +98,19 @@ export const Header = () => {
             <Logo />
             <Navigation />
             <Button
-              colors="blue"
-              width="150px"
-              height="40px"
+              colors='blue'
+              width='150px'
+              height='40px'
               onClick={popupHandler}
+              marginTop='20px'
             >
               {(wallet === 'metamask' && (
                 <img
-                  src="/images/logo-metamask.png"
+                  src='/images/logo-metamask.png'
                   style={{ width: '15px' }}
                 />
               )) || (
-                <img src="/images/logo-TWT.png" style={{ width: '15px' }} />
+                <img src='/images/logo-TWT.png' style={{ width: '15px' }} />
               )}
               {isLogin
                 ? account && network
@@ -128,62 +129,3 @@ export const Header = () => {
     </>
   );
 };
-
-/*
-  useEffect(() => {
-    // 어카운트가 있냐 없냐 확인 => 없으면 전역에 저장한 account 값 없애야 해서 있어야 함
-    const handleAccountsChanged = (accounts) => {
-      if (accounts.length === 0) {
-        setIsLogin(false);
-        setAccount(null);
-      }
-    };
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", handleAccountsChanged);
-    }  // 실행 시켰다가 다시 리턴으로 없애기?
-    return () => {
-      if (window.ethereum) {
-        window.ethereum.removeListener(
-          "accountsChanged",
-          handleAccountsChanged
-        );
-      }
-    };
-  }, [account]);
-
-  useEffect(() => {
-    // 연결된 네트워크가 아비트럼인지 아닌지 확인
-    (async () => {
-      try {
-        const networkId = await window.ethereum.request({
-          method: "net_version",
-        });
-        if (networkId === "42161") {
-          console.log("현재 연결된 네트워크는 아비트럼입니다.");
-          setNetwork(true);
-        } else {
-          console.log("현재 연결된 네트워크는 아비트럼이 아닙니다.");
-          setNetwork(false);
-        }
-      } catch (error) {
-        console.error("네트워크 확인 중 오류가 발생했습니다.", error);
-      }
-    })();
-  }, [network]);
-
-  useEffect(() => {
-    // 연결된 네트워크가 변경되었을 때 변경을 감지
-    const handleNetworkChanged = (...args) => {
-      const networkId = args[0];
-      window.location.reload();
-      if (networkId === "42161") {
-        setNetwork(true);
-      } else setNetwork(false);
-    };
-
-    window.ethereum?.on("networkChanged", handleNetworkChanged);
-    return () => {
-      window.ethereum?.removeListener("networkChanged", handleNetworkChanged);
-    };
-  });
-*/
