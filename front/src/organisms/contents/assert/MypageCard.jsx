@@ -5,11 +5,7 @@ import axios from 'axios';
 
 const APIURL = process.env.REACT_APP_AXIOS_URL;
 
-const getLogo = async (logo) => {
-  const { data } = await axios.get(`${APIURL}/aws/signedurl/${logo}`);
-  const response = data.signedURL;
-  return response;
-};
+const getImagePath = (logo) => `/images/${logo}`;
 
 const getTokenValue = async (symbol) => {
   const response = await axios.get(`${APIURL}/coinMarket/currency`);
@@ -24,35 +20,42 @@ const getTokenValue = async (symbol) => {
 };
 
 export const MyCard = ({ item }) => {
-  const logoQuery = useQuery(['coinLogo', item.logo], () => getLogo(item.logo));
+  const logoPath = getImagePath(item.logo);
   const priceQuery = useQuery(['coinPrice', item.symbol], () =>
     getTokenValue(item.symbol),
   );
 
-  if (logoQuery.isLoading || priceQuery.isLoading) {
+  if (priceQuery.isLoading) {
     return <Loader />;
   }
 
-  if (logoQuery.isError || priceQuery.isError) {
+  if (priceQuery.isError) {
     return 'An error has occurred';
   }
 
   try {
     const { usdPrice, krwPrice } = priceQuery.data;
-    const formattedUSDPrice = Number(usdPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    const formattedKRWPrice = Number(krwPrice).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const formattedUSDPrice = Number(usdPrice).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+    const formattedKRWPrice = Number(krwPrice).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
     return (
       <Card>
         <Img>
-          <img src={logoQuery.data} alt={item.name} /></Img>
-          <GraphWrap>
-            <GraphData symbol={item.symbol} />
-          </GraphWrap>
+          <img src={logoPath} alt={item.name} />
+        </Img>
+        <GraphWrap>
+          <GraphData symbol={item.symbol} />
+        </GraphWrap>
         <Infos>
           <h2>{item.name}</h2>
           <h4>{item.description}</h4>
         </Infos>
-        
+
         <Text>내 보유수량 :</Text>
         <Stats>
           <li>

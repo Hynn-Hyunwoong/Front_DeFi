@@ -44,12 +44,9 @@ export const Header = () => {
     }
   };
   const handleNetworkChanged = (...args) => {
-    // console.log(args[0]);
     const networkId = args[0]; // networkId를 인자값으로 바로 넣으면 얘 없어질 수 있는데.. 왜 있지?
-    // window.location.reload();
-    if (networkId.toString() === '42161') {
+    if (networkId.toString() === '421613') {
       setNetwork(true);
-      console.log(network);
     } else setNetwork(false);
   };
 
@@ -66,7 +63,6 @@ export const Header = () => {
       if (window.trustwallet) {
         window.trustwallet.off('accountsChanged', handleAccountChange);
         window.trustwallet.off('networkChanged', handleNetworkChanged);
-        // console.log(networkId);
       }
       if (window.ethereum) {
         window.ethereum.removeListener('accountsChanged', handleAccountChange);
@@ -77,11 +73,14 @@ export const Header = () => {
 
   useEffect(() => {
     if (!isLoading && !error) {
-      if (networkId === '42161') {
-        console.log('현재 연결된 네트워크는 아비트럼입니다.');
+      if (networkId === '421613') {
+        console.log(`This Network is ArbitrumTestnet.${networkId}}`);
+        setNetwork(true);
+      } else if (networkId === '5') {
+        console.log(`This Network is EthereumTestnet. ${networkId}`);
         setNetwork(true);
       } else {
-        console.log('현재 연결된 네트워크는 아비트럼이 아닙니다.');
+        console.log('현재 연결된 네트워크가 없습니다.');
         setNetwork(false);
       }
     }
@@ -98,23 +97,48 @@ export const Header = () => {
             <Logo />
             <Navigation />
             <Button
-              colors='blue'
-              width='150px'
-              height='40px'
+              colors="blue"
+              width="150px"
+              height="40px"
               onClick={popupHandler}
-              marginTop='20px'
+              style={{ display: 'flex', alignItems: 'center' }} // Add flex styling
             >
-              {(wallet === 'metamask' && (
+              {wallet === 'metamask' && (
                 <img
-                  src='/images/logo-metamask.png'
-                  style={{ width: '15px' }}
+                  src="/images/logo-metamask.png"
+                  alt="logo-metamask"
+                  style={{
+                    width: '25px',
+                    marginRight: '10px',
+                    verticalAlign: 'middle',
+                  }}
                 />
-              )) || (
-                <img src='/images/logo-TWT.png' style={{ width: '15px' }} />
+              )}
+              {wallet === 'trustwallet' && (
+                <img
+                  src="/images/logo-TWT.png"
+                  alt="logo-trustwallet"
+                  style={{
+                    width: '25px',
+                    marginRight: '10px',
+                    verticalAlign: 'middle',
+                  }}
+                />
+              )}
+              {wallet === 'walletconnect' && (
+                <img
+                  src="/images/logo-walletConnect.png"
+                  alt="logo-walletconnect"
+                  style={{
+                    width: '20px',
+                    marginRight: 'px',
+                    verticalAlign: 'middle',
+                  }}
+                />
               )}
               {isLogin
                 ? account && network
-                  ? account
+                  ? wallet + ' 연결됨'
                   : ' wrong network'
                 : '지갑 연결'}
             </Button>

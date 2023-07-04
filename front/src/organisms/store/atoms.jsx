@@ -62,21 +62,21 @@ export const walletconnectLoginState = atom({
 });
 
 export const tokenListPopupState = atom({
-  key: "tokenListPopupState",
+  key: 'tokenListPopupState',
   default: false,
 });
 
 export const FromTokenState = atom({
-  key: "FromToken",
-  default: "init",
+  key: 'FromToken',
+  default: 'init',
 });
 
 export const ToTokenState = atom({
-  key: "ToToken",
-  default: "init",
+  key: 'ToToken',
+  default: 'init',
 });
 
 export const balanceState = atom({
   key: 'balanceState',
-  default: { ETH: '0', USDT: '0', Arbitrum: '0', ASD: '0' },  
+  default: { ETH: '0', USDT: '0', Arbitrum: '0', ASD: '0' },
 });

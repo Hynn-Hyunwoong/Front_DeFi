@@ -1,6 +1,6 @@
-import { WalletList } from "./styled";
-import { ethers } from "ethers";
-import { useRecoilState } from "recoil";
+import { WalletList } from './styled';
+import { ethers } from 'ethers';
+import { useRecoilState } from 'recoil';
 import {
   loginState,
   accountState,
@@ -10,8 +10,7 @@ import {
   selectedWallet,
   trustwalletLoginState,
   walletconnectLoginState,
-} from "../../../organisms/store";
-import { getWalletBalance } from '../../../utils/getBlanceFromWallet';
+} from '../../../organisms/store';
 
 export const Metamask = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
@@ -20,8 +19,12 @@ export const Metamask = () => {
   const [wallet, setWallet] = useRecoilState(selectedWallet);
   const [provider, setProvider] = useRecoilState(providerState);
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
-  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(trustwalletLoginState);
-  const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(walletconnectLoginState);
+  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
+    trustwalletLoginState,
+  );
+  const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(
+    walletconnectLoginState,
+  );
 
   const handleLogin = async () => {
     setIsloading(true);
@@ -32,14 +35,14 @@ export const Metamask = () => {
       }
 
       const networkDetails = {
-        chainId: '0x66eed',
+        chainId: '421613',
         chainName: 'Arbitrum Testnet',
         nativeCurrency: {
           name: 'ETH',
           symbol: 'ETH',
           decimals: 18,
         },
-        rpcUrls: 'bridge.arbitrum.io/rpc',
+        rpcUrls: 'https://goerli-rollup.arbitrum.io/rpc',
         blockExplorerUrls: 'https://goerli.arbiscan.io/',
       };
 
@@ -56,17 +59,7 @@ export const Metamask = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       setProvider(provider);
       setPopupOpen(false);
-
-      if(provider) {
-        const balances = await getWalletBalance(
-          accounts[0],
-          provider,
-          "",
-          "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
-          ""
-        )
-        console.log(balances)
-      } 
+      console.log(ethers.formatEther(await provider.getBalance(accounts[0])));
     } catch (error) {
       console.error(error);
     }
@@ -78,7 +71,7 @@ export const Metamask = () => {
       <WalletList onClick={handleLogin}>
         <img src="/images/logo-metaMask.png" />
         <p>
-          {isLogin && wallet === "metamask" ? "Metamask 연결됨" : "Metamask"}
+          {isLogin && wallet === 'metamask' ? 'Metamask 연결됨' : 'Metamask'}
         </p>
       </WalletList>
     </>
