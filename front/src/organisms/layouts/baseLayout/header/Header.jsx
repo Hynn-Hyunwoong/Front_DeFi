@@ -9,7 +9,7 @@ import {
   popupState,
   selectedWallet,
 } from "../../../store";
-import { Wallet } from "../../../contents/wallet/Wallet";
+import { Wallet } from "../../../contents/popupWallet/Wallet";
 import { useQuery } from "@tanstack/react-query";
 
 export const Header = () => {

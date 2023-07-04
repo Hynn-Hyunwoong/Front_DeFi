@@ -59,4 +59,19 @@ export const walletconnectLoginState = atom({
   key: "walletconnectLoginState",
   default: false,
   effects_UNSTABLE: [persistAtom],
-})
+});
+
+export const tokenListPopupState = atom({
+  key: "tokenListPopupState",
+  default: false,
+});
+
+export const FromTokenState = atom({
+  key: "FromToken",
+  default: "init",
+});
+
+export const ToTokenState = atom({
+  key: "ToToken",
+  default: "init",
+});

@@ -14,8 +14,20 @@ export const BoxWrap = styled.section`
   align-items: center;
   justify-content: space-between;
   background-color: white;
-
   box-shadow: 20px 20px 30px 0px #e6eaed;
+
+  position: relative;
+  animation: fadeInUp 0.7s;
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 10%, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translateZ(0);
+    }
+  }
 `;
 
 export const BoxArticle = styled.article`
@@ -48,15 +60,44 @@ export const ButtonArticle = styled.article`
   }
 `;
 
+// Bottom
+
 export const ExpectedArticle = styled.article`
+  width: 100%;
   margin: 0 auto;
-  width: 85%;
   color: #767c83;
+
+  &:nth-child(1) {
+    margin-bottom: 80px;
+  }
 `;
 
-export const Div = styled.div`
+export const HoverSpan = styled.span`
+  cursor: pointer;
+`;
+
+export const TXTableHeader = styled.div`
   margin: 20px 0;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #caccd2;
+  border-top: 1px solid #caccd2;
+  font-size: 13px;
   display: flex;
-  justify-content: space-between;
-  text-align: right;
+
+  & > .action {
+    width: 20%;
+    padding-left: 20px;
+  }
+  & > .hash {
+    width: 45%;
+  }
+  & > .status {
+    width: 15%;
+  }
+  & > .date {
+    width: 20%;
+    text-align: right;
+    padding-right: 20px;
+  }
 `;
