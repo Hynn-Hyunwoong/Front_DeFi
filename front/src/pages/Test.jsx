@@ -1,24 +1,24 @@
-import React from "react";
+import React from 'react';
 
 // This is the same implementation presented in the previous sections.
-import { getTrustWalletInjectedProvider } from "../utils/trustWallet";
+import { getTrustWalletInjectedProvider } from '../utils/trustWallet';
 
 export const Test = () => {
   const [initializing, setInitializing] = React.useState(true);
   const [injectedProvider, setInjectedProvider] = React.useState(null);
-  const [initializationError, setInitializationError] = React.useState("");
+  const [initializationError, setInitializationError] = React.useState('');
 
   const [connected, setConnected] = React.useState(false);
-  const [selectedAccount, setSelectedAccount] = React.useState("");
-  const [chainId, setChainId] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [selectedAccount, setSelectedAccount] = React.useState('');
+  const [chainId, setChainId] = React.useState('');
+  const [error, setError] = React.useState('');
 
   React.useEffect(() => {
     const initializeInjectedProvider = async () => {
       const trustWallet = await getTrustWalletInjectedProvider();
 
       if (!trustWallet) {
-        setInitializationError("Trust Wallet is not installed.");
+        setInitializationError('Trust Wallet is not installed.');
         setInitializing(false);
         return;
       }
@@ -32,25 +32,25 @@ export const Test = () => {
 
   const connect = async () => {
     try {
-      setError("");
+      setError('');
 
       const accounts = await injectedProvider.request({
-        method: "eth_requestAccounts",
+        method: 'eth_requestAccounts',
       });
 
-      const chainId = await injectedProvider.request({ method: "eth_chainId" });
+      const chainId = await injectedProvider.request({ method: 'eth_chainId' });
 
       setSelectedAccount(accounts[0]);
       setChainId(chainId);
       setConnected(true);
 
-      injectedProvider.addListener("chainChanged", setChainId);
+      injectedProvider.addListener('chainChanged', setChainId);
 
-      injectedProvider.addListener("accountsChanged", (accounts) => {
+      injectedProvider.addListener('accountsChanged', (accounts) => {
         if (accounts.length === 0) {
           setConnected(false);
-          setSelectedAccount("");
-          setChainId("");
+          setSelectedAccount('');
+          setChainId('');
         } else {
           const connectedAccount = accounts[0];
           setSelectedAccount(connectedAccount);
@@ -59,7 +59,7 @@ export const Test = () => {
     } catch (e) {
       console.error(e);
       if (e.code === 4001) {
-        setError("User denied connection.");
+        setError('User denied connection.');
       }
     }
   };
@@ -67,13 +67,13 @@ export const Test = () => {
   const switchChain = async () => {
     try {
       await injectedProvider.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0x1" }],
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x1' }],
       });
     } catch (e) {
       console.error(e);
       if (e.code === 4001) {
-        setError("User rejected switching chains.");
+        setError('User rejected switching chains.');
       }
     }
   };
@@ -83,16 +83,16 @@ export const Test = () => {
   }
 
   if (initializationError) {
-    return <p style={{ color: "red" }}>{initializationError}</p>;
+    return <p style={{ color: 'red' }}>{initializationError}</p>;
   }
 
   if (connected) {
     return (
       <div>
-        <p style={{ color: "red" }}>{error}</p>
+        <p style={{ color: 'red' }}>{error}</p>
         <p>Selected account: {selectedAccount}</p>
         <p>Selected chainId: {chainId}</p>
-        {chainId !== "0x1" && (
+        {chainId !== '0x1' && (
           <button onClick={switchChain}>Switch to Ethereum</button>
         )}
       </div>
@@ -101,7 +101,7 @@ export const Test = () => {
 
   return (
     <div>
-      <p style={{ color: "red" }}>{error}</p>
+      <p style={{ color: 'red' }}>{error}</p>
       <button onClick={connect}>Connect</button>
     </div>
   );

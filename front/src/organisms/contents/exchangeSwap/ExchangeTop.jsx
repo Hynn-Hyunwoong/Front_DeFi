@@ -1,5 +1,5 @@
-import { SectionWrap } from "./styled";
-import { H1 } from "../main/styled";
+import { SectionWrap } from './styled';
+import { H1 } from '../main/styled';
 
 export const ExchangeTop = () => {
   return (

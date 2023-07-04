@@ -1,4 +1,4 @@
-import { Wrapped, Div, H1, LightP, MainArticle } from "./styled";
+import { Wrapped, Div, H1, LightP, MainArticle } from './styled';
 
 export const SectionSecond = () => {
   return (

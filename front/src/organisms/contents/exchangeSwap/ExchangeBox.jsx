@@ -4,6 +4,7 @@ import { LightP } from "../main/styled";
 import { SelectTokenBox } from "../../components";
 import { FromTokenState, ToTokenState } from "../../store";
 
+
 export const ExchangeBox = () => {
   // 필요한 상태값
   // 토큰 선택 했는지 안했는지

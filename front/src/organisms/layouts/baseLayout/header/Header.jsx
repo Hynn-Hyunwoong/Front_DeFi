@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { HeaderWrap, HeaderTop, HeaderBottom } from "./styled";
-import { Navigation, Logo, Button, Popup } from "../../../components";
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { HeaderWrap, HeaderTop, HeaderBottom } from './styled';
+import { Navigation, Logo, Button, Popup } from '../../../components';
 import {
   loginState,
   accountState,
@@ -21,7 +21,7 @@ export const Header = () => {
 
   const fetchNetwork = async () => {
     const networkId = await window.ethereum.request({
-      method: "net_version",
+      method: 'net_version',
     });
     return networkId;
   };
@@ -30,7 +30,7 @@ export const Header = () => {
     data: networkId,
     isLoading,
     error,
-  } = useQuery(["networkId"], fetchNetwork);
+  } = useQuery(['networkId'], fetchNetwork);
 
   const popupHandler = (e) => {
     e.preventDefault();
@@ -47,7 +47,7 @@ export const Header = () => {
     // console.log(args[0]);
     const networkId = args[0]; // networkId를 인자값으로 바로 넣으면 얘 없어질 수 있는데.. 왜 있지?
     // window.location.reload();
-    if (networkId.toString() === "42161") {
+    if (networkId.toString() === '42161') {
       setNetwork(true);
       console.log(network);
     } else setNetwork(false);
@@ -55,33 +55,33 @@ export const Header = () => {
 
   useEffect(() => {
     if (window.trustwallet) {
-      window.trustwallet.on("accountsChanged", handleAccountChange);
-      window.trustwallet.on("networkChanged", handleNetworkChanged);
+      window.trustwallet.on('accountsChanged', handleAccountChange);
+      window.trustwallet.on('networkChanged', handleNetworkChanged);
     }
     if (window.ethereum) {
-      window.ethereum.on("accountsChanged", handleAccountChange);
-      window.ethereum.on("networkChanged", handleNetworkChanged);
+      window.ethereum.on('accountsChanged', handleAccountChange);
+      window.ethereum.on('networkChanged', handleNetworkChanged);
     }
     return () => {
       if (window.trustwallet) {
-        window.trustwallet.off("accountsChanged", handleAccountChange);
-        window.trustwallet.off("networkChanged", handleNetworkChanged);
+        window.trustwallet.off('accountsChanged', handleAccountChange);
+        window.trustwallet.off('networkChanged', handleNetworkChanged);
         // console.log(networkId);
       }
       if (window.ethereum) {
-        window.ethereum.removeListener("accountsChanged", handleAccountChange);
-        window.ethereum.removeListener("networkChanged", handleNetworkChanged);
+        window.ethereum.removeListener('accountsChanged', handleAccountChange);
+        window.ethereum.removeListener('networkChanged', handleNetworkChanged);
       }
     };
   }, [account]);
 
   useEffect(() => {
     if (!isLoading && !error) {
-      if (networkId === "42161") {
-        console.log("현재 연결된 네트워크는 아비트럼입니다.");
+      if (networkId === '42161') {
+        console.log('현재 연결된 네트워크는 아비트럼입니다.');
         setNetwork(true);
       } else {
-        console.log("현재 연결된 네트워크는 아비트럼이 아닙니다.");
+        console.log('현재 연결된 네트워크는 아비트럼이 아닙니다.');
         setNetwork(false);
       }
     }
@@ -103,19 +103,19 @@ export const Header = () => {
               height="40px"
               onClick={popupHandler}
             >
-              {(wallet === "metamask" && (
+              {(wallet === 'metamask' && (
                 <img
                   src="/images/logo-metamask.png"
-                  style={{ width: "15px" }}
+                  style={{ width: '15px' }}
                 />
               )) || (
-                <img src="/images/logo-TWT.png" style={{ width: "15px" }} />
+                <img src="/images/logo-TWT.png" style={{ width: '15px' }} />
               )}
               {isLogin
                 ? account && network
                   ? account
-                  : " wrong network"
-                : "지갑 연결"}
+                  : ' wrong network'
+                : '지갑 연결'}
             </Button>
           </div>
         </HeaderBottom>

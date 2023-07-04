@@ -1,62 +1,62 @@
-import { atom } from "recoil";
-import { recoilPersist } from "recoil-persist";
+import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
 export const loginState = atom({
-  key: "isLoginState",
+  key: 'isLoginState',
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
 
 export const accountState = atom({
-  key: "accountState",
+  key: 'accountState',
   default: null,
   effects_UNSTABLE: [persistAtom],
 });
 
 export const networkState = atom({
-  key: "networkState",
+  key: 'networkState',
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
 
 export const loadingState = atom({
-  key: "loadingState",
+  key: 'loadingState',
   default: false,
 });
 
 export const popupState = atom({
-  key: "popupState",
+  key: 'popupState',
   default: false,
 });
 
 export const providerState = atom({
-  key: "providerState",
+  key: 'providerState',
   default: null,
   effects_UNSTABLE: [persistAtom],
 });
 
 export const selectedWallet = atom({
-  key: "selectedWalletState",
+  key: 'selectedWalletState',
   default: null,
   effects_UNSTABLE: [persistAtom],
 });
 
 export const metamaskLoginState = atom({
-  key: "metamaskLoginState",
+  key: 'metamaskLoginState',
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
 
 export const trustwalletLoginState = atom({
-  key: "trustwalletLoginState",
+  key: 'trustwalletLoginState',
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
 
 export const walletconnectLoginState = atom({
-  key: "walletconnectLoginState",
+  key: 'walletconnectLoginState',
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
@@ -74,4 +74,9 @@ export const FromTokenState = atom({
 export const ToTokenState = atom({
   key: "ToToken",
   default: "init",
+});
+
+export const balanceState = atom({
+  key: 'balanceState',
+  default: { ETH: '0', USDT: '0', Arbitrum: '0', ASD: '0' },  
 });

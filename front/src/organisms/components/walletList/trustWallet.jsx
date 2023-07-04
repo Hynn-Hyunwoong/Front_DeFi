@@ -13,6 +13,7 @@ import {
 } from "../../../organisms/store";
 import { getTrustWalletInjectedProvider } from "../../../utils/trustWallet";
 
+
 export const TrustWallet = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
@@ -22,27 +23,25 @@ export const TrustWallet = () => {
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
   const [isMetamaskLogin, setIsMetamaskLogin] =
     useRecoilState(metamaskLoginState);
-  const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(
-    walletconnectLoginState
-  );
+  const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(walletconnectLoginState);
 
   const handleLogin = async () => {
     setIsloading(true);
     try {
       if (!window.trustwallet) {
-        alert("Get Trust Wallet!");
+        alert('Get Trust Wallet!');
         return;
       }
 
       const accounts = await window.trustwallet.request({
-        method: "eth_requestAccounts",
+        method: 'eth_requestAccounts',
       });
       console.log(123);
       setIsMetamaskLogin(false);
       setIsWalletconnectLogin(false);
       setAccount(accounts[0]);
       setIsLogin(true);
-      setWallet("trustwallet");
+      setWallet('trustwallet');
 
       const injectedProvider = await getTrustWalletInjectedProvider();
       const newProvider = new ethers.BrowserProvider(injectedProvider);

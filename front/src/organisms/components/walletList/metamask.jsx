@@ -11,6 +11,7 @@ import {
   trustwalletLoginState,
   walletconnectLoginState,
 } from "../../../organisms/store";
+import { getWalletBalance } from '../../../utils/getBlanceFromWallet';
 
 export const Metamask = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
@@ -19,35 +20,31 @@ export const Metamask = () => {
   const [wallet, setWallet] = useRecoilState(selectedWallet);
   const [provider, setProvider] = useRecoilState(providerState);
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
-  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
-    trustwalletLoginState
-  );
-  const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(
-    walletconnectLoginState
-  );
+  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(trustwalletLoginState);
+  const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(walletconnectLoginState);
 
   const handleLogin = async () => {
     setIsloading(true);
     try {
       if (!window.ethereum) {
-        alert("Get MetaMask!");
+        alert('Get MetaMask!');
         return;
       }
 
       const networkDetails = {
-        chainId: "0x66eed",
-        chainName: "Arbitrum Testnet",
+        chainId: '0x66eed',
+        chainName: 'Arbitrum Testnet',
         nativeCurrency: {
-          name: "ETH",
-          symbol: "ETH",
+          name: 'ETH',
+          symbol: 'ETH',
           decimals: 18,
         },
-        rpcUrls: "bridge.arbitrum.io/rpc",
-        blockExplorerUrls: "https://goerli.arbiscan.io/",
+        rpcUrls: 'bridge.arbitrum.io/rpc',
+        blockExplorerUrls: 'https://goerli.arbiscan.io/',
       };
 
       const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
+        method: 'eth_requestAccounts',
         wallet_addEthereumChain: networkDetails,
       });
 
@@ -55,11 +52,21 @@ export const Metamask = () => {
       setIsWalletconnectLogin(false);
       setAccount(accounts[0]);
       setIsLogin(true);
-      setWallet("metamask");
-
+      setWallet('metamask');
       const provider = new ethers.BrowserProvider(window.ethereum);
       setProvider(provider);
       setPopupOpen(false);
+
+      if(provider) {
+        const balances = await getWalletBalance(
+          accounts[0],
+          provider,
+          "",
+          "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
+          ""
+        )
+        console.log(balances)
+      } 
     } catch (error) {
       console.error(error);
     }
@@ -77,3 +84,4 @@ export const Metamask = () => {
     </>
   );
 };
+  )
