@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const TxLi = styled.li`
   display: flex;
   font-size: 13px;
   letter-spacing: -1px;
-  padding-bottom: 20px;
+  padding-bottom: 5px;
 
   & > .action {
     width: 20%;
