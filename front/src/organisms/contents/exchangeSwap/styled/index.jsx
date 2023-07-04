@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const flexCenter = css`
+  display: flex;
+  align-items: center;
+`;
 
 export const SectionWrap = styled.section`
   width: 800px;
@@ -6,16 +11,14 @@ export const SectionWrap = styled.section`
 `;
 
 export const BoxWrap = styled.section`
+  ${flexCenter}
   margin: 0 auto;
   border-radius: 20px;
   width: 800px;
   height: 305px;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
   background-color: white;
   box-shadow: 20px 20px 30px 0px #e6eaed;
-
   position: relative;
   animation: fadeInUp 0.7s;
   @keyframes fadeInUp {
@@ -31,11 +34,10 @@ export const BoxWrap = styled.section`
 `;
 
 export const BoxArticle = styled.article`
+  ${flexCenter}
   width: 77%;
   height: 100%;
-  display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 `;
 
@@ -178,9 +180,9 @@ export const List = styled.li`
   }
 
   & > .token {
+    ${flexCenter}
     height: 100%;
     width: 47%;
-    display: flex;
     & > img {
       height: 33px;
       margin-right: 5px;
@@ -191,20 +193,17 @@ export const List = styled.li`
         font-size: 12px;
       }
     }
-    align-items: center;
   }
 
   & > .price {
+    ${flexCenter}
     width: 28%;
-    display: flex;
-    align-items: center;
   }
 
   & > .balance {
+    ${flexCenter}
     width: 25%;
     text-align: right;
-    display: flex;
-    align-items: center;
     justify-content: flex-end;
     margin-right: 10px;
     & > div > p:nth-child(1) {

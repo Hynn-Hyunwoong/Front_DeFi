@@ -29,9 +29,9 @@ export const Navigation = () => {
     setIsOpen(false);
   };
 
-  const categoryMap = category.map((item, index) => {
+  const categoryMap = category.map((item) => {
     const subMenu = item.subMenu?.map((subItem, subIndex) => (
-      <SubLi key={`${item.label}-${subIndex}`} className="sub">
+      <SubLi key={`${item.label}-${subIndex}`} className='sub'>
         {subItem.label}
       </SubLi>
     ));
@@ -40,7 +40,7 @@ export const Navigation = () => {
       <NavLi key={item.label} onMouseOver={overEvent} onMouseOut={outEvent}>
         {item.label}
         {isOpen ? (
-          <div className="subBox">{item.subMenu && <ul>{subMenu}</ul>}</div>
+          <div className='subBox'>{item.subMenu && <ul>{subMenu}</ul>}</div>
         ) : null}
       </NavLi>
     );
