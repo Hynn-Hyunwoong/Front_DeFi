@@ -1,4 +1,4 @@
-import { FooterWrap, ContentWrap } from "./styled";
+import { FooterWrap, ContentWrap } from './styled';
 
 export const Footer = () => {
   return (

@@ -1,2 +1,2 @@
-export * from "./MypageTitle"
-export * from "./MypageTable"
+export * from './MypageTitle';
+export * from './MypageTable';

@@ -1,4 +1,4 @@
-import { Wrap, ContentWrap } from "./styled";
+import { Wrap, ContentWrap } from './styled';
 
 export const Popup = ({ children }) => {
   return (

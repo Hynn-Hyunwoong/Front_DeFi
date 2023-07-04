@@ -1,10 +1,9 @@
-import { Dashboard } from "../organisms/contents/dashboard" 
+import { Dashboard } from '../organisms/contents/dashboard';
 
 export const DashboardPage = () => {
-
-    return (
-        <>
-            <Dashboard />
-        </>
-    )
-}
+  return (
+    <>
+      <Dashboard />
+    </>
+  );
+};

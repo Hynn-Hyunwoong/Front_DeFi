@@ -1,6 +1,13 @@
-import { Routes, Route } from "react-router-dom";
-import { Main, Test, GovernanceCreate, Assets, Swap, DashboardPage } from "../pages";
-import { Header, Footer } from "../organisms/layouts/baseLayout";
+import { Routes, Route } from 'react-router-dom';
+import {
+  Main,
+  Test,
+  GovernanceCreate,
+  Assets,
+  Swap,
+  DashboardPage,
+} from '../pages';
+import { Header, Footer } from '../organisms/layouts/baseLayout';
 
 export const AppRouter = () => {
   return (

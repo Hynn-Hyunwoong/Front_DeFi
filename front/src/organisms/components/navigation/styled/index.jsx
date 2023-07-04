@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const res = {
-  mobile: "@media(max-width:768px)",
+  mobile: '@media(max-width:768px)',
 };
 
 export const NavWrap = styled.div`

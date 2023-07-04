@@ -3,7 +3,7 @@ import {
   SectionFourth,
   SectionSecond,
   SectionThird,
-} from "../organisms/contents/main";
+} from '../organisms/contents/main';
 
 export const Main = () => {
   return (

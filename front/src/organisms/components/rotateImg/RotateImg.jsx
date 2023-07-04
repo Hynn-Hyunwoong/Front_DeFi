@@ -1,7 +1,7 @@
-import { RotateImgBody, ImgStyled } from "./styled";
+import { RotateImgBody, ImgStyled } from './styled';
 
 export const RotateImg = () => {
-  const coinImg = ["logo-arbitrum", "logo-ethereum", "logo-tether"];
+  const coinImg = ['logo-arbitrum', 'logo-ethereum', 'logo-tether'];
 
   const renderItem = (item) => {
     return item.map((v) => (

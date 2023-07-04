@@ -10,3 +10,5 @@ export * from "./WriteTopic/Writepreview";
 export * from "./selectTokenBox/SelectTokenBox";
 export * from "./exchangeExpected/ExchangeExpected";
 export * from "./txHistoryLi/TXHistory";
+export * from './exchangeBox/ExchangeBox';
+export * from './graph/index'

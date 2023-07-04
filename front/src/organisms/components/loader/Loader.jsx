@@ -1,4 +1,4 @@
-import { GlobalStyle } from "./styled";
+import { GlobalStyle } from './styled';
 export const Loader = () => {
   return (
     <>

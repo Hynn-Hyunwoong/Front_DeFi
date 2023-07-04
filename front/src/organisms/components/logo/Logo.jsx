@@ -1,4 +1,4 @@
-import { LogoImg, LogoText, LogoWrap } from "./styled";
+import { LogoImg, LogoText, LogoWrap } from './styled';
 
 export const Logo = () => {
   return (

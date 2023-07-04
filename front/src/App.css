@@ -1,6 +1,6 @@
 /* @import 'tailwindcss/base'; */
-@import 'tailwindcss/components'; 
-@import 'tailwindcss/utilities'; 
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 .App {
   text-align: center;
@@ -41,13 +41,12 @@
   }
 }
 
-
 .bold1 {
   font-weight: bold;
-  color: #0194FF;
+  color: #0194ff;
 }
 
-.bold2{
+.bold2 {
   font-weight: bold;
-  color: #94CA0D;
+  color: #94ca0d;
 }
