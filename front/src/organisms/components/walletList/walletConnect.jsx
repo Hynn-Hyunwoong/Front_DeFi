@@ -11,6 +11,7 @@ import {
   selectedWallet,
   metamaskLoginState,
   trustwalletLoginState,
+  balanceState,
 } from '../../../organisms/store';
 import { EthereumProvider } from '@walletconnect/ethereum-provider';
 

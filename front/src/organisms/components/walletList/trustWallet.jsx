@@ -10,6 +10,7 @@ import {
   selectedWallet,
   metamaskLoginState,
   walletconnectLoginState,
+  balanceState,
 } from '../../../organisms/store';
 import { getTrustWalletInjectedProvider } from '../../../utils/trustWallet';
 
