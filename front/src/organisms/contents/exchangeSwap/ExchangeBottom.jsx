@@ -1,5 +1,5 @@
 import { SectionWrap, ExpectedArticle, TXTableHeader } from "./styled";
-import { Expected, TxHistory } from "../../components";
+import { Expected, TxHistoryLi } from "../../components";
 
 export const ExchangeBottom = () => {
   return (
@@ -17,7 +17,9 @@ export const ExchangeBottom = () => {
           <p className="date">일자</p>
         </TXTableHeader>
         <div>
-          <TxHistory />
+          <ul>
+            <TxHistoryLi />
+          </ul>
         </div>
       </ExpectedArticle>
     </SectionWrap>

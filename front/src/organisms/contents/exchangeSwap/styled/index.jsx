@@ -90,13 +90,13 @@ export const TXTableHeader = styled.div`
     padding-left: 20px;
   }
   & > .hash {
-    width: 40%;
+    width: 45%;
   }
   & > .status {
     width: 15%;
   }
   & > .date {
-    width: 25%;
+    width: 20%;
     text-align: right;
     padding-right: 20px;
   }

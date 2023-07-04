@@ -9,4 +9,4 @@ export * from "./walletList";
 export * from "./WriteTopic/Writepreview";
 export * from "./selectTokenBox/SelectTokenBox";
 export * from "./exchangeExpected/ExchangeExpected";
-export * from "./txHistory/TXHistory";
+export * from "./txHistoryLi/TXHistory";

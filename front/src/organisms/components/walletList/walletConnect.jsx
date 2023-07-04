@@ -24,21 +24,32 @@ export const WalletConnect = () => {
   const [wallet, setWallet] = useRecoilState(selectedWallet);
   const [qrCodeUri, setQrCodeUri] = useState(null);
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
-  const [isMetamaskLogin, setIsMetamaskLogin] = useRecoilState(metamaskLoginState);
-  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(trustwalletLoginState);
+  const [isMetamaskLogin, setIsMetamaskLogin] =
+    useRecoilState(metamaskLoginState);
+  const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
+    trustwalletLoginState
+  );
 
   const handleLogin = async () => {
     setIsloading(true);
     try {
       const walletConnectProvider = await EthereumProvider.init({
-        projectId : APIKEY,
-        chains :[421613],
-        showQrModal : true,
-        methods: ['eth_accounts', 'eth_sendTransaction'],
-        events: ['session_request', 'session_update', 'session_reject','call_request', 'disconnect', 'connect', 'reset'],
-      })
-      
-      walletConnectProvider.on('connect', () => {
+        projectId: APIKEY,
+        chains: [421613],
+        showQrModal: true,
+        methods: ["eth_accounts", "eth_sendTransaction"],
+        events: [
+          "session_request",
+          "session_update",
+          "session_reject",
+          "call_request",
+          "disconnect",
+          "connect",
+          "reset",
+        ],
+      });
+
+      walletConnectProvider.on("connect", () => {
         setQrCodeUri(null);
       });
 
@@ -53,22 +64,25 @@ export const WalletConnect = () => {
       setIsMetamaskLogin(false);
       setIsTrustwalletLogin(false);
       setPopupOpen(false);
-
     } catch (error) {
-      if (error.message === 'User closed modal') {
-        console.log('WalletConnect Closed');
+      if (error.message === "User closed modal") {
+        console.log("WalletConnect Closed");
       } else {
         console.error(error);
       }
     }
     setIsloading(false);
   };
-  
+
   return (
     <>
       <WalletList onClick={handleLogin}>
-        <img src="images/logo-walletconnect.png" />
-        <p>{isLogin && wallet === "walletconnect" ? "WalletConnect 연결됨" : "WalletConnect"}</p>
+        <img src="/images/logo-walletconnect.png" />
+        <p>
+          {isLogin && wallet === "walletconnect"
+            ? "WalletConnect 연결됨"
+            : "WalletConnect"}
+        </p>
       </WalletList>
     </>
   );

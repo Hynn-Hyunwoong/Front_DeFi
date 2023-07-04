@@ -10,9 +10,9 @@ export const Expected = () => {
     { title: "교환 경로", data: "KLAY ➤ KDAI" },
   ];
 
-  const testMap = testArr.map((v) => {
+  const testMap = testArr.map((v, index) => {
     return (
-      <LiStyled>
+      <LiStyled key={index}>
         <div>{v.title}</div>
         <div>
           <p>{v.data}</p>
