@@ -1,12 +1,16 @@
 import { Button } from '../../components';
 import {
-  SectionStyled,
   ListHeaderDiv,
   ListContentDiv,
   PageDiv,
   FlexDiv,
+  ButtonSection,
+  ListSection,
 } from './styled';
+
 export const GovernanceContent = ({ testArr }) => {
+  const statusText = { exectued: '통과', progress: '진행중', canceled: '취소' };
+
   const listMap = testArr.map((v) => {
     return (
       <ListContentDiv className='ListContent' key={v.index}>
@@ -19,9 +23,7 @@ export const GovernanceContent = ({ testArr }) => {
           </div>
           <div className='status' style={{ width: '70px' }}>
             <Button colors={`${v.status}`} width='60px' height='30px'>
-              {(v.status === 'exectued' && '통과') ||
-                (v.status === 'progress' && '진행중') ||
-                (v.status === 'canceled' && '취소')}
+              {statusText[v.status]}
             </Button>
           </div>
         </FlexDiv>
@@ -37,27 +39,28 @@ export const GovernanceContent = ({ testArr }) => {
 
   return (
     <div>
-      <SectionStyled
-        className='proposalButton'
-        justifyContent='end'
-        marginBottom='20px'
-      >
-        <Button colors='green' height='40px' width='100px'>
+      <ButtonSection>
+        <Button
+          colors='green'
+          height='40px'
+          width='100px'
+          to='/governance/create'
+        >
           <h3>투표 제안하기</h3>
         </Button>
-      </SectionStyled>
-
-      <SectionStyled
-        className='proposalList'
-        flexDirection='column'
-        background='white'
-      >
-        <ListHeaderDiv className='ListHeader'>
+      </ButtonSection>
+      <ListSection>
+        <ListHeaderDiv>
           <h4>전체 목록</h4>
           <div>전체</div>
         </ListHeaderDiv>
         <div>{listMap}</div>
+      </ListSection>
+    </div>
+  );
+};
 
+/*
         <PageDiv className='pagenation'>
           <button>◀️</button>
           <div>1</div>
@@ -67,7 +70,4 @@ export const GovernanceContent = ({ testArr }) => {
           <div>5</div>
           <button>▶️</button>
         </PageDiv>
-      </SectionStyled>
-    </div>
-  );
-};
+*/

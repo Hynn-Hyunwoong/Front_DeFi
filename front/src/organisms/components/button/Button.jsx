@@ -1,7 +1,12 @@
+import { NavLink } from 'react-router-dom';
 import { ButtonStyled } from './styled';
 
-export const Button = ({ children, ...rest }) => {
-  return <ButtonStyled {...rest}>{children}</ButtonStyled>;
+export const Button = ({ children, to, ...rest }) => {
+  return (
+    <NavLink to={to} style={{ textDecoration: 'none' }}>
+      <ButtonStyled {...rest}>{children}</ButtonStyled>
+    </NavLink>
+  );
 };
 
 // width={width}

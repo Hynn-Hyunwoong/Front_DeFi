@@ -97,16 +97,16 @@ export const Header = () => {
             <Logo />
             <Navigation />
             <Button
-              colors="blue"
-              width="150px"
-              height="40px"
+              colors='blue'
+              width='150px'
+              height='40px'
               onClick={popupHandler}
               style={{ display: 'flex', alignItems: 'center' }} // Add flex styling
             >
               {wallet === 'metamask' && (
                 <img
-                  src="/images/logo-metamask.png"
-                  alt="logo-metamask"
+                  src='/images/logo-metamask.png'
+                  alt='logo-metamask'
                   style={{
                     width: '25px',
                     marginRight: '10px',
@@ -116,8 +116,8 @@ export const Header = () => {
               )}
               {wallet === 'trustwallet' && (
                 <img
-                  src="/images/logo-TWT.png"
-                  alt="logo-trustwallet"
+                  src='/images/logo-TWT.png'
+                  alt='logo-trustwallet'
                   style={{
                     width: '25px',
                     marginRight: '10px',
@@ -127,8 +127,8 @@ export const Header = () => {
               )}
               {wallet === 'walletconnect' && (
                 <img
-                  src="/images/logo-walletConnect.png"
-                  alt="logo-walletconnect"
+                  src='/images/logo-walletConnect.png'
+                  alt='logo-walletconnect'
                   style={{
                     width: '20px',
                     marginRight: 'px',

@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const flexCenter = css`
+  display: flex;
+  align-items: center;
+`;
 
 export const HeaderWrap = styled.header`
   width: 100%;
@@ -35,13 +40,15 @@ export const HeaderBottom = styled.section`
   margin: 0 auto;
   width: 100%;
   height: 60%;
+  ${flexCenter}
 
   & > div {
     margin: 0 auto;
     width: 100%;
     max-width: 1000px;
-    display: flex;
+    ${flexCenter}
     flex-direction: row;
+    justify-content: center;
   }
 
   & > div > button {

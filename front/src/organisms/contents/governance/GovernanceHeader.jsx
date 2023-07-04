@@ -1,12 +1,18 @@
 import { Box, Button } from '../../components';
-import { SectionStyled, VoteTitleDiv, ButtonStyled, AmountDiv } from './styled';
+import { VoteTitleDiv, ButtonStyled, AmountDiv, HeaderSection } from './styled';
 
 export const GovernanceHeader = () => {
   return (
-    <SectionStyled style={{ marginBottom: '70px' }}>
+    <HeaderSection style={{ marginBottom: '70px' }}>
       <div>
         <h1>SOLARswap에 제안 등록하기</h1>
-        <Button colors='blueBox' width='150px' height='35px' marginTop='20px'>
+        <Button
+          colors='blueBox'
+          width='150px'
+          height='35px'
+          marginTop='20px'
+          to='https://docs.klayswap.com/v/kr/product/governance'
+        >
           거버넌스 정책 상세보기
         </Button>
       </div>
@@ -25,6 +31,6 @@ export const GovernanceHeader = () => {
           </AmountDiv>
         </Box>
       </div>
-    </SectionStyled>
+    </HeaderSection>
   );
 };

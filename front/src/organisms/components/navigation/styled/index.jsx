@@ -5,7 +5,7 @@ const res = {
 };
 
 export const NavWrap = styled.div`
-  margin-left: 30px;
+  margin: 0 120px 0 30px;
   width: 500px;
   height: 100%;
 
