@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { Card, Img, Infos, Text, Stats, Links, GraphWrap } from './styled';
 import { Button, Loader, GraphData } from '../../components';
+import { balanceState } from '../../store';
+import { useRecoilState } from 'recoil';
+
 import axios from 'axios';
 
 const APIURL = process.env.REACT_APP_AXIOS_URL;
@@ -20,6 +23,7 @@ const getTokenValue = async (symbol) => {
 };
 
 export const MyCard = ({ item }) => {
+  const [balance, setBalance] = useRecoilState(balanceState);
   const logoPath = getImagePath(item.logo);
   const priceQuery = useQuery(['coinPrice', item.symbol], () =>
     getTokenValue(item.symbol),
@@ -43,6 +47,9 @@ export const MyCard = ({ item }) => {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
+
+    const tokenBalance = balance[item.symbol] ?? 0.0;
+
     return (
       <Card>
         <Img>
@@ -56,7 +63,7 @@ export const MyCard = ({ item }) => {
           <h4>{item.description}</h4>
         </Infos>
 
-        <Text>내 보유수량 :</Text>
+        <Text>내 보유수량 : {tokenBalance}</Text>
         <Stats>
           <li>
             <h3>USD $ {formattedUSDPrice}</h3>

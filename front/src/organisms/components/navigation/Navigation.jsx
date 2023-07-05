@@ -1,4 +1,4 @@
-import { NavWrap, NavLi, NavUl, SubLi } from './styled';
+import { NavWrap, NavLi, NavUl, SubLi, NavLink } from './styled';
 import { useState } from 'react';
 
 export const Navigation = () => {
@@ -31,16 +31,16 @@ export const Navigation = () => {
 
   const categoryMap = category.map((item) => {
     const subMenu = item.subMenu?.map((subItem, subIndex) => (
-      <SubLi key={`${item.label}-${subIndex}`} className='sub'>
+      <SubLi key={`${item.label}-${subIndex}`} className="sub">
         {subItem.label}
       </SubLi>
     ));
 
     return (
       <NavLi key={item.label} onMouseOver={overEvent} onMouseOut={outEvent}>
-        {item.label}
+        <NavLink to={item.path}>{item.label}</NavLink>
         {isOpen ? (
-          <div className='subBox'>{item.subMenu && <ul>{subMenu}</ul>}</div>
+          <div className="subBox">{item.subMenu && <ul>{subMenu}</ul>}</div>
         ) : null}
       </NavLi>
     );
