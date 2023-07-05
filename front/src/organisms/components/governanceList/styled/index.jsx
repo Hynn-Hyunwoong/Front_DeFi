@@ -4,6 +4,7 @@ const Flex = css`
   display: flex;
   justify-content: space-between;
 `;
+
 const basicOption = css`
   ${Flex}
   padding: 0 30px;
@@ -16,12 +17,37 @@ export const ListContentDiv = styled.div`
   height: 80px;
   cursor: pointer;
   font-size: 14px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    flex-direction: column;
+    padding: 0;
+    justify-content: center;
+  }
 `;
+
 export const FlexDiv = styled.div`
   ${Flex}
   width: ${({ width }) => width};
   align-items: center;
+
+  & > .period {
+    color: #767c83;
+  }
+
+  ${({ width }) =>
+    width &&
+    css`
+      @media (max-width: 768px) {
+        width: 90%;
+        &:nth-child(1) {
+          margin-bottom: 10px;
+        }
+        /* 다른 원하는 속성들 추가 */
+      }
+    `}
 `;
+
 export const ActionColor = styled.span`
   font-weight: bold;
   color: ${({ status }) => {

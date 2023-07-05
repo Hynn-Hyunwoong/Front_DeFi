@@ -36,7 +36,7 @@ export const Governance = () => {
 
   return (
     <div style={{ padding: '60px 0' }}>
-      <div style={{ width: '800px', margin: '0 auto' }}>
+      <div>
         <GovernanceHeader />
         <GovernanceContent testArr={testArr} />
       </div>
