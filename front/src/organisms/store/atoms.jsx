@@ -85,3 +85,8 @@ export const listState = atom({
   key: 'listState',
   default: null,
 });
+
+export const dropboxState = atom({
+  key: 'dropboxState',
+  default: false,
+});

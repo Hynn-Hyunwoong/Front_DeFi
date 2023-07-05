@@ -1,4 +1,3 @@
-import { useState, useRef, useEffect } from 'react';
 import { Button, DropBox, GovernanceList } from '../../components';
 import {
   ListHeaderDiv,
@@ -8,21 +7,19 @@ import {
   PageDiv,
 } from './styled';
 import { useRecoilState } from 'recoil';
-import { listState } from '../../store';
+import { listState, dropboxState } from '../../store';
 
 export const GovernanceContent = ({ testArr }) => {
   const [list] = useRecoilState(listState);
-  console.log(list);
+  const [dropbox, setDropbox] = useRecoilState(dropboxState);
+
   const statusText = {
     exectued: '통과',
     progress: '진행중',
     canceled: '취소',
-    null: '전체',
   };
 
-  const listFilter = testArr.filter((v) => v.status === list);
-
-  const [dropbox, setDropbox] = useState(false);
+  const filteredArr = list ? testArr.filter((v) => v.status === list) : testArr;
 
   return (
     <div>
@@ -45,21 +42,13 @@ export const GovernanceContent = ({ testArr }) => {
                 setDropbox(!dropbox);
               }}
             >
-              {statusText[list]} {dropbox ? '▲' : '▼'}
+              {list ? statusText[list] : '전체'} {dropbox ? '▲' : '▼'}
             </ButtonStyle>
           </div>
         </ListHeaderDiv>
         {dropbox && <DropBox statusText={statusText} />}
         <div>
-          {list ? (
-            <>
-              <GovernanceList testArr={listFilter} statusText={statusText} />
-            </>
-          ) : (
-            <>
-              <GovernanceList testArr={testArr} statusText={statusText} />
-            </>
-          )}
+          <GovernanceList testArr={filteredArr} statusText={statusText} />
         </div>
       </ListSection>
     </div>

@@ -22,6 +22,7 @@ export const DropBoxWrap = styled.div`
 `;
 
 export const ListStyled = styled.li`
+  cursor: pointer;
   text-align: center;
   padding: 10px;
   border-bottom: 1px solid #ececec;

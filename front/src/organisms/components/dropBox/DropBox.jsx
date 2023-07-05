@@ -1,47 +1,25 @@
 import { useRecoilState } from 'recoil';
 import { DropBoxWrap, ListStyled } from './styled';
-import { listState } from '../../store';
+import { listState, dropboxState } from '../../store';
 
 export const DropBox = ({ statusText }) => {
   const [liseCate, setListCate] = useRecoilState(listState);
+  const [dropbox, setDropbox] = useRecoilState(dropboxState);
 
-  const clickEvent = (state) => {
+  const handleClick = (state) => {
     setListCate(state);
+    setDropbox(false);
   };
-
-  console.log(listState);
 
   return (
     <DropBoxWrap>
       <ul>
-        <ListStyled
-          onClick={() => {
-            clickEvent(null);
-          }}
-        >
-          전체
-        </ListStyled>
-        <ListStyled
-          onClick={() => {
-            clickEvent('progress');
-          }}
-        >
-          진행중
-        </ListStyled>
-        <ListStyled
-          onClick={() => {
-            clickEvent('exectued');
-          }}
-        >
-          통과
-        </ListStyled>
-        <ListStyled
-          onClick={() => {
-            clickEvent('canceled');
-          }}
-        >
-          취소
-        </ListStyled>
+        <ListStyled onClick={() => handleClick(null)}>전체</ListStyled>
+        {Object.entries(statusText).map(([status, text]) => (
+          <ListStyled key={status} onClick={() => handleClick(status)}>
+            {text}
+          </ListStyled>
+        ))}
       </ul>
     </DropBoxWrap>
   );
