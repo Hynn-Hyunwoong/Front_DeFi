@@ -41,7 +41,6 @@ export const HeaderSection = styled.section`
   }
 `;
 export const HeaderDiv = styled.div`
-  width: 100%;
   @media (max-width: 768px) {
     width: 80%;
   }
