@@ -40,16 +40,6 @@ export const AmountDiv = styled.div`
 `;
 
 // GovernanceContent
-export const ListHeaderDiv = styled.div`
-  ${basicOption}
-  height: 60px;
-`;
-export const ListContentDiv = styled.div`
-  ${basicOption}
-  height: 80px;
-  cursor: pointer;
-  font-size: 14px;
-`;
 export const ButtonSection = styled.section`
   ${Flex}
   width: 100%;
@@ -57,15 +47,21 @@ export const ButtonSection = styled.section`
   margin-bottom: 20px;
 `;
 export const ListSection = styled.section`
+  position: relative;
   ${Flex}
   width: 100%;
   flex-direction: column;
   background: white;
 `;
-export const FlexDiv = styled.div`
-  ${Flex}
-  width: ${({ width }) => width};
-  align-items: center;
+export const ListHeaderDiv = styled.div`
+  ${basicOption}
+  height: 60px;
+`;
+export const ButtonStyle = styled.button`
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #767c83;
 `;
 export const PageDiv = styled.div`
   ${Flex}

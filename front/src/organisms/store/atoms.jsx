@@ -80,3 +80,8 @@ export const balanceState = atom({
   key: 'balanceState',
   default: { ETH: '0', USDT: '0', Arbitrum: '0', ASD: '0' },
 });
+
+export const listState = atom({
+  key: 'listState',
+  default: null,
+});
