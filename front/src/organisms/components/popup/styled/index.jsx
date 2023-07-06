@@ -11,17 +11,18 @@ export const Wrap = styled.div`
 
 export const ContentWrap = styled.div`
   margin: auto;
-  /* height: 45%; */
-  width: ${({ width }) => width || '30rem'};
+  width: ${({ width }) => width || '480px'};
+  max-height: 750px;
+  height: ${({ height }) => height || 'auto'};
   background: white;
-  /* padding: 50px; */
   z-index: 1;
+  overflow: auto;
   @media (max-width: 768px) {
     width: 100%;
+    max-height: 100%;
   }
 `;
 
 export const Content = styled.div`
-  overflow: auto;
   padding: 50px;
 `;

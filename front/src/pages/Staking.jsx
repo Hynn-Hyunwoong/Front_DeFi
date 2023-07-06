@@ -3,6 +3,7 @@ import {
   StakingHeader,
   StakingMyVote,
   StakingPoolList,
+  StakingPopup,
 } from '../organisms/contents/staking';
 
 export const Staking = () => {
@@ -16,6 +17,7 @@ export const Staking = () => {
   return (
     <>
       <div style={{ padding: '60px 0' }}>
+        <StakingPopup />
         <StakingHeader reward={testArr} />
         <StakingBalance />
         <StakingMyVote />

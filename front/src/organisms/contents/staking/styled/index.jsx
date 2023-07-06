@@ -165,3 +165,13 @@ export const PoolListHeaderDiv = styled.div`
     }
   }
 `;
+
+// staking popup
+export const StakingHeader = styled.section`
+  ${Flex}
+  margin-bottom: 20px;
+`;
+export const StakingContent = styled.section`
+  ${Flex}
+  flex-direction: column;
+`;

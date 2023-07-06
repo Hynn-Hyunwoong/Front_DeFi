@@ -14,4 +14,5 @@ export * from './graph/index';
 export * from './greenbox/Box';
 export * from './dropBox/DropBox';
 export * from './search/Search';
-export * from './List';
+export * from './list';
+export * from './inputBox/InputBox';

@@ -21,7 +21,7 @@ export const Swap = () => {
   return (
     <div className='swap'>
       {tokenList && (
-        <Popup>
+        <Popup height={'500px'}>
           <PopupTokenList />
         </Popup>
       )}
