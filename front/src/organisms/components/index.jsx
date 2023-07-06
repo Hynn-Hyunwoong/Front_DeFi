@@ -12,3 +12,4 @@ export * from './exchangeExpected/ExchangeExpected';
 export * from './txHistoryLi/TXHistory';
 export * from './graph/index';
 export * from './greenbox/Box';
+export * from './Opening/Opening';
