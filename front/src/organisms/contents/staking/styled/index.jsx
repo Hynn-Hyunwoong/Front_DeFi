@@ -1,36 +1,24 @@
 import styled, { css } from 'styled-components';
+
 const Flex = css`
   display: flex;
   justify-content: space-between;
 `;
-
 const basicOption = css`
   ${Flex}
   padding: 0 30px;
   border-bottom: 1px solid #dee3eb;
   align-items: center;
 `;
-
 const mobileFlex = css`
   display: flex;
   flex-direction: column;
 `;
-
-export const StakingWrap = styled.div`
-  width: 850px;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    margin: 0 auto;
-  }
-`;
-
-// Header
 export const FlexDiv = styled.div`
   ${Flex}
 `;
 
+// Header
 export const BoxSection = styled.section`
   width: 50%;
   &:nth-child(1) {
@@ -61,7 +49,7 @@ export const ExpectedRewardDiv = styled.div`
 export const BoxDivBalance = styled.div`
   ${Flex}
   @media (max-width: 768px) {
-    flex-direction: column;
+    ${mobileFlex}
   }
 `;
 export const ButtonDiv = styled.div`
@@ -110,5 +98,47 @@ export const ExpectInfoDiv = styled.div`
   letter-spacing: -0.5px;
   & > span:nth-child(1) {
     margin-right: 20px;
+  }
+`;
+
+// MyVote
+export const MyVoteSection = styled.div`
+  ${mobileFlex}
+  justify-content: center;
+  height: 95px;
+  background: #4192f7;
+  padding: 0 30px;
+  color: white;
+  @media (max-width: 768px) {
+    width: 90%;
+    margin: 0 auto;
+  }
+`;
+export const VoteInfoDiv = styled.div`
+  ${Flex}
+  font-weight: 330;
+
+  & > span > strong {
+    font-size: 24px;
+  }
+  @media (max-width: 768px) {
+    ${mobileFlex}
+    text-align: right;
+  }
+
+  .option {
+    margin-left: 30px;
+    font-size: 14px;
+  }
+`;
+
+export const PoolVote = styled.div`
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: right;
+  font-weight: 330;
+  & > span:nth-child(1) {
+    letter-spacing: -0.5px;
+    margin-right: 15px;
   }
 `;

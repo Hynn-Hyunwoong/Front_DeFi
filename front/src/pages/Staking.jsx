@@ -1,7 +1,7 @@
 import {
   StakingBalance,
   StakingHeader,
-  StakingMyvote,
+  StakingMyVote,
   StakingPoolList,
 } from '../organisms/contents/staking';
 
@@ -10,6 +10,7 @@ export const Staking = () => {
     { label: '스테이킹', percent: '19.14' },
     { label: '드랍스', percent: '17.96' },
     { label: '풀투표', percent: '8.74' },
+    // math 함수 모아놓은 util을 하나 만들어야 할 것 같당 => 수익률 등 계산 위해서
   ];
 
   return (
@@ -17,7 +18,7 @@ export const Staking = () => {
       <div style={{ padding: '60px 0' }}>
         <StakingHeader reward={testArr} />
         <StakingBalance />
-        <StakingMyvote />
+        <StakingMyVote />
         <StakingPoolList />
       </div>
     </>

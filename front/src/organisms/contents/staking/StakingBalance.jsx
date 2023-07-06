@@ -1,5 +1,5 @@
 import { Box, Button } from '../../components';
-import { Wrap } from '../governance/styled';
+import { HeaderSection, Wrap } from '../governance/styled';
 import {
   BoxDivBalance,
   BoxSectionBalance,
@@ -47,26 +47,28 @@ export const StakingBalance = () => {
 
   return (
     <Wrap>
-      <Box colors='white' width='740px' height='130px'>
-        <BoxDivBalance>
-          <BoxSectionBalance className='staking' borderColor='#e6f4fe'>
-            {renderHead(
-              '스테이킹 수량',
-              <ButtonDiv>
-                {renderButton('100', '언스테이킹', false)}
-                {renderButton('90', '스테이킹', true)}
-              </ButtonDiv>
-            )}
-            {renderBalance(test.stakingAmount)}
-            {renderExpectInfo('예상 수익률', '연 2.39% ~ 연 19.14%', true)}
-          </BoxSectionBalance>
-          <BoxSectionBalance className='reward'>
-            {renderHead('보상 수량', renderButton('90', '보상 수령'))}
-            {renderBalance(test.rewardAmount)}
-            {renderExpectInfo('누적', '384927394 ASD')}
-          </BoxSectionBalance>
-        </BoxDivBalance>
-      </Box>
+      <HeaderSection>
+        <Box colors='white' width='740px' height='130px'>
+          <BoxDivBalance>
+            <BoxSectionBalance className='staking' borderColor='#e6f4fe'>
+              {renderHead(
+                '스테이킹 수량',
+                <ButtonDiv>
+                  {renderButton('100', '언스테이킹', false)}
+                  {renderButton('90', '스테이킹', true)}
+                </ButtonDiv>
+              )}
+              {renderBalance(test.stakingAmount)}
+              {renderExpectInfo('예상 수익률', '연 2.39% ~ 연 19.14%', true)}
+            </BoxSectionBalance>
+            <BoxSectionBalance className='reward'>
+              {renderHead('보상 수량', renderButton('90', '보상 수령'))}
+              {renderBalance(test.rewardAmount)}
+              {renderExpectInfo('누적', '384927394 ASD')}
+            </BoxSectionBalance>
+          </BoxDivBalance>
+        </Box>
+      </HeaderSection>
     </Wrap>
   );
 };

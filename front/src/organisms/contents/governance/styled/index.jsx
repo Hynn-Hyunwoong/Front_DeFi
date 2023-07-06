@@ -19,7 +19,7 @@ const mobileFlex = css`
 
 // @media (max-width: 768px) {}
 
-export const Wrap = styled.div`
+export const Wrap = styled.section`
   width: 800px;
   margin: 0 auto;
 
@@ -30,7 +30,7 @@ export const Wrap = styled.div`
 `;
 
 // GovernanceHeader
-export const HeaderSection = styled.section`
+export const HeaderSection = styled.div`
   ${Flex}
   margin-bottom: 70px;
 
