@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const res = {
   mobile: '@media(max-width:768px)',
@@ -58,5 +59,17 @@ export const SubLi = styled.li`
 
   @media (max-width: 768px) {
     display: block;
+  }
+`;
+
+export const NavLink = styled(Link)`
+  font-size: 17px;
+  display: inline-block;
+  text-align: center;
+  &:hover .sub {
+    display: block;
+  }
+  @media (max-width: 768px) {
+    font-size: 14px;
   }
 `;

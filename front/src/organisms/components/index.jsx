@@ -16,3 +16,4 @@ export * from './dropBox/DropBox';
 export * from './search/Search';
 export * from './list';
 export * from './inputBox/InputBox';
+export * from './Opening/Opening';

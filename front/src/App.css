@@ -50,3 +50,15 @@
   font-weight: bold;
   color: #94ca0d;
 }
+
+.appContent {
+  transition: opacity 5.5s ease-in-out;
+}
+
+.appContent.hidden {
+  opacity: 0;
+}
+
+.appContent.visible {
+  opacity: 1;
+}

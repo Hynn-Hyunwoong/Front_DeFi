@@ -48,7 +48,7 @@ export const HeaderBottom = styled.section`
     max-width: 1000px;
     ${flexCenter}
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
   }
 
   & > div > button {
