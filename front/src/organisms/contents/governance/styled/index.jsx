@@ -4,6 +4,7 @@ const Flex = css`
   display: flex;
   justify-content: space-between;
 `;
+
 const basicOption = css`
   ${Flex}
   padding: 0 30px;
@@ -11,11 +12,43 @@ const basicOption = css`
   align-items: center;
 `;
 
+const mobileFlex = css`
+  display: flex;
+  flex-direction: column;
+`;
+
+// @media (max-width: 768px) {}
+
+export const Wrap = styled.section`
+  width: 800px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 0 auto;
+  }
+`;
+
 // GovernanceHeader
-export const HeaderSection = styled.section`
+export const HeaderSection = styled.div`
   ${Flex}
-  width: 100%;
   margin-bottom: 70px;
+
+  @media (max-width: 768px) {
+    ${mobileFlex}
+    margin-bottom: 40px;
+    align-items: center;
+  }
+`;
+export const HeaderDiv = styled.div`
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+`;
+
+export const HeaderBottomDiv = styled.div`
+  width: 100%;
+  margin: 20px;
 `;
 
 export const VoteTitleDiv = styled.div`
@@ -40,16 +73,6 @@ export const AmountDiv = styled.div`
 `;
 
 // GovernanceContent
-export const ListHeaderDiv = styled.div`
-  ${basicOption}
-  height: 60px;
-`;
-export const ListContentDiv = styled.div`
-  ${basicOption}
-  height: 80px;
-  cursor: pointer;
-  font-size: 14px;
-`;
 export const ButtonSection = styled.section`
   ${Flex}
   width: 100%;
@@ -57,15 +80,21 @@ export const ButtonSection = styled.section`
   margin-bottom: 20px;
 `;
 export const ListSection = styled.section`
+  position: relative;
   ${Flex}
   width: 100%;
   flex-direction: column;
   background: white;
 `;
-export const FlexDiv = styled.div`
-  ${Flex}
-  width: ${({ width }) => width};
-  align-items: center;
+export const ListHeaderDiv = styled.div`
+  ${basicOption}
+  height: 60px;
+`;
+export const ButtonStyle = styled.button`
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #767c83;
 `;
 export const PageDiv = styled.div`
   ${Flex}

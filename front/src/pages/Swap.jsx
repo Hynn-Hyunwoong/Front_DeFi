@@ -19,18 +19,15 @@ export const Swap = () => {
   const [tokenList] = useRecoilState(tokenListPopupState);
 
   return (
-    <div className='swap' style={{ position: 'relative' }}>
-      {tokenList ? (
-        <Popup>
+    <div className='swap'>
+      {tokenList && (
+        <Popup height={'500px'}>
           <PopupTokenList />
         </Popup>
-      ) : (
-        <>
-          <ExchangeTop />
-          <ExchangeBox />
-          <ExchangeBottom />
-        </>
       )}
+      <ExchangeTop />
+      <ExchangeBox />
+      <ExchangeBottom />
     </div>
   );
 };

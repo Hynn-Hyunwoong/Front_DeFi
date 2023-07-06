@@ -12,4 +12,8 @@ export * from './exchangeExpected/ExchangeExpected';
 export * from './txHistoryLi/TXHistory';
 export * from './graph/index';
 export * from './greenbox/Box';
+export * from './dropBox/DropBox';
+export * from './search/Search';
+export * from './list';
+export * from './inputBox/InputBox';
 export * from './Opening/Opening';

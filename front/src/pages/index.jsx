@@ -5,3 +5,4 @@ export * from './Assets';
 export * from './Swap';
 export * from './Dashboard';
 export * from './Governance';
+export * from './Staking';

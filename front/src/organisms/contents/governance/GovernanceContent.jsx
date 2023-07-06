@@ -1,44 +1,29 @@
-import { Button } from '../../components';
+import { Button, DropBox, GovernanceList } from '../../components';
 import {
+  Wrap,
   ListHeaderDiv,
-  ListContentDiv,
-  PageDiv,
-  FlexDiv,
   ButtonSection,
   ListSection,
+  ButtonStyle,
+  PageDiv,
 } from './styled';
+import { useRecoilState } from 'recoil';
+import { listState, dropboxState } from '../../store';
 
 export const GovernanceContent = ({ testArr }) => {
-  const statusText = { exectued: '통과', progress: '진행중', canceled: '취소' };
+  const [list] = useRecoilState(listState);
+  const [dropbox, setDropbox] = useRecoilState(dropboxState);
 
-  const listMap = testArr.map((v) => {
-    return (
-      <ListContentDiv className='ListContent' key={v.index}>
-        <FlexDiv width='56%'>
-          <div className='index' style={{ width: '30px' }}>
-            {v.index}
-          </div>
-          <div className='subject' style={{ width: 'calc(100% - 100px)' }}>
-            <strong>{v.subject}</strong>
-          </div>
-          <div className='status' style={{ width: '70px' }}>
-            <Button colors={`${v.status}`} width='60px' height='30px'>
-              {statusText[v.status]}
-            </Button>
-          </div>
-        </FlexDiv>
-        <FlexDiv width='42%'>
-          <div className='period'>
-            투표 기간 {v.period.start} ~ {v.period.end}
-          </div>
-          <div className='action'>{v.action ? '참여' : '미참여'}</div>
-        </FlexDiv>
-      </ListContentDiv>
-    );
-  });
+  const statusText = {
+    exectued: '통과',
+    progress: '진행중',
+    canceled: '취소',
+  };
+
+  const filteredArr = list ? testArr.filter((v) => v.status === list) : testArr;
 
   return (
-    <div>
+    <Wrap>
       <ButtonSection>
         <Button
           colors='green'
@@ -52,11 +37,22 @@ export const GovernanceContent = ({ testArr }) => {
       <ListSection>
         <ListHeaderDiv>
           <h4>전체 목록</h4>
-          <div>전체</div>
+          <div>
+            <ButtonStyle
+              onClick={() => {
+                setDropbox(!dropbox);
+              }}
+            >
+              {list ? statusText[list] : '전체'} {dropbox ? '▲' : '▼'}
+            </ButtonStyle>
+          </div>
         </ListHeaderDiv>
-        <div>{listMap}</div>
+        {dropbox && <DropBox statusText={statusText} />}
+        <div>
+          <GovernanceList testArr={filteredArr} statusText={statusText} />
+        </div>
       </ListSection>
-    </div>
+    </Wrap>
   );
 };
 
