@@ -1,7 +1,6 @@
 import { WalletList } from './styled';
 import { ethers } from 'ethers';
 import { useRecoilState } from 'recoil';
-import { useEffect, useRef } from 'react';
 import {
   loginState,
   accountState,
@@ -13,33 +12,12 @@ import {
   walletconnectLoginState,
   balanceState,
 } from '../../../organisms/store';
+import { ARBnetworkDetails, ETHnetworkDetails } from './networkDefine';
 import ASDTokenABI from '../../../ABI/ASDToken.json';
 
 const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
-
-const ARBnetworkDetails = {
-  chainId: '421613',
-  chainName: 'Arbitrum Testnet',
-  nativeCurrency: {
-    name: 'ETH',
-    symbol: 'ETH',
-    decimals: 18,
-  },
-  rpcUrls: 'https://goerli-rollup.arbitrum.io/rpc',
-  blockExplorerUrls: 'https://goerli.arbiscan.io/',
-};
-
-const ETHnetworkDetails = {
-  chainId: '5',
-  chainName: 'Goerli Testnet',
-  nativeCurrency: {
-    name: 'ETH',
-    symbol: 'ETH',
-    decimals: 18,
-  },
-  rpcUrls: 'https://ethereum-goerli.publicnode.com',
-  blockExplorerUrls: 'https://goerli.etherscan.io/',
-};
+const ARBrpc = process.env.REACT_APP_ARBITRUM_RPC;
+const ETHrpc = process.env.REACT_APP_ETHEREUM_RPC;
 
 export const Metamask = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
@@ -55,11 +33,10 @@ export const Metamask = () => {
     walletconnectLoginState,
   );
   const [balance, setBalance] = useRecoilState(balanceState);
-  const intervalRef = useRef();
 
   const updateBalances = async (ARBaccounts, ETHaccounts) => {
-    const ARBprovider = new ethers.JsonRpcProvider(ARBnetworkDetails.rpcUrls);
-    const ETHprovider = new ethers.JsonRpcProvider(ETHnetworkDetails.rpcUrls);
+    const ARBprovider = new ethers.JsonRpcProvider(ARBrpc);
+    const ETHprovider = new ethers.JsonRpcProvider(ETHrpc);
     const contract = new ethers.Contract(
       contractAddress,
       ASDTokenABI.abi,
@@ -76,35 +53,25 @@ export const Metamask = () => {
       await contract.balanceOf(ARBaccounts[0]),
     );
 
-    console.log(`this is updateBalance`, ARBbalance, ETHbalance, ASDbalance);
+    console.log(ARBbalance, ETHbalance, ASDbalance);
 
     setBalance({
       ...balance,
       ETH: ETHbalance,
-      Arbitrum: ARBbalance,
+      ARB: ARBbalance,
       ASD: ASDbalance,
     });
   };
-
-  useEffect(() => {
-    if (isLogin && wallet === 'metamask') {
-      intervalRef.current = setInterval(updateBalances, 10000);
-      return () => {
-        clearInterval(intervalRef.current);
-      };
-    }
-  }, [isLogin, wallet, updateBalances]);
 
   const handleLogin = async () => {
     setIsloading(true);
     try {
       if (!window.ethereum) {
-        alert('Get MetaMask!');
+        alert('Metamask가 설치되어있지 않습니다. 설치 후 다시시도해주세요.');
         return;
       }
-      //network define for metamask
 
-      // Connect Requets method
+      setProvider(provider);
       const ARBaccounts = await window.ethereum.request({
         method: 'eth_requestAccounts',
         wallet_addEthereumChain: ARBnetworkDetails,
@@ -115,16 +82,13 @@ export const Metamask = () => {
         wallet_addEthereumChain: ETHnetworkDetails,
       });
 
-      setIsTrustwalletLogin(false);
-      setIsWalletconnectLogin(false);
+      setAccount(ARBaccounts[0]);
       setIsLogin(true);
       setWallet('metamask');
-      setAccount(ARBaccounts[0]);
-
-      await updateBalances(ARBaccounts, ETHaccounts);
-
-      setProvider(provider);
       setPopupOpen(false);
+      setIsTrustwalletLogin(false);
+      setIsWalletconnectLogin(false);
+      await updateBalances(ARBaccounts, ETHaccounts);
     } catch (error) {
       console.error(error);
     }

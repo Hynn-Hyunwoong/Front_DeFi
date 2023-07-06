@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import {
   Main,
-  Test,
   Governance,
   GovernanceCreate,
   Assets,
@@ -14,20 +13,19 @@ export const AppRouter = () => {
   return (
     <>
       <Routes>
-        <Route path='*' element={<Header />} />
+        <Route path="*" element={<Header />} />
       </Routes>
       <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/test' element={<Test />} />
-        <Route path='/governance' element={<Governance />} />
-        <Route path='/governance/create' element={<GovernanceCreate />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/governance" element={<Governance />} />
+        <Route path="/governance/create" element={<GovernanceCreate />} />
         {/* <Route path="/" element={<MainPage />} /> */}
-        <Route path='/assets' element={<Assets />} />
-        <Route path='/exchange/swap' element={<Swap />} />
-        <Route path='/dashboard' element={<DashboardPage />} />
+        <Route path="/assets" element={<Assets />} />
+        <Route path="/exchange/swap" element={<Swap />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
       <Routes>
-        <Route path='/' element={<Footer />} />
+        <Route path="/" element={<Footer />} />
       </Routes>
     </>
   );
