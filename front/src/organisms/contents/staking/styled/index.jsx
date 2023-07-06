@@ -4,18 +4,31 @@ const Flex = css`
   display: flex;
   justify-content: space-between;
 `;
+const mobileFlex = css`
+  display: flex;
+  flex-direction: column;
+`;
 const basicOption = css`
   ${Flex}
   padding: 0 30px;
   border-bottom: 1px solid #dee3eb;
   align-items: center;
 `;
-const mobileFlex = css`
-  display: flex;
-  flex-direction: column;
-`;
+
 export const FlexDiv = styled.div`
   ${Flex}
+  align-items: center;
+  & > h3 {
+    margin-right: 20px;
+  }
+`;
+
+// Column After Between
+export const BoxDivBalance = styled.div`
+  ${Flex}
+  @media (max-width: 768px) {
+    ${mobileFlex}
+  }
 `;
 
 // Header
@@ -46,12 +59,6 @@ export const ExpectedRewardDiv = styled.div`
 `;
 
 // balance
-export const BoxDivBalance = styled.div`
-  ${Flex}
-  @media (max-width: 768px) {
-    ${mobileFlex}
-  }
-`;
 export const ButtonDiv = styled.div`
   ${Flex}
   width: 200px;
@@ -105,19 +112,19 @@ export const ExpectInfoDiv = styled.div`
 export const MyVoteSection = styled.div`
   ${mobileFlex}
   justify-content: center;
-  height: 95px;
-  background: #4192f7;
-  padding: 0 30px;
-  color: white;
+  /* height: 95px; */
+  height: ${({ height }) => height || '95px'};
+  background: ${({ theme, colors }) => theme[colors].background};
+  color: ${({ theme, colors }) => theme[colors].color};
+
   @media (max-width: 768px) {
-    width: 90%;
+    width: 98%;
     margin: 0 auto;
   }
 `;
 export const VoteInfoDiv = styled.div`
   ${Flex}
   font-weight: 330;
-
   & > span > strong {
     font-size: 24px;
   }
@@ -125,13 +132,12 @@ export const VoteInfoDiv = styled.div`
     ${mobileFlex}
     text-align: right;
   }
-
   .option {
     margin-left: 30px;
     font-size: 14px;
+    cursor: pointer;
   }
 `;
-
 export const PoolVote = styled.div`
   margin-top: 10px;
   font-size: 14px;
@@ -140,5 +146,22 @@ export const PoolVote = styled.div`
   & > span:nth-child(1) {
     letter-spacing: -0.5px;
     margin-right: 15px;
+  }
+`;
+
+// Pool list
+export const PoolListHeaderDiv = styled.div`
+  ${basicOption}
+  height: 60px;
+  @media (max-width: 768px) {
+    padding: 15px 30px;
+    ${mobileFlex}
+    align-items: start;
+
+    & > input {
+      margin-top: 10px;
+      padding: 0;
+      /* border-top: solid 1px; */
+    }
   }
 `;

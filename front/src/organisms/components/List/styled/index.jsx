@@ -14,21 +14,27 @@ const basicOption = css`
 
 export const ListContentDiv = styled.div`
   ${basicOption}
-  height: 80px;
-  cursor: pointer;
+  min-height: 80px;
+  cursor: ${({ cursor }) => cursor || 'pointer'};
+
   font-size: 14px;
+
+  .right {
+    justify-content: right;
+  }
 
   @media (max-width: 768px) {
     width: 100%;
+    /* height: auto; */
     flex-direction: column;
-    padding: 0;
     justify-content: center;
+    padding: 20px 0;
   }
 `;
-
 export const FlexDiv = styled.div`
   ${Flex}
   width: ${({ width }) => width};
+  height: auto;
   align-items: center;
 
   & > .period {
@@ -43,11 +49,11 @@ export const FlexDiv = styled.div`
         &:nth-child(1) {
           margin-bottom: 10px;
         }
-        /* 다른 원하는 속성들 추가 */
       }
     `}
 `;
 
+// governance list
 export const ActionColor = styled.span`
   font-weight: bold;
   color: ${({ status }) => {
@@ -61,4 +67,43 @@ export const ActionColor = styled.span`
       return '#CACCD2';
     }
   }};
+`;
+
+// pool list
+export const TokenInfo = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  letter-spacing: -0.3px;
+
+  .logo {
+    margin-right: 20px;
+    & > img {
+      height: 32px;
+      width: 32px;
+      box-shadow: 1px 1px 6px 0px #d6d8dd;
+      border-radius: 100px;
+    }
+  }
+  .name {
+    color: black;
+    margin-bottom: 3px;
+    font-size: 16px;
+  }
+  .symbol {
+    color: grey;
+    font-size: 13px;
+    font-weight: 350;
+  }
+`;
+
+export const EstimatieRate = styled.div`
+  text-align: right;
+  .text {
+    font-size: 10px;
+    color: grey;
+  }
+  & > strong {
+    font-size: 22px;
+  }
 `;
