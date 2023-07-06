@@ -18,14 +18,25 @@ const colorChip = {
   },
   grey: {
     background: '#CACCD2',
-    color: '#000000',
+    color: 'white',
     border: 'none',
+  },
+
+  white: {
+    background: 'white',
+    color: '#0194FF',
   },
 
   blueBox: {
     background: 'transparent',
     color: '#0194FF',
     border: 'solid 1px #0194FF',
+  },
+
+  greenBox: {
+    background: 'transparent',
+    color: 'white',
+    border: 'solid 1px #76953e',
   },
 
   // vote status

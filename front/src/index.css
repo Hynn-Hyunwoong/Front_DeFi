@@ -24,3 +24,7 @@ li {
   margin: 0;
   list-style: none;
 }
+
+.pointColor {
+  color: #94ca0d;
+}
