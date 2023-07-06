@@ -14,6 +14,11 @@ export const StakingPoolList = () => {
       token2: 'ETH',
       estimateRate: '4.23%',
     },
+    {
+      token1: 'ASD',
+      token2: 'ARB',
+      estimateRate: '27.98%',
+    },
   ];
 
   return (

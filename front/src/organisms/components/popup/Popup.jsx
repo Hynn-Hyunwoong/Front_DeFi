@@ -1,10 +1,12 @@
-import { Wrap, ContentWrap } from './styled';
+import { Wrap, ContentWrap, Content } from './styled';
 
-export const Popup = ({ children }) => {
+export const Popup = ({ children, width }) => {
   return (
     <>
       <Wrap>
-        <ContentWrap>{children}</ContentWrap>
+        <ContentWrap width={width}>
+          <Content>{children}</Content>
+        </ContentWrap>
       </Wrap>
     </>
   );
