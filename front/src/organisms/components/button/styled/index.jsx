@@ -17,7 +17,7 @@ export const ButtonStyled = styled.button`
 
   /* 20px; */
 
-  border-radius: 5px;
+  border-radius: ${({ borderRadius }) => borderRadius || '5px'};
   border: ${({ theme, colors }) => theme[colors].border};
 `;
 

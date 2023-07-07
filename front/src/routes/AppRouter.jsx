@@ -14,23 +14,23 @@ export const AppRouter = () => {
   return (
     <>
       <Routes>
-        <Route path="*" element={<Header />} />
+        <Route path='*' element={<Header />} />
       </Routes>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/governance" element={<Governance />} />
-        <Route path="/governance/create" element={<GovernanceCreate />} />
+        <Route path='/' element={<Main />} />
+        <Route path='/governance' element={<Governance />} />
+        <Route path='/governance/create' element={<GovernanceCreate />} />
         {/* <Route path="/" element={<MainPage />} /> */}
         <Route path='/assets' element={<Assets />} />
         <Route path='/exchange/swap' element={<Swap />} />
         <Route path='/dashboard' element={<DashboardPage />} />
-        <Route path='/staking' element={<Staking />} /
-        <Route path="/assets" element={<Assets />} />
-        <Route path="/exchange/swap" element={<Swap />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path='/staking' element={<Staking />} />
+        <Route path='/assets' element={<Assets />} />
+        <Route path='/exchange/swap' element={<Swap />} />
+        <Route path='/dashboard' element={<DashboardPage />} />
       </Routes>
       <Routes>
-        <Route path="/" element={<Footer />} />
+        <Route path='/' element={<Footer />} />
       </Routes>
     </>
   );

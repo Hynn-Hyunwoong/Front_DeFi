@@ -16,7 +16,7 @@ export const ContentWrap = styled.div`
   height: ${({ height }) => height || 'auto'};
   background: white;
   z-index: 1;
-  overflow: auto;
+  /* overflow: auto; */
   @media (max-width: 768px) {
     width: 100%;
     max-height: 100%;
@@ -24,5 +24,5 @@ export const ContentWrap = styled.div`
 `;
 
 export const Content = styled.div`
-  padding: 50px;
+  padding: ${({ padding }) => padding || '50px'};
 `;

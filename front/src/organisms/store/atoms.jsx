@@ -90,3 +90,21 @@ export const dropboxState = atom({
   key: 'dropboxState',
   default: false,
 });
+
+export const optionTermsState = atom({
+  key: 'stakingTerms',
+  default: 4,
+});
+export const optionTimesState = atom({
+  key: 'stakingTimes',
+  default: 1,
+});
+
+export const noticeChenckState = atom({
+  key: 'noticeChenck',
+  default: false,
+});
+export const nextChenckState = atom({
+  key: 'nextCheck',
+  default: false,
+});

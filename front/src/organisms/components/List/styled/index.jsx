@@ -107,3 +107,8 @@ export const EstimatieRate = styled.div`
     font-size: 22px;
   }
 `;
+
+// staking option list
+export const Size18 = styled.p`
+  font-size: 18px;
+`;
