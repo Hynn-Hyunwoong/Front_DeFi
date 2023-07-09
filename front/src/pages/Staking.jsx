@@ -1,3 +1,4 @@
+import { useRecoilState } from 'recoil';
 import {
   StakingBalance,
   StakingHeader,
@@ -5,8 +6,10 @@ import {
   StakingPoolList,
   StakingPopup,
 } from '../organisms/contents/staking';
+import { stakingPopup } from '../organisms/store';
 
 export const Staking = () => {
+  const [staking] = useRecoilState(stakingPopup);
   const testArr = [
     { label: '스테이킹', percent: '19.14' },
     { label: '드랍스', percent: '17.96' },
@@ -23,11 +26,16 @@ export const Staking = () => {
   return (
     <>
       <div>
-        <StakingPopup option={stakingOption} reward={testArr} />
-        <StakingHeader reward={testArr} />
-        <StakingBalance />
-        <StakingMyVote />
-        <StakingPoolList />
+        {staking ? (
+          <StakingPopup option={stakingOption} reward={testArr} />
+        ) : (
+          <>
+            <StakingHeader reward={testArr} />
+            <StakingBalance />
+            <StakingMyVote />
+            <StakingPoolList />{' '}
+          </>
+        )}
       </div>
     </>
   );

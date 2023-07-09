@@ -100,11 +100,7 @@ export const optionTimesState = atom({
   default: 1,
 });
 
-export const noticeChenckState = atom({
-  key: 'noticeChenck',
-  default: false,
-});
-export const nextChenckState = atom({
-  key: 'nextCheck',
+export const stakingPopup = atom({
+  key: 'stakingPopup',
   default: false,
 });

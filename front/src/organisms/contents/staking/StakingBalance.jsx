@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Box, Button } from '../../components';
 import { HeaderSection, Wrap } from '../governance/styled';
 import {
@@ -8,9 +9,20 @@ import {
   BalanceDiv,
   ExpectInfoDiv,
 } from './styled';
+import { useRecoilState } from 'recoil';
+import { stakingPopup } from '../../store';
 
 export const StakingBalance = () => {
+  const [statking, setStaking] = useRecoilState(stakingPopup);
+  // const [unstaking, setUnstaking] = useState(false);
+
   const test = { stakingAmount: '2341235123', rewardAmount: '123' };
+  const stakingPopupEvnet = () => {
+    setStaking(true);
+  };
+  const stakingAlert = () => {
+    alert(`수량이 부족합니다.`);
+  };
 
   // STATE는 로그인이 되었느냐, 혹은 수량이 있느냐 확인해서 설정해줘야 함
   const renderButton = (width, title, state) => (
@@ -18,6 +30,7 @@ export const StakingBalance = () => {
       colors={state ? 'green' : 'grey'}
       height='35px'
       width={`${width}px`}
+      onClick={state ? stakingPopupEvnet : stakingAlert}
     >
       <h3>{title}</h3>
     </Button>

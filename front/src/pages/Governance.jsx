@@ -35,11 +35,9 @@ export const Governance = () => {
   ];
 
   return (
-    <div style={{ padding: '60px 0' }}>
-      <div>
-        <GovernanceHeader />
-        <GovernanceContent testArr={testArr} />
-      </div>
+    <div>
+      <GovernanceHeader />
+      <GovernanceContent testArr={testArr} />
     </div>
   );
 };

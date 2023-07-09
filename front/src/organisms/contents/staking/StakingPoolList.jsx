@@ -23,7 +23,11 @@ export const StakingPoolList = () => {
 
   return (
     <Wrap>
-      <MyVoteSection height='100%' colors='white'>
+      <MyVoteSection
+        height='100%'
+        colors='white'
+        style={{ marginBottom: '70px' }}
+      >
         <PoolListHeaderDiv>
           <FlexDiv>
             <h3>풀 투표 목록</h3>
