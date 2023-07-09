@@ -25,17 +25,14 @@ export const Staking = () => {
 
   return (
     <>
-      <div>
-        {staking ? (
-          <StakingPopup option={stakingOption} reward={testArr} />
-        ) : (
-          <>
-            <StakingHeader reward={testArr} />
-            <StakingBalance />
-            <StakingMyVote />
-            <StakingPoolList />{' '}
-          </>
-        )}
+      <div style={{ position: 'relative' }}>
+        {/* {staking ? ( */}
+        {staking && <StakingPopup option={stakingOption} reward={testArr} />}
+        {/* // ) : ( */}
+        <StakingHeader reward={testArr} />
+        <StakingBalance />
+        <StakingMyVote />
+        <StakingPoolList /> {/* )} */}
       </div>
     </>
   );
