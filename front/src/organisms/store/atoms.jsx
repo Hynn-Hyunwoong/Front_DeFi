@@ -115,7 +115,7 @@ export const searchKeyword = atom({
   default: '',
 });
 
-export const stakingValue = atom({
-  key: 'stakingValue',
+export const stakingValueState = atom({
+  key: 'stakingValueState',
   default: 0,
 });

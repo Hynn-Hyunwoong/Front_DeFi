@@ -8,9 +8,12 @@ import {
 } from './styled';
 import { Xbutton } from '../../components';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { stakingValueState } from '../../store';
 
 export const Step2 = ({ closePopup, date }) => {
   const [approve, setApprove] = useState(false);
+  const [stakingValue] = useRecoilState(stakingValueState);
   return (
     <>
       <StakingHeader>
@@ -26,7 +29,7 @@ export const Step2 = ({ closePopup, date }) => {
                 <h4 className='pointBlue'>스테이킹</h4>
               </ApproveHeader>
               <ApproveHeader>
-                <p>Token</p> <p>ASD</p>
+                <p>{stakingValue}</p> <p>ASD</p>
               </ApproveHeader>
             </article>
             <article>
