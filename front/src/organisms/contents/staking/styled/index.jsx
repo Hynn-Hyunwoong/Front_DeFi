@@ -120,6 +120,10 @@ export const MyVoteSection = styled.div`
   @media (max-width: 768px) {
     width: 98%;
     margin: 0 auto;
+
+    .poolList {
+      display: none;
+    }
   }
 `;
 export const VoteInfoDiv = styled.div`
@@ -152,7 +156,7 @@ export const PoolVote = styled.div`
 // Pool list
 export const PoolListHeaderDiv = styled.div`
   ${basicOption}
-  height: 60px;
+  height: ${({ height }) => height || '60px'};
   @media (max-width: 768px) {
     padding: 15px 30px;
     ${mobileFlex}

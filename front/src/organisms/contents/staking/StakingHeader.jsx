@@ -1,5 +1,5 @@
 import { Box, Button } from '../../components';
-import { Wrap, HeaderSection, HeaderDiv } from '../governance/styled';
+import { SectionStyled, HeaderSection, HeaderDiv } from '../governance/styled';
 import {
   FlexDiv,
   BoxSection,
@@ -18,7 +18,7 @@ export const StakingHeader = ({ reward }) => {
   ));
 
   return (
-    <Wrap>
+    <SectionStyled>
       <HeaderSection>
         <HeaderDiv>
           <h1>
@@ -58,6 +58,6 @@ export const StakingHeader = ({ reward }) => {
           </Box>
         </HeaderDiv>
       </HeaderSection>
-    </Wrap>
+    </SectionStyled>
   );
 };

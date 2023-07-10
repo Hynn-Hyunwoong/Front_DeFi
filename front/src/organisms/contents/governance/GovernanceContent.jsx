@@ -1,6 +1,6 @@
 import { Button, DropBox, GovernanceList } from '../../components';
 import {
-  Wrap,
+  SectionStyled,
   ListHeaderDiv,
   ButtonSection,
   ListSection,
@@ -23,7 +23,7 @@ export const GovernanceContent = ({ testArr }) => {
   const filteredArr = list ? testArr.filter((v) => v.status === list) : testArr;
 
   return (
-    <Wrap>
+    <SectionStyled>
       <ButtonSection>
         <Button
           colors='green'
@@ -52,7 +52,7 @@ export const GovernanceContent = ({ testArr }) => {
           <GovernanceList testArr={filteredArr} statusText={statusText} />
         </div>
       </ListSection>
-    </Wrap>
+    </SectionStyled>
   );
 };
 

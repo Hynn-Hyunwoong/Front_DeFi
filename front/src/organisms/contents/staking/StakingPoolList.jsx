@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
-import { Search, Button, PoolList } from '../../components';
-import { Wrap } from '../governance/styled';
+import { Search, Button, StakingVotePoolList } from '../../components';
+import { SectionStyled } from '../governance/styled';
 import { MyVoteSection, FlexDiv, PoolListHeaderDiv } from './styled';
 import { searchKeyword } from '../../store';
 
@@ -33,7 +33,7 @@ export const StakingPoolList = () => {
   );
 
   return (
-    <Wrap>
+    <SectionStyled>
       <MyVoteSection
         height='100%'
         colors='white'
@@ -49,9 +49,11 @@ export const StakingPoolList = () => {
           <Search placeholder='토큰명, 심볼 검색' />
         </PoolListHeaderDiv>
         <div>
-          <PoolList tokenData={keyword ? filteredData : testTokenData} />
+          <StakingVotePoolList
+            tokenData={keyword ? filteredData : testTokenData}
+          />
         </div>
       </MyVoteSection>
-    </Wrap>
+    </SectionStyled>
   );
 };

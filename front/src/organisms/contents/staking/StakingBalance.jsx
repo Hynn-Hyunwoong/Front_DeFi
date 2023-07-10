@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box, Button } from '../../components';
-import { HeaderSection, Wrap } from '../governance/styled';
+import { HeaderSection, SectionStyled } from '../governance/styled';
 import {
   BoxDivBalance,
   BoxSectionBalance,
@@ -62,7 +62,7 @@ export const StakingBalance = () => {
   );
 
   return (
-    <Wrap>
+    <SectionStyled>
       <HeaderSection>
         <Box colors='white' width='740px' height='130px'>
           <BoxDivBalance>
@@ -88,6 +88,6 @@ export const StakingBalance = () => {
           </BoxDivBalance>
         </Box>
       </HeaderSection>
-    </Wrap>
+    </SectionStyled>
   );
 };

@@ -19,7 +19,7 @@ const mobileFlex = css`
 
 // @media (max-width: 768px) {}
 
-export const Wrap = styled.section`
+export const SectionStyled = styled.section`
   width: 800px;
   margin: 0 auto;
   &:nth-child(1) {

@@ -1,7 +1,7 @@
 import { ListContentDiv, FlexDiv, TokenInfo, EstimatieRate } from './styled';
 import { Button } from '../button/Button';
 
-export const PoolList = ({ tokenData }) => {
+export const StakingVotePoolList = ({ tokenData }) => {
   const tokenLogoRender = (item) => <img src={`/images/logo-${item}.png`} />;
 
   const listMap = tokenData.map((v, index) => (

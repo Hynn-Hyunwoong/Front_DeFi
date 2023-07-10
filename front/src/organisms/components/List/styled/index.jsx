@@ -11,6 +11,10 @@ const basicOption = css`
   border-bottom: 1px solid #dee3eb;
   align-items: center;
 `;
+const mobileFlex = css`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const ListContentDiv = styled.div`
   ${basicOption}
@@ -69,7 +73,7 @@ export const ActionColor = styled.span`
   }};
 `;
 
-// pool list
+// staking vote pool list
 export const TokenInfo = styled.div`
   display: flex;
   align-items: center;
@@ -111,4 +115,55 @@ export const EstimatieRate = styled.div`
 // staking option list
 export const Size18 = styled.p`
   font-size: 18px;
+`;
+
+// exchange pool list
+export const PoolContentWrap = styled.div`
+  ${Flex}
+  width: ${({ width }) => width};
+  height: auto;
+  align-items: center;
+
+  ${({ width }) =>
+    width &&
+    css`
+      @media (max-width: 768px) {
+        width: 90%;
+        ${mobileFlex}
+        align-items: start;
+        &:nth-child(1) {
+          margin-bottom: 10px;
+        }
+      }
+    `}
+`;
+export const Liquidity = styled.div`
+  width: 16%;
+`;
+export const RewardToken = styled.div`
+  width: 15%;
+  .logo {
+    margin-right: 20px;
+    & > img {
+      height: 30px;
+      box-shadow: 1px 1px 6px 0px #d6d8dd;
+      border-radius: 100px;
+    }
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+export const RewardRate = styled.div`
+  width: 20%;
+  text-align: center;
+  font-size: 12px;
+`;
+export const Estimated = styled.div`
+  width: 15%;
+  text-align: right;
+  & > strong {
+    font-size: 18px;
+    font-weight: 350;
+  }
 `;
