@@ -104,3 +104,8 @@ export const stakingPopup = atom({
   key: 'stakingPopup',
   default: false,
 });
+
+export const stakingStep = atom({
+  key: 'stakingStep',
+  default: '',
+});

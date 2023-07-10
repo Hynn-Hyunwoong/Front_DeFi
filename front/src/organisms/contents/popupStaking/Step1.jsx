@@ -25,7 +25,7 @@ const testData = {
 
 const buttonList = ['입금하기', '거래하기'];
 
-export const Step1 = ({ option, reward, closePopup, setStep2, date }) => {
+export const Step1 = ({ option, reward, closePopup, setStep, date }) => {
   const [optionTerm] = useRecoilState(optionTermsState);
   const [optionTimes] = useRecoilState(optionTimesState);
   const [noticeChenck, setNoticeChenck] = useState(false);
@@ -117,7 +117,7 @@ export const Step1 = ({ option, reward, closePopup, setStep2, date }) => {
       </StakingContent>
       <NextButton
         onClick={() => {
-          noticeChenck && nextChenck && setStep2(true);
+          noticeChenck && nextChenck && setStep('step2');
         }}
       >
         다음 단계로
