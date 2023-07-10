@@ -26,14 +26,12 @@ export const Staking = () => {
   ];
 
   return (
-    <>
-      <div>
-        <StakingHeader reward={testArr} />
-        <StakingBalance />
-        <StakingMyVote />
-        <StakingPoolList />
-        {staking && <StakingPopup option={stakingOption} reward={testArr} />}
-      </div>
-    </>
+    <div>
+      <StakingHeader reward={testArr} />
+      <StakingBalance />
+      <StakingMyVote />
+      <StakingPoolList />
+      {staking && <StakingPopup option={stakingOption} reward={testArr} />}
+    </div>
   );
 };

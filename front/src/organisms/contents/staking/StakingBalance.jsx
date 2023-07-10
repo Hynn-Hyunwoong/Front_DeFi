@@ -16,15 +16,9 @@ export const StakingBalance = () => {
   const [statking, setStaking] = useRecoilState(stakingPopup);
   const [step, setStep] = useRecoilState(stakingStep);
 
-  // const [unstaking, setUnstaking] = useState(false);
-
   const test = { stakingAmount: '2341235123', rewardAmount: '123' };
-  // const stakingPopupEvnet = () => {
-  //   setStaking(true);
-  // };
-  const stakingAlert = () => {
-    alert(`수량이 부족합니다.`);
-  };
+
+  const stakingAlert = () => alert(`수량이 부족합니다.`);
 
   // STATE는 로그인이 되었느냐, 혹은 수량이 있느냐 확인해서 설정해줘야 함
   const renderButton = (width, title, state, popup) => (

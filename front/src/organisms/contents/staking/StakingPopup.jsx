@@ -1,6 +1,6 @@
+import { useRecoilState } from 'recoil';
 import { Popup } from '../../components';
 import { stakingPopup, optionTermsState, stakingStep } from '../../store';
-import { useRecoilState } from 'recoil';
 import { Reward, Step1, Step2, Unstaking } from '../popupStaking';
 
 export const StakingPopup = ({ option, reward }) => {
@@ -8,9 +8,7 @@ export const StakingPopup = ({ option, reward }) => {
   const [optionTerm] = useRecoilState(optionTermsState);
   const [step, setStep] = useRecoilState(stakingStep);
 
-  const closePopup = () => {
-    setStaking(false);
-  };
+  const closePopup = () => setStaking(false);
 
   const afterDate = typeof optionTerm === 'number' ? optionTerm * 30 : null;
   const optionDate = new Date();
@@ -28,22 +26,32 @@ export const StakingPopup = ({ option, reward }) => {
           second: '2-digit',
         });
 
+  const renderStep = () => {
+    switch (step) {
+      case 'step1':
+        return (
+          <Step1 //스테이킹
+            option={option}
+            reward={reward}
+            closePopup={closePopup}
+            setStep={setStep}
+            date={formattedDate}
+          />
+        );
+      case 'step2': // 스테이킹 approve, transfer
+        return <Step2 closePopup={closePopup} date={formattedDate} />;
+      case 'unstaking': // 언스테이킹
+        return <Unstaking closePopup={closePopup} />;
+      case 'reward': // 보상수령
+        return <Reward closePopup={closePopup} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <Popup width='520px' padding={'0'}>
-      {(staking && step === 'step1' && (
-        <Step1
-          option={option}
-          reward={reward}
-          closePopup={closePopup}
-          setStep={setStep}
-          date={formattedDate}
-        />
-      )) ||
-        (step === 'step2' && (
-          <Step2 closePopup={closePopup} date={formattedDate} />
-        ))}
-      {staking && step === 'unstaking' && <Unstaking closePopup={closePopup} />}
-      {staking && step === 'reward' && <Reward closePopup={closePopup} />}
+      {staking && renderStep()}
     </Popup>
   );
 };

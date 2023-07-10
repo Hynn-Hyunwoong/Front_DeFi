@@ -8,16 +8,14 @@ import {
 } from './styled';
 
 export const StakingHeader = ({ reward }) => {
-  const stakingList = reward.map((v) => {
-    return (
-      <StakingListDiv key={v.label}>
-        <h4>{v.label}</h4>
-        <p>
-          <strong>{v.percent} </strong> %
-        </p>
-      </StakingListDiv>
-    );
-  });
+  const stakingList = reward.map((v) => (
+    <StakingListDiv key={v.label}>
+      <h4>{v.label}</h4>
+      <p>
+        <strong>{v.percent} </strong> %
+      </p>
+    </StakingListDiv>
+  ));
 
   return (
     <Wrap>
