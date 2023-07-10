@@ -17,10 +17,14 @@ import {
   NextButton,
   StakingHeader,
 } from './styled';
-import { optionTermsState, optionTimesState } from '../../store';
+import {
+  optionTermsState,
+  optionTimesState,
+  stakingValueState,
+} from '../../store';
 
 const testData = {
-  ASDbalance: '442',
+  ASDbalance: 442,
 };
 
 const buttonList = ['입금하기', '거래하기'];
@@ -28,6 +32,7 @@ const buttonList = ['입금하기', '거래하기'];
 export const Step1 = ({ option, reward, closePopup, setStep, date }) => {
   const [optionTerm] = useRecoilState(optionTermsState);
   const [optionTimes] = useRecoilState(optionTimesState);
+  const [stakingValue] = useRecoilState(stakingValueState);
   const [noticeChenck, setNoticeChenck] = useState(false);
   const [nextChenck, setNextCheck] = useState(false);
 
@@ -117,6 +122,10 @@ export const Step1 = ({ option, reward, closePopup, setStep, date }) => {
       </StakingContent>
       <NextButton
         onClick={() => {
+          if (Number(stakingValue) > testData.ASDbalance) {
+            alert('잔액이 부족합니다'); // 데이터 타입 잘 보기! => number가 맞는지
+            return;
+          }
           noticeChenck && nextChenck && setStep('step2');
         }}
       >

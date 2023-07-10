@@ -14,6 +14,7 @@ export const InputBox = ({ placeholder, width }) => {
       type='number'
       min={0}
       width={width}
+      value={stakingValue}
       onChange={inputChange}
     />
   );
