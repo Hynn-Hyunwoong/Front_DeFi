@@ -2,29 +2,19 @@ import { ListContentDiv, FlexDiv, TokenInfo, EstimatieRate } from './styled';
 import { Button } from '../button/Button';
 
 export const PoolList = ({ tokenData }) => {
-  const token = {
-    ASD: { logo: 'solar', name: '솔라스왑' },
-    USTD: { logo: 'tether', name: '테더' },
-    ARB: { logo: 'arbitrum', name: '아비트럼' },
-    ETH: { logo: 'ethereum', name: '이더리움' },
-  };
-  const tokenLogoRender = (item) => (
-    <img src={`/images/logo-${token[item].logo}.png`} />
-  );
+  const tokenLogoRender = (item) => <img src={`/images/logo-${item}.png`} />;
 
   const listMap = tokenData.map((v, index) => (
     <ListContentDiv key={index} cursor='auto'>
       <FlexDiv width='70%'>
         <TokenInfo>
           <div className='logo'>
-            {tokenLogoRender(v.token1)}
-            {tokenLogoRender(v.token2)}
+            {tokenLogoRender(v.token1.logo)}
+            {tokenLogoRender(v.token2.logo)}
           </div>
           <div>
-            <div className='name'>{`${token[v.token1].name} + ${
-              token[v.token2].name
-            }`}</div>
-            <div className='symbol'>{`${v.token1} + ${v.token2}`}</div>
+            <div className='name'>{`${v.token1.name} + ${v.token2.name}`}</div>
+            <div className='symbol'>{`${v.token1.symbol} + ${v.token2.symbol}`}</div>
           </div>
         </TokenInfo>
         <EstimatieRate>

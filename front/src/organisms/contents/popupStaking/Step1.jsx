@@ -31,9 +31,9 @@ export const Step1 = ({ option, reward, closePopup, setStep, date }) => {
   const [noticeChenck, setNoticeChenck] = useState(false);
   const [nextChenck, setNextCheck] = useState(false);
 
-  const buttonMap = buttonList.map((v) => {
+  const buttonMap = buttonList.map((v, index) => {
     return (
-      <Button colors='lightBlue' width='60px' height='20px'>
+      <Button colors='lightBlue' width='60px' height='20px' key={index}>
         {v}
       </Button>
     );

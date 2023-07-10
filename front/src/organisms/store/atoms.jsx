@@ -109,3 +109,13 @@ export const stakingStep = atom({
   key: 'stakingStep',
   default: '',
 });
+
+export const searchKeyword = atom({
+  key: 'searchKeyword',
+  default: '',
+});
+
+export const stakingValue = atom({
+  key: 'stakingValue',
+  default: 0,
+});
