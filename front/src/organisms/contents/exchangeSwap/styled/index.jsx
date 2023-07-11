@@ -8,6 +8,9 @@ const flexCenter = css`
 export const SectionWrap = styled.section`
   width: 800px;
   margin: 80px auto;
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 export const BoxWrap = styled.section`
