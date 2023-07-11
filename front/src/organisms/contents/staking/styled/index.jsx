@@ -112,7 +112,6 @@ export const ExpectInfoDiv = styled.div`
 export const MyVoteSection = styled.div`
   ${mobileFlex}
   justify-content: center;
-  /* height: 95px; */
   height: ${({ height }) => height || '95px'};
   background: ${({ theme, colors }) => theme[colors].background};
   color: ${({ theme, colors }) => theme[colors].color};
@@ -120,6 +119,10 @@ export const MyVoteSection = styled.div`
   @media (max-width: 768px) {
     width: 98%;
     margin: 0 auto;
+
+    .poolList {
+      display: none;
+    }
   }
 `;
 export const VoteInfoDiv = styled.div`
@@ -152,7 +155,7 @@ export const PoolVote = styled.div`
 // Pool list
 export const PoolListHeaderDiv = styled.div`
   ${basicOption}
-  height: 60px;
+  height: ${({ height }) => height || '60px'};
   @media (max-width: 768px) {
     padding: 15px 30px;
     ${mobileFlex}
@@ -167,11 +170,3 @@ export const PoolListHeaderDiv = styled.div`
 `;
 
 // staking popup
-export const StakingHeader = styled.section`
-  ${Flex}
-  margin-bottom: 20px;
-`;
-export const StakingContent = styled.section`
-  ${Flex}
-  flex-direction: column;
-`;

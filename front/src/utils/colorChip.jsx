@@ -32,11 +32,15 @@ const colorChip = {
     color: '#0194FF',
     border: 'solid 1px #0194FF',
   },
-
   greenBox: {
     background: 'transparent',
     color: 'white',
     border: 'solid 1px #76953e',
+  },
+  greyBox: {
+    background: 'transparent',
+    color: '#767C83',
+    border: 'solid 1px #caccd1',
   },
 
   // vote status
@@ -54,6 +58,13 @@ const colorChip = {
     background: 'transparent',
     color: '#767C83',
     border: 'solid 1px #767C83',
+  },
+
+  // staking Button
+  lightBlue: {
+    background: '#D2EDFF',
+    color: '#0194FF',
+    border: 'none',
   },
 };
 

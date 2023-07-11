@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const InputStyled = styled.input`
-  border: 1px solid #caccd1;
-  padding: 0 10px;
-  width: 100%;
+  border: none;
+  outline: none;
+  width: ${({ width }) => width || '75%'};
   height: 35px;
   font-size: 17px;
   &::placeholder {

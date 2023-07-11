@@ -1,6 +1,6 @@
 import { Button, DropBox, GovernanceList } from '../../components';
 import {
-  Wrap,
+  SectionStyled,
   ListHeaderDiv,
   ButtonSection,
   ListSection,
@@ -12,6 +12,7 @@ import { listState, dropboxState } from '../../store';
 export const GovernanceContent = ({ testArr }) => {
   const [list] = useRecoilState(listState);
   const [dropbox, setDropbox] = useRecoilState(dropboxState);
+  // const [dropbox, setDropbox] = useState(dropboxState);
 
   const statusText = {
     exectued: '통과',
@@ -22,7 +23,7 @@ export const GovernanceContent = ({ testArr }) => {
   const filteredArr = list ? testArr.filter((v) => v.status === list) : testArr;
 
   return (
-    <Wrap>
+    <SectionStyled>
       <ButtonSection>
         <Button
           colors="green"
@@ -51,7 +52,7 @@ export const GovernanceContent = ({ testArr }) => {
           <GovernanceList testArr={filteredArr} statusText={statusText} />
         </div>
       </ListSection>
-    </Wrap>
+    </SectionStyled>
   );
 };
 

@@ -3,10 +3,29 @@ import styled from 'styled-components';
 // @media (max-width: 768px) {}
 
 export const Wrap = styled.div`
-  padding-top: 50px;
-  height: 100vh;
-  width: 100%;
   background: rgba(130, 130, 130, 0.334);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+
+  animation: modal-show 0.3s;
+
+  @keyframes modal-show {
+    from {
+      opacity: 0;
+      margin-top: -10px;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }
 `;
 
 export const ContentWrap = styled.div`
@@ -16,7 +35,8 @@ export const ContentWrap = styled.div`
   height: ${({ height }) => height || 'auto'};
   background: white;
   z-index: 1;
-  overflow: auto;
+  /* overflow: auto; */
+
   @media (max-width: 768px) {
     width: 100%;
     max-height: 100%;
@@ -24,5 +44,5 @@ export const ContentWrap = styled.div`
 `;
 
 export const Content = styled.div`
-  padding: 50px;
+  padding: ${({ padding }) => padding || '50px'};
 `;

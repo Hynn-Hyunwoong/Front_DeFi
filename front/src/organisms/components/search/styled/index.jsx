@@ -6,6 +6,7 @@ export const SearchInput = styled.input`
   height: ${({ height }) => height || '30px'};
   border-radius: 50px;
   padding: 0 10px;
+  background: transparent;
   @media (max-width: 768px) {
     width: 100%;
     border: none;

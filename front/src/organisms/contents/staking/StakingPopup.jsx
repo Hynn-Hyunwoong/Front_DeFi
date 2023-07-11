@@ -1,16 +1,60 @@
-import { InputBox, Popup, Xbutton } from '../../components';
-import { StakingHeader, StakingContent } from './styled';
+import { useRecoilState } from 'recoil';
+import { Popup } from '../../components';
+import { stakingPopup, optionTermsState, stakingStep } from '../../store';
+import { Reward, Step1, Step2, Unstaking } from '../popupStaking';
 
-export const StakingPopup = () => {
+export const StakingPopup = ({ option, reward }) => {
+  const [staking, setStaking] = useRecoilState(stakingPopup);
+  const [optionTerm] = useRecoilState(optionTermsState);
+  const [step, setStep] = useRecoilState(stakingStep);
+
+  const closePopup = () => setStaking(false);
+
+  const afterDate = typeof optionTerm === 'number' ? optionTerm * 30 : null;
+  const optionDate = new Date();
+  optionDate.setDate(optionDate.getDate() + afterDate);
+
+  const formattedDate =
+    afterDate === null
+      ? '12+a개월'
+      : optionDate.toLocaleString('ko-KR', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        });
+
+  const renderStep = () => {
+    switch (step) {
+      case 'step1':
+        return (
+          <Step1 //스테이킹
+            option={option}
+            reward={reward}
+            closePopup={closePopup}
+            setStep={setStep}
+            date={formattedDate}
+          />
+        );
+      case 'step2': // 스테이킹 approve, transfer
+        return <Step2 closePopup={closePopup} date={formattedDate} />;
+      case 'unstaking': // 언스테이킹
+        return <Unstaking closePopup={closePopup} />;
+      case 'reward': // 보상수령
+        return <Reward closePopup={closePopup} />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <Popup width="520px">
-      <StakingHeader>
-        <h3>스테이킹</h3>
-        <Xbutton />
-      </StakingHeader>
-      <StakingContent>
-        <InputBox placeholder={'정수 단위로만 입력이 가능합니다'} />
-      </StakingContent>
+    <Popup width='520px' padding={'0'}>
+      {staking && renderStep()}
     </Popup>
   );
 };
+
+// staking=>팝업 자체를 띄우는 상태
+// step=> 어떤 종류의 팝업을 띄울 건지 결정해주는 상태

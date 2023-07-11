@@ -1,4 +1,4 @@
-import { Wrap } from '../governance/styled';
+import { SectionStyled } from '../governance/styled';
 import { MyVoteSection, FlexDiv, VoteInfoDiv, PoolVote } from './styled';
 
 export const StakingMyVote = () => {
@@ -8,7 +8,7 @@ export const StakingMyVote = () => {
   };
 
   return (
-    <Wrap>
+    <SectionStyled>
       <MyVoteSection colors='blue'>
         <div style={{ padding: '0 30px' }}>
           <VoteInfoDiv>
@@ -28,6 +28,6 @@ export const StakingMyVote = () => {
           </PoolVote>
         </div>
       </MyVoteSection>
-    </Wrap>
+    </SectionStyled>
   );
 };

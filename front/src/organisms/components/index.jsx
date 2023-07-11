@@ -17,3 +17,4 @@ export * from './search/Search';
 export * from './List/index';
 export * from './inputBox/InputBox';
 export * from './Opening/Opening';
+export * from './radio/Radio';

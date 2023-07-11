@@ -1,5 +1,5 @@
 import { Box, Button } from '../../components';
-import { Wrap, HeaderSection, HeaderDiv } from '../governance/styled';
+import { SectionStyled, HeaderSection, HeaderDiv } from '../governance/styled';
 import {
   FlexDiv,
   BoxSection,
@@ -8,19 +8,17 @@ import {
 } from './styled';
 
 export const StakingHeader = ({ reward }) => {
-  const stakingList = reward.map((v) => {
-    return (
-      <StakingListDiv key={v.label}>
-        <h4>{v.label}</h4>
-        <p>
-          <strong>{v.percent} </strong> %
-        </p>
-      </StakingListDiv>
-    );
-  });
+  const stakingList = reward.map((v) => (
+    <StakingListDiv key={v.label}>
+      <h4>{v.label}</h4>
+      <p>
+        <strong>{v.percent} </strong> %
+      </p>
+    </StakingListDiv>
+  ));
 
   return (
-    <Wrap>
+    <SectionStyled>
       <HeaderSection>
         <HeaderDiv>
           <h1>
@@ -60,6 +58,6 @@ export const StakingHeader = ({ reward }) => {
           </Box>
         </HeaderDiv>
       </HeaderSection>
-    </Wrap>
+    </SectionStyled>
   );
 };

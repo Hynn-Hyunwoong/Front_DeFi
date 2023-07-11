@@ -90,3 +90,32 @@ export const dropboxState = atom({
   key: 'dropboxState',
   default: false,
 });
+
+export const optionTermsState = atom({
+  key: 'stakingTerms',
+  default: 4,
+});
+export const optionTimesState = atom({
+  key: 'stakingTimes',
+  default: 1,
+});
+
+export const stakingPopup = atom({
+  key: 'stakingPopup',
+  default: false,
+});
+
+export const stakingStep = atom({
+  key: 'stakingStep',
+  default: '',
+});
+
+export const searchKeyword = atom({
+  key: 'searchKeyword',
+  default: '',
+});
+
+export const stakingValueState = atom({
+  key: 'stakingValueState',
+  default: 0,
+});

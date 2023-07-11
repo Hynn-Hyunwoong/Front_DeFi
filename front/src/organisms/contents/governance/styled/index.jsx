@@ -19,9 +19,12 @@ const mobileFlex = css`
 
 // @media (max-width: 768px) {}
 
-export const Wrap = styled.section`
+export const SectionStyled = styled.section`
   width: 800px;
   margin: 0 auto;
+  &:nth-child(1) {
+    margin-top: 60px;
+  }
 
   @media (max-width: 768px) {
     width: 100%;
