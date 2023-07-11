@@ -4,24 +4,17 @@ const Flex = css`
   display: flex;
   justify-content: space-between;
 `;
-
 const basicOption = css`
   ${Flex}
   padding: 0 30px;
   border-bottom: 1px solid #dee3eb;
   align-items: center;
 `;
-const mobileFlex = css`
-  display: flex;
-  flex-direction: column;
-`;
 const listStyled = css`
   ${basicOption}
   min-height: 80px;
   cursor: ${({ cursor }) => cursor || 'pointer'};
-
   font-size: 14px;
-
   .right {
     justify-content: right;
   }
@@ -31,7 +24,6 @@ const tokenInfo = css`
   align-items: center;
   font-weight: bold;
   letter-spacing: -0.3px;
-
   .logo {
     margin-right: 20px;
     & > img {
@@ -66,7 +58,6 @@ export const ListContentDiv = styled.div`
   ${listStyled}
   @media (max-width: 768px) {
     width: 100%;
-    /* height: auto; */
     flex-direction: column;
     justify-content: center;
     padding: 20px 0;
@@ -173,23 +164,16 @@ export const PoolTokenInfo = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     .logo {
-      margin-right: 20px;
       & > img {
         height: 28px;
         width: 28px;
-        box-shadow: 1px 1px 6px 0px #d6d8dd;
-        border-radius: 100px;
       }
     }
     .name {
-      color: black;
-      margin-bottom: 3px;
       font-size: 13px;
     }
     .symbol {
-      color: grey;
       font-size: 12px;
-      font-weight: 350;
     }
   }
 `;
@@ -204,11 +188,8 @@ export const RewardToken = styled.div`
   ${mobileListNone}
   width: 15%;
   .logo {
-    margin-right: 20px;
     & > img {
       height: 25px;
-      box-shadow: 1px 1px 6px 0px #d6d8dd;
-      border-radius: 100px;
     }
   }
 `;

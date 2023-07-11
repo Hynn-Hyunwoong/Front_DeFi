@@ -1,8 +1,6 @@
 import {
-  ListContentDiv,
   PoolList,
   PoolContentWrap,
-  TokenInfo,
   PoolTokenInfo,
   Liquidity,
   RewardToken,
