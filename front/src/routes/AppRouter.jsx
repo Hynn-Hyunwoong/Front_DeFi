@@ -8,6 +8,7 @@ import {
   DashboardPage,
   Staking,
   Pool,
+  Drops,
 } from '../pages';
 import { Header, Footer } from '../organisms/layouts/baseLayout';
 
@@ -28,6 +29,7 @@ export const AppRouter = () => {
         <Route path='/staking' element={<Staking />} />
         <Route path='/assets' element={<Assets />} />
         <Route path='/dashboard' element={<DashboardPage />} />
+        <Route path='/drops' element={<Drops />} />
       </Routes>
       <Routes>
         <Route path='/' element={<Footer />} />

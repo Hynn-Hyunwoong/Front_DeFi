@@ -7,3 +7,4 @@ export * from './Dashboard';
 export * from './Governance';
 export * from './Staking';
 export * from './Pool';
+export * from './Drops';

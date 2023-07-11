@@ -13,6 +13,7 @@ import { listState, dropboxState } from '../../store';
 export const GovernanceContent = ({ testArr }) => {
   const [list] = useRecoilState(listState);
   const [dropbox, setDropbox] = useRecoilState(dropboxState);
+  // const [dropbox, setDropbox] = useState(dropboxState);
 
   const statusText = {
     exectued: '통과',
