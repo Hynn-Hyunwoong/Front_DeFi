@@ -63,13 +63,13 @@ export const TrendingEmphasisWrap = styled.div`
 export const TrendingTitle = styled.dt`
   font-size: 1.25rem;
   font-weight: 500;
-  color: #ffffff;
+  color: #6b7280;
 `;
 
 export const TrendingEmphasis = styled.dd`
   font-size: 3rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #111827;
 `;
 
 export const TrendingVariation = styled.dd`
@@ -84,21 +84,12 @@ export const TrendingVariationIcon = styled.span`
   margin-right: 0.5rem;
 `;
 
-export const TableHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5rem;
-  background-color: #f3f4f6;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-  max-width: 80%;
-  margin: auto;
-`;
-
 export const HeaderItem = styled.p`
   font-size: 1rem;
   font-weight: 500;
   color: #6b7280;
+  margin-left: 6rem;
+  text-align: center;
 `;
 
 export const AvatarCard = styled.div`
@@ -106,50 +97,79 @@ export const AvatarCard = styled.div`
   border-radius: 0.5rem;
   padding: 1.5rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  margin: auto;
+  align-items: center;
   margin-bottom: 1rem;
   max-width: 80%;
+  margin: auto;
 `;
 
 export const AvatarImage = styled.img`
   border-radius: 50%;
   width: 48px;
   height: 48px;
+  text-align: center;
 `;
 
 export const AvatarContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 `;
 
 export const AvatarName = styled.p`
   font-size: 1rem;
   font-weight: 500;
+  text-align: center;
 `;
 
 export const AvatarDescription = styled.p`
   font-size: 0.875rem;
   font-weight: 400;
   color: #6b7280;
+  margin-left: 6rem;
 `;
 
 export const AvatarTitle = styled.p`
   font-size: 1rem;
   font-weight: 500;
+  text-align: center;
 `;
 
 export const AvatarStatus = styled.p`
   font-size: 0.875rem;
   font-weight: 400;
   color: #6b7280;
+  text-align: center;
 `;
 
 export const AvatarRole = styled.p`
   font-size: 0.875rem;
   font-weight: 400;
   color: #6b7280;
+  text-align: center;
+`;
+
+export const Table = styled.table`
+  width: 80%;
+  border-spacing: 0;
+  margin: auto;
+`;
+
+export const TableRow = styled.tr``;
+
+export const TableHeader = styled.th`
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6b7280;
+  padding: 1rem;
+  background-color: #f3f4f6;
+`;
+
+export const TableData = styled.td`
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid #e5e7eb;
 `;

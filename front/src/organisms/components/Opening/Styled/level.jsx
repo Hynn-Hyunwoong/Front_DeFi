@@ -11,7 +11,7 @@ export const Wrap = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 2000px;
+  height: 1080px;
 `;
 
 export const Container = styled.div`
@@ -1122,80 +1122,3 @@ export const Lamp28 = styled.span`
     animation-duration: 5s;
   }
 `;
-
-export const test = () => {
-  return;
-  <>
-    <Wrap>
-      <Container>
-        <Intro>
-          <FurAWrap>
-            <FunAPaired>
-              <Fun1 />
-              <Fun2 />
-              <Fun3 />
-              <Fun4 />
-              <Fun5 />
-              <Fun6 />
-              <Fun7 />
-              <Fun8 />
-              <Fun9 />
-              <Fun10 />
-              <Fun11 />
-              <Fun12 />
-              <Fun13 />
-              <Fun14 />
-              <Fun15 />
-              <Fun16 />
-              <Fun17 />
-              <Fun18 />
-              <Fun19 />
-              <Fun20 />
-              <Fun21 />
-              <Fun22 />
-              <Fun23 />
-              <Fun24 />
-              <Fun25 />
-              <Fun26 />
-              <Fun27 />
-              <Fun28 />
-              <Fun29 />
-              <Fun30 />
-              <Fun31 />
-            </FunAPaired>
-            <EffectLumieres>
-              <Lamp1 />
-              <Lamp2 />
-              <Lamp3 />
-              <Lamp4 />
-              <Lamp5 />
-              <Lamp6 />
-              <Lamp7 />
-              <Lamp8 />
-              <Lamp9 />
-              <Lamp10 />
-              <Lamp11 />
-              <Lamp12 />
-              <Lamp13 />
-              <Lamp14 />
-              <Lamp15 />
-              <Lamp16 />
-              <Lamp17 />
-              <Lamp18 />
-              <Lamp19 />
-              <Lamp20 />
-              <Lamp21 />
-              <Lamp22 />
-              <Lamp23 />
-              <Lamp24 />
-              <Lamp25 />
-              <Lamp26 />
-              <Lamp27 />
-              <Lamp28 />
-            </EffectLumieres>
-          </FurAWrap>
-        </Intro>
-      </Container>
-    </Wrap>
-  </>;
-};
