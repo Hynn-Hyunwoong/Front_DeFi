@@ -5,10 +5,9 @@ export const BoxStyled = styled.div`
   height: ${({ height }) => height};
   background: ${({ theme, colors }) => theme[colors].background};
   color: ${({ theme, colors }) => theme[colors].color};
-  padding: 30px;
+  padding: ${({ padding }) => padding || '30px'};
   border-radius: 5px;
   box-shadow: 1px 1px 6px 0px #d6d8dd;
-  align-items: center;
 
   ${({ width }) =>
     width &&

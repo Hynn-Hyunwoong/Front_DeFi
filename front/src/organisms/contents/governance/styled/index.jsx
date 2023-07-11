@@ -98,6 +98,7 @@ export const ButtonStyle = styled.button`
   border: none;
   background: transparent;
   color: #767c83;
+  width: 50px;
 `;
 export const PageDiv = styled.div`
   ${Flex}
