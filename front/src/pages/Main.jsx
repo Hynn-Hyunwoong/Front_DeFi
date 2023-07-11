@@ -4,7 +4,6 @@ import {
   SectionSecond,
   SectionThird,
 } from '../organisms/contents/main';
-import { Opening } from '../organisms/components';
 
 export const Main = () => {
   return (

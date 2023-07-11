@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 import { HeaderWrap, HeaderTop, HeaderBottom } from './styled';
 import { Navigation, Logo, Button, Popup } from '../../../components';
@@ -17,6 +17,7 @@ export const Header = () => {
   const [account, setAccount] = useRecoilState(accountState);
   const [network, setNetwork] = useRecoilState(networkState);
   const [popup, setPopup] = useRecoilState(popupState);
+  // eslint-disable-next-line no-unused-vars
   const [wallet, setWallet] = useRecoilState(selectedWallet);
 
   const fetchNetwork = async () => {
@@ -37,18 +38,24 @@ export const Header = () => {
     setPopup(!popup);
   };
 
-  const handleAccountChange = (account) => {
-    if (account.length === 0 || null) {
-      setIsLogin(false);
-      setAccount(null);
-    }
-  };
-  const handleNetworkChanged = (...args) => {
-    const networkId = args[0]; // networkId를 인자값으로 바로 넣으면 얘 없어질 수 있는데.. 왜 있지?
-    if (networkId.toString() === '421613') {
-      setNetwork(true);
-    } else setNetwork(false);
-  };
+  const handleAccountChange = useCallback(
+    (account) => {
+      if (account.length === 0 || null) {
+        setIsLogin(false);
+        setAccount(null);
+      }
+    },
+    [setAccount, setIsLogin],
+  );
+  const handleNetworkChanged = useCallback(
+    (...args) => {
+      const networkId = args[0];
+      if (networkId.toString() === '421613') {
+        setNetwork(true);
+      } else setNetwork(false);
+    },
+    [setNetwork],
+  );
 
   useEffect(() => {
     if (window.trustwallet) {
@@ -69,7 +76,7 @@ export const Header = () => {
         window.ethereum.removeListener('networkChanged', handleNetworkChanged);
       }
     };
-  }, [account]);
+  }, [handleAccountChange, handleNetworkChanged, error, isLoading, setNetwork]);
 
   useEffect(() => {
     if (!isLoading && !error) {
@@ -84,7 +91,7 @@ export const Header = () => {
         setNetwork(false);
       }
     }
-  }, [networkId]);
+  }, [networkId, error, isLoading, setNetwork]);
 
   // Wallet 컴포넌트 안에 있는 각각의 지갑 컨트랙트는 연결만 시켜줄 뿐
   // 연결된 account가 존재하는지, 어느 네트워크에 연결 되어 있는지는 Header 컴포넌트에서 처리
@@ -97,16 +104,16 @@ export const Header = () => {
             <Logo />
             <Navigation />
             <Button
-              colors='blue'
-              width='150px'
-              height='40px'
+              colors="blue"
+              width="150px"
+              height="40px"
               onClick={popupHandler}
               style={{ display: 'flex', alignItems: 'center' }} // Add flex styling
             >
               {wallet === 'metamask' && (
                 <img
-                  src='/images/logo-metamask.png'
-                  alt='logo-metamask'
+                  src="/images/logo-metamask.png"
+                  alt="logo-metamask"
                   style={{
                     width: '25px',
                     marginRight: '10px',
@@ -116,8 +123,8 @@ export const Header = () => {
               )}
               {wallet === 'trustwallet' && (
                 <img
-                  src='/images/logo-TWT.png'
-                  alt='logo-trustwallet'
+                  src="/images/logo-TWT.png"
+                  alt="logo-trustwallet"
                   style={{
                     width: '25px',
                     marginRight: '10px',
@@ -127,8 +134,8 @@ export const Header = () => {
               )}
               {wallet === 'walletconnect' && (
                 <img
-                  src='/images/logo-walletConnect.png'
-                  alt='logo-walletconnect'
+                  src="/images/logo-walletConnect.png"
+                  alt="logo-walletconnect"
                   style={{
                     width: '20px',
                     marginRight: 'px',

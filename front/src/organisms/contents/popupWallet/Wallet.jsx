@@ -12,16 +12,22 @@ import { Wrap, Top, Xbutton, Bottom, Notice } from './styled';
 import { Button, Metamask, TrustWallet, WalletConnect } from '../../components';
 
 export const Wallet = () => {
+  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsloading] = useRecoilState(loadingState);
   const [isLogin, setIsLogin] = useRecoilState(loginState);
+  // eslint-disable-next-line no-unused-vars
   const [popup, setPopup] = useRecoilState(popupState);
+  // eslint-disable-next-line no-unused-vars
   const [wallet, setWallet] = useRecoilState(selectedWallet);
+  // eslint-disable-next-line no-unused-vars
   const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
     trustwalletLoginState,
   );
+  // eslint-disable-next-line no-unused-vars
   const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(
     walletconnectLoginState,
   );
+  // eslint-disable-next-line no-unused-vars
   const [isMetamaskLogin, setIsMetamaskLogin] =
     useRecoilState(metamaskLoginState);
 

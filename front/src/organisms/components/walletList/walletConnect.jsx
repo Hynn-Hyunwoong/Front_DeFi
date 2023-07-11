@@ -24,13 +24,19 @@ const ETHrpc = process.env.REACT_APP_ETHEREUM_RPC;
 export const WalletConnect = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
+  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsloading] = useRecoilState(loadingState);
   const [wallet, setWallet] = useRecoilState(selectedWallet);
+  // eslint-disable-next-line no-unused-vars
   const [provider, setProvider] = useRecoilState(providerState);
+  // eslint-disable-next-line no-unused-vars
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
+  // eslint-disable-next-line no-unused-vars
   const [qrCodeUri, setQrCodeUri] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [isMetamaskLogin, setIsMetamaskLogin] =
     useRecoilState(metamaskLoginState);
+  // eslint-disable-next-line no-unused-vars
   const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
     trustwalletLoginState,
   );
@@ -120,7 +126,7 @@ export const WalletConnect = () => {
   return (
     <>
       <WalletList onClick={handleLogin}>
-        <img src="/images/logo-walletconnect.png" />
+        <img src="/images/logo-walletconnect.png" alt="WalletConnect" />
         <p>
           {isLogin && wallet === 'walletconnect'
             ? 'WalletConnect 연결됨'

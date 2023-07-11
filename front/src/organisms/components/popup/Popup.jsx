@@ -1,4 +1,4 @@
-import { Wrap, ContentWrap, Content, ModalOverlay } from './styled';
+import { Wrap, ContentWrap, Content } from './styled';
 
 export const Popup = ({ children, width, height, padding }) => {
   return (

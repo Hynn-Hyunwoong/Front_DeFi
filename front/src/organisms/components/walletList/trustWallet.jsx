@@ -22,12 +22,17 @@ const ETHrpc = process.env.REACT_APP_ETHEREUM_RPC;
 export const TrustWallet = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
+  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsloading] = useRecoilState(loadingState);
   const [wallet, setWallet] = useRecoilState(selectedWallet);
+  // eslint-disable-next-line no-unused-vars
   const [provider, setProvider] = useRecoilState(providerState);
+  // eslint-disable-next-line no-unused-vars
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
+  // eslint-disable-next-line no-unused-vars
   const [isMetamaskLogin, setIsMetamaskLogin] =
     useRecoilState(metamaskLoginState);
+  // eslint-disable-next-line no-unused-vars
   const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(
     walletconnectLoginState,
   );
@@ -78,10 +83,6 @@ export const TrustWallet = () => {
       const ARBaccounts = await window.trustwallet.request({
         method: 'eth_requestAccounts',
       });
-      const ETHaccounts = await window.trustwallet.request({
-        method: 'eth_requestAccounts',
-      });
-
       setProvider((await Provider.getSigner()).address);
 
       setAccount(ARBaccounts);
@@ -99,7 +100,7 @@ export const TrustWallet = () => {
   return (
     <>
       <WalletList onClick={handleLogin}>
-        <img src="/images/logo-TWT.png" />
+        <img src="/images/logo-TWT.png" alt="TWT" />
         <p>
           {isLogin && wallet === 'trustwallet'
             ? 'Trust Wallet 연결됨'

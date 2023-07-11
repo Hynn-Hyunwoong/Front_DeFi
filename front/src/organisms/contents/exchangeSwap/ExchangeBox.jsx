@@ -1,15 +1,16 @@
-import { useRecoilState } from "recoil";
-import { BoxWrap, BoxArticle, Exchange, ButtonArticle } from "./styled";
-import { LightP } from "../main/styled";
-import { SelectTokenBox } from "../../components";
-import { FromTokenState, ToTokenState } from "../../store";
-
+import { useRecoilState } from 'recoil';
+import { BoxWrap, BoxArticle, Exchange, ButtonArticle } from './styled';
+import { LightP } from '../main/styled';
+import { SelectTokenBox } from '../../components';
+import { FromTokenState, ToTokenState } from '../../store';
 
 export const ExchangeBox = () => {
   // 필요한 상태값
   // 토큰 선택 했는지 안했는지
   // 선택한 토큰의 종류
+  // eslint-disable-next-line no-unused-vars
   const [fromToken, setFromToken] = useRecoilState(FromTokenState);
+  // eslint-disable-next-line no-unused-vars
   const [toToken, setToToken] = useRecoilState(ToTokenState);
 
   const test = () => {
