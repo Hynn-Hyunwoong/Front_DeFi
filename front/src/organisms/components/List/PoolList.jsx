@@ -9,32 +9,32 @@ export const PoolList = ({ tokenData }) => {
     ETH: { logo: 'ethereum', name: '이더리움' },
   };
   const tokenLogoRender = (item) => {
-    return <img src={`/images/logo-${token[item].logo}.png`} />;
+    return <img src={`/images/logo-${token[item].logo}.png`} alt="" />;
   };
 
   const listMap = tokenData.map((v, index) => {
     return (
-      <ListContentDiv key={index} cursor='auto'>
-        <FlexDiv width='70%'>
+      <ListContentDiv key={index} cursor="auto">
+        <FlexDiv width="70%">
           <TokenInfo>
-            <div className='logo'>
+            <div className="logo">
               {tokenLogoRender(v.token1)}
               {tokenLogoRender(v.token2)}
             </div>
             <div>
-              <div className='name'>{`${token[v.token1].name} + ${
+              <div className="name">{`${token[v.token1].name} + ${
                 token[v.token2].name
               }`}</div>
-              <div className='symbol'>{`${v.token1} + ${v.token2}`}</div>
+              <div className="symbol">{`${v.token1} + ${v.token2}`}</div>
             </div>
           </TokenInfo>
           <EstimatieRate>
-            <p className='text'>Earn up to</p>
-            <strong className='pointColor'>{v.estimateRate}</strong>
+            <p className="text">Earn up to</p>
+            <strong className="pointColor">{v.estimateRate}</strong>
           </EstimatieRate>
         </FlexDiv>
-        <FlexDiv width='30%' className='right'>
-          <Button colors={`blue`} width='120px' height='30px'>
+        <FlexDiv width="30%" className="right">
+          <Button colors={`blue`} width="120px" height="30px">
             투표하기
           </Button>
         </FlexDiv>

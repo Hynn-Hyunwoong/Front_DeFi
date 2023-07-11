@@ -3,8 +3,8 @@ import { DropBoxWrap, ListStyled } from './styled';
 import { listState, dropboxState } from '../../store';
 
 export const DropBox = ({ statusText }) => {
-  const [liseCate, setListCate] = useRecoilState(listState);
-  const [dropbox, setDropbox] = useRecoilState(dropboxState);
+  const [setListCate] = useRecoilState(listState);
+  const [setDropbox] = useRecoilState(dropboxState);
 
   const handleClick = (state) => {
     setListCate(state);
