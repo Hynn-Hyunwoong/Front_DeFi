@@ -68,21 +68,21 @@ export const PoolTableHeader = styled.div`
   color: #767c83;
 
   .pair {
-    width: 25%;
+    width: 27%;
   }
   .liquidity {
     width: calc(15% - 30px);
     text-align: right;
   }
   .rewardToken {
-    width: calc(20% - 10px);
+    width: calc(18% - 10px);
     margin-left: 50px;
   }
   .rewardRate {
     width: calc(15% - 10px);
   }
   .estimated {
-    width: calc(25% - 110px);
+    width: calc(25% - 115px);
     text-align: right;
   }
 `;

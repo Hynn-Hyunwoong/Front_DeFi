@@ -1,7 +1,9 @@
 import {
   ListContentDiv,
+  PoolList,
   PoolContentWrap,
   TokenInfo,
+  PoolTokenInfo,
   Liquidity,
   RewardToken,
   RewardRate,
@@ -13,9 +15,9 @@ export const ExchangePoolList = ({ tokenData }) => {
   const tokenLogoRender = (item) => <img src={`/images/logo-${item}.png`} />;
 
   const listMap = tokenData.map((v, index) => (
-    <ListContentDiv key={index} cursor='auto'>
+    <PoolList key={index} cursor='auto'>
       <PoolContentWrap width='86%'>
-        <TokenInfo className='exchangePool' style={{ width: '34%' }}>
+        <PoolTokenInfo>
           <div className='logo'>
             {tokenLogoRender(v.token1.logo)}
             {tokenLogoRender(v.token2.logo)}
@@ -24,9 +26,10 @@ export const ExchangePoolList = ({ tokenData }) => {
             <div className='name'>{`${v.token1.name} + ${v.token2.name}`}</div>
             <div className='symbol'>{`${v.token1.symbol} + ${v.token2.symbol}`}</div>
           </div>
-        </TokenInfo>
+        </PoolTokenInfo>
         <Liquidity>
-          <strong className='pointColor'>$ 35,892</strong>
+          <p className='mobile'>유동성 규모</p>
+          <strong className='pointColor'>$ 1,235,892</strong>
         </Liquidity>
         <RewardToken>
           <div className='logo'>{tokenLogoRender(v.token1.logo)}</div>
@@ -35,6 +38,7 @@ export const ExchangePoolList = ({ tokenData }) => {
           <span>KSP 분배</span> <span>2.90%</span>
         </RewardRate>
         <Estimated>
+          <p className='mobile'>예상 수익률</p>
           <strong>123.90</strong> %
         </Estimated>
       </PoolContentWrap>
@@ -43,7 +47,7 @@ export const ExchangePoolList = ({ tokenData }) => {
           예치
         </Button>
       </PoolContentWrap>
-    </ListContentDiv>
+    </PoolList>
   ));
 
   return listMap;
