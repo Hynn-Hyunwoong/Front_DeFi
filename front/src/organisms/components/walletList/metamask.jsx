@@ -21,14 +21,19 @@ const ETHrpc = process.env.REACT_APP_ETHEREUM_RPC;
 
 export const Metamask = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
+  // eslint-disable-next-line no-unused-vars
   const [account, setAccount] = useRecoilState(accountState);
+  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsloading] = useRecoilState(loadingState);
   const [wallet, setWallet] = useRecoilState(selectedWallet);
   const [provider, setProvider] = useRecoilState(providerState);
+  // eslint-disable-next-line no-unused-vars
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
+  // eslint-disable-next-line no-unused-vars
   const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
     trustwalletLoginState,
   );
+  // eslint-disable-next-line no-unused-vars
   const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(
     walletconnectLoginState,
   );
@@ -98,7 +103,7 @@ export const Metamask = () => {
   return (
     <>
       <WalletList onClick={handleLogin}>
-        <img src="/images/logo-metaMask.png" />
+        <img src="/images/logo-metaMask.png" alt="Metamask" />
         <p>
           {isLogin && wallet === 'metamask' ? 'Metamask 연결됨' : 'Metamask'}
         </p>

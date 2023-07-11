@@ -23,6 +23,7 @@ const getTokenValue = async (symbol) => {
 };
 
 export const MyCard = ({ item }) => {
+  // eslint-disable-next-line no-unused-vars
   const [balance, setBalance] = useRecoilState(balanceState);
   const logoPath = getImagePath(item.logo);
   const priceQuery = useQuery(['coinPrice', item.symbol], () =>

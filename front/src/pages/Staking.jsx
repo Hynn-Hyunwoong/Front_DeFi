@@ -7,11 +7,10 @@ import {
   StakingPopup,
 } from '../organisms/contents/staking';
 import { stakingPopup } from '../organisms/store';
-import { useState } from 'react';
 
 export const Staking = () => {
-  const [staking] = useRecoilState(stakingPopup);
-  const [unstaking, setUnstaking] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [staking, setStaking] = useRecoilState(stakingPopup);
   const testArr = [
     { label: '스테이킹', percent: '19.14' },
     { label: '드랍스', percent: '17.96' },

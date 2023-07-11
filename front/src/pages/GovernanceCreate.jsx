@@ -9,6 +9,7 @@ import {
 } from '../organisms/contents/governanceCreate';
 
 export const GovernanceCreate = () => {
+  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsloading] = useRecoilState(loadingState);
 
   return (

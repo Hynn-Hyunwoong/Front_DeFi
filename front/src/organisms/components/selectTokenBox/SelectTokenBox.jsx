@@ -1,4 +1,4 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState } from 'recoil';
 import {
   LabelStyled,
   InputBoxWrap,
@@ -7,12 +7,13 @@ import {
   RightItem,
   BalanceStyled,
   SectionStyled,
-} from "./styled";
-import { tokenListPopupState, FromTokenState, ToTokenState } from "../../store";
+} from './styled';
+import { tokenListPopupState, ToTokenState } from '../../store';
 
 export const SelectTokenBox = ({ children, token }) => {
+  // eslint-disable-next-line no-unused-vars
   const [tokenListPopup, setTokenList] = useRecoilState(tokenListPopupState);
-  const [fromToken, setfromToken] = useRecoilState(FromTokenState);
+  // eslint-disable-next-line no-unused-vars
   const [toToken, setToToken] = useRecoilState(ToTokenState);
   const popupOpenEvent = () => {
     setTokenList(true);
@@ -20,20 +21,20 @@ export const SelectTokenBox = ({ children, token }) => {
 
   const tokenData = {
     init: {
-      logo: "null",
-      token: "Token",
+      logo: 'null',
+      token: 'Token',
     },
     solar: {
-      logo: "solar",
-      token: "ASD",
+      logo: 'solar',
+      token: 'ASD',
     },
     tether: {
-      logo: "tether",
-      token: "USDT",
+      logo: 'tether',
+      token: 'USDT',
     },
     ethereum: {
-      logo: "ethereum",
-      token: "ETH",
+      logo: 'ethereum',
+      token: 'ETH',
     },
   };
 
@@ -47,7 +48,7 @@ export const SelectTokenBox = ({ children, token }) => {
       >
         <img
           src={`/images/logo-${tokenData[selectedToken].logo}.png`}
-          style={{ width: "30px" }}
+          style={{ width: '30px' }}
           alt="tokenLogo"
         />
         <p>{tokenData[selectedToken].token}</p>

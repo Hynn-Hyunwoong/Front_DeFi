@@ -4,13 +4,6 @@ const Flex = css`
   justify-content: space-between;
 `;
 
-const basicOption = css`
-  ${Flex}
-  padding: 0 30px;
-  border-bottom: 1px solid #dee3eb;
-  align-items: center;
-`;
-
 const mobileFlex = css`
   display: flex;
   flex-direction: column;

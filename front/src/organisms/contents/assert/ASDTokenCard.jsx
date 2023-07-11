@@ -29,6 +29,7 @@ const getCoinData = async () => {
 await getCoinData();
 
 export const ASDTokenCard = () => {
+  // eslint-disable-next-line no-unused-vars
   const [balance, setBalance] = useRecoilState(balanceState);
   console.log(balance.Date);
   const { data: logoURL, isError, isLoading } = useQuery(['logo'], getLogoData);
@@ -79,11 +80,9 @@ export const ASDTokenCard = () => {
         <Stats>
           <li>
             <h3>USD $ {formattedUsdValue}</h3>
-            <h4></h4>
           </li>
           <li>
             <h3>KRW ￦ {formattedKrwValue}</h3>
-            <h4></h4>
           </li>
         </Stats>
         <Links>

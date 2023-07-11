@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Box, Button } from '../../components';
 import { HeaderSection, SectionStyled } from '../governance/styled';
 import {
@@ -13,7 +12,9 @@ import { useRecoilState } from 'recoil';
 import { stakingPopup, stakingStep } from '../../store';
 
 export const StakingBalance = () => {
-  const [statking, setStaking] = useRecoilState(stakingPopup);
+  // eslint-disable-next-line no-unused-vars
+  const [staking, setStaking] = useRecoilState(stakingPopup);
+  // eslint-disable-next-line no-unused-vars
   const [step, setStep] = useRecoilState(stakingStep);
 
   const test = { stakingAmount: '2341235123', rewardAmount: '123' };
@@ -24,7 +25,7 @@ export const StakingBalance = () => {
   const renderButton = (width, title, state, popup) => (
     <Button
       colors={state ? 'green' : 'grey'}
-      height='35px'
+      height="35px"
       width={`${width}px`}
       onClick={
         state
@@ -40,20 +41,20 @@ export const StakingBalance = () => {
   );
 
   const renderHead = (title, buttonGroup) => (
-    <FlexDiv className='head'>
+    <FlexDiv className="head">
       <h4>{title}</h4>
       {buttonGroup}
     </FlexDiv>
   );
 
   const renderBalance = (amount) => (
-    <BalanceDiv className='balance'>
+    <BalanceDiv className="balance">
       <strong>{amount}</strong> ASD
     </BalanceDiv>
   );
 
   const renderExpectInfo = (label, value, isHighlighted) => (
-    <ExpectInfoDiv className='expectInfo'>
+    <ExpectInfoDiv className="expectInfo">
       <span>{label}</span>
       <span className={isHighlighted ? 'pointColor' : ''}>
         <strong>{value}</strong>
@@ -64,23 +65,23 @@ export const StakingBalance = () => {
   return (
     <SectionStyled>
       <HeaderSection>
-        <Box colors='white' width='740px' height='130px'>
+        <Box colors="white" width="740px" height="130px">
           <BoxDivBalance>
-            <BoxSectionBalance className='staking' borderColor='#e6f4fe'>
+            <BoxSectionBalance className="staking" borderColor="#e6f4fe">
               {renderHead(
                 '스테이킹 수량',
                 <ButtonDiv>
                   {renderButton('100', '언스테이킹', true, 'unstaking')}
                   {renderButton('90', '스테이킹', true, 'step1')}
-                </ButtonDiv>
+                </ButtonDiv>,
               )}
               {renderBalance(test.stakingAmount)}
               {renderExpectInfo('예상 수익률', '연 2.39% ~ 연 19.14%', true)}
             </BoxSectionBalance>
-            <BoxSectionBalance className='reward'>
+            <BoxSectionBalance className="reward">
               {renderHead(
                 '보상 수량',
-                renderButton('90', '보상 수령', true, 'reward')
+                renderButton('90', '보상 수령', true, 'reward'),
               )}
               {renderBalance(test.rewardAmount)}
               {renderExpectInfo('누적', '384927394 ASD')}
