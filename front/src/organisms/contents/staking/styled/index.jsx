@@ -112,7 +112,6 @@ export const ExpectInfoDiv = styled.div`
 export const MyVoteSection = styled.div`
   ${mobileFlex}
   justify-content: center;
-  /* height: 95px; */
   height: ${({ height }) => height || '95px'};
   background: ${({ theme, colors }) => theme[colors].background};
   color: ${({ theme, colors }) => theme[colors].color};
