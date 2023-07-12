@@ -3,9 +3,11 @@ import { PoolSection, PoolTableHeader } from './styled';
 import { Search, ExchangePoolList, Button } from '../../components';
 import { MyVoteSection, PoolListHeaderDiv, FlexDiv } from '../staking/styled';
 import { PopupDeposit } from './PopupDeposit';
+import { useRecoilState } from 'recoil';
+import { stakingPopup } from '../../store';
 
 export const PoolList = ({ tokenData }) => {
-  const [popup, setPopup] = useState(false);
+  const [staking, setStaking] = useRecoilState(stakingPopup);
   return (
     <>
       <PoolSection style={{ marginTop: '30px' }}>
@@ -30,14 +32,14 @@ export const PoolList = ({ tokenData }) => {
             </PoolTableHeader>
           </PoolListHeaderDiv>
           <div>
-            <ExchangePoolList tokenData={tokenData} setPopup={setPopup} />
+            <ExchangePoolList tokenData={tokenData} setPopup={setStaking} />
           </div>
         </MyVoteSection>
         <Button colors='blueBox' width='100%' height='50px'>
           <strong>➕ 유동성 풀 추가</strong>
         </Button>
       </PoolSection>
-      {popup && <PopupDeposit />}
+      {staking && <PopupDeposit />}
     </>
   );
 };

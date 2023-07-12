@@ -49,7 +49,7 @@ export const StakingPopup = ({ option, reward }) => {
   };
 
   return (
-    <Popup width='520px' padding={'0'}>
+    <Popup width='520px' padding='0'>
       {staking && renderStep()}
     </Popup>
   );

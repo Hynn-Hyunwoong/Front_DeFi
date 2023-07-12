@@ -79,3 +79,11 @@ export const PoolTableHeader = styled.div`
     text-align: right;
   }
 `;
+
+// 예치 팝업
+export const PopupBoxWrap = styled.div`
+  width: 100%;
+  margin: 40px 0;
+  ${mobileFlex}
+  align-items: center;
+`;

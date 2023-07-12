@@ -13,14 +13,15 @@ import { PopupTokenList } from '../../contents/exchangeSwap';
 export const SelectTokenBox = ({
   children,
   tokenList,
-  setTokenList,
+  setTokenList = () => {},
   token,
   setToken,
 }) => {
   const popupOpenEvent = () => {
-    setTokenList(true);
+    if (setTokenList) {
+      setTokenList(true);
+    }
   };
-
   const tokenData = {
     init: {
       logo: 'null',
@@ -37,6 +38,10 @@ export const SelectTokenBox = ({
     ethereum: {
       logo: 'ethereum',
       symbol: 'ETH',
+    },
+    arbitrum: {
+      logo: 'arbitrum',
+      symbol: 'ARB',
     },
   };
 

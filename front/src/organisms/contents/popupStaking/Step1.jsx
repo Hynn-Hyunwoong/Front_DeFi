@@ -15,7 +15,6 @@ import {
   InputBalance,
   InputValue,
   NextButton,
-  StakingHeader,
 } from './styled';
 import { optionTermsState, stakingValueState } from '../../store';
 
