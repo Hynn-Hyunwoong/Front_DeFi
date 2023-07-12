@@ -61,16 +61,19 @@ export const walletconnectLoginState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const tokenListPopupState = atom({
-  key: 'tokenListPopupState',
+// 스왑창
+export const tokenFromListPopupState = atom({
+  key: 'tokenFromListPopupState',
   default: false,
 });
-
+export const tokenToListPopupState = atom({
+  key: 'tokenToListPopupState',
+  default: false,
+});
 export const FromTokenState = atom({
   key: 'FromToken',
   default: 'init',
 });
-
 export const ToTokenState = atom({
   key: 'ToToken',
   default: 'init',
