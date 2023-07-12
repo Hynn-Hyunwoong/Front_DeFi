@@ -15,7 +15,7 @@
     "axios": "^1.4.0",
     "buffer": "^6.0.3",
     "dotenv": "^16.3.1",
-    "ethers": "^6.6.2",
+    "ethers": "^5.7.2",
     "https-browserify": "^1.0.0",
     "os-browserify": "^0.3.0",
     "postcss-loader": "^7.3.3",

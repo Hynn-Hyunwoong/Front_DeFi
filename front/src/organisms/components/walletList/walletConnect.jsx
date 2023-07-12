@@ -7,7 +7,6 @@ import {
   accountState,
   loadingState,
   popupState,
-  providerState,
   selectedWallet,
   metamaskLoginState,
   trustwalletLoginState,
@@ -24,51 +23,46 @@ const ETHrpc = process.env.REACT_APP_ETHEREUM_RPC;
 export const WalletConnect = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
-  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsloading] = useRecoilState(loadingState);
   const [wallet, setWallet] = useRecoilState(selectedWallet);
-  // eslint-disable-next-line no-unused-vars
-  const [provider, setProvider] = useRecoilState(providerState);
-  // eslint-disable-next-line no-unused-vars
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
-  // eslint-disable-next-line no-unused-vars
   const [qrCodeUri, setQrCodeUri] = useState(null);
-  // eslint-disable-next-line no-unused-vars
   const [isMetamaskLogin, setIsMetamaskLogin] =
     useRecoilState(metamaskLoginState);
-  // eslint-disable-next-line no-unused-vars
   const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
     trustwalletLoginState,
   );
   const [balance, setBalance] = useRecoilState(balanceState);
 
-  const updateBalances = async (ARBaccounts, ETHaccounts) => {
-    const ARBprovider = new ethers.JsonRpcProvider(ARBrpc);
-    const ETHprovider = new ethers.JsonRpcProvider(ETHrpc);
-    const contract = new ethers.Contract(
-      contractaddress,
-      ASDTokenABI.abi,
-      ARBprovider,
-    );
+  const updateBalances = async (accounts) => {
+    try {
+      const ARBProvider = new ethers.providers.JsonRpcProvider(ARBrpc);
+      const ETHProvider = new ethers.providers.JsonRpcProvider(ETHrpc);
+      const ASDProvider = new ethers.Contract(
+        contractaddress,
+        ASDTokenABI.abi,
+        ARBProvider,
+      );
 
-    const ARBbalance = ethers.formatEther(
-      await ARBprovider.getBalance(ARBaccounts[0]),
-    );
-    const ETHbalance = ethers.formatEther(
-      await ETHprovider.getBalance(ETHaccounts[0]),
-    );
-    const ASDbalance = ethers.formatEther(
-      await contract.balanceOf(ARBaccounts[0]),
-    );
+      const ARBsigner = await ARBProvider.getBalance(accounts[0]);
+      const ETHsigner = await ETHProvider.getBalance(accounts[0]);
+      const ASDsigner = await ASDProvider.balanceOf(accounts[0]);
 
-    console.log(ARBbalance, ETHbalance, ASDbalance);
+      const balanceA = ethers.utils.formatEther(ARBsigner);
+      const balanceE = ethers.utils.formatEther(ETHsigner);
+      const balanceASD = ethers.utils.formatEther(ASDsigner);
 
-    setBalance({
-      ...balance,
-      ETH: ETHbalance,
-      ARB: ARBbalance,
-      ASD: ASDbalance,
-    });
+      setBalance({
+        ...balance,
+        ARB: balanceA,
+        ETH: balanceE,
+        ASD: balanceASD,
+      });
+
+      console.log(balanceA, balanceE, balanceASD);
+    } catch (err) {
+      console.error(`Failed to update balances: ${err}`);
+    }
   };
 
   const handleLogin = async () => {
@@ -90,6 +84,11 @@ export const WalletConnect = () => {
         ],
       });
 
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+        wallet: 'walletconnect',
+      });
+
       walletConnectProvider.on('connect', () => {
         setQrCodeUri(null);
       });
@@ -97,30 +96,21 @@ export const WalletConnect = () => {
       const uri = await walletConnectProvider.connect();
       setQrCodeUri(uri);
 
-      const walletConnectprovider = new ethers.BrowserProvider(
+      const walletConnectProviderAccounts = new ethers.providers.Web3Provider(
         walletConnectProvider,
       );
-      setProvider(walletConnectprovider);
+      const signer = walletConnectProviderAccounts.getSigner();
 
-      const signer = walletConnectprovider.getSigner();
-      console.log((await signer).address);
-
-      setAccount((await signer).address);
+      setAccount(accounts[0]);
       setIsLogin(true);
       setWallet('walletconnect');
+      await updateBalances(accounts);
       setPopupOpen(false);
-      setIsMetamaskLogin(false);
       setIsTrustwalletLogin(false);
-
-      await updateBalances([account], [account]);
-    } catch (error) {
-      if (error.message === 'User closed modal') {
-        console.log('WalletConnect Closed');
-      } else {
-        console.error(error);
-      }
+      setIsMetamaskLogin(false);
+    } catch (e) {
+      console.log(e);
     }
-    setIsloading(false);
   };
 
   return (
