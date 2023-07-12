@@ -15,7 +15,7 @@ import { ToggleSwitch } from '../../contents/assert/styled';
 const APIURL = process.env.REACT_APP_AXIOS_URL;
 
 const fetchCoinData = async ({ queryKey }) => {
-  const [symbol] = queryKey;
+  const [, symbol] = queryKey;
   const result = await axios.get(`${APIURL}/token/tokenValue/${symbol}`);
   return result.data;
 };

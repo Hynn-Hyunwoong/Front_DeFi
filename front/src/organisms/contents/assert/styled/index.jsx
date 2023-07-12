@@ -94,6 +94,7 @@ export const Links = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  width: 100%;
 
   button {
     border: none;
@@ -102,9 +103,9 @@ export const Links = styled.div`
 
 export const GraphWrap = styled.div`
   display: grid;
-  grid-template-rows: 1fr auto; 
-  grid-template-columns: 1fr; 
-  gap: 10px; 
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr;
+  gap: 10px;
   position: absolute;
   width: 70%;
   height: 200px;
@@ -116,8 +117,8 @@ export const GraphWrap = styled.div`
 export const ToggleSwitch = styled.label`
   position: relative;
   display: inline-block;
-  width: 60px;  // Switch 길이 조절
-  height: 25px;  // Switch 높이 조절
+  width: 60px; // Switch 길이 조절
+  height: 25px; // Switch 높이 조절
   margin-left: 60%; // Adjust to move to the right
 
   input {
@@ -139,9 +140,9 @@ export const ToggleSwitch = styled.label`
 
   .slider:before {
     position: absolute;
-    content: "";
-    height: 21px;  
-    width: 21px;   
+    content: '';
+    height: 21px;
+    width: 21px;
     left: 2px;
     bottom: 2px;
     background-color: white;
@@ -150,31 +151,31 @@ export const ToggleSwitch = styled.label`
 
   .slider:after {
     position: absolute;
-    content: "USD";
+    content: 'USD';
     color: blue;
     display: flex;
-    right : 7px;
+    right: 7px;
     justify-content: end;
     align-items: center;
     width: 100%;
     height: 100%;
-    font-size: 12px;  
+    font-size: 12px;
     transition: 1s;
   }
 
   input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #2196f3;
   }
 
   input:checked + .slider:after {
-    content: "KRW";
-    color : white;
-    display:flex;
-    right:26px;
+    content: 'KRW';
+    color: white;
+    display: flex;
+    right: 26px;
   }
 
   input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #2196f3;
   }
 
   input:checked + .slider:before {
@@ -182,7 +183,7 @@ export const ToggleSwitch = styled.label`
   }
 
   .slider.round {
-    border-radius: 25px;  
+    border-radius: 25px;
   }
 
   .slider.round:before {

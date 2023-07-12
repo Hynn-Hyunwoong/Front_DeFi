@@ -52,8 +52,6 @@ export const Metamask = () => {
       ETH: balanceE,
       ASD: balanceASD,
     });
-
-    console.log(balanceA, balanceE, balanceASD);
   };
 
   const handleLogin = async () => {
@@ -74,7 +72,6 @@ export const Metamask = () => {
         method: 'eth_requestAccounts',
         wallet: 'metamask',
       });
-      console.log(accounts[0]);
 
       setAccount(accounts[0]);
       setIsLogin(true);

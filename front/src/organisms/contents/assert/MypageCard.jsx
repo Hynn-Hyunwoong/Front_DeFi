@@ -7,6 +7,7 @@ import { useRecoilState } from 'recoil';
 import axios from 'axios';
 
 const APIURL = process.env.REACT_APP_AXIOS_URL;
+const symbols = ['ETH', 'ARB', 'USDT', 'ASD'];
 
 const getImagePath = (logo) => `/images/${logo}`;
 
@@ -23,7 +24,6 @@ const getTokenValue = async (symbol) => {
 };
 
 export const MyCard = ({ item }) => {
-  // eslint-disable-next-line no-unused-vars
   const [balance, setBalance] = useRecoilState(balanceState);
   const logoPath = getImagePath(item.logo);
   const priceQuery = useQuery(['coinPrice', item.symbol], () =>
@@ -74,10 +74,10 @@ export const MyCard = ({ item }) => {
           </li>
         </Stats>
         <Links>
-          <Button width={'45%'} height={'40px'} colors={'blue'}>
+          <Button width={'10rem'} height={'40px'} colors={'blue'}>
             구매하기
           </Button>
-          <Button width={'45%'} height={'40px'} colors={'blue'}>
+          <Button width={'10rem'} height={'40px'} colors={'blue'}>
             판매하기
           </Button>
         </Links>
