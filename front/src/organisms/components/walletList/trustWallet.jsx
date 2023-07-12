@@ -13,7 +13,6 @@ import {
   balanceState,
 } from '../../../organisms/store';
 import ASDTokenABI from '../../../ABI/ASDToken.json';
-import { getTrustWalletInjectedProvider } from '../../../utils/trustWalletInject';
 
 const contractaddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 const ARBrpc = process.env.REACT_APP_ARBITRUM_RPC;
@@ -53,8 +52,6 @@ export const TrustWallet = () => {
       ETH: balanceE,
       ASD: balanceASD,
     });
-
-    console.log(balanceA, balanceE, balanceASD);
   };
 
   const handleLogin = async () => {

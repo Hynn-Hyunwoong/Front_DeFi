@@ -58,8 +58,6 @@ export const WalletConnect = () => {
         ETH: balanceE,
         ASD: balanceASD,
       });
-
-      console.log(balanceA, balanceE, balanceASD);
     } catch (err) {
       console.error(`Failed to update balances: ${err}`);
     }
@@ -117,7 +115,7 @@ export const WalletConnect = () => {
     <>
       <WalletList onClick={handleLogin}>
         <img src="/images/logo-walletconnect.png" alt="WalletConnect" />
-        <p>
+        <p style={{ fontSize: '24px', whiteSpace: 'nowrap' }}>
           {isLogin && wallet === 'walletconnect'
             ? 'WalletConnect 연결됨'
             : 'WalletConnect'}

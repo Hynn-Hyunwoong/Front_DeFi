@@ -92,7 +92,6 @@ export const Header = () => {
           ARB: ARBbalance,
           ASD: ASDbalance,
         });
-        console.log(ETHbalance, ARBbalance, ASDbalance);
       } catch (e) {
         console.log(e);
       }
@@ -151,10 +150,15 @@ export const Header = () => {
             <Navigation />
             <Button
               colors="blue"
-              width="150px"
+              width="160px"
               height="40px"
+              margin="auto"
               onClick={popupHandler}
-              style={{ display: 'flex', alignItems: 'center' }} // Add flex styling
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
             >
               {wallet === 'metamask' && (
                 <img
@@ -178,13 +182,14 @@ export const Header = () => {
                   }}
                 />
               )}
-              {wallet === 'walletconnect' && (
+              {wallet === 'walletConnect' && (
                 <img
                   src="/images/logo-walletConnect.png"
                   alt="logo-walletconnect"
                   style={{
                     width: '20px',
-                    marginRight: 'px',
+                    marginRight: '2px',
+                    marginLeft: '0.3rem',
                     verticalAlign: 'middle',
                   }}
                 />

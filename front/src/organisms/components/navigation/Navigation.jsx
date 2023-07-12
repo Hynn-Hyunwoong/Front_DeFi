@@ -81,6 +81,7 @@ export const Navigation = () => {
                   key={item.name}
                   onMouseEnter={() => setActiveMenu(item.name)}
                   onMouseLeave={() => setActiveMenu(null)}
+                  style={{ position: 'relative' }}
                 >
                   <a
                     href={item.path}

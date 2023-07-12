@@ -9,19 +9,13 @@ import { useRecoilState } from 'recoil';
 const APIURL = process.env.REACT_APP_AXIOS_URL;
 
 const getCoinData = async () => {
-  let today = new Date();
-  let dd = String(today.getDate()).padStart(2, '0');
-  let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  let yyyy = today.getFullYear();
-  let todayStr = yyyy + '-' + mm + '-' + dd;
+  const todayStr = new Date().toISOString().split('T')[0];
   const { data } = await axios.get(
     `${APIURL}/token/tokenValue/ASD/${todayStr}`,
   );
 
   return data;
 };
-
-await getCoinData();
 
 export const ASDTokenCard = () => {
   const [balance, setBalance] = useRecoilState(balanceState);
@@ -31,11 +25,10 @@ export const ASDTokenCard = () => {
     isLoading: isCoinDataLoading,
   } = useQuery(['coinData'], getCoinData);
 
-  if (isCoinDataError || isCoinDataLoading) {
+  if (isCoinDataLoading) {
     return <Loader />;
   }
-
-  if (isCoinDataError || isCoinDataError) {
+  if (isCoinDataError) {
     return <div>Error occurred while fetching data</div>;
   }
 
@@ -56,7 +49,7 @@ export const ASDTokenCard = () => {
   const formattedKrwValue = Number(
     Number(krwValue).toFixed(2),
   ).toLocaleString();
-  console.log(`ASd token is ${balance.ASD}`);
+
   return (
     <>
       <Card>
@@ -80,10 +73,10 @@ export const ASDTokenCard = () => {
           </li>
         </Stats>
         <Links>
-          <Button width={'45%'} height={'40px'} colors={'blue'}>
+          <Button width={'10rem'} height={'40px'} colors={'blue'}>
             구매하기
           </Button>
-          <Button width={'45%'} height={'40px'} colors={'blue'}>
+          <Button width={'10rem'} height={'40px'} colors={'blue'}>
             판매하기
           </Button>
         </Links>
