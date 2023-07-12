@@ -36,6 +36,16 @@ export const DropsContents = () => {
       rewardAcccess: '2025. 04. 21',
       img: 'mangle2',
     },
+    {
+      symbol: 'SWCo',
+      tx: '0x99c0fe94c0d868c01d3545b4f1f3e9bf63911c65272a0d7ada40f25516e85a14',
+      mintAmount: '2,000,000.00000000',
+      dropAmount: '0.324',
+      startDate: '2024. 07. 14',
+      endDate: '2025. 02. 20',
+      rewardAcccess: '2025. 04. 21',
+      img: 'mangle3',
+    },
   ];
 
   return (

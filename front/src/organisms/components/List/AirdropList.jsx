@@ -51,8 +51,11 @@ export const AirDropList = ({ airdropData }) => {
             <RewardDate>
               보상 수령 가능일 : <strong>{v.rewardAcccess}</strong>
             </RewardDate>
-            <Button colors='greyBox' width='300px' height='55px' before='100%'>
+            <Button colors='greyBox' width='250px' height='55px' before='100%'>
               <h1>참여 방법</h1>
+            </Button>
+            <Button colors='green' width='250px' height='55px' before='100%'>
+              <h1>보상 수령</h1>
             </Button>
           </AirDropContentTop>
           <AirDropContentBottom>

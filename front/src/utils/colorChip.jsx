@@ -37,6 +37,11 @@ const colorChip = {
     color: 'white',
     border: 'solid 1px #76953e',
   },
+  greenBox2: {
+    background: 'transparent',
+    color: '#76953e',
+    border: 'solid 1px #76953e',
+  },
   greyBox: {
     background: 'transparent',
     color: '#767C83',
