@@ -15,7 +15,7 @@ import { ToggleSwitch } from '../../contents/assert/styled';
 const APIURL = process.env.REACT_APP_AXIOS_URL;
 
 const fetchCoinData = async ({ queryKey }) => {
-  const [symbol] = queryKey;
+  const [, symbol] = queryKey;
   const result = await axios.get(`${APIURL}/token/tokenValue/${symbol}`);
   return result.data;
 };
@@ -24,9 +24,9 @@ const CustomTooltip = ({ active, payload, label, selectedCurrency }) => {
   if (active && payload && payload.length) {
     const formatter = new Intl.NumberFormat();
     return (
-      <div className="custom-tooltip">
+      <div className='custom-tooltip'>
         <p
-          className="label"
+          className='label'
           style={{
             color: '#333333',
             fontWeight: 'bold',
@@ -36,7 +36,7 @@ const CustomTooltip = ({ active, payload, label, selectedCurrency }) => {
         {selectedCurrency === 'USD' && (
           <>
             <p
-              className="intro"
+              className='intro'
               style={{
                 color: '#8884d8',
                 fontWeight: 'bold',
@@ -44,7 +44,7 @@ const CustomTooltip = ({ active, payload, label, selectedCurrency }) => {
               }}
             >{`시작가(USD : $ ${formatter.format(payload[0].value)}`}</p>
             <p
-              className="intro"
+              className='intro'
               style={{
                 color: '#82ca9d',
                 fontWeight: 'bold',
@@ -56,7 +56,7 @@ const CustomTooltip = ({ active, payload, label, selectedCurrency }) => {
         {selectedCurrency === 'KRW' && (
           <>
             <p
-              className="intro"
+              className='intro'
               style={{
                 color: '#ffc658',
                 fontWeight: 'bold',
@@ -64,7 +64,7 @@ const CustomTooltip = ({ active, payload, label, selectedCurrency }) => {
               }}
             >{`시작가(KRW) : ₩ ${formatter.format(payload[0].value)}`}</p>
             <p
-              className="intro"
+              className='intro'
               style={{
                 color: '#ff7300',
                 fontWeight: 'bold',
@@ -82,7 +82,7 @@ const CustomTooltip = ({ active, payload, label, selectedCurrency }) => {
 export const GraphData = ({ symbol }) => {
   const { data, isLoading, isError } = useQuery(
     ['coinData', symbol],
-    fetchCoinData,
+    fetchCoinData
   );
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
 
@@ -112,7 +112,7 @@ export const GraphData = ({ symbol }) => {
 
   return (
     <>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width='100%' height='100%'>
         <AreaChart
           data={modifiedData}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
@@ -120,42 +120,42 @@ export const GraphData = ({ symbol }) => {
           <Tooltip
             content={<CustomTooltip selectedCurrency={selectedCurrency} />}
           />
-          <XAxis dataKey="date" axisLine={false} tick={false} />
+          <XAxis dataKey='date' axisLine={false} tick={false} />
           <YAxis
             domain={[maxValue * 0.8, maxValue * 1.2]}
-            orientation="right"
+            orientation='right'
             axisLine={false}
             tick={false}
           />
           {selectedCurrency === 'USD' && (
             <>
               <Area
-                type="monotone"
-                dataKey="dailyOpenPriceUSD"
-                stroke="#8884d8"
-                fill="#d8d784"
+                type='monotone'
+                dataKey='dailyOpenPriceUSD'
+                stroke='#8884d8'
+                fill='#d8d784'
               />
               <Area
-                type="monotone"
-                dataKey="dailyEndPriceUSD"
-                stroke="#82ca9d"
-                fill="#ca8282"
+                type='monotone'
+                dataKey='dailyEndPriceUSD'
+                stroke='#82ca9d'
+                fill='#ca8282'
               />
             </>
           )}
           {selectedCurrency === 'KRW' && (
             <>
               <Area
-                type="monotone"
-                dataKey="dailyOpenPriceKRW"
-                stroke="#d8d784"
-                fill="#8884d8"
+                type='monotone'
+                dataKey='dailyOpenPriceKRW'
+                stroke='#d8d784'
+                fill='#8884d8'
               />
               <Area
-                type="monotone"
-                dataKey="dailyEndPriceKRW"
-                stroke="#ca8282"
-                fill="#82ca9d"
+                type='monotone'
+                dataKey='dailyEndPriceKRW'
+                stroke='#ca8282'
+                fill='#82ca9d'
               />
             </>
           )}
@@ -163,11 +163,11 @@ export const GraphData = ({ symbol }) => {
       </ResponsiveContainer>
       <ToggleSwitch>
         <input
-          type="checkbox"
+          type='checkbox'
           checked={selectedCurrency === 'KRW'}
           onChange={handleToggle}
         />
-        <span className="slider round"></span>
+        <span className='slider round'></span>
       </ToggleSwitch>
     </>
   );

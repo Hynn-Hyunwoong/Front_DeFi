@@ -10,6 +10,29 @@ import {
 import { Popup } from '../popup/Popup';
 import { PopupTokenList } from '../../contents/exchangeSwap';
 
+const tokenData = {
+  init: {
+    logo: 'null',
+    symbol: 'Token',
+  },
+  solar: {
+    logo: 'solar',
+    symbol: 'ASD',
+  },
+  tether: {
+    logo: 'tether',
+    symbol: 'USDT',
+  },
+  ethereum: {
+    logo: 'ethereum',
+    symbol: 'ETH',
+  },
+  arbitrum: {
+    logo: 'arbitrum',
+    symbol: 'ARB',
+  },
+};
+
 export const SelectTokenBox = ({
   children,
   tokenList,
@@ -21,28 +44,6 @@ export const SelectTokenBox = ({
     if (setTokenList) {
       setTokenList(true);
     }
-  };
-  const tokenData = {
-    init: {
-      logo: 'null',
-      symbol: 'Token',
-    },
-    solar: {
-      logo: 'solar',
-      symbol: 'ASD',
-    },
-    tether: {
-      logo: 'tether',
-      symbol: 'USDT',
-    },
-    ethereum: {
-      logo: 'ethereum',
-      symbol: 'ETH',
-    },
-    arbitrum: {
-      logo: 'arbitrum',
-      symbol: 'ARB',
-    },
   };
 
   const tokenBox = (token) => {

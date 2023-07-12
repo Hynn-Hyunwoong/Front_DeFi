@@ -4,27 +4,10 @@ import { SectionStyled } from '../governance/styled';
 import { MyVoteSection, FlexDiv, PoolListHeaderDiv } from './styled';
 import { searchKeyword } from '../../store';
 
-export const StakingPoolList = () => {
+export const StakingPoolList = ({ tokenData }) => {
   const [keyword] = useRecoilState(searchKeyword);
-  const testTokenData = [
-    {
-      token1: { name: '솔라스왑', symbol: 'ASD', logo: 'solar' },
-      token2: { name: '테더', symbol: 'USDT', logo: 'tether' },
-      estimateRate: '12.65%',
-    },
-    {
-      token1: { name: '솔라스왑', symbol: 'ASD', logo: 'solar' },
-      token2: { name: '이더리움', symbol: 'ETH', logo: 'ethereum' },
-      estimateRate: '4.23%',
-    },
-    {
-      token1: { name: '솔라스왑', symbol: 'ASD', logo: 'solar' },
-      token2: { name: '아비트럼', symbol: 'ARB', logo: 'arbitrum' },
-      estimateRate: '27.98%',
-    },
-  ];
 
-  const filteredData = testTokenData.filter(
+  const filteredData = tokenData.filter(
     (item) =>
       item.token1.symbol.toLowerCase().includes(keyword.toLowerCase()) ||
       item.token2.symbol.toLowerCase().includes(keyword.toLowerCase()) ||
@@ -49,9 +32,7 @@ export const StakingPoolList = () => {
           <Search placeholder='토큰명, 심볼 검색' />
         </PoolListHeaderDiv>
         <div>
-          <StakingVotePoolList
-            tokenData={keyword ? filteredData : testTokenData}
-          />
+          <StakingVotePoolList tokenData={keyword ? filteredData : tokenData} />
         </div>
       </MyVoteSection>
     </SectionStyled>
