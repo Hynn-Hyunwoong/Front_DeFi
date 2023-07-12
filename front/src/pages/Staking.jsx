@@ -15,14 +15,15 @@ const stakingOption = [
   { times: 4, term: 12 },
   { times: 8, term: '12+a' },
 ];
-
 const testArr = [
   // 수익률 박스입니다. 퍼센트는 데이터 받아오면 계산해서 넘겨주면 될 것 같아요!
   { label: '스테이킹', percent: '19.14' },
   { label: '드랍스', percent: '17.96' },
   { label: '풀투표', percent: '8.74' },
 ];
+// 얘는 여기 꼭 있어야 함
 
+//
 // 예상 수익률
 const testRewardRate = { min: '5.79', max: '46.36' }; // 헤더 박스
 const stakingRewardRate = { min: '2.36', max: '18.89' }; // 밸런스 박스
