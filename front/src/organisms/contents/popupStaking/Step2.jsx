@@ -1,25 +1,22 @@
 import {
-  StakingHeader,
   StakingContent,
   NextButton,
   StakingListDiv,
   ApproveHeader,
   ApproveNotice,
 } from './styled';
-import { Xbutton } from '../../components';
+import { PopupHeader } from '../../components';
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { stakingValueState } from '../../store';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { stakingPopup, stakingValueState } from '../../store';
 
 export const Step2 = ({ closePopup, date }) => {
   const [approve, setApprove] = useState(false);
   const [stakingValue] = useRecoilState(stakingValueState);
+  const setStaking = useSetRecoilState(stakingPopup);
   return (
     <>
-      <StakingHeader>
-        <h3>트랜잭션 요청</h3>
-        <Xbutton onClick={closePopup} />
-      </StakingHeader>
+      <PopupHeader>트랜잭션 요청</PopupHeader>
 
       {approve ? (
         <>
@@ -53,7 +50,13 @@ export const Step2 = ({ closePopup, date }) => {
               </ApproveNotice>
             </article>
           </StakingContent>
-          <NextButton onClick={closePopup}>스테이킹 하기</NextButton>
+          <NextButton
+            onClick={() => {
+              closePopup(false);
+            }}
+          >
+            스테이킹 하기
+          </NextButton>
         </>
       ) : (
         <>

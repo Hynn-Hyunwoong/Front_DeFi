@@ -1,14 +1,13 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Popup } from '../../components';
 import { stakingPopup, optionTermsState, stakingStep } from '../../store';
 import { Reward, Step1, Step2, Unstaking } from '../popupStaking';
 
 export const StakingPopup = ({ option, reward }) => {
-  const [staking, setStaking] = useRecoilState(stakingPopup);
+  const [staking] = useRecoilState(stakingPopup);
   const [optionTerm] = useRecoilState(optionTermsState);
   const [step, setStep] = useRecoilState(stakingStep);
-
-  const closePopup = () => setStaking(false);
+  const setStaking = useSetRecoilState(stakingPopup);
 
   const afterDate = typeof optionTerm === 'number' ? optionTerm * 30 : null;
   const optionDate = new Date();
@@ -33,17 +32,17 @@ export const StakingPopup = ({ option, reward }) => {
           <Step1 //스테이킹
             option={option}
             reward={reward}
-            closePopup={closePopup}
             setStep={setStep}
             date={formattedDate}
+            closePopup={setStaking}
           />
         );
-      case 'step2': // 스테이킹 approve, transfer
-        return <Step2 closePopup={closePopup} date={formattedDate} />;
-      case 'unstaking': // 언스테이킹
-        return <Unstaking closePopup={closePopup} />;
-      case 'reward': // 보상수령
-        return <Reward closePopup={closePopup} />;
+      case 'step2': // 스테이킹 approve, transfer => popup 꺼야 함
+        return <Step2 date={formattedDate} closePopup={setStaking} />;
+      case 'unstaking': // 언스테이킹 => popup 꺼야 함
+        return <Unstaking closePopup={setStaking} />;
+      case 'reward': // 보상수령 => popup 꺼야 함
+        return <Reward closePopup={setStaking} />;
       default:
         return null;
     }

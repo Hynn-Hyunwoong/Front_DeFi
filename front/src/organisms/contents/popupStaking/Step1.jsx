@@ -5,7 +5,7 @@ import {
   InputBox,
   StakingOptionList,
   Radio,
-  Xbutton,
+  PopupHeader,
 } from '../../components';
 import {
   StakingContent,
@@ -34,7 +34,7 @@ export const Step1 = ({ option, reward, closePopup, setStep, date }) => {
 
   const buttonMap = buttonList.map((v, index) => {
     return (
-      <Button colors="lightBlue" width="60px" height="20px" key={index}>
+      <Button colors='lightBlue' width='60px' height='20px' key={index}>
         {v}
       </Button>
     );
@@ -42,56 +42,53 @@ export const Step1 = ({ option, reward, closePopup, setStep, date }) => {
 
   return (
     <>
-      <StakingHeader>
-        <h3>스테이킹</h3>
-        <Xbutton onClick={closePopup} />
-      </StakingHeader>
+      <PopupHeader>스테이킹</PopupHeader>
       <StakingContent>
-        <article className="inputValue">
+        <article className='inputValue'>
           <InputValue>
             <InputBox placeholder={'정수 단위로만 입력이 가능합니다'} /> ASD
             {/*입력한 값은 다음 컴포넌트에 넘겨줘야 함*/}
           </InputValue>
           <InputBalance>
-            <div className="balance">
+            <div className='balance'>
               <span>보유</span>
               <span>{testData.ASDbalance}</span>
             </div>
-            <div className="button">{buttonMap}</div>
+            <div className='button'>{buttonMap}</div>
           </InputBalance>
         </article>
-        <article className="option">
+        <article className='option'>
           <h5 style={{ marginBottom: '10px' }}>스테이킹 기간 선택</h5>
           <StakingOptionList optionList={option} />
         </article>
-        <article className="detailInfo">
+        <article className='detailInfo'>
           <Notice>
             <p>
               • 4개월, 8개월, 12개월 동안 스테이킹 하여 각각 1배, 2배, 4배의
               효율로 ASD 스테이킹 보상, 드랍스 에어드랍 토큰 보상, 풀 거래
               수수료 보상을 획득할 수 있습니다.
             </p>
-            <p className="grey">
+            <p className='grey'>
               • 원하는 시점에 8배의 스테이킹 효율로 변경 가능하며, 변경 시점부터
               계속해서 ASD를 스테이킹하게 됩니다.
             </p>
           </Notice>
           <Summary>
-            <div className="summaryStaking">
+            <div className='summaryStaking'>
               <StakingListDiv>
                 <strong>스테이킹 기간</strong>
-                <strong className="pointBlue">{optionTerm}개월</strong>
+                <strong className='pointBlue'>{optionTerm}개월</strong>
               </StakingListDiv>
               <StakingListDiv>
                 <strong>스테이킹 종료 일시</strong>
-                <strong className="pointBlue">{date}</strong>
+                <strong className='pointBlue'>{date}</strong>
               </StakingListDiv>
               <StakingListDiv>
                 <strong>예상 수익률</strong>
                 <strong>18.64 %</strong>
               </StakingListDiv>
             </div>
-            <div className="summaryReward">
+            <div className='summaryReward'>
               <StakingListDiv>
                 <p>스테이킹 수익률</p>
                 <p>9.54 %</p>
@@ -107,7 +104,7 @@ export const Step1 = ({ option, reward, closePopup, setStep, date }) => {
             </div>
           </Summary>
         </article>
-        <article className="check">
+        <article className='check'>
           <Radio checkItem={noticeChenck} setFunction={setNoticeChenck}>
             <strong>스테이킹 이용 유의사항</strong>
           </Radio>

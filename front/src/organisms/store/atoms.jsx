@@ -122,3 +122,14 @@ export const stakingValueState = atom({
   key: 'stakingValueState',
   default: 0,
 });
+
+// 스왑 토큰 => 여기서 저장되면 예치 버튼 클릭시 자동으로 토큰 설정이 됨
+export const poolToken1State = atom({
+  key: 'poolToken1State',
+  default: null,
+});
+export const poolToken2State = atom({
+  key: 'poolToken2State',
+  default: null,
+});
+//

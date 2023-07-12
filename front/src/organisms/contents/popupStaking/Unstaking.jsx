@@ -6,15 +6,12 @@ import {
   ApproveHeader,
   ApproveNotice,
 } from './styled';
-import { Xbutton } from '../../components';
+import { PopupHeader } from '../../components';
 
 export const Unstaking = ({ closePopup }) => {
   return (
     <>
-      <StakingHeader>
-        <h3>트랜잭션 요청</h3>
-        <Xbutton onClick={closePopup} />
-      </StakingHeader>
+      <PopupHeader>트랜잭션 요청</PopupHeader>
 
       <StakingContent className='unstaking'>
         <article>
@@ -53,7 +50,13 @@ export const Unstaking = ({ closePopup }) => {
           </ApproveNotice>
         </article>
       </StakingContent>
-      <NextButton onClick={closePopup}>언스테이킹 하기</NextButton>
+      <NextButton
+        onClick={() => {
+          closePopup(false);
+        }}
+      >
+        언스테이킹 하기
+      </NextButton>
       {/*언스테이킹 해주는 abi 넣어주면 됨*/}
     </>
   );

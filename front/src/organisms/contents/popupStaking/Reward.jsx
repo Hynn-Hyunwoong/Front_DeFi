@@ -1,19 +1,15 @@
 import {
-  StakingHeader,
   StakingContent,
   NextButton,
   ApproveHeader,
   ApproveNotice,
 } from './styled';
-import { Xbutton } from '../../components';
+import { PopupHeader } from '../../components';
 
 export const Reward = ({ closePopup }) => {
   return (
     <>
-      <StakingHeader>
-        <h3>트랜잭션 요청</h3>
-        <Xbutton onClick={closePopup} />
-      </StakingHeader>
+      <PopupHeader>트랜잭션 요청</PopupHeader>
 
       <StakingContent className='reward'>
         <article>
@@ -31,7 +27,13 @@ export const Reward = ({ closePopup }) => {
           </ApproveNotice>
         </article>
       </StakingContent>
-      <NextButton onClick={closePopup}>수령하기</NextButton>
+      <NextButton
+        onClick={() => {
+          closePopup(false);
+        }}
+      >
+        수령하기
+      </NextButton>
       {/*이용자의 지갑으로 수령해주는 abi 넣어주면 됨*/}
     </>
   );
