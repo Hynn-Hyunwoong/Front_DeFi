@@ -12,60 +12,48 @@ import {
   walletconnectLoginState,
   balanceState,
 } from '../../../organisms/store';
-import { ARBnetworkDetails, ETHnetworkDetails } from './networkDefine';
 import ASDTokenABI from '../../../ABI/ASDToken.json';
 
-const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+const contractaddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 const ARBrpc = process.env.REACT_APP_ARBITRUM_RPC;
 const ETHrpc = process.env.REACT_APP_ETHEREUM_RPC;
 
 export const Metamask = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
-  // eslint-disable-next-line no-unused-vars
   const [account, setAccount] = useRecoilState(accountState);
-  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsloading] = useRecoilState(loadingState);
   const [wallet, setWallet] = useRecoilState(selectedWallet);
-  const [provider, setProvider] = useRecoilState(providerState);
-  // eslint-disable-next-line no-unused-vars
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
-  // eslint-disable-next-line no-unused-vars
   const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
     trustwalletLoginState,
   );
-  // eslint-disable-next-line no-unused-vars
   const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(
     walletconnectLoginState,
   );
   const [balance, setBalance] = useRecoilState(balanceState);
 
-  const updateBalances = async (ARBaccounts, ETHaccounts) => {
-    const ARBprovider = new ethers.JsonRpcProvider(ARBrpc);
-    const ETHprovider = new ethers.JsonRpcProvider(ETHrpc);
-    const contract = new ethers.Contract(
-      contractAddress,
-      ASDTokenABI.abi,
-      ARBprovider,
-    );
+  const updateBalances = async (
+    ARBProvider,
+    ETHProvider,
+    ASDProvider,
+    accounts,
+  ) => {
+    const ARBsigner = await ARBProvider.getBalance(accounts[0]);
+    const ETHsigner = await ETHProvider.getBalance(accounts[0]);
+    const ASDsigner = await ASDProvider.balanceOf(accounts[0]);
 
-    const ARBbalance = ethers.formatEther(
-      await ARBprovider.getBalance(ARBaccounts[0]),
-    );
-    const ETHbalance = ethers.formatEther(
-      await ETHprovider.getBalance(ETHaccounts[0]),
-    );
-    const ASDbalance = ethers.formatEther(
-      await contract.balanceOf(ARBaccounts[0]),
-    );
-
-    console.log(ARBbalance, ETHbalance, ASDbalance);
+    const balanceA = ethers.utils.formatEther(ARBsigner);
+    const balanceE = ethers.utils.formatEther(ETHsigner);
+    const balanceASD = ethers.utils.formatEther(ASDsigner);
 
     setBalance({
       ...balance,
-      ETH: ETHbalance,
-      ARB: ARBbalance,
-      ASD: ASDbalance,
+      ARB: balanceA,
+      ETH: balanceE,
+      ASD: balanceASD,
     });
+
+    console.log(balanceA, balanceE, balanceASD);
   };
 
   const handleLogin = async () => {
@@ -75,25 +63,26 @@ export const Metamask = () => {
         alert('Metamask가 설치되어있지 않습니다. 설치 후 다시시도해주세요.');
         return;
       }
-
-      setProvider(provider);
-      const ARBaccounts = await window.ethereum.request({
+      const ARBProvider = new ethers.providers.JsonRpcProvider(ARBrpc);
+      const ETHProvider = new ethers.providers.JsonRpcProvider(ETHrpc);
+      const ASDProvider = new ethers.Contract(
+        contractaddress,
+        ASDTokenABI.abi,
+        ARBProvider,
+      );
+      const accounts = await window.ethereum.request({
         method: 'eth_requestAccounts',
-        wallet_addEthereumChain: ARBnetworkDetails,
+        wallet: 'metamask',
       });
+      console.log(accounts[0]);
 
-      const ETHaccounts = await window.ethereum.request({
-        method: 'eth_requestAccounts',
-        wallet_addEthereumChain: ETHnetworkDetails,
-      });
-
-      setAccount(ARBaccounts[0]);
+      setAccount(accounts[0]);
       setIsLogin(true);
       setWallet('metamask');
+      updateBalances(ARBProvider, ETHProvider, ASDProvider, accounts);
       setPopupOpen(false);
       setIsTrustwalletLogin(false);
       setIsWalletconnectLogin(false);
-      await updateBalances(ARBaccounts, ETHaccounts);
     } catch (error) {
       console.error(error);
     }

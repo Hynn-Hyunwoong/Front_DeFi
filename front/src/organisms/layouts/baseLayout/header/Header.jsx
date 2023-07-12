@@ -1,3 +1,4 @@
+import { ethers } from 'ethers';
 import { useEffect, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 import { HeaderWrap, HeaderTop, HeaderBottom } from './styled';
@@ -7,10 +8,16 @@ import {
   accountState,
   networkState,
   popupState,
+  balanceState,
   selectedWallet,
 } from '../../../store';
 import { Wallet } from '../../../contents/popupWallet/Wallet';
 import { useQuery } from '@tanstack/react-query';
+import ASDTokenABI from '../../../../ABI/ASDToken.json';
+
+const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+const ARBrpc = process.env.REACT_APP_ARBITRUM_RPC;
+const ETHrpc = process.env.REACT_APP_ETHEREUM_RPC;
 
 export const Header = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
@@ -19,6 +26,7 @@ export const Header = () => {
   const [popup, setPopup] = useRecoilState(popupState);
   // eslint-disable-next-line no-unused-vars
   const [wallet, setWallet] = useRecoilState(selectedWallet);
+  const [balance, setBalance] = useRecoilState(balanceState);
 
   const fetchNetwork = async () => {
     const networkId = await window.ethereum.request({
@@ -56,6 +64,44 @@ export const Header = () => {
     },
     [setNetwork],
   );
+
+  const updateBalance = useCallback(async () => {
+    if (account && window.ethereum) {
+      const ARBprovider = new ethers.providers.JsonRpcProvider(ARBrpc);
+      const ETHprovider = new ethers.providers.JsonRpcProvider(ETHrpc);
+      const contract = new ethers.Contract(
+        contractAddress,
+        ASDTokenABI.abi,
+        ARBprovider,
+      );
+
+      const ARBbalance = ethers.utils.formatEther(
+        await ARBprovider.getBalance(account),
+      );
+      const ETHbalance = ethers.utils.formatEther(
+        await ETHprovider.getBalance(account),
+      );
+      const ASDbalance = ethers.utils.formatEther(
+        await contract.balanceOf(account),
+      );
+
+      try {
+        setBalance({
+          ...balance,
+          ETH: ETHbalance,
+          ARB: ARBbalance,
+          ASD: ASDbalance,
+        });
+        console.log(ETHbalance, ARBbalance, ASDbalance);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }, [account, balance, setBalance]);
+
+  useEffect(() => {
+    updateBalance();
+  }, [account, network, updateBalance]);
 
   useEffect(() => {
     if (window.trustwallet) {

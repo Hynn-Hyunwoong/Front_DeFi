@@ -8,11 +8,6 @@ import { useRecoilState } from 'recoil';
 
 const APIURL = process.env.REACT_APP_AXIOS_URL;
 
-const getLogoData = async () => {
-  const { data } = await axios.get(`${APIURL}/aws/signedurl/logo.png`);
-  return data.signedURL;
-};
-
 const getCoinData = async () => {
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
@@ -29,21 +24,18 @@ const getCoinData = async () => {
 await getCoinData();
 
 export const ASDTokenCard = () => {
-  // eslint-disable-next-line no-unused-vars
   const [balance, setBalance] = useRecoilState(balanceState);
-  console.log(balance.Date);
-  const { data: logoURL, isError, isLoading } = useQuery(['logo'], getLogoData);
   const {
     data: coinData,
     isError: isCoinDataError,
     isLoading: isCoinDataLoading,
   } = useQuery(['coinData'], getCoinData);
 
-  if (isLoading || isCoinDataLoading) {
+  if (isCoinDataError || isCoinDataLoading) {
     return <Loader />;
   }
 
-  if (isError || isCoinDataError) {
+  if (isCoinDataError || isCoinDataError) {
     return <div>Error occurred while fetching data</div>;
   }
 
@@ -68,7 +60,9 @@ export const ASDTokenCard = () => {
   return (
     <>
       <Card>
-        <Img>{logoURL && <img src={logoURL} alt="ASD Logo" />}</Img>
+        <Img>
+          <img src={`/images/logo-solar.png`} alt="ASD Logo" />
+        </Img>
         <GraphWrap>
           <GraphData symbol={'ASD'} />
         </GraphWrap>

@@ -22,79 +22,71 @@ const ETHrpc = process.env.REACT_APP_ETHEREUM_RPC;
 export const TrustWallet = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
-  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsloading] = useRecoilState(loadingState);
   const [wallet, setWallet] = useRecoilState(selectedWallet);
-  // eslint-disable-next-line no-unused-vars
   const [provider, setProvider] = useRecoilState(providerState);
-  // eslint-disable-next-line no-unused-vars
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
-  // eslint-disable-next-line no-unused-vars
   const [isMetamaskLogin, setIsMetamaskLogin] =
     useRecoilState(metamaskLoginState);
-  // eslint-disable-next-line no-unused-vars
   const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(
     walletconnectLoginState,
   );
   const [balance, setBalance] = useRecoilState(balanceState);
 
-  const updateBalances = async (ARBaccounts, ETHaccounts) => {
-    const ARBprovider = new ethers.JsonRpcProvider(ARBrpc);
-    const ETHprovider = new ethers.JsonRpcProvider(ETHrpc);
-    const contract = new ethers.Contract(
-      contractaddress,
-      ASDTokenABI.abi,
-      ARBprovider,
-    );
+  const updateBalances = async (
+    ARBProvider,
+    ETHProvider,
+    ASDProvider,
+    accounts,
+  ) => {
+    const ARBsigner = await ARBProvider.getBalance(accounts[0]);
+    const ETHsigner = await ETHProvider.getBalance(accounts[0]);
+    const ASDsigner = await ASDProvider.balanceOf(accounts[0]);
 
-    const ARBbalance = ethers.formatEther(
-      await ARBprovider.getBalance(ARBaccounts[0]),
-    );
-    const ETHbalance = ethers.formatEther(
-      await ETHprovider.getBalance(ETHaccounts[0]),
-    );
-    const ASDbalance = ethers.formatEther(
-      await contract.balanceOf(ARBaccounts[0]),
-    );
-
-    console.log(ARBbalance, ETHbalance, ASDbalance);
+    const balanceA = ethers.utils.formatEther(ARBsigner);
+    const balanceE = ethers.utils.formatEther(ETHsigner);
+    const balanceASD = ethers.utils.formatEther(ASDsigner);
 
     setBalance({
       ...balance,
-      ARB: ARBbalance,
-      ETH: ETHbalance,
-      ASD: ASDbalance,
+      ARB: balanceA,
+      ETH: balanceE,
+      ASD: balanceASD,
     });
+
+    console.log(balanceA, balanceE, balanceASD);
   };
 
   const handleLogin = async () => {
     setIsloading(true);
     try {
-      if (!window.trustwallet) {
-        alert(
-          'Trust-Wallet 이 설치되어 있지 않습니다. 설치 후 다시시도해주세요.',
-        );
+      if (!window.trustWallet) {
+        alert('trustWallet이 설치되어있지 않습니다. 설치 후 다시시도해주세요.');
         return;
       }
-      const Provider = new ethers.BrowserProvider(
-        await getTrustWalletInjectedProvider(),
+      const ARBProvider = new ethers.providers.JsonRpcProvider(ARBrpc);
+      const ETHProvider = new ethers.providers.JsonRpcProvider(ETHrpc);
+      const ASDProvider = new ethers.Contract(
+        contractaddress,
+        ASDTokenABI.abi,
+        ARBProvider,
       );
-
-      const ARBaccounts = await window.trustwallet.request({
+      const accounts = await window.trustWallet.request({
         method: 'eth_requestAccounts',
+        wallet: 'trustwallet',
       });
-      setProvider((await Provider.getSigner()).address);
 
-      setAccount(ARBaccounts);
+      setAccount(accounts[0]);
       setIsLogin(true);
       setWallet('trustwallet');
+      updateBalances(ARBProvider, ETHProvider, ASDProvider, accounts);
       setPopupOpen(false);
-      setIsMetamaskLogin(false);
+      setIsMetamaskLogin(true);
       setIsWalletconnectLogin(false);
-      await updateBalances([account], [account]);
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
+    setIsloading(false);
   };
 
   return (
