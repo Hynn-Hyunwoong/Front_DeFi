@@ -1,24 +1,14 @@
-import { useRecoilState } from 'recoil';
-import { tokenListPopupState } from '../organisms/store';
-import { Popup } from '../organisms/components';
-
 import {
   ExchangeBottom,
   ExchangeBox,
   ExchangeTop,
-  PopupTokenList,
 } from '../organisms/contents/exchangeSwap';
 
 export const Swap = () => {
-  const [tokenList] = useRecoilState(tokenListPopupState);
+  // const [tokenList] = useRecoilState(tokenListPopupState);
 
   return (
-    <div className="swap">
-      {tokenList && (
-        <Popup height={'500px'}>
-          <PopupTokenList />
-        </Popup>
-      )}
+    <div className='swap'>
       <ExchangeTop />
       <ExchangeBox />
       <ExchangeBottom />

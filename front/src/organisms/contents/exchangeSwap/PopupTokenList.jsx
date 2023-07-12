@@ -1,6 +1,4 @@
-import { useRecoilState } from 'recoil';
 import { Xbutton } from '../../components';
-import { tokenListPopupState, FromTokenState } from '../../store';
 import {
   ListTop,
   InputBox,
@@ -10,12 +8,7 @@ import {
   List,
 } from './styled';
 
-export const PopupTokenList = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [tokenListPopup, setTokenList] = useRecoilState(tokenListPopupState);
-  // eslint-disable-next-line no-unused-vars
-  const [fromToken, setFromToken] = useRecoilState(FromTokenState);
-
+export const PopupTokenList = ({ setToken, setTokenList }) => {
   const tokenData = [
     {
       logo: 'solar',
@@ -47,28 +40,24 @@ export const PopupTokenList = () => {
     setTokenList(false);
   };
 
-  const selectToken = (token) => {
-    setFromToken(token);
-  };
-
   const tokenListMap = tokenData.map((v) => {
     return (
       <List
         key={v.symbol}
         onClick={() => {
-          selectToken(`${v.logo}`);
+          setToken(v.logo);
           setTokenList(false);
         }}
       >
-        <div className="token">
-          <img src={`/images/logo-${v.logo}.png`} alt="tokenLogo" />
+        <div className='token'>
+          <img src={`/images/logo-${v.logo}.png`} alt='tokenLogo' />
           <div>
             <p>{`${v.name}`}</p>
             <p>{`${v.symbol}`}</p>
           </div>
         </div>
-        <div className="price">$ {v.price}</div>
-        <div className="balance">
+        <div className='price'>$ {v.price}</div>
+        <div className='balance'>
           <div>
             <p>{v.balance}</p>
             <p>$ {v.evaluation}</p>
@@ -85,13 +74,13 @@ export const PopupTokenList = () => {
         <Xbutton onClick={closePopup} />
       </ListTop>
       <SearchWrap>
-        <InputBox type="text" placeholder="코인명, 심볼, 토큰주소 검색" />
+        <InputBox type='text' placeholder='코인명, 심볼, 토큰주소 검색' />
       </SearchWrap>
       <ListWrap>
         <ListHeader>
-          <p className="token">토큰</p>
-          <p className="price">가격</p>
-          <p className="balance">보유/평가금액</p>
+          <p className='token'>토큰</p>
+          <p className='price'>가격</p>
+          <p className='balance'>보유/평가금액</p>
         </ListHeader>
         <ul>{tokenListMap}</ul>
       </ListWrap>

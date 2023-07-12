@@ -2,7 +2,7 @@ import { HeaderDiv } from '../governance/styled';
 import { Box } from '../../components';
 import { PoolSection, PoolHeaderDiv, PoolHeaderBoxDiv } from './styled';
 
-export const PoolHeader = () => {
+export const PoolHeader = ({ balance }) => {
   return (
     <PoolSection>
       <PoolHeaderDiv>
@@ -22,7 +22,7 @@ export const PoolHeader = () => {
               <h4>수령 가능</h4>
               <div className='light'>
                 <span>
-                  <strong className='point'>200 </strong>
+                  <strong className='point'>{balance.ASD} </strong>
                   ASD
                 </span>
                 <br />

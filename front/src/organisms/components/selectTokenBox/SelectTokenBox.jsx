@@ -1,4 +1,3 @@
-import { useRecoilState } from 'recoil';
 import {
   LabelStyled,
   InputBoxWrap,
@@ -8,64 +7,79 @@ import {
   BalanceStyled,
   SectionStyled,
 } from './styled';
-import { tokenListPopupState, ToTokenState } from '../../store';
+import { Popup } from '../popup/Popup';
+import { PopupTokenList } from '../../contents/exchangeSwap';
 
-export const SelectTokenBox = ({ children, token }) => {
-  // eslint-disable-next-line no-unused-vars
-  const [tokenListPopup, setTokenList] = useRecoilState(tokenListPopupState);
-  // eslint-disable-next-line no-unused-vars
-  const [toToken, setToToken] = useRecoilState(ToTokenState);
+export const SelectTokenBox = ({
+  children,
+  tokenList,
+  setTokenList = () => {},
+  token,
+  setToken,
+}) => {
   const popupOpenEvent = () => {
-    setTokenList(true);
+    if (setTokenList) {
+      setTokenList(true);
+    }
   };
-
   const tokenData = {
     init: {
       logo: 'null',
-      token: 'Token',
+      symbol: 'Token',
     },
     solar: {
       logo: 'solar',
-      token: 'ASD',
+      symbol: 'ASD',
     },
     tether: {
       logo: 'tether',
-      token: 'USDT',
+      symbol: 'USDT',
     },
     ethereum: {
       logo: 'ethereum',
-      token: 'ETH',
+      symbol: 'ETH',
+    },
+    arbitrum: {
+      logo: 'arbitrum',
+      symbol: 'ARB',
     },
   };
 
-  const tokenBox = (selectedToken) => {
+  const tokenBox = (token) => {
     return (
       <TokenBox
-        key={tokenData[selectedToken].token}
-        logo={tokenData[selectedToken].logo}
-        token={tokenData[selectedToken].token}
+        key={tokenData[token].symbol}
+        logo={tokenData[token].logo}
+        token={tokenData[token].symbol}
         onClick={popupOpenEvent}
       >
         <img
-          src={`/images/logo-${tokenData[selectedToken].logo}.png`}
+          src={`/images/logo-${tokenData[token].logo}.png`}
           style={{ width: '30px' }}
-          alt="tokenLogo"
+          alt='tokenLogo'
         />
-        <p>{tokenData[selectedToken].token}</p>
+        <p>{tokenData[token].symbol}</p>
       </TokenBox>
     );
   };
 
   return (
-    <SectionStyled>
-      <LabelStyled>
-        <strong>{children}</strong>
-      </LabelStyled>
-      <InputBoxWrap>
-        <InputStyled type="number" min={1} placeholder="0" />
-        <RightItem>{tokenBox(toToken)}</RightItem>
-      </InputBoxWrap>
-      <BalanceStyled>보유 : 10</BalanceStyled>
-    </SectionStyled>
+    <>
+      <SectionStyled>
+        <LabelStyled>
+          <strong>{children}</strong>
+        </LabelStyled>
+        <InputBoxWrap>
+          <InputStyled type='number' min={1} placeholder='0' />
+          <RightItem>{tokenBox(token)}</RightItem>
+        </InputBoxWrap>
+        <BalanceStyled>보유 : 10</BalanceStyled>
+      </SectionStyled>
+      {tokenList && (
+        <Popup height={'500px'}>
+          <PopupTokenList setToken={setToken} setTokenList={setTokenList} />
+        </Popup>
+      )}
+    </>
   );
 };

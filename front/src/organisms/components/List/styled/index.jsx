@@ -211,3 +211,113 @@ export const Estimated = styled.div`
     text-align: left;
   }
 `;
+
+// airDrop
+const margin30to20 = css`
+  margin-bottom: 30px;
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
+`;
+
+export const AirDropContent = styled.div`
+  margin-top: 50px;
+  width: 100%;
+  border-radius: 10px;
+  background: white;
+  overflow: hidden;
+  box-shadow: 1px 1px 6px 0px #d6d8dd;
+`;
+export const AirDropHeader = styled.section`
+  padding: 0 40px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: url(${({ backgroundIMG }) => backgroundIMG}) no-repeat center/100%;
+  color: white;
+
+  @media (max-width: 768px) {
+    height: 70px;
+  }
+`;
+export const AirDropTokenTitle = styled.div`
+  display: flex;
+  align-items: center;
+  & > img {
+    height: 40px;
+    width: 40px;
+    border-radius: 500px;
+    margin-right: 10px;
+    box-shadow: #959595 1px 0 10px;
+  }
+  & > h1 {
+    font-size: 35px;
+    text-shadow: #000000 1px 0 10px;
+  }
+  @media (max-width: 768px) {
+    & > h1 {
+      font-size: 28px;
+    }
+  }
+`;
+export const AirDropContentTop = styled.section`
+  padding: 50px 40px;
+  text-align: center;
+
+  & > h1 {
+    ${margin30to20}
+  }
+`;
+export const BalanceText = styled.div`
+  font-size: 30px;
+  font-weight: bold;
+  color: #94ca0d;
+  letter-spacing: -1px;
+  ${margin30to20}
+  & > span {
+    font-size: 1rem;
+    color: grey;
+  }
+`;
+export const RewardDate = styled.div`
+  color: #94ca0d;
+  ${margin30to20}
+`;
+
+export const AirDropContentBottom = styled.section`
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #dee3eb;
+  margin: 0 40px;
+  padding: 40px 30px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 40px 0;
+  }
+
+  .airDrop {
+    width: 50%;
+    font-size: 14px;
+    color: grey;
+
+    & > div {
+      display: flex;
+      justify-content: space-between;
+      &:nth-child(1) {
+        margin-bottom: 15px;
+      }
+      & > strong {
+        color: black;
+      }
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+      & > div {
+        &:nth-last-child(1) {
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+`;
