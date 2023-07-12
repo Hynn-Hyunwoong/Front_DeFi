@@ -2,6 +2,7 @@ import { ExchageCard, BoxArticle, ButtonArticle } from '../../components';
 
 export const ExchangeBox = () => {
   return (
+    // 데이터는 BoxArticle, ButtonArticle에 있습니다!
     <>
       <ExchageCard
         onClick={() => {

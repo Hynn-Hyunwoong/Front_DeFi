@@ -1,24 +1,24 @@
-import { SectionWrap, ExpectedArticle, TXTableHeader } from "./styled";
-import { Expected, TxHistoryLi } from "../../components";
+import { SectionWrap, ExpectedArticle, TXTableHeader } from './styled';
+import { Expected, TxHistoryLi } from '../../components';
 
-export const ExchangeBottom = () => {
+export const ExchangeBottom = ({ transactions }) => {
   return (
     <SectionWrap>
-      <ExpectedArticle className="expected" style={{ width: "85%" }}>
+      <ExpectedArticle className='expected' style={{ width: '85%' }}>
         <h3>예상 내역</h3>
         <Expected />
       </ExpectedArticle>
-      <ExpectedArticle className="txHistory">
+      <ExpectedArticle className='txHistory'>
         <h3>트랜잭션 내역</h3>
         <TXTableHeader>
-          <p className="action">유형</p>
-          <p className="hash">해시</p>
-          <p className="status">상태</p>
-          <p className="date">일자</p>
+          <p className='action'>유형</p>
+          <p className='hash'>해시</p>
+          <p className='status'>상태</p>
+          <p className='date'>일자</p>
         </TXTableHeader>
         <div>
           <ul>
-            <TxHistoryLi />
+            <TxHistoryLi transactions={transactions} />
           </ul>
         </div>
       </ExpectedArticle>

@@ -6,6 +6,10 @@ export const TxLi = styled.li`
   letter-spacing: -1px;
   padding-bottom: 5px;
 
+  & > div {
+    margin: 5px 0;
+  }
+
   & > .action {
     width: 20%;
     padding-left: 20px;

@@ -19,8 +19,8 @@ export const BoxArticle = ({ title1, sign, title2 }) => {
   return (
     <>
       <SelectTokenBox
-        token={fromToken}
-        tokenList={fromTokenList}
+        token={fromToken} // token값은 solar, tether 같은 로고 명으로 들어갑니다!
+        tokenList={fromTokenList} // 모달창 띄우고 닫을 수 있는 상태
         setToken={setFromToken}
         setTokenList={setFromTokenList}
       >

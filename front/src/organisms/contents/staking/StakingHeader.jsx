@@ -7,7 +7,7 @@ import {
   ExpectedRewardDiv,
 } from './styled';
 
-export const StakingHeader = ({ reward }) => {
+export const StakingHeader = ({ reward, rate }) => {
   const stakingList = reward.map((v) => (
     <StakingListDiv key={v.label}>
       <h4>{v.label}</h4>
@@ -45,11 +45,11 @@ export const StakingHeader = ({ reward }) => {
                   <h4>예상수익률</h4>
                   <div>
                     <p>
-                      연 <strong>5.79</strong> %
+                      연 <strong>{rate.min}</strong> %
                     </p>
                     <p> ~ </p>
                     <p>
-                      연 <strong>46.36</strong> %
+                      연 <strong>{rate.max}</strong> %
                     </p>
                   </div>
                 </ExpectedRewardDiv>

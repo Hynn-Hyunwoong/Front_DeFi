@@ -1,12 +1,7 @@
 import { SectionStyled } from '../governance/styled';
 import { MyVoteSection, FlexDiv, VoteInfoDiv, PoolVote } from './styled';
 
-export const StakingMyVote = () => {
-  const testData = {
-    myVote: '1234',
-    participate_amount: '12',
-  };
-
+export const StakingMyVote = ({ voteAmount }) => {
   return (
     <SectionStyled>
       <MyVoteSection colors='blue'>
@@ -17,13 +12,13 @@ export const StakingMyVote = () => {
               <span className='option'>투표권 획득 방법 📣</span>
             </FlexDiv>
             <span>
-              <strong>{testData.myVote}</strong> vASD
+              <strong>{voteAmount.myVote}</strong> vASD
             </span>
           </VoteInfoDiv>
           <PoolVote>
             <span>풀 투표 참여 가능</span>
             <span>
-              <strong>{testData.participate_amount}</strong> vASD
+              <strong>{voteAmount.participate_amount}</strong> vASD
             </span>
           </PoolVote>
         </div>
