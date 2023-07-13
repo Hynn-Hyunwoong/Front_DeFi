@@ -1,0 +1,131 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IPair",
+  "sourceName": "contracts/Interface/IPair.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_lptoken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_level",
+          "type": "uint256"
+        }
+      ],
+      "name": "LptokenLvManagement",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLpAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "arblp",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "usdtlp",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "ethlp",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLpLv",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_ArbpoolLv",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_ArbLpLv",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_UsdtpoolLv",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_UsdtLpLv",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_EthpoolLv",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_EthLpLv",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_token1",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_token2",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_contractAddress",
+          "type": "address"
+        }
+      ],
+      "name": "makeLpPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_lptoken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_level",
+          "type": "uint256"
+        }
+      ],
+      "name": "poolLvManagement",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
