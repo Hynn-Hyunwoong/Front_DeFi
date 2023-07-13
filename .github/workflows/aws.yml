@@ -37,7 +37,7 @@ jobs:
           rm -rf build
           git pull
           npm install
-          node --max_old_space_size=4096 ./node_modules/.bin/react-scripts build
+          npm run build
 
     - name: Restart Nginx
       uses: appleboy/ssh-action@master
