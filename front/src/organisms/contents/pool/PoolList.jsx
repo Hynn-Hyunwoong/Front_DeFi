@@ -10,7 +10,7 @@ export const PoolList = ({ tokenData }) => {
   const [staking, setStaking] = useRecoilState(stakingPopup);
   return (
     <>
-      <PoolSection style={{ marginTop: '30px' }}>
+      <PoolSection>
         <MyVoteSection
           height='100%'
           colors='white'

@@ -26,10 +26,10 @@ export const GovernanceContent = ({ testArr }) => {
     <SectionStyled>
       <ButtonSection>
         <Button
-          colors="green"
-          height="40px"
-          width="100px"
-          to="/governance/create"
+          colors='green'
+          height='40px'
+          width='100px'
+          to='/governance/create'
         >
           <h3>투표 제안하기</h3>
         </Button>

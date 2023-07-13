@@ -24,6 +24,24 @@ export const Pool = () => {
       estimateRate: '27.98%',
       CA: '0x5471783860098f0366d7d76a4739239966f66469',
     },
+    {
+      token1: { name: '솔라스왑', symbol: 'ASD', logo: 'solar' },
+      token2: { name: '아비트럼', symbol: 'ARB', logo: 'arbitrum' },
+      estimateRate: '27.98%',
+      CA: '0x5471783860098f0366d7d76a4739239966f66469',
+    },
+    {
+      token1: { name: '솔라스왑', symbol: 'ASD', logo: 'solar' },
+      token2: { name: '아비트럼', symbol: 'ARB', logo: 'arbitrum' },
+      estimateRate: '27.98%',
+      CA: '0x5471783860098f0366d7d76a4739239966f66469',
+    },
+    {
+      token1: { name: '솔라스왑', symbol: 'ASD', logo: 'solar' },
+      token2: { name: '아비트럼', symbol: 'ARB', logo: 'arbitrum' },
+      estimateRate: '27.98%',
+      CA: '0x5471783860098f0366d7d76a4739239966f66469',
+    },
   ];
 
   return (
