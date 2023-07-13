@@ -1,0 +1,118 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IStaking",
+  "sourceName": "contracts/Interface/IStaking.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_differLptoken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_userAccount",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_factoryAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_month",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_VASDtokenAddress",
+          "type": "address"
+        }
+      ],
+      "name": "StakeDifferLp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getValue1",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_firstNum",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_secondNum",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_firstTokenName",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_firstTokenMon",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_firstAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_secondAmount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getValue2",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "_isPossible",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_userAccount",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_factoryAddress",
+          "type": "address"
+        }
+      ],
+      "name": "withDrawDifferLp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
