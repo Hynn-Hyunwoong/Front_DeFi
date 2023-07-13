@@ -11,12 +11,13 @@ const mobileFlex = css`
 
 export const PoolSection = styled.section`
   width: 900px;
-  margin: 0 auto;
+  margin: 70px auto;
   &:nth-child(1) {
     margin-top: 60px;
   }
   @media (max-width: 768px) {
     width: 100%;
+    margin: 40px auto;
   }
 `;
 

@@ -25,10 +25,12 @@ export const SectionStyled = styled.section`
   &:nth-child(1) {
     margin-top: 60px;
   }
+  &:nth-last-child(1) {
+    margin-bottom: 60px;
+  }
 
   @media (max-width: 768px) {
     width: 100%;
-    margin: 0 auto;
   }
 `;
 

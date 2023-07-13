@@ -32,6 +32,55 @@ export const Governance = () => {
       period: { start: '23.07.02', end: '23.07.05' },
       action: false,
     },
+    {
+      index: '1',
+      subject: 'AWM 토큰 레벨 변경 C -> B',
+      status: 'canceled',
+      period: { start: '23.07.02', end: '23.07.05' },
+      action: false,
+    },
+    {
+      index: '1',
+      subject: 'AWM 토큰 레벨 변경 C -> B',
+      status: 'canceled',
+      period: { start: '23.07.02', end: '23.07.05' },
+      action: false,
+    },
+    {
+      index: '1',
+      subject: 'AWM 토큰 레벨 변경 C -> B',
+      status: 'canceled',
+      period: { start: '23.07.02', end: '23.07.05' },
+      action: false,
+    },
+    {
+      index: '1',
+      subject: 'AWM 토큰 레벨 변경 C -> B',
+      status: 'canceled',
+      period: { start: '23.07.02', end: '23.07.05' },
+      action: false,
+    },
+    {
+      index: '1',
+      subject: 'AWM 토큰 레벨 변경 C -> B',
+      status: 'canceled',
+      period: { start: '23.07.02', end: '23.07.05' },
+      action: false,
+    },
+    {
+      index: '1',
+      subject: 'AWM 토큰 레벨 변경 C -> B',
+      status: 'canceled',
+      period: { start: '23.07.02', end: '23.07.05' },
+      action: false,
+    },
+    {
+      index: '1',
+      subject: 'AWM 토큰 레벨 변경 C -> B',
+      status: 'canceled',
+      period: { start: '23.07.02', end: '23.07.05' },
+      action: false,
+    },
   ];
 
   return (
