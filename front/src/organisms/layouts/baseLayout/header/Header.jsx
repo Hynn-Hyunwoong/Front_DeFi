@@ -126,7 +126,7 @@ export const Header = () => {
   useEffect(() => {
     if (!isLoading && !error) {
       if (networkId === '421613') {
-        console.log(`This Network is ArbitrumTestnet.${networkId}}`);
+        console.log(`This Network is ArbitrumTestnet.${networkId}`);
         setNetwork(true);
       } else if (networkId === '5') {
         console.log(`This Network is EthereumTestnet. ${networkId}`);

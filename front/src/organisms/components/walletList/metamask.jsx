@@ -23,6 +23,7 @@ export const Metamask = () => {
   const [account, setAccount] = useRecoilState(accountState);
   const [isLoading, setIsloading] = useRecoilState(loadingState);
   const [wallet, setWallet] = useRecoilState(selectedWallet);
+  const [provider, setProvider] = useRecoilState(providerState);
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
   const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
     trustwalletLoginState,
@@ -72,6 +73,8 @@ export const Metamask = () => {
         method: 'eth_requestAccounts',
         wallet: 'metamask',
       });
+
+      setProvider(ARBProvider);
 
       setAccount(accounts[0]);
       setIsLogin(true);
