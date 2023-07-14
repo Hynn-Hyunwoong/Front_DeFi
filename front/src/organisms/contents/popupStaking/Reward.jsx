@@ -6,7 +6,7 @@ import {
 } from './styled';
 import { PopupHeader } from '../../components';
 
-export const Reward = ({ closePopup }) => {
+export const Reward = ({ closePopup, provider, contract }) => {
   return (
     <>
       <PopupHeader>트랜잭션 요청</PopupHeader>

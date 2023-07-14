@@ -7,13 +7,24 @@ import {
 } from './styled';
 import { PopupHeader } from '../../components';
 import { useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { stakingPopup, stakingValueState } from '../../store';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { stakingPopup, stakingValueState, optionTermsState } from '../../store';
+import useProvider from '../../hooks/ethersProvider';
 
-export const Step2 = ({ closePopup, date }) => {
+export const Step2 = ({ closePopup, date, provider, contract }) => {
   const [approve, setApprove] = useState(false);
   const [stakingValue] = useRecoilState(stakingValueState);
+  const stakingTerms = useRecoilValue(optionTermsState);
   const setStaking = useSetRecoilState(stakingPopup);
+
+  const stakingHandler = async () => {
+    console.log(
+      `스테이킹 버튼`,
+      `amount:${stakingValue} `,
+      `개월수: ${stakingTerms}`
+    );
+    // await contract.LpStaking(lpTokenAddress, amount, stakingTerms)
+  };
   return (
     <>
       <PopupHeader>트랜잭션 요청</PopupHeader>
@@ -53,6 +64,7 @@ export const Step2 = ({ closePopup, date }) => {
           <NextButton
             onClick={() => {
               closePopup(false);
+              stakingHandler();
             }}
           >
             스테이킹 하기
