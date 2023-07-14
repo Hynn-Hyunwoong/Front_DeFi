@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Xbutton } from '../../components';
 import {
   ListTop,
@@ -8,62 +7,13 @@ import {
   ListHeader,
   List,
 } from './styled';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { balanceState, tokenPricesState } from '../../store';
-import { BigNumber, ethers } from 'ethers';
-import TokenABI from '../../../ABI/contracts/SelfToken.sol/SelfToken.json';
-
-let tokenABI = TokenABI.abi;
-const ASDTokenAddress = process.env.REACT_APP_ASD_TOKEN_ADDRESS;
-const ARBTokenAddress = process.env.REACT_APP_ARB_TOKEN_ADDRESS;
-const USDTTokenAddress = process.env.REACT_APP_USDT_TOKEN_ADDRESS;
-const ETHTokenAddress = process.env.REACT_APP_ETH_TOKEN_ADDRESS;
-
-const provider = new ethers.providers.Web3Provider(window.ethereum);
-const signer = provider.getSigner();
-const ASDcontract = new ethers.Contract(ASDTokenAddress, tokenABI, signer);
-const ARBcontract = new ethers.Contract(ARBTokenAddress, tokenABI, signer);
-const USDTcontract = new ethers.Contract(USDTTokenAddress, tokenABI, signer);
-const ETHcontract = new ethers.Contract(ETHTokenAddress, tokenABI, signer);
-// const test1 = await ASDcontract.balanceOf(signer.getAddress());
-// const ASD = ethers.utils.formatEther(test1);
-// const test3 = await ARBcontract.balanceOf(signer.getAddress());
-// const ARB = ethers.utils.formatEther(test3);
-// const test5 = await USDTcontract.balanceOf(signer.getAddress());
-// const USDT = ethers.utils.formatEther(test5);
-// const test7 = await ETHcontract.balanceOf(signer.getAddress());
-// const ETH = ethers.utils.formatEther(test7);
+import { useRecoilValue } from 'recoil';
+import { tokenPricesState } from '../../store';
+import useFetchBalance from '../../hooks/useBalance';
 
 export const PopupTokenList = ({ setToken, setTokenList }) => {
   const prices = useRecoilValue(tokenPricesState);
-  const [balance, setBalance] = useRecoilState(balanceState);
-  // const [ASD, setASD] = useState('0');
-  // const [ARB, setARB] = useState('0');
-  // const [USDT, setUSDT] = useState('0');
-  // const [ETH, setETH] = useState('0');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const test1 = await ASDcontract.balanceOf(signer.getAddress());
-      const ASD = ethers.utils.formatEther(test1);
-      const test3 = await ARBcontract.balanceOf(signer.getAddress());
-      const ARB = ethers.utils.formatEther(test3);
-      const test5 = await USDTcontract.balanceOf(signer.getAddress());
-      const USDT = ethers.utils.formatEther(test5);
-      const test7 = await ETHcontract.balanceOf(signer.getAddress());
-      const ETH = ethers.utils.formatEther(test7);
-
-      setBalance({
-        ...balance,
-        USDT: USDT,
-        ETH: ETH,
-        ARB: ARB,
-        ASD: ASD,
-      });
-    };
-
-    fetchData();
-  }, []);
+  const balance = useFetchBalance();
 
   const tokenData = [
     {
@@ -103,9 +53,6 @@ export const PopupTokenList = ({ setToken, setTokenList }) => {
   const closePopup = () => {
     setTokenList(false);
   };
-  // useEffect(async () => {
-  //   (() => {})();
-  // }, []);
 
   const tokenListMap = tokenData.map((v) => {
     return (
