@@ -10,6 +10,9 @@ import {
 } from './styled';
 import { Popup } from '../popup/Popup';
 import { PopupTokenList } from '../../contents/exchangeSwap';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { balanceState, fromAmount, tokenPricesState } from '../../store';
+import { InputBox } from '../inputBox/InputBox';
 import { ethers } from 'ethers';
 import tokenABI from '../../../ABI/contracts/SelfToken.sol/SelfToken.json';
 
@@ -20,26 +23,43 @@ const tokenData = {
   init: {
     logo: 'null',
     symbol: 'Token',
+    value: '0',
     Address: 'null',
   },
-  solar: {
+  ASD: {
     logo: 'solar',
+    name: '솔라스왑',
     symbol: 'ASD',
+    price: '30,634.0034',
+    balance: '10384',
+    evaluation: '123933.3212',
     Address: process.env.REACT_APP_ASD_TOKEN_ADDRESS,
   },
-  tether: {
+  USDT: {
     logo: 'tether',
+    name: '테더',
     symbol: 'USDT',
+    price: '0,634.0034',
+    balance: '0',
+    evaluation: '0.00',
     Address: process.env.REACT_APP_USDT_TOKEN_ADDRESS,
   },
-  ethereum: {
+  ETH: {
     logo: 'ethereum',
+    name: '이더리움',
     symbol: 'ETH',
+    price: '30,634.0034',
+    balance: '12',
+    evaluation: '123933.3212',
     Address: process.env.REACT_APP_ETH_TOKEN_ADDRESS,
   },
-  arbitrum: {
+  ARB: {
     logo: 'arbitrum',
+    name: '아비트럼',
     symbol: 'ARB',
+    price: '0,634.0034',
+    balance: '0',
+    evaluation: '0.00',
     Address: process.env.REACT_APP_ARB_TOKEN_ADDRESS,
   },
 };
@@ -56,14 +76,16 @@ export const SelectTokenBox = ({
   setTokenList = () => {},
   token,
   setToken,
+  amount,
+  setAmount,
 }) => {
-  const [balance, setBalance] = useState(0);
+  const balance = useRecoilValue(balanceState);
+  const tokenPrices = useRecoilValue(tokenPricesState);
+  // console.log(tokenPrices);
 
-  useEffect(() => {
-    if (tokenData[token]) {
-      getBalance(tokenData[token].Address).then(setBalance);
-    }
-  }, [token]);
+  const inputChange = (e) => {
+    setAmount(e.target.value);
+  };
 
   const popupOpenEvent = () => {
     if (setTokenList) {
@@ -96,10 +118,16 @@ export const SelectTokenBox = ({
           <strong>{children}</strong>
         </LabelStyled>
         <InputBoxWrap>
-          <InputStyled type="number" min={1} placeholder="0" />
+          <InputStyled
+            onChange={inputChange}
+            type='number'
+            min={1}
+            placeholder='0'
+          />
           <RightItem>{tokenBox(token)}</RightItem>
         </InputBoxWrap>
-        <BalanceStyled>보유 : {balance}</BalanceStyled>
+        <BalanceStyled>보유 : {balance[tokenData[token].symbol]}</BalanceStyled>
+
       </SectionStyled>
       {tokenList && (
         <Popup height={'500px'}>
