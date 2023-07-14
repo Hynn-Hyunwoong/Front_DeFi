@@ -1,13 +1,60 @@
-import { LiStyled } from "./styled";
+import { useRecoilValue } from 'recoil';
+import { LiStyled } from './styled';
+import {
+  FromTokenState,
+  ToTokenState,
+  swapFromAmountState,
+  swapToAmountState,
+  tokenPricesState,
+  tokenToListPopupState,
+} from '../../store';
 
 export const Expected = () => {
+  const fromToken = useRecoilValue(FromTokenState);
+  const toToken = useRecoilValue(ToTokenState);
+  const prices = useRecoilValue(tokenPricesState);
+  const fromAmount = useRecoilValue(swapFromAmountState);
+  const toAmount = useRecoilValue(swapToAmountState);
+
+  const exchageRate = () => {
+    if (prices[fromToken] >= prices[toToken]) {
+      return `1 ${fromToken} ≈ ${
+        prices[fromToken] / prices[toToken]
+      } ${toToken}`;
+    } else if (prices[fromToken] < prices[toToken]) {
+      return `1 ${toToken} ≈  ${
+        prices[toToken] / prices[fromToken]
+      } ${fromToken}`;
+    }
+  };
+
+  const exchageAmount = () => {
+    if (prices[fromToken] >= prices[toToken]) {
+      if (fromAmount) {
+        return `${
+          (fromAmount * prices[fromToken]) / prices[toToken]
+        } ${toToken}`;
+      } else if (toAmount) {
+        return `${
+          (toAmount * prices[toToken]) / prices[fromToken]
+        } ${fromToken}`;
+      }
+    }
+    // else if (prices[fromToken] < prices[toToken]) {
+    //   return `1 ${toToken} ≈  ${
+    //     prices[toToken] / prices[fromToken]
+    //   } ${fromToken}`;
+    // }
+  };
+
   const testArr = [
-    { title: "교환 비율(가격)", data: "1 KLAY ≈ 0.300551 KSP ($0.1627)" },
-    { title: "", data: "현재 가격 대비 차이 < 0.01%" },
-    { title: "최소 거래 수량", data: "from값 설정시" },
-    { title: "최소 전송 수량", data: "to값 설정시" },
-    { title: "수수료", data: "0.036695 KLAY" },
-    { title: "교환 경로", data: "KLAY ➤ KDAI" },
+    {
+      title: '교환 비율(가격)',
+      data: exchageRate(),
+    },
+    { title: '최소 거래 수량', data: exchageAmount() },
+    { title: '수수료', data: '0.03%' },
+    { title: '교환 경로', data: `${fromToken} ➤ ${toToken}` },
   ];
 
   const testMap = testArr.map((v, index) => {

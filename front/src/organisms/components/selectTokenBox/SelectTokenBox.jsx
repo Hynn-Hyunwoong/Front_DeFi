@@ -9,27 +9,47 @@ import {
 } from './styled';
 import { Popup } from '../popup/Popup';
 import { PopupTokenList } from '../../contents/exchangeSwap';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { balanceState, fromAmount, tokenPricesState } from '../../store';
+import { InputBox } from '../inputBox/InputBox';
 
 const tokenData = {
   init: {
     logo: 'null',
     symbol: 'Token',
+    value: '0',
   },
-  solar: {
+  ASD: {
     logo: 'solar',
+    name: '솔라스왑',
     symbol: 'ASD',
+    price: '30,634.0034',
+    balance: '10384',
+    evaluation: '123933.3212',
   },
-  tether: {
+  USDT: {
     logo: 'tether',
+    name: '테더',
     symbol: 'USDT',
+    price: '0,634.0034',
+    balance: '0',
+    evaluation: '0.00',
   },
-  ethereum: {
+  ETH: {
     logo: 'ethereum',
+    name: '이더리움',
     symbol: 'ETH',
+    price: '30,634.0034',
+    balance: '12',
+    evaluation: '123933.3212',
   },
-  arbitrum: {
+  ARB: {
     logo: 'arbitrum',
+    name: '아비트럼',
     symbol: 'ARB',
+    price: '0,634.0034',
+    balance: '0',
+    evaluation: '0.00',
   },
 };
 
@@ -39,7 +59,17 @@ export const SelectTokenBox = ({
   setTokenList = () => {},
   token,
   setToken,
+  amount,
+  setAmount,
 }) => {
+  const balance = useRecoilValue(balanceState);
+  const tokenPrices = useRecoilValue(tokenPricesState);
+  // console.log(tokenPrices);
+
+  const inputChange = (e) => {
+    setAmount(e.target.value);
+  };
+
   const popupOpenEvent = () => {
     if (setTokenList) {
       setTokenList(true);
@@ -71,10 +101,15 @@ export const SelectTokenBox = ({
           <strong>{children}</strong>
         </LabelStyled>
         <InputBoxWrap>
-          <InputStyled type='number' min={1} placeholder='0' />
+          <InputStyled
+            onChange={inputChange}
+            type='number'
+            min={1}
+            placeholder='0'
+          />
           <RightItem>{tokenBox(token)}</RightItem>
         </InputBoxWrap>
-        <BalanceStyled>보유 : 10</BalanceStyled>
+        <BalanceStyled>보유 : {balance[tokenData[token].symbol]}</BalanceStyled>
       </SectionStyled>
       {tokenList && (
         <Popup height={'500px'}>

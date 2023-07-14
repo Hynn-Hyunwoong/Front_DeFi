@@ -81,7 +81,7 @@ export const ToTokenState = atom({
 
 export const balanceState = atom({
   key: 'balanceState',
-  default: { ETH: '0', USDT: '0', ARB: '0', ASD: '0' },
+  default: { ETH: 0, USDT: 0, ARB: 0, ASD: 1 },
 });
 
 export const listState = atom({
@@ -132,4 +132,32 @@ export const poolToken2State = atom({
   key: 'poolToken2State',
   default: null,
 });
-//
+
+// 스왑 어마운트
+export const swapFromAmountState = atom({
+  key: 'fromAmount',
+  default: '0',
+});
+export const swapToAmountState = atom({
+  key: 'toAmount',
+  default: '0',
+});
+
+// 스왑 후 로그?
+export const transactionState = atom({
+  key: 'transaction',
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
+
+// 다른 토큰들 가격
+export const tokenPricesState = atom({
+  key: 'tokenPrices',
+  default: {
+    ETH: 0,
+    USDT: 0,
+    ARB: 0,
+    ASD: 0,
+    init: '토큰을 선택하세요',
+  },
+});
