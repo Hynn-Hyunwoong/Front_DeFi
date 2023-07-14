@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import {
   LabelStyled,
   InputBoxWrap,
@@ -12,12 +13,18 @@ import { PopupTokenList } from '../../contents/exchangeSwap';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { balanceState, fromAmount, tokenPricesState } from '../../store';
 import { InputBox } from '../inputBox/InputBox';
+import { ethers } from 'ethers';
+import tokenABI from '../../../ABI/contracts/SelfToken.sol/SelfToken.json';
+
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+const signer = provider.getSigner();
 
 const tokenData = {
   init: {
     logo: 'null',
     symbol: 'Token',
     value: '0',
+    Address: 'null',
   },
   ASD: {
     logo: 'solar',
@@ -26,6 +33,7 @@ const tokenData = {
     price: '30,634.0034',
     balance: '10384',
     evaluation: '123933.3212',
+    Address: process.env.REACT_APP_ASD_TOKEN_ADDRESS,
   },
   USDT: {
     logo: 'tether',
@@ -34,6 +42,7 @@ const tokenData = {
     price: '0,634.0034',
     balance: '0',
     evaluation: '0.00',
+    Address: process.env.REACT_APP_USDT_TOKEN_ADDRESS,
   },
   ETH: {
     logo: 'ethereum',
@@ -42,6 +51,7 @@ const tokenData = {
     price: '30,634.0034',
     balance: '12',
     evaluation: '123933.3212',
+    Address: process.env.REACT_APP_ETH_TOKEN_ADDRESS,
   },
   ARB: {
     logo: 'arbitrum',
@@ -50,7 +60,14 @@ const tokenData = {
     price: '0,634.0034',
     balance: '0',
     evaluation: '0.00',
+    Address: process.env.REACT_APP_ARB_TOKEN_ADDRESS,
   },
+};
+
+const getBalance = async (address) => {
+  const contract = new ethers.Contract(address, tokenABI.abi, signer);
+  const balance = await contract.balanceOf(signer.getAddress());
+  return ethers.utils.formatEther(balance);
 };
 
 export const SelectTokenBox = ({
@@ -87,7 +104,7 @@ export const SelectTokenBox = ({
         <img
           src={`/images/logo-${tokenData[token].logo}.png`}
           style={{ width: '30px' }}
-          alt='tokenLogo'
+          alt="tokenLogo"
         />
         <p>{tokenData[token].symbol}</p>
       </TokenBox>
@@ -110,6 +127,7 @@ export const SelectTokenBox = ({
           <RightItem>{tokenBox(token)}</RightItem>
         </InputBoxWrap>
         <BalanceStyled>보유 : {balance[tokenData[token].symbol]}</BalanceStyled>
+
       </SectionStyled>
       {tokenList && (
         <Popup height={'500px'}>
