@@ -44,11 +44,11 @@ const tokenData = {
   },
 };
 
-async function getBalance(address) {
+const getBalance = async (address) => {
   const contract = new ethers.Contract(address, tokenABI.abi, signer);
   const balance = await contract.balanceOf(signer.getAddress());
   return ethers.utils.formatEther(balance);
-}
+};
 
 export const SelectTokenBox = ({
   children,
