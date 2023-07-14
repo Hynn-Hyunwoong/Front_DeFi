@@ -23,12 +23,13 @@ export const Metamask = () => {
   const [account, setAccount] = useRecoilState(accountState);
   const [isLoading, setIsloading] = useRecoilState(loadingState);
   const [wallet, setWallet] = useRecoilState(selectedWallet);
+  const [provider, setProvider] = useRecoilState(providerState);
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
   const [isTrustwalletLogin, setIsTrustwalletLogin] = useRecoilState(
-    trustwalletLoginState,
+    trustwalletLoginState
   );
   const [isWalletconnectLogin, setIsWalletconnectLogin] = useRecoilState(
-    walletconnectLoginState,
+    walletconnectLoginState
   );
   const [balance, setBalance] = useRecoilState(balanceState);
 
@@ -36,7 +37,7 @@ export const Metamask = () => {
     ARBProvider,
     ETHProvider,
     ASDProvider,
-    accounts,
+    accounts
   ) => {
     const ARBsigner = await ARBProvider.getBalance(accounts[0]);
     const ETHsigner = await ETHProvider.getBalance(accounts[0]);
@@ -66,7 +67,7 @@ export const Metamask = () => {
       const ASDProvider = new ethers.Contract(
         contractaddress,
         ASDTokenABI.abi,
-        ARBProvider,
+        ARBProvider
       );
       const accounts = await window.ethereum.request({
         method: 'eth_requestAccounts',
@@ -89,7 +90,7 @@ export const Metamask = () => {
   return (
     <>
       <WalletList onClick={handleLogin}>
-        <img src="/images/logo-metaMask.png" alt="Metamask" />
+        <img src='/images/logo-metaMask.png' alt='Metamask' />
         <p>
           {isLogin && wallet === 'metamask' ? 'Metamask 연결됨' : 'Metamask'}
         </p>
