@@ -39,12 +39,17 @@ export const Expected = () => {
           (toAmount * prices[toToken]) / prices[fromToken]
         } ${fromToken}`;
       }
+    } else if (prices[fromToken] < prices[toToken]) {
+      if (fromAmount) {
+        return `${
+          (fromAmount * prices[fromToken]) / prices[toToken]
+        } ${toToken}`;
+      } else if (toAmount) {
+        return `${
+          (toAmount * prices[toToken]) / prices[fromToken]
+        } ${fromToken}`;
+      }
     }
-    // else if (prices[fromToken] < prices[toToken]) {
-    //   return `1 ${toToken} ≈  ${
-    //     prices[toToken] / prices[fromToken]
-    //   } ${fromToken}`;
-    // }
   };
 
   const testArr = [
