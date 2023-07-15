@@ -8,12 +8,11 @@ import {
   List,
 } from './styled';
 import { useRecoilValue } from 'recoil';
-import { tokenPricesState } from '../../store';
-import useFetchBalance from '../../hooks/useBalance';
+import { balanceState, tokenPricesState } from '../../store';
 
 export const PopupTokenList = ({ setToken, setTokenList }) => {
   const prices = useRecoilValue(tokenPricesState);
-  const balance = useFetchBalance();
+  const balance = useRecoilValue(balanceState);
 
   const tokenData = [
     {
