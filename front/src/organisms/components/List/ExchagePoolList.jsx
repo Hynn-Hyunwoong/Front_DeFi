@@ -8,16 +8,37 @@ import {
   Estimated,
 } from './styled';
 import { Button } from '../button/Button';
-import { useSetRecoilState } from 'recoil';
-import { poolToken1State, poolToken2State } from '../../store';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  poolToken1State,
+  poolToken2State,
+  transactionState,
+} from '../../store';
+import { useEffect, useRef } from 'react';
 
 export const ExchangePoolList = ({ tokenData, setPopup }) => {
   const setToken1 = useSetRecoilState(poolToken1State);
   const setToken2 = useSetRecoilState(poolToken2State);
+  const transaction = useRecoilValue(transactionState);
+  const previousTransactionTimestampRef = useRef();
 
   const tokenLogoRender = (item) => (
     <img src={`/images/logo-${item}.png`} alt={`${item}`} />
   );
+
+  useEffect(() => {
+    if (
+      transaction &&
+      transaction.timestamp !== previousTransactionTimestampRef.current
+    ) {
+      if (transaction.status === 1) {
+        setPopup(false);
+      } else if (transaction.status === 0) {
+      }
+      setPopup(false);
+      previousTransactionTimestampRef.current = transaction.timestamp;
+    }
+  }, [transaction, setPopup]);
 
   const listMap = tokenData.map((v, index) => (
     <PoolList key={index} cursor="auto">

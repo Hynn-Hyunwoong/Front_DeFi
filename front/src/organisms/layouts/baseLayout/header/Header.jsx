@@ -13,7 +13,7 @@ import {
 } from '../../../store';
 import { Wallet } from '../../../contents/popupWallet/Wallet';
 import { useQuery } from '@tanstack/react-query';
-import ASDTokenABI from '../../../../ABI/ASDToken.json';
+import TokenABI from '../../../../ABI/contracts/SelfToken.sol/SelfToken.json';
 
 const contractAddresses = [
   process.env.REACT_APP_ARB_TOKEN_ADDRESS,
@@ -21,7 +21,6 @@ const contractAddresses = [
   process.env.REACT_APP_ASD_TOKEN_ADDRESS,
   process.env.REACT_APP_USDT_TOKEN_ADDRESS,
 ];
-console.log(contractAddresses);
 
 export const Header = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
@@ -94,7 +93,7 @@ export const Header = () => {
       for (let i = 0; i < contractAddresses.length; i++) {
         const contract = new ethers.Contract(
           contractAddresses[i],
-          ASDTokenABI.abi,
+          TokenABI.abi,
           provider,
         );
 
