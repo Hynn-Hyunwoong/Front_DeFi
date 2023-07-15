@@ -97,7 +97,7 @@ export const SelectTokenBox = ({
         <img
           src={`/images/logo-${tokenData[token].logo}.png`}
           style={{ width: '30px' }}
-          alt="tokenLogo"
+          alt='tokenLogo'
         />
         <p>{tokenData[token].symbol}</p>
       </TokenBox>

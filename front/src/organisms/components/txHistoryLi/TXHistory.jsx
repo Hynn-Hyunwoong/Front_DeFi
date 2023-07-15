@@ -1,13 +1,11 @@
-import { useEffect } from 'react';
 import { TxLi } from './styled';
-import { ethers } from 'ethers';
 import { useRecoilValue } from 'recoil';
 import { transactionState } from '../../store';
 
 export const TxHistoryLi = () => {
   const transactions = useRecoilValue(transactionState);
-  console.log(transactions);
-  console.log(transactions[0].data);
+  // console.log(transactions);
+  // const statusState = {};
 
   return (
     <>
@@ -15,15 +13,17 @@ export const TxHistoryLi = () => {
         transactions.map((transaction, index) => (
           <TxLi key={index}>
             <div className='action'>
-              {/* <strong>{ethers.utils.hexlify(transaction.data)}</strong> */}
+              <strong>
+                {transaction.data.includes('0x0c0a7630') && 'Swap Token'}
+              </strong>
             </div>
             <div className='hash'>
               <div>{transaction.hash}</div>
             </div>
             <div className='status'>
-              <strong>{transaction.status}</strong>
+              <strong>{transaction.hash ? 'Success' : 'Fail'}</strong>
             </div>
-            <div className='date'>{transaction.date}</div>
+            <div className='date'>{Date.now()}</div>
           </TxLi>
         ))
       ) : (
