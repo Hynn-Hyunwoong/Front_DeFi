@@ -10,10 +10,10 @@ const FacContract = new ethers.Contract(
 );
 
 let tokenAddressMapping = {
-  ASD: process.env.REACT_APP_ASD_TOKEN_ADDRESS,
-  ARB: process.env.REACT_APP_ARB_TOKEN_ADDRESS,
-  ETH: process.env.REACT_APP_ETH_TOKEN_ADDRESS,
-  USDT: process.env.REACT_APP_USDT_TOKEN_ADDRESS,
+  ASD: '0xC1162804aA55fD78cD9C112395d92aa4a5645ed8',
+  ARB: '0x88A19c26eE0ecb39e02F00e400F02218bAA883D3',
+  ETH: '0x19097cFFF4ebbc1d9c44F2D5E9760A1168a36E48',
+  USDT: '0x16ac33004C9fe527bB72dE7Dd87E3D53d2a5200C',
 };
 
 export const handleAddLiquidity = async (
