@@ -1,14 +1,11 @@
-import { useEffect } from 'react';
 import { TxLi } from './styled';
-import { ethers } from 'ethers';
 import { useRecoilValue } from 'recoil';
 import { transactionState } from '../../store';
 
 export const TxHistoryLi = () => {
   const transactions = useRecoilValue(transactionState);
-  console.log(transactions);
-
-  const statusState = {};
+  // console.log(transactions);
+  // const statusState = {};
 
   return (
     <>

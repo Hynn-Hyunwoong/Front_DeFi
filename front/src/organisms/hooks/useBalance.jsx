@@ -1,7 +1,7 @@
 import TokenABI from '../../ABI/contracts/SelfToken.sol/SelfToken.json';
-import { balanceState } from '../store';
+import { accountState, balanceState } from '../store';
 import { ethers } from 'ethers';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect } from 'react';
 
 const tokenABI = TokenABI.abi;
@@ -19,6 +19,7 @@ const ETHcontract = new ethers.Contract(ETHTokenAddress, tokenABI, signer);
 
 const useFetchBalance = () => {
   const [balance, setBalance] = useRecoilState(balanceState);
+  const account = useRecoilValue(accountState);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +42,7 @@ const useFetchBalance = () => {
     };
 
     fetchData();
-  }, []);
+  }, [signer]);
 
   return balance;
 };

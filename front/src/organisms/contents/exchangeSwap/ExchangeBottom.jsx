@@ -18,9 +18,7 @@ export const ExchangeBottom = ({ provider, contract }) => {
         </TXTableHeader>
         <div>
           <ul>
-            <TxHistoryLi
-            // transactions={transaction}
-            />
+            <TxHistoryLi />
           </ul>
         </div>
       </ExpectedArticle>

@@ -8,7 +8,6 @@ import {
   tokenPricesState,
   transactionState,
 } from '../../store';
-import { useEffect } from 'react';
 import { BigNumber, ethers } from 'ethers';
 
 export const ExchangeBox = ({ provider, contract }) => {
@@ -16,7 +15,7 @@ export const ExchangeBox = ({ provider, contract }) => {
   const toToken = useRecoilValue(ToTokenState);
   const fromAmount = useRecoilValue(swapFromAmountState);
   const toAmount = useRecoilValue(swapToAmountState);
-  const [price, setPrice] = useRecoilState(tokenPricesState);
+  // const [price, setPrice] = useRecoilState(tokenPricesState);
   const [transaction, setTransaction] = useRecoilState(transactionState);
 
   const tokenCA = {
@@ -42,7 +41,6 @@ export const ExchangeBox = ({ provider, contract }) => {
           maxPriorityFeePerGas: ethers.utils.parseUnits('1', 'gwei'),
         }
       );
-      // const receipt = await tx.wait();
       setTransaction((prevTX) => [...prevTX, tx]);
       console.log(transaction);
     } catch (e) {
@@ -71,7 +69,6 @@ export const ExchangeBox = ({ provider, contract }) => {
   };
 
   return (
-    // 데이터는 BoxArticle, ButtonArticle에 있습니다!
     <>
       <ExchageCard
         onClick={clickSwap}
