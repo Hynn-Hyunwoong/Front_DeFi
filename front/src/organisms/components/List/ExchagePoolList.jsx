@@ -14,7 +14,42 @@ import {
   poolToken2State,
   transactionState,
 } from '../../store';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { ethers } from 'ethers';
+import FactoryABI from '../../../ABI/contracts/Factory_v1.sol/Factory_v1.json';
+import TokenABI from '../../../ABI/contracts/SelfToken.sol/SelfToken.json';
+
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+const signer = provider.getSigner();
+
+const tokens = [
+  {
+    name: 'Usdt',
+    symbol: 'USDT',
+    address: process.env.REACT_APP_LP_USDT_ADDRESS,
+  },
+  {
+    name: 'Eth',
+    symbol: 'ETH',
+    address: process.env.REACT_APP_LP_ETH_ADDRESS,
+  },
+
+  {
+    name: 'Arb',
+    symbol: 'ARB',
+    address: process.env.REACT_APP_LP_ARB_ADDRESS,
+  },
+];
+
+let tokenContracts = tokens.map((token) => {
+  return new ethers.Contract(token.address, TokenABI.abi, signer);
+});
+
+let FacContract = new ethers.Contract(
+  process.env.REACT_APP_FACTORY_ADDRESS,
+  FactoryABI.abi,
+  signer,
+);
 
 export const ExchangePoolList = ({ tokenData, setPopup }) => {
   const setToken1 = useSetRecoilState(poolToken1State);
@@ -22,9 +57,40 @@ export const ExchangePoolList = ({ tokenData, setPopup }) => {
   const transaction = useRecoilValue(transactionState);
   const previousTransactionTimestampRef = useRef();
 
-  const tokenLogoRender = (item) => (
-    <img src={`/images/logo-${item}.png`} alt={`${item}`} />
-  );
+  const [prices, setPrices] = useState([]);
+  const [totalPoolAmounts, setTotalPoolAmounts] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const fetchedPrices = await Promise.all(
+        tokens.map(async (token) => {
+          const price = await FacContract[token.name + 'Price'](); // 'name' property is used here.
+          const formattedPrice = ethers.utils.formatUnits(price, 8);
+          return formattedPrice;
+        }),
+      );
+
+      const fetchedTotalPoolAmounts = await Promise.all(
+        tokenContracts.map(async (tokenContract, index) => {
+          const totalSupply = await tokenContract.totalSupply();
+          const formattedSupply = ethers.utils.formatEther(totalSupply);
+          return formattedSupply;
+        }),
+      );
+
+      setPrices(fetchedPrices);
+      setTotalPoolAmounts(fetchedTotalPoolAmounts);
+    } catch (error) {
+      console.error('Error while fetching data: ', error);
+    }
+  };
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (
@@ -39,6 +105,10 @@ export const ExchangePoolList = ({ tokenData, setPopup }) => {
       previousTransactionTimestampRef.current = transaction.timestamp;
     }
   }, [transaction, setPopup]);
+
+  const tokenLogoRender = (item) => (
+    <img src={`/images/logo-${item}.png`} alt={`${item}`} />
+  );
 
   const listMap = tokenData.map((v, index) => (
     <PoolList key={index} cursor="auto">
@@ -55,7 +125,14 @@ export const ExchangePoolList = ({ tokenData, setPopup }) => {
         </PoolTokenInfo>
         <Liquidity>
           <p className="mobile">유동성 규모</p>
-          <strong className="pointColor">$ 1,235,892</strong>
+          <strong className="pointColor">
+            ${' '}
+            {totalPoolAmounts[index] && prices[index]
+              ? numberWithCommas(
+                  (totalPoolAmounts[index] * prices[index]).toFixed(2),
+                )
+              : 0}
+          </strong>
         </Liquidity>
         <RewardToken>
           <div className="logo">{tokenLogoRender(v.token1.logo)}</div>
