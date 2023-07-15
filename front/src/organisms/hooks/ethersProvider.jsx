@@ -12,6 +12,7 @@ const ARBRPC = process.env.REACT_APP_ARBITRUM_RPC;
 const useProvider = () => {
   const [provider, setProvider] = useState(null);
   const [contract, setContract] = useState(null);
+  const account = useRecoilValue(accountState);
 
   useEffect(() => {
     (async () => {
@@ -22,7 +23,7 @@ const useProvider = () => {
       setProvider(test);
       setContract(contract);
     })();
-  }, []);
+  }, [account]);
   return [provider, contract];
 };
 

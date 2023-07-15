@@ -2,8 +2,10 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Popup } from '../../components';
 import { stakingPopup, optionTermsState, stakingStep } from '../../store';
 import { Reward, Step1, Step2, Unstaking } from '../popupStaking';
+import useProvider from '../../hooks/ethersProvider';
 
 export const StakingPopup = ({ option, reward }) => {
+  const [provider, contract] = useProvider();
   const [staking] = useRecoilState(stakingPopup);
   const [optionTerm] = useRecoilState(optionTermsState);
   const [step, setStep] = useRecoilState(stakingStep);
@@ -38,11 +40,30 @@ export const StakingPopup = ({ option, reward }) => {
           />
         );
       case 'step2': // 스테이킹 approve, transfer => popup 꺼야 함
-        return <Step2 date={formattedDate} closePopup={setStaking} />;
+        return (
+          <Step2
+            date={formattedDate}
+            closePopup={setStaking}
+            provider={provider}
+            contract={contract}
+          />
+        );
       case 'unstaking': // 언스테이킹 => popup 꺼야 함
-        return <Unstaking closePopup={setStaking} />;
+        return (
+          <Unstaking
+            closePopup={setStaking}
+            provider={provider}
+            contract={contract}
+          />
+        );
       case 'reward': // 보상수령 => popup 꺼야 함
-        return <Reward closePopup={setStaking} />;
+        return (
+          <Reward
+            closePopup={setStaking}
+            provider={provider}
+            contract={contract}
+          />
+        );
       default:
         return null;
     }

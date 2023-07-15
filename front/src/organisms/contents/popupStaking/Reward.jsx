@@ -6,7 +6,12 @@ import {
 } from './styled';
 import { PopupHeader } from '../../components';
 
-export const Reward = ({ closePopup }) => {
+export const Reward = ({ closePopup, provider, contract }) => {
+  const rewardHandler = async () => {
+    console.log(`리워드 버튼`);
+    // await contract.claimAmount(ASDtokneAddr)????
+    // 리워드 받는 함수가 뭔지 잘 모르곘음....
+  };
   return (
     <>
       <PopupHeader>트랜잭션 요청</PopupHeader>
@@ -29,6 +34,7 @@ export const Reward = ({ closePopup }) => {
       </StakingContent>
       <NextButton
         onClick={() => {
+          rewardHandler();
           closePopup(false);
         }}
       >

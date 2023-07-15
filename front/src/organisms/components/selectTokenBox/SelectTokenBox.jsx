@@ -104,7 +104,7 @@ export const SelectTokenBox = ({
         <img
           src={`/images/logo-${tokenData[token].logo}.png`}
           style={{ width: '30px' }}
-          alt="tokenLogo"
+          alt='tokenLogo'
         />
         <p>{tokenData[token].symbol}</p>
       </TokenBox>
@@ -127,7 +127,6 @@ export const SelectTokenBox = ({
           <RightItem>{tokenBox(token)}</RightItem>
         </InputBoxWrap>
         <BalanceStyled>보유 : {balance[tokenData[token].symbol]}</BalanceStyled>
-
       </SectionStyled>
       {tokenList && (
         <Popup height={'500px'}>
