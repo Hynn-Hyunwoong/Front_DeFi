@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { WalletList } from './styled';
 import { useRecoilState } from 'recoil';
@@ -12,13 +12,11 @@ import {
   trustwalletLoginState,
   balanceState,
 } from '../../../organisms/store';
-import ASDTokenABI from '../../../ABI/ASDToken.json';
+import TokenABi from '../../../ABI/contracts/SelfToken.sol/SelfToken.json';
 import { EthereumProvider } from '@walletconnect/ethereum-provider';
 
 const APIKEY = process.env.REACT_APP_INFURA_ID;
-const contractaddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 const ARBrpc = process.env.REACT_APP_ARBITRUM_RPC;
-const ETHrpc = process.env.REACT_APP_ETHEREUM_RPC;
 
 export const WalletConnect = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
@@ -35,32 +33,31 @@ export const WalletConnect = () => {
   const [balance, setBalance] = useRecoilState(balanceState);
 
   const updateBalances = async (accounts) => {
-    try {
-      const ARBProvider = new ethers.providers.JsonRpcProvider(ARBrpc);
-      const ETHProvider = new ethers.providers.JsonRpcProvider(ETHrpc);
-      const ASDProvider = new ethers.Contract(
-        contractaddress,
-        ASDTokenABI.abi,
-        ARBProvider,
-      );
-
-      const ARBsigner = await ARBProvider.getBalance(accounts[0]);
-      const ETHsigner = await ETHProvider.getBalance(accounts[0]);
-      const ASDsigner = await ASDProvider.balanceOf(accounts[0]);
-
-      const balanceA = ethers.utils.formatEther(ARBsigner);
-      const balanceE = ethers.utils.formatEther(ETHsigner);
-      const balanceASD = ethers.utils.formatEther(ASDsigner);
-
-      setBalance({
-        ...balance,
-        ARB: balanceA,
-        ETH: balanceE,
-        ASD: balanceASD,
-      });
-    } catch (err) {
-      console.error(`Failed to update balances: ${err}`);
+    if (!account) {
+      console.log('Account is not defined');
+      return;
     }
+    const provider = new ethers.providers.JsonRpcProvider(ARBrpc);
+    const tokenAddressMap = {
+      ARB: process.env.REACT_APP_ARB_TOKEN_ADDRESS,
+      ETH: process.env.REACT_APP_ETH_TOKEN_ADDRESS,
+      ASD: process.env.REACT_APP_ASD_TOKEN_ADDRESS,
+      USDT: process.env.REACT_APP_USDT_TOKEN_ADDRESS,
+    };
+
+    let newBalance = { ...balance };
+
+    for (let tokenName in tokenAddressMap) {
+      const tokenContract = new ethers.Contract(
+        tokenAddressMap[tokenName],
+        TokenABi.abi,
+        provider,
+      );
+      const tokenBalance = await tokenContract.balanceOf(account);
+      newBalance[tokenName] = ethers.utils.formatEther(tokenBalance);
+    }
+    console.log(newBalance);
+    setBalance(newBalance);
   };
 
   const handleLogin = async () => {
@@ -109,7 +106,23 @@ export const WalletConnect = () => {
     } catch (e) {
       console.log(e);
     }
+    setIsloading(false);
   };
+
+  const intervalId = useRef(null);
+  useEffect(() => {
+    intervalId.current = setInterval(() => {
+      if (isLogin) {
+        updateBalances([account]);
+      }
+    }, 30000); // 30 seconds
+
+    return () => {
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+      }
+    };
+  }, [isLogin, account]);
 
   return (
     <>

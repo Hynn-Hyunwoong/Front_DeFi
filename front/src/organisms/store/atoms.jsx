@@ -161,5 +161,7 @@ export const tokenPricesState = atom({
     init: '토큰을 선택하세요',
   },
 });
-
-// 내 토큰 밸런스들
+export const transactionMessageState = atom({
+  key: 'transactionMessage',
+  default: '',
+});

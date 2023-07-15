@@ -64,12 +64,6 @@ const tokenData = {
   },
 };
 
-const getBalance = async (address) => {
-  const contract = new ethers.Contract(address, tokenABI.abi, signer);
-  const balance = await contract.balanceOf(signer.getAddress());
-  return ethers.utils.formatEther(balance);
-};
-
 export const SelectTokenBox = ({
   children,
   tokenList,
@@ -81,7 +75,6 @@ export const SelectTokenBox = ({
 }) => {
   const balance = useRecoilValue(balanceState);
   const tokenPrices = useRecoilValue(tokenPricesState);
-  // console.log(tokenPrices);
 
   const inputChange = (e) => {
     setAmount(e.target.value);
@@ -120,9 +113,9 @@ export const SelectTokenBox = ({
         <InputBoxWrap>
           <InputStyled
             onChange={inputChange}
-            type='number'
+            type="number"
             min={1}
-            placeholder='0'
+            placeholder="0"
           />
           <RightItem>{tokenBox(token)}</RightItem>
         </InputBoxWrap>
