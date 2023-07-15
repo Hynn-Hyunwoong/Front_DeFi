@@ -8,7 +8,12 @@ import {
 } from './styled';
 import { PopupHeader } from '../../components';
 
-export const Unstaking = ({ closePopup }) => {
+export const Unstaking = ({ closePopup, provider, contract }) => {
+  const unstakingHandler = async () => {
+    console.log(`언스테이킹 버튼`);
+    // await contract.withDrawStaking()
+  };
+
   return (
     <>
       <PopupHeader>트랜잭션 요청</PopupHeader>
@@ -53,6 +58,7 @@ export const Unstaking = ({ closePopup }) => {
       <NextButton
         onClick={() => {
           closePopup(false);
+          unstakingHandler();
         }}
       >
         언스테이킹 하기

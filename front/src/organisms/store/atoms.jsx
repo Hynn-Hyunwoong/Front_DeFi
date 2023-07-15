@@ -81,7 +81,7 @@ export const ToTokenState = atom({
 
 export const balanceState = atom({
   key: 'balanceState',
-  default: { ETH: 0, USDT: 0, ARB: 0, ASD: 1 },
+  default: { ETH: 0, USDT: 0, ARB: 0, ASD: 0 },
 });
 
 export const listState = atom({
@@ -157,7 +157,11 @@ export const tokenPricesState = atom({
     ETH: 0,
     USDT: 0,
     ARB: 0,
-    ASD: 0,
+    ASD: 1,
     init: '토큰을 선택하세요',
   },
+});
+export const transactionMessageState = atom({
+  key: 'transactionMessage',
+  default: '',
 });
