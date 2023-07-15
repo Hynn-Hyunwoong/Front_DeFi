@@ -23,22 +23,26 @@ const useFetchBalance = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const test1 = await ASDcontract.balanceOf(signer.getAddress());
-      const ASD = ethers.utils.formatEther(test1);
-      const test3 = await ARBcontract.balanceOf(signer.getAddress());
-      const ARB = ethers.utils.formatEther(test3);
-      const test5 = await USDTcontract.balanceOf(signer.getAddress());
-      const USDT = ethers.utils.formatEther(test5);
-      const test7 = await ETHcontract.balanceOf(signer.getAddress());
-      const ETH = ethers.utils.formatEther(test7);
+      try {
+        const test1 = await ASDcontract.balanceOf(signer.getAddress());
+        const ASD = ethers.utils.formatEther(test1);
+        const test3 = await ARBcontract.balanceOf(signer.getAddress());
+        const ARB = ethers.utils.formatEther(test3);
+        const test5 = await USDTcontract.balanceOf(signer.getAddress());
+        const USDT = ethers.utils.formatEther(test5);
+        const test7 = await ETHcontract.balanceOf(signer.getAddress());
+        const ETH = ethers.utils.formatEther(test7);
 
-      setBalance({
-        ...balance,
-        USDT: USDT,
-        ETH: ETH,
-        ARB: ARB,
-        ASD: ASD,
-      });
+        setBalance({
+          ...balance,
+          USDT: USDT,
+          ETH: ETH,
+          ARB: ARB,
+          ASD: ASD,
+        });
+      } catch (error) {
+        console.error('An error occurred while fetching balances:', error);
+      }
     };
 
     fetchData();
