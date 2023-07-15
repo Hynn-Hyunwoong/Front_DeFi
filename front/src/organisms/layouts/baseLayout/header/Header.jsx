@@ -15,16 +15,19 @@ import { Wallet } from '../../../contents/popupWallet/Wallet';
 import { useQuery } from '@tanstack/react-query';
 import ASDTokenABI from '../../../../ABI/ASDToken.json';
 
-const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
-const ARBrpc = process.env.REACT_APP_ARBITRUM_RPC;
-const ETHrpc = process.env.REACT_APP_ETHEREUM_RPC;
+const contractAddresses = [
+  process.env.REACT_APP_ARB_TOKEN_ADDRESS,
+  process.env.REACT_APP_ETH_TOKEN_ADDRESS,
+  process.env.REACT_APP_ASD_TOKEN_ADDRESS,
+  process.env.REACT_APP_USDT_TOKEN_ADDRESS,
+];
+console.log(contractAddresses);
 
 export const Header = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
   const [network, setNetwork] = useRecoilState(networkState);
   const [popup, setPopup] = useRecoilState(popupState);
-  // eslint-disable-next-line no-unused-vars
   const [wallet, setWallet] = useRecoilState(selectedWallet);
   const [balance, setBalance] = useRecoilState(balanceState);
 
@@ -55,6 +58,7 @@ export const Header = () => {
     },
     [setAccount, setIsLogin],
   );
+
   const handleNetworkChanged = useCallback(
     (...args) => {
       const networkId = args[0];
@@ -66,37 +70,60 @@ export const Header = () => {
   );
 
   const updateBalance = useCallback(async () => {
-    if (account && window.ethereum) {
-      const ARBprovider = new ethers.providers.JsonRpcProvider(ARBrpc);
-      const ETHprovider = new ethers.providers.JsonRpcProvider(ETHrpc);
-      const contract = new ethers.Contract(
-        contractAddress,
-        ASDTokenABI.abi,
-        ARBprovider,
-      );
-
-      const ARBbalance = ethers.utils.formatEther(
-        await ARBprovider.getBalance(account),
-      );
-      const ETHbalance = ethers.utils.formatEther(
-        await ETHprovider.getBalance(account),
-      );
-      const ASDbalance = ethers.utils.formatEther(
-        await contract.balanceOf(account),
-      );
-
-      try {
-        setBalance({
-          ...balance,
-          ETH: ETHbalance,
-          ARB: ARBbalance,
-          ASD: ASDbalance,
-        });
-      } catch (e) {
-        console.log(e);
+    if (account) {
+      let provider;
+      switch (wallet) {
+        case 'metamask':
+          provider = new ethers.providers.Web3Provider(window.ethereum);
+          break;
+        case 'trustwallet':
+          provider = new ethers.providers.Web3Provider(window.trustwallet);
+          break;
+        case 'walletConnect':
+          provider = new ethers.providers.Web3Provider(
+            window.walletConnectProvider,
+          );
+          break;
+        default:
+          console.log('Unknown wallet type');
+          return;
       }
+
+      const newBalance = {};
+
+      for (let i = 0; i < contractAddresses.length; i++) {
+        const contract = new ethers.Contract(
+          contractAddresses[i],
+          ASDTokenABI.abi,
+          provider,
+        );
+
+        const tokenBalance = ethers.utils.formatEther(
+          await contract.balanceOf(account),
+        );
+
+        switch (i) {
+          case 0:
+            newBalance['ARB'] = tokenBalance;
+            break;
+          case 1:
+            newBalance['ETH'] = tokenBalance;
+            break;
+          case 2:
+            newBalance['ASD'] = tokenBalance;
+            break;
+          case 3:
+            newBalance['USDT'] = tokenBalance;
+            break;
+          default:
+            console.log('Unknown token index');
+            return;
+        }
+      }
+
+      setBalance(newBalance);
     }
-  }, [account, balance, setBalance]);
+  }, [account, setBalance, wallet]);
 
   useEffect(() => {
     updateBalance();
@@ -128,9 +155,6 @@ export const Header = () => {
       if (networkId === '421613') {
         console.log(`This Network is ArbitrumTestnet.${networkId}`);
         setNetwork(true);
-      } else if (networkId === '5') {
-        console.log(`This Network is EthereumTestnet. ${networkId}`);
-        setNetwork(true);
       } else {
         console.log('현재 연결된 네트워크가 없습니다.');
         setNetwork(false);
@@ -138,8 +162,6 @@ export const Header = () => {
     }
   }, [networkId, error, isLoading, setNetwork]);
 
-  // Wallet 컴포넌트 안에 있는 각각의 지갑 컨트랙트는 연결만 시켜줄 뿐
-  // 연결된 account가 존재하는지, 어느 네트워크에 연결 되어 있는지는 Header 컴포넌트에서 처리
   return (
     <>
       <HeaderWrap>

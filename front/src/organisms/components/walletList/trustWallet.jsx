@@ -1,29 +1,25 @@
 import { WalletList } from './styled';
 import { ethers } from 'ethers';
 import { useRecoilState } from 'recoil';
+import { useRef, useEffect } from 'react';
 import {
   loginState,
   accountState,
   loadingState,
   popupState,
-  providerState,
   selectedWallet,
   metamaskLoginState,
   walletconnectLoginState,
   balanceState,
 } from '../../../organisms/store';
-import ASDTokenABI from '../../../ABI/ASDToken.json';
-
-const contractaddress = process.env.REACT_APP_CONTRACT_ADDRESS;
-const ARBrpc = process.env.REACT_APP_ARBITRUM_RPC;
-const ETHrpc = process.env.REACT_APP_ETHEREUM_RPC;
+import TokenABi from '../../../ABI/contracts/SelfToken.sol/SelfToken.json';
 
 export const TrustWallet = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
   const [isLoading, setIsloading] = useRecoilState(loadingState);
   const [wallet, setWallet] = useRecoilState(selectedWallet);
-  const [provider, setProvider] = useRecoilState(providerState);
+  const providerRef = useRef(null);
   const [popupOpen, setPopupOpen] = useRecoilState(popupState);
   const [isMetamaskLogin, setIsMetamaskLogin] =
     useRecoilState(metamaskLoginState);
@@ -32,59 +28,80 @@ export const TrustWallet = () => {
   );
   const [balance, setBalance] = useRecoilState(balanceState);
 
-  const updateBalances = async (
-    ARBProvider,
-    ETHProvider,
-    ASDProvider,
-    accounts,
-  ) => {
-    const ARBsigner = await ARBProvider.getBalance(accounts[0]);
-    const ETHsigner = await ETHProvider.getBalance(accounts[0]);
-    const ASDsigner = await ASDProvider.balanceOf(accounts[0]);
+  const updateBalances = async () => {
+    if (providerRef.current === null) {
+      console.log('Provider is not initialized');
+      return;
+    }
 
-    const balanceA = ethers.utils.formatEther(ARBsigner);
-    const balanceE = ethers.utils.formatEther(ETHsigner);
-    const balanceASD = ethers.utils.formatEther(ASDsigner);
+    const tokenAddressMap = {
+      USDT: process.env.REACT_APP_USDT_TOKEN_ADDRESS,
+      ARB: process.env.REACT_APP_ARB_TOKEN_ADDRESS,
+      ETH: process.env.REACT_APP_ETH_TOKEN_ADDRESS,
+      ASD: process.env.REACT_APP_ASD_TOKEN_ADDRESS,
+    };
 
-    setBalance({
-      ...balance,
-      ARB: balanceA,
-      ETH: balanceE,
-      ASD: balanceASD,
-    });
+    let newBalance = { ...balance };
+
+    for (let tokenName in tokenAddressMap) {
+      const tokenContract = new ethers.Contract(
+        tokenAddressMap[tokenName],
+        TokenABi.abi,
+        providerRef.current,
+      );
+
+      const tokenBalance = await tokenContract.balanceOf(account);
+      newBalance[tokenName] = ethers.utils.formatEther(tokenBalance);
+    }
+    console.log(newBalance);
+    setBalance(newBalance);
   };
 
   const handleLogin = async () => {
     setIsloading(true);
     try {
       if (!window.trustWallet) {
-        alert('trustWallet이 설치되어있지 않습니다. 설치 후 다시시도해주세요.');
+        alert('TrustWallet이 설치되어있지 않습니다. 설치 후 다시시도해주세요.');
         return;
       }
-      const ARBProvider = new ethers.providers.JsonRpcProvider(ARBrpc);
-      const ETHProvider = new ethers.providers.JsonRpcProvider(ETHrpc);
-      const ASDProvider = new ethers.Contract(
-        contractaddress,
-        ASDTokenABI.abi,
-        ARBProvider,
-      );
+
+      const provider = new ethers.providers.Web3Provider(window.trustWallet);
+      providerRef.current = provider;
       const accounts = await window.trustWallet.request({
         method: 'eth_requestAccounts',
-        wallet: 'trustwallet',
       });
 
-      setAccount(accounts[0]);
-      setIsLogin(true);
-      setWallet('trustwallet');
-      updateBalances(ARBProvider, ETHProvider, ASDProvider, accounts);
-      setPopupOpen(false);
-      setIsMetamaskLogin(true);
-      setIsWalletconnectLogin(false);
+      if (accounts[0]) {
+        setAccount(accounts[0]);
+        setIsLogin(true);
+        setWallet('trustwallet');
+        setPopupOpen(false);
+        setIsMetamaskLogin(false);
+        setIsWalletconnectLogin(false);
+        await updateBalances();
+      } else {
+        alert('로그인이 만료되었거나, 실패하였습니다. 다시 시도해주세요.');
+      }
     } catch (error) {
       console.error(error);
     }
     setIsloading(false);
   };
+
+  const intervalId = useRef(null);
+  useEffect(() => {
+    intervalId.current = setInterval(() => {
+      if (isLogin) {
+        updateBalances();
+      }
+    }, 30000);
+
+    return () => {
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+      }
+    };
+  }, [isLogin]);
 
   return (
     <>
