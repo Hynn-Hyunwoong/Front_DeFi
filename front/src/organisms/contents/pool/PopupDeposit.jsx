@@ -22,14 +22,19 @@ export const PopupDeposit = () => {
   const transactionMessage = useRecoilValue(transactionMessageState);
 
   const onAddLiquidityClick = async () => {
-    await handleAddLiquidity(
-      token1,
-      amount1,
-      token2,
-      amount2,
-      setTransaction,
-      setShowPopup,
-    );
+    try {
+      await handleAddLiquidity(
+        token1,
+        amount1,
+        token2,
+        amount2,
+        setTransaction,
+        setShowPopup,
+      );
+    } catch (error) {
+      console.error('An error occurred while adding liquidity:', error);
+      // You might want to add additional logic here, such as showing an error message to the user
+    }
   };
 
   const handleClose = () => {
