@@ -89,13 +89,22 @@ export const BoxSectionBalance = styled.section`
   }
 `;
 export const BalanceDiv = styled.div`
-  & > strong {
-    color: black;
-    font-size: 24px;
-  }
   color: #2c67b0;
   font-weight: lighter;
-  margin: 20px 0;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > span {
+    font-weight: 300;
+    letter-spacing: -1px;
+    & > strong {
+      color: black;
+      font-size: 24px;
+      margin-right: 5px;
+    }
+  }
 `;
 
 export const ExpectInfoDiv = styled.div`

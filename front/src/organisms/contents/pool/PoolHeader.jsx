@@ -3,19 +3,82 @@ import { Box } from '../../components';
 import { PoolSection, PoolHeaderDiv, PoolHeaderBoxDiv } from './styled';
 import { ethers } from 'ethers';
 import { useState, useEffect } from 'react';
-import FactoryABI from '../../../ABI/contracts/Factory_v1.sol/Factory_v1.json';
 import TokenABI from '../../../ABI/contracts/SelfToken.sol/SelfToken.json';
-import LiquidABI from '../../../ABI/contracts/Liquid.sol/Liquid.json';
+import { LPbalanceState } from '../../store';
+import { useRecoilState } from 'recoil';
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
-const FacContract = new ethers.Contract(
-  process.env.REACT_APP_FACTORY_ADDRESS,
-  FactoryABI.abi,
-  signer,
-);
 
-export const PoolHeader = ({ balance }) => {
+const tokenAddresses = {
+  ASD: process.env.REACT_APP_ASD_TOKEN_ADDRESS,
+  ETH: process.env.REACT_APP_ETH_TOKEN_ADDRESS,
+  USDT: process.env.REACT_APP_USDT_TOKEN_ADDRESS,
+  ARB: process.env.REACT_APP_ARB_TOKEN_ADDRESS,
+  LPARB: process.env.REACT_APP_LP_ARB_ADDRESS,
+  LPETH: process.env.REACT_APP_LP_ETH_ADDRESS,
+  LPUSDT: process.env.REACT_APP_LP_USDT_ADDRESS,
+  VASD: process.env.REACT_APP_VASD_ADDRESS,
+};
+
+const tokenContracts = {};
+
+for (const token in tokenAddresses) {
+  tokenContracts[token] = new ethers.Contract(
+    tokenAddresses[token],
+    TokenABI.abi,
+    signer,
+  );
+}
+
+export const PoolHeader = () => {
+  const [LPbalance, setLPbalanceState] = useRecoilState(LPbalanceState);
+  const [total, setTotal] = useState({ ASD: 0, LP: 0 });
+
+  useEffect(() => {
+    const fetchBalances = async () => {
+      const Account = await signer.getAddress();
+
+      const balances = await Promise.all(
+        Object.values(tokenContracts).map((contract) =>
+          contract.balanceOf(Account).then(ethers.utils.formatEther),
+        ),
+      );
+
+      let totalASD = 0;
+      let totalLP = 0;
+
+      for (let i = 0; i < balances.length; i++) {
+        const balance = parseFloat(balances[i]);
+
+        if (i < 4) {
+          totalASD += balance;
+        } else if (i < 7) {
+          totalLP += balance;
+        }
+        if (i === 7) {
+          setLPbalanceState((prevLPbalance) => ({
+            ...prevLPbalance,
+            VASD: balance,
+          }));
+        }
+      }
+
+      const lpForASD = (totalASD * 22) / 1000000;
+
+      setLPbalanceState((prevLPbalance) => ({
+        ...prevLPbalance,
+        LPETH: balances[4],
+        LPUSDT: balances[5],
+        LPARB: balances[6],
+      }));
+
+      setTotal({ ASD: lpForASD, LP: totalLP });
+    };
+
+    fetchBalances();
+  }, []);
+
   return (
     <PoolSection>
       <PoolHeaderDiv>
@@ -32,10 +95,10 @@ export const PoolHeader = ({ balance }) => {
               <span className="light">매 블록당 보상 분배</span>
             </PoolHeaderBoxDiv>
             <PoolHeaderBoxDiv className="poolStatus">
-              <h4>수령 가능</h4>
+              <h4>최대 수령 가능</h4>
               <div className="light">
                 <span>
-                  <strong className="point">{balance.ASD} </strong>
+                  <strong className="point">{total.ASD} </strong>
                   ASD
                 </span>
                 <br />
@@ -43,8 +106,8 @@ export const PoolHeader = ({ balance }) => {
               </div>
             </PoolHeaderBoxDiv>
             <PoolHeaderBoxDiv>
-              <span>누적 보상</span>
-              <span>1234 ASD</span>
+              <span>현재 누적 보상</span>
+              <span>{total.LP} ASD</span>
             </PoolHeaderBoxDiv>
           </Box>
         </PoolHeaderBoxDiv>

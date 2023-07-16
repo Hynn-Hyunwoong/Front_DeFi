@@ -12,8 +12,7 @@ import { listState, dropboxState } from '../../store';
 export const GovernanceContent = ({ testArr }) => {
   const [list] = useRecoilState(listState);
   const [dropbox, setDropbox] = useRecoilState(dropboxState);
-  // const [dropbox, setDropbox] = useState(dropboxState);
-  console.log("list:::",list)
+
   const statusText = {
     exectued: '통과',
     progress: '진행중',
@@ -21,7 +20,7 @@ export const GovernanceContent = ({ testArr }) => {
   };
 
   const filteredArr = list ? testArr.filter((v) => v.status === list) : testArr;
-
+  console.log(filteredArr)
   return (
     <SectionStyled>
       <ButtonSection>
@@ -49,7 +48,7 @@ export const GovernanceContent = ({ testArr }) => {
         </ListHeaderDiv>
         {dropbox && <DropBox statusText={statusText} />}
         <div>
-          <GovernanceList testArr={filteredArr} statusText={statusText} />
+          {/* <GovernanceList testArr={filteredArr} statusText={statusText} /> */}
         </div>
       </ListSection>
     </SectionStyled>

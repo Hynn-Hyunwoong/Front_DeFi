@@ -39,7 +39,6 @@ export const TrustWallet = () => {
       ARB: process.env.REACT_APP_ARB_TOKEN_ADDRESS,
       ETH: process.env.REACT_APP_ETH_TOKEN_ADDRESS,
       ASD: process.env.REACT_APP_ASD_TOKEN_ADDRESS,
-      vASD: process.env.REACT_APP_VASD_TOKEN_ADDRESS,
     };
 
     let newBalance = { ...balance };

@@ -1,8 +1,11 @@
 import { useParams } from "react-router-dom"
 import { useRecoilState } from "recoil";
-import {listState} from "../organisms/store";
+import {GovToken, accountState, selectedWallet} from "../organisms/store";
 import styled from "styled-components";
 import {GovHeadArea, GovVotingArea, GovTransactionBox, GovTextArea, GovDetailArea, GovSchedule} from "../organisms/contents/governancePost";
+import { useEffect } from "react";
+import { ethers } from "ethers";
+import factotyABI from "../ABI/contracts/Factory_v1.sol/Factory_v1.json";
 
 export const GovPostWrapper = styled.div`
     width: 720px;
@@ -20,8 +23,41 @@ export const Wrapper = styled.div`
 
 export const GovernancePost = () => {
     const {id} = useParams();
-    const [list] = useRecoilState(listState);
-    console.log("list::",list);
+    const [wallet, setWallet] = useRecoilState(selectedWallet);
+    const [govBalance, setgovBalance] = useRecoilState(GovToken);
+    const govToken = process.env.REACT_APP_VASD_ADDRESS
+    const setGov = async() => {
+        let provider;
+        switch (wallet) {
+            case 'metamask':
+            provider = new ethers.providers.Web3Provider(window.ethereum);
+            break;
+            case 'trustwallet':
+            provider = new ethers.providers.Web3Provider(window.trustwallet);
+            break;
+            case 'walletConnect':
+            provider = new ethers.providers.Web3Provider(
+                window.walletConnectProvider,
+            );
+            break;
+            default:
+            console.log('Unknown wallet type');
+            return;
+        }
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+            process.env.REACT_APP_FACTORY_ADDRESS,
+            factotyABI.abi,
+            signer
+        );
+        const checkToken = await contract.checkToken(process.env.REACT_APP_VASD_ADDRESS)
+        const result = ethers.utils.formatEther(checkToken)
+        setgovBalance(result)
+    }
+
+    useEffect(()=>{
+        setGov()
+    },[])
     return <>
     <Wrapper>
         <GovPostWrapper>

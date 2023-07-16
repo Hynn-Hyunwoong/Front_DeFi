@@ -3,6 +3,7 @@ import { Popup } from '../../components';
 import { stakingPopup, optionTermsState, stakingStep } from '../../store';
 import { Reward, Step1, Step2, Unstaking } from '../popupStaking';
 import useProvider from '../../hooks/ethersProvider';
+import { useEffect } from 'react';
 
 export const StakingPopup = ({ option, reward }) => {
   const [provider, contract] = useProvider();

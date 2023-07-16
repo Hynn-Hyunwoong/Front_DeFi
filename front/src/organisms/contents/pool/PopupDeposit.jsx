@@ -11,6 +11,8 @@ import { PopupBoxWrap } from './styled';
 import { NextButton } from '../popupStaking/styled';
 import { Exchange } from '../../components/exchageCard/styled';
 import { handleAddLiquidity } from './handleAddLiquidity';
+import { ethers } from 'ethers';
+import FacABI from '../../../ABI/contracts/Factory_v1.sol/Factory_v1.json';
 
 export const PopupDeposit = () => {
   const [token1, setToken1] = useRecoilState(poolToken1State);
@@ -36,7 +38,6 @@ export const PopupDeposit = () => {
       );
     } catch (error) {
       console.error('An error occurred while adding liquidity:', error);
-      // You might want to add additional logic here, such as showing an error message to the user
     }
   };
 

@@ -6,9 +6,10 @@ import {
   StakingPoolList,
   StakingPopup,
 } from '../organisms/contents/staking';
-import { stakingPopup } from '../organisms/store';
+import { LPtokenState, stakingPopup } from '../organisms/store';
 import { useEffect } from 'react';
 import useProvider from '../organisms/hooks/ethersProvider';
+import { ethers } from 'ethers';
 
 const stakingOption = [
   // 스테이킹 배수, 기간(개월)
@@ -30,26 +31,11 @@ const testArr = [
 const testRewardRate = { min: '0', max: '46.36' }; // 헤더 박스, 수익률 계산 어떻게 하는지,,??
 const stakingRewardRate = { min: '0', max: '18.89' }; // 밸런스 박스
 
-const testAmounts = {
-  // 스테이킹 수량, 보상 수량
-  stakingAmount: 0,
-  rewardAmount: '123',
-  holeAmount: '2342', // 누적 amount 가져오는 메서드 없으면 그냥 없애기
-};
-
-// 0이면 false, 값이 있으면 true??
-// 스테이킹의 경우 타임락 걸어서 정한 기간이 다가오면 언스테이킹 버튼 활성화?
-const state = {
-  staking: testAmounts.stakingAmount != 0,
-  unstaking: true, // 기간이 되면 true가 되어야 하는데...
-  reward: testAmounts.rewardAmount != 0,
-};
-
-const testData = {
-  // 투표권 => vASD값 받아오면 되는데, 이 값으로 풀 투표하는 기능은 준비중으로 처리
-  myVote: 0,
-  participate_amount: 0,
-};
+// const testData = {
+//   // 투표권 => vASD값 받아오면 되는데, 이 값으로 풀 투표하는 기능은 준비중으로 처리
+//   myVote: 0,
+//   participate_amount: 0,
+// };
 
 // 스테이킹 풀 투표 목록
 const testTokenData = [
@@ -70,30 +56,48 @@ const testTokenData = [
   },
 ];
 
+const ARBlp = process.env.REACT_APP_LP_ARB_ADDRESS;
+const ETHlp = process.env.REACT_APP_LP_ETH_ADDRESS;
+const USDTlp = process.env.REACT_APP_LP_USDT_ADDRESS;
+const vASDAddress = process.env.REACT_APP_VASD_ADDRESS;
+
 export const Staking = () => {
   const [provider, contract] = useProvider();
   const [staking] = useRecoilState(stakingPopup);
-  const amount = `contract에서 받아와야 함`;
+  const [LPamount, setLPamount] = useRecoilState(LPtokenState);
+  // 블럭 length가 바뀔 때마다 재랜더링?
+
+  const fetchData = async () => {
+    if (!contract) return;
+    try {
+      const ARB = await contract.checkToken(ARBlp);
+      const ETH = await contract.checkToken(ETHlp);
+      const USDT = await contract.checkToken(USDTlp);
+      const vASD = await contract.checkToken(vASDAddress);
+      setLPamount({
+        ARBLP: Number(ethers.utils.formatEther(ARB)),
+        ETHLP: Number(ethers.utils.formatEther(ETH)),
+        USDTLP: Number(ethers.utils.formatEther(USDT)),
+        vASD: Number(ethers.utils.formatEther(vASD)),
+      });
+      console.log(`hi`);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   useEffect(() => {
-    (async () => {
-      // const amount = await contract.checkToken(lptokenAddr) 사용해서 lp token balance 받아오기 => 그리고 상태에 저장
-      console.log(`staking page useEffect`);
-    })();
-  }, [amount]);
+    fetchData();
+  }, [contract]);
 
   return (
     <div>
       <StakingHeader reward={testArr} rate={testRewardRate} />
-      <StakingBalance
-        amounts={testAmounts}
-        state={state}
-        stakingRewardRate={stakingRewardRate}
-      />
+      <StakingBalance stakingRewardRate={stakingRewardRate} />
       {staking && <StakingPopup option={stakingOption} reward={testArr} />}
 
       {/*얘네는 준비중*/}
-      <StakingMyVote voteAmount={testData} />
+      <StakingMyVote LPamount={LPamount} />
       <StakingPoolList tokenData={testTokenData} />
     </div>
   );

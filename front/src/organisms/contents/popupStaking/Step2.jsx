@@ -8,23 +8,53 @@ import {
 import { PopupHeader } from '../../components';
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { stakingPopup, stakingValueState, optionTermsState } from '../../store';
-import useProvider from '../../hooks/ethersProvider';
+import {
+  stakingPopup,
+  stakingValueState,
+  optionTermsState,
+  selectedLPTokenState,
+} from '../../store';
+import { ethers } from 'ethers';
+
+const LPaddress = {
+  ARBLP: process.env.REACT_APP_LP_ARB_ADDRESS,
+  ETHLP: process.env.REACT_APP_LP_ETH_ADDRESS,
+  USDTLP: process.env.REACT_APP_LP_USDT_ADDRESS,
+};
 
 export const Step2 = ({ closePopup, date, provider, contract }) => {
   const [approve, setApprove] = useState(false);
   const [stakingValue] = useRecoilState(stakingValueState);
   const stakingTerms = useRecoilValue(optionTermsState);
+  const lpToken = useRecoilValue(selectedLPTokenState);
   const setStaking = useSetRecoilState(stakingPopup);
+
+  const fatchStaking = async () => {
+    try {
+      await contract.LpStaking(
+        LPaddress[lpToken],
+        ethers.utils.parseEther(stakingValue),
+        stakingTerms,
+        {
+          maxFeePerGas: ethers.utils.parseUnits('10', 'gwei'),
+          maxPriorityFeePerGas: ethers.utils.parseUnits('1', 'gwei'),
+        }
+      );
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   const stakingHandler = async () => {
     console.log(
       `스테이킹 버튼`,
       `amount:${stakingValue} `,
-      `개월수: ${stakingTerms}`
+      `개월수: ${stakingTerms}`,
+      `선택한 lp : ${lpToken}`
     );
-    // await contract.LpStaking(lpTokenAddress, amount, stakingTerms)
+    fatchStaking();
   };
+
   return (
     <>
       <PopupHeader>트랜잭션 요청</PopupHeader>
