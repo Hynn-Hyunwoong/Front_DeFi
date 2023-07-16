@@ -62,6 +62,7 @@ const USDTlp = process.env.REACT_APP_LP_USDT_ADDRESS;
 const vASDAddress = process.env.REACT_APP_VASD_ADDRESS;
 
 export const Staking = () => {
+  // eslint-disable-next-line no-unused-vars
   const [provider, contract] = useProvider();
   const [staking] = useRecoilState(stakingPopup);
   const [LPamount, setLPamount] = useRecoilState(LPtokenState);

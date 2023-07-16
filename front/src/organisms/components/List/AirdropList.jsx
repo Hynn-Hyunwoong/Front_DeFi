@@ -44,6 +44,9 @@ export const AirDropList = ({ airdropData }) => {
         gasLimit: 800000,
       });
       const receipt = await tx.wait();
+      alert(
+        `에어드랍이 완료되었습니다. 세부사항은 아래의 트랜잭션을 확인해주세요.${receipt}`,
+      );
       console.log(receipt);
     } catch (e) {
       console.log(e);
