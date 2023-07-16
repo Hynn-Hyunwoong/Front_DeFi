@@ -26,19 +26,20 @@ export const ExchangeBox = ({ provider, contract }) => {
   };
 
   const swap = async (fromToken, toToken, amount) => {
-    // console.log(
-    //   tokenCA[fromToken],
-    //   tokenCA[toToken],
-    //   BigNumber.from(ethers.utils.parseEther(amount)).toString()
-    // );
+    console.log(
+      tokenCA[fromToken],
+      tokenCA[toToken],
+      BigNumber.from(ethers.utils.parseEther(amount)).toString()
+    );
     try {
       const tx = await contract.swapToken(
         tokenCA[fromToken],
         tokenCA[toToken],
         ethers.utils.parseEther(amount),
         {
-          maxFeePerGas: ethers.utils.parseUnits('10', 'gwei'),
-          maxPriorityFeePerGas: ethers.utils.parseUnits('1', 'gwei'),
+          // maxFeePerGas: ethers.utils.parseUnits('10', 'gwei'),
+          // maxPriorityFeePerGas: ethers.utils.parseUnits('1', 'gwei'),
+          gasLimit: 5000000,
         }
       );
       setTransaction((prevTX) => [...prevTX, tx]);
@@ -50,18 +51,10 @@ export const ExchangeBox = ({ provider, contract }) => {
 
   const clickSwap = async () => {
     try {
-      if (fromToken === 'ASD') {
-        if (toAmount) {
-          swap('ASD', toToken, toAmount);
-        } else if (fromAmount) {
-          swap('ASD', toToken, fromAmount);
-        }
-      } else if (toToken === 'ASD') {
-        if (toAmount) {
-          swap(fromToken, 'ASD', toAmount);
-        } else if (fromAmount) {
-          swap(fromToken, 'ASD', fromAmount);
-        }
+      if (toAmount) {
+        swap(fromToken, toToken, toAmount);
+      } else if (fromAmount) {
+        swap(fromToken, toToken, fromAmount);
       }
     } catch (e) {
       console.log(e.message);
