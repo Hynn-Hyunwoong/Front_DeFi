@@ -1,3 +1,4 @@
+import { useRecoilState } from 'recoil';
 import {
   TokenStateWrap,
   TokenLeftWrap,
@@ -6,14 +7,17 @@ import {
   TokenCurrentValue,
   TokenLine,
 } from '../../components';
+import { GovToken } from '../../store';
 
 export const TopicTokenState = () => {
+  const [govBalance] = useRecoilState(GovToken)
+
   return (
     <>
       <TokenStateWrap>
         <TokenLeftWrap>
           <TokenStateAlignLeft>보유 투표권</TokenStateAlignLeft>
-          <TokenCurrentValue>100 vASD</TokenCurrentValue>
+          <TokenCurrentValue>{parseInt(govBalance)} vASD</TokenCurrentValue>
         </TokenLeftWrap>
         <TokenLine />
         <TokenRightWrap>

@@ -1,4 +1,6 @@
+import { useRecoilState } from 'recoil';
 import { Box, Button } from '../../components';
+import { GovToken } from '../../store';
 import {
   VoteTitleDiv,
   ButtonStyled,
@@ -9,6 +11,8 @@ import {
 } from './styled';
 
 export const GovernanceHeader = () => {
+  const [gov] = useRecoilState(GovToken)
+
   return (
     <SectionStyled>
       <HeaderSection>
@@ -36,7 +40,7 @@ export const GovernanceHeader = () => {
             </VoteTitleDiv>
             <AmountDiv>
               <span>
-                <strong>123</strong> vKSP
+                <strong>{parseInt(gov)}</strong> vKSP
               </span>
             </AmountDiv>
           </Box>

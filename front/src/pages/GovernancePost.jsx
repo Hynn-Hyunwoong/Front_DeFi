@@ -23,9 +23,9 @@ export const Wrapper = styled.div`
 
 export const GovernancePost = () => {
     const {id} = useParams();
-    const [account, setAccount] = useRecoilState(accountState);
     const [wallet, setWallet] = useRecoilState(selectedWallet);
     const [govBalance, setgovBalance] = useRecoilState(GovToken);
+    const govToken = process.env.REACT_APP_VASD_ADDRESS
     const setGov = async() => {
         let provider;
         switch (wallet) {
@@ -48,18 +48,12 @@ export const GovernancePost = () => {
         const contract = new ethers.Contract(
             process.env.REACT_APP_FACTORY_ADDRESS,
             factotyABI.abi,
-            provider,
             signer
         );
-
-        // const result = ethers.utils.formatEther( await contract.checkToken(process.env.REACT_APP_FACTORY_ADDRESS))
-        // console.log("factory::",result)
+        const checkToken = await contract.checkToken(process.env.REACT_APP_VASD_ADDRESS)
+        const result = ethers.utils.formatEther(checkToken)
+        setgovBalance(result)
     }
-    
-    console.log("balance::",govBalance);
-    console.log("account",account)
-    console.log("wallet",wallet)
-    // setBalance({...balance, vASD:1200});
 
     useEffect(()=>{
         setGov()

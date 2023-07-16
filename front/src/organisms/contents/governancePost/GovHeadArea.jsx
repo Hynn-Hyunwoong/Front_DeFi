@@ -1,10 +1,10 @@
 import {PostHeadArea, HeadArea, HeadTitle, Span, HeadAsdArea, HeadVotingDate} from "./style";
 import { ethers } from 'ethers';
 import { useRecoilState } from "recoil";
-import {balanceState} from "../../store"
+import {balanceState, GovToken} from "../../store"
 
 export const GovHeadArea = () => {
-
+    const [govBalance] = useRecoilState(GovToken)
 
     return <>
         <PostHeadArea>
@@ -22,7 +22,7 @@ export const GovHeadArea = () => {
             </HeadArea>
             <HeadAsdArea>
                 <Span display="block" fontSize="12px" color="#999" margin="0 0 5px 0">내가 보유한 vASD</Span>
-                <Span display="block" fontSize="16px" fontWeight="700" color="#e66d16">0 vASD</Span>    
+                <Span display="block" fontSize="16px" fontWeight="700" color="#e66d16">{parseInt(govBalance)} vASD</Span>    
             </HeadAsdArea>
         </PostHeadArea>        
     </>
