@@ -1,29 +1,50 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { ExchageCard, BoxArticle, ButtonArticle } from '../../components';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  ExchageCard,
+  BoxArticle,
+  ButtonArticle,
+  Loader,
+} from '../../components';
 import {
   FromTokenState,
   ToTokenState,
   swapFromAmountState,
   swapToAmountState,
-  tokenPricesState,
   transactionState,
 } from '../../store';
 import { BigNumber, ethers } from 'ethers';
+
+const tokenCA = {
+  ASD: process.env.REACT_APP_ASD_TOKEN_ADDRESS,
+  ETH: process.env.REACT_APP_ETH_TOKEN_ADDRESS,
+  ARB: process.env.REACT_APP_ARB_TOKEN_ADDRESS,
+  USDT: process.env.REACT_APP_USDT_TOKEN_ADDRESS,
+};
 
 export const ExchangeBox = ({ provider, contract }) => {
   const fromToken = useRecoilValue(FromTokenState);
   const toToken = useRecoilValue(ToTokenState);
   const fromAmount = useRecoilValue(swapFromAmountState);
   const toAmount = useRecoilValue(swapToAmountState);
-  // const [price, setPrice] = useRecoilState(tokenPricesState);
   const [transaction, setTransaction] = useRecoilState(transactionState);
 
-  const tokenCA = {
-    ASD: process.env.REACT_APP_ASD_TOKEN_ADDRESS,
-    ETH: process.env.REACT_APP_ETH_TOKEN_ADDRESS,
-    ARB: process.env.REACT_APP_ARB_TOKEN_ADDRESS,
-    USDT: process.env.REACT_APP_USDT_TOKEN_ADDRESS,
-  };
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    async (data) => {
+      const { fromToken, toToken, amount } = data;
+      await swap(fromToken, toToken, amount);
+    },
+    {
+      onError: (error) => {
+        console.log(error.message);
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries('transactionState');
+      },
+    }
+  );
 
   const swap = async (fromToken, toToken, amount) => {
     console.log(
@@ -37,9 +58,8 @@ export const ExchangeBox = ({ provider, contract }) => {
         tokenCA[toToken],
         ethers.utils.parseEther(amount),
         {
-          // maxFeePerGas: ethers.utils.parseUnits('10', 'gwei'),
-          // maxPriorityFeePerGas: ethers.utils.parseUnits('1', 'gwei'),
-          gasLimit: 5000000,
+          maxFeePerGas: ethers.utils.parseUnits('10', 'gwei'),
+          maxPriorityFeePerGas: ethers.utils.parseUnits('1', 'gwei'),
         }
       );
       setTransaction((prevTX) => [...prevTX, tx]);
@@ -50,11 +70,28 @@ export const ExchangeBox = ({ provider, contract }) => {
   };
 
   const clickSwap = async () => {
+    // try {
+    //   if (toAmount) {
+    //     swap(fromToken, toToken, toAmount);
+    //   } else if (fromAmount) {
+    //     swap(fromToken, toToken, fromAmount);
+    //   }
+    // } catch (e) {
+    //   console.log(e.message);
+    // }
     try {
       if (toAmount) {
-        swap(fromToken, toToken, toAmount);
+        await mutation.mutateAsync({
+          fromToken,
+          toToken,
+          amount: toAmount,
+        });
       } else if (fromAmount) {
-        swap(fromToken, toToken, fromAmount);
+        await mutation.mutateAsync({
+          fromToken,
+          toToken,
+          amount: fromAmount,
+        });
       }
     } catch (e) {
       console.log(e.message);
@@ -63,6 +100,7 @@ export const ExchangeBox = ({ provider, contract }) => {
 
   return (
     <>
+      {mutation.isLoading && <Loader />}
       <ExchageCard
         onClick={clickSwap}
         boxContent={<BoxArticle title1={'From'} title2={'To'} sign={'↑↓'} />}
@@ -70,6 +108,7 @@ export const ExchangeBox = ({ provider, contract }) => {
           <ButtonArticle
             actionText={'Swap'}
             alertText={'토큰을 선택해주세요'}
+            disabled={mutation.isLoading}
           />
         }
       />
