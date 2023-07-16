@@ -4,6 +4,9 @@ import {
   TrendingEmphasis,
   TrendingVariation,
   TrendingVariationIcon,
+  TrendingTopic2,
+  DashboardContainer,
+  TablesWrapper,
 } from './styled';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -48,19 +51,24 @@ export const DashboardTrend = () => {
 
   return (
     <>
-      {trendingData.map((data, index) => (
-        <TrendingBox key={index}>
-          <TrendingTitle>{data.title}</TrendingTitle>
-          <TrendingEmphasis>$ {data.value}</TrendingEmphasis>
-          <TrendingVariation isPositive={data.isPositive}>
-            <TrendingVariationIcon>
-              {data.isPositive ? '+' : '-'} {/* Updated this output */}
-            </TrendingVariationIcon>
-            {Math.abs(data.trending)}%{' '}
-            {/* Get the absolute value of trending */}
-          </TrendingVariation>
-        </TrendingBox>
-      ))}
+      <DashboardContainer>
+        <TrendingTopic2>Token 실시간 가격 현황</TrendingTopic2>
+        <TablesWrapper>
+          {trendingData.map((data, index) => (
+            <TrendingBox key={index}>
+              <TrendingTitle>{data.title}</TrendingTitle>
+              <TrendingEmphasis>$ {data.value}</TrendingEmphasis>
+              <TrendingVariation isPositive={data.isPositive}>
+                <TrendingVariationIcon>
+                  {data.isPositive ? '+' : '-'} {/* Updated this output */}
+                </TrendingVariationIcon>
+                {Math.abs(data.trending)}%{' '}
+                {/* Get the absolute value of trending */}
+              </TrendingVariation>
+            </TrendingBox>
+          ))}
+        </TablesWrapper>
+      </DashboardContainer>
     </>
   );
 };
