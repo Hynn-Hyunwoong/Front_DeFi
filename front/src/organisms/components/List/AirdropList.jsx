@@ -9,10 +9,12 @@ import {
   BalanceText,
 } from './styled';
 import { Button } from '../button/Button';
+import { ethers } from 'ethers';
+import AirDropABI from '../../../ABI/contracts/airdrop.sol/Airdrop.json';
 
 export const AirDropList = ({ airdropData }) => {
   const [popupStates, setPopupStates] = useState(
-    Array(airdropData.length).fill(false)
+    Array(airdropData.length).fill(false),
   );
 
   const togglePopup = (index) => {
@@ -23,6 +25,31 @@ export const AirDropList = ({ airdropData }) => {
     });
   };
 
+  const airdropLaunch = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const acc = await signer.getAddress();
+    const AirdropAddress = process.env.REACT_APP_AIRDROP_ADDRESS;
+    const AirdropContract = new ethers.Contract(
+      AirdropAddress,
+      AirDropABI.abi,
+      signer,
+    );
+
+    let recipients = [acc];
+    let amounts = [ethers.utils.parseUnits('100.0', 18)];
+
+    try {
+      const tx = await AirdropContract.airdrop(recipients, amounts, {
+        gasLimit: 800000,
+      });
+      const receipt = await tx.wait();
+      console.log(receipt);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const airdropList = airdropData.map((v, index) => (
     <AirDropContent key={v.symbol}>
       <AirDropHeader backgroundIMG={`/images/airdrop/${v.img}.png`}>
@@ -31,9 +58,9 @@ export const AirDropList = ({ airdropData }) => {
           <h1>{v.symbol} 에어드랍</h1>
         </AirDropTokenTitle>
         <Button
-          colors='blue'
-          width='30px'
-          height='30px'
+          colors="blue"
+          width="30px"
+          height="30px"
           onClick={() => {
             togglePopup(index);
           }}
@@ -46,20 +73,23 @@ export const AirDropList = ({ airdropData }) => {
           <AirDropContentTop>
             <h1>내 에어드랍 수량</h1>
             <BalanceText>
-              {v.dropAmount} <span>{v.symbol}</span>
+              {v.dropAmount} <span>ASD</span>
             </BalanceText>
             <RewardDate>
               보상 수령 가능일 : <strong>{v.rewardAcccess}</strong>
             </RewardDate>
-            <Button colors='greyBox' width='250px' height='55px' before='100%'>
-              <h1>참여 방법</h1>
-            </Button>
-            <Button colors='green' width='250px' height='55px' before='100%'>
+            <Button
+              colors="green"
+              width="250px"
+              height="55px"
+              before="100%"
+              onClick={airdropLaunch}
+            >
               <h1>보상 수령</h1>
             </Button>
           </AirDropContentTop>
           <AirDropContentBottom>
-            <div className='airDrop'>
+            <div className="airDrop">
               <div>
                 <p>에어드랍 기간</p>
                 <strong>
@@ -75,10 +105,10 @@ export const AirDropList = ({ airdropData }) => {
             </div>
             <div>
               <Button
-                colors='blueBox'
-                width='150px'
-                height='30px'
-                before='100%'
+                colors="blueBox"
+                width="150px"
+                height="30px"
+                before="100%"
                 to={`https://arbiscan.io/tx/${v.tx}`}
               >
                 토큰 컨트랙트

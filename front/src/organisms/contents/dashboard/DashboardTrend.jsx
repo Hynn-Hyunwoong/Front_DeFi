@@ -60,10 +60,9 @@ export const DashboardTrend = () => {
               <TrendingEmphasis>$ {data.value}</TrendingEmphasis>
               <TrendingVariation isPositive={data.isPositive}>
                 <TrendingVariationIcon>
-                  {data.isPositive ? '+' : '-'} {/* Updated this output */}
+                  {data.isPositive ? '+' : '-'}
                 </TrendingVariationIcon>
                 {Math.abs(data.trending)}%{' '}
-                {/* Get the absolute value of trending */}
               </TrendingVariation>
             </TrendingBox>
           ))}
