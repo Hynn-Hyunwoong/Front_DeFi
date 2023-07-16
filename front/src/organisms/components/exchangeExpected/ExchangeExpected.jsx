@@ -6,7 +6,6 @@ import {
   swapFromAmountState,
   swapToAmountState,
   tokenPricesState,
-  tokenToListPopupState,
 } from '../../store';
 
 export const Expected = () => {
