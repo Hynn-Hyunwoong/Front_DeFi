@@ -5,17 +5,15 @@ import { ethers } from 'ethers';
 import { useState, useEffect } from 'react';
 import FactoryABI from '../../../ABI/contracts/Factory_v1.sol/Factory_v1.json';
 import TokenABI from '../../../ABI/contracts/SelfToken.sol/SelfToken.json';
+import LiquidABI from '../../../ABI/contracts/Liquid.sol/Liquid.json';
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
-const VASDContract = new ethers.Contract(
-  process.env.REACT_APP_VASD_ADDRESS,
-  TokenABI.abi,
+const FacContract = new ethers.Contract(
+  process.env.REACT_APP_FACTORY_ADDRESS,
+  FactoryABI.abi,
   signer,
 );
-const amount = await VASDContract.balanceOf(signer.getAddress());
-const test = ethers.utils.formatEther(amount);
-console.log(test);
 
 export const PoolHeader = ({ balance }) => {
   return (

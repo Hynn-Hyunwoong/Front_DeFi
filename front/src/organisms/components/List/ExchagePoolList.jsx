@@ -64,16 +64,18 @@ export const ExchangePoolList = ({ tokenData, setPopup }) => {
     try {
       const fetchedPrices = await Promise.all(
         tokens.map(async (token) => {
-          const price = await FacContract[token.name + 'Price'](); // 'name' property is used here.
+          const price = await FacContract[token.name + 'Price']();
           const formattedPrice = ethers.utils.formatUnits(price, 8);
           return formattedPrice;
         }),
       );
 
       const fetchedTotalPoolAmounts = await Promise.all(
-        tokenContracts.map(async (tokenContract, index) => {
-          const totalSupply = await tokenContract.totalSupply();
-          const formattedSupply = ethers.utils.formatEther(totalSupply);
+        tokens.map(async (token) => {
+          const totalSupply = await FacContract[
+            'lqAmount' + token.name.toUpperCase()
+          ]();
+          const formattedSupply = ethers.utils.formatUnits(totalSupply, 0);
           return formattedSupply;
         }),
       );
@@ -84,6 +86,7 @@ export const ExchangePoolList = ({ tokenData, setPopup }) => {
       console.error('Error while fetching data: ', error);
     }
   };
+
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
