@@ -1,8 +1,12 @@
 import {PostHeadArea, HeadArea, HeadTitle, Span, HeadAsdArea, HeadVotingDate} from "./style";
-
-
+import { ethers } from 'ethers';
+import { useRecoilState } from "recoil";
+import {balanceState} from "../../store"
 
 export const GovHeadArea = () => {
+
+    const [balance] = useRecoilState(balanceState)
+    console.log(balance)
 
     return <>
         <PostHeadArea>
