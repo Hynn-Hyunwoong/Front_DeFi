@@ -47,7 +47,7 @@ export const TrendingBox = styled.div`
   flex: 1;
   height: 100%;
   margin: 0;
-  width: 17rem;
+  width: 21rem;
 `;
 
 export const TrendingTitleVariation = styled.div`
@@ -68,9 +68,10 @@ export const TrendingTitle = styled.dt`
 `;
 
 export const TrendingEmphasis = styled.dd`
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #111827;
+  text-align: center;
 `;
 
 export const TrendingVariation = styled.dd`
@@ -156,6 +157,8 @@ export const Table = styled.table`
   width: 80%;
   border-spacing: 0;
   margin: auto;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
 `;
 
 export const TableRow = styled.tr``;
@@ -177,7 +180,7 @@ export const TableData = styled.td`
 
 export const TrendingTopic = styled.h2`
   display: block;
-  width: 100%;
+  width: 80%;
   font-size: 2rem;
   font-weight: 500;
   text-align: center;
@@ -189,16 +192,23 @@ export const TrendingTopic = styled.h2`
 
 export const TrendingTopic2 = styled.h2`
   display: block;
-  width: 100%;
+  width: 80%;
   font-size: 2rem;
   font-weight: 500;
   text-align: center;
-  margin: 0 auto;
+  margin: auto;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   color: #0000ff;
 `;
 
+export const TablesWrapperB = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10%;
+  width: 100%;
+  margin: auto;
+`;
 export const TablesWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);

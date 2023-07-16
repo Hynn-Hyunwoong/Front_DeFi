@@ -5,6 +5,7 @@ import axios from 'axios';
 import { GraphData } from '../../components/graph';
 import { balanceState } from '../../store';
 import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 
 const APIURL = process.env.REACT_APP_AXIOS_URL;
 
@@ -24,6 +25,7 @@ export const ASDTokenCard = () => {
     isError: isCoinDataError,
     isLoading: isCoinDataLoading,
   } = useQuery(['coinData'], getCoinData);
+  const navigate = useNavigate();
 
   if (isCoinDataLoading) {
     return <Loader />;
@@ -31,6 +33,16 @@ export const ASDTokenCard = () => {
   if (isCoinDataError) {
     return <div>Error occurred while fetching data</div>;
   }
+
+  const redirectToPool = (e) => {
+    e.preventDefault();
+    navigate('/exchange/pool');
+  };
+
+  const redirectToswap = (e) => {
+    e.preventDefault();
+    navigate('/exchange/swap');
+  };
 
   // USD and KRW values
   const usdValue =
@@ -73,11 +85,21 @@ export const ASDTokenCard = () => {
           </li>
         </Stats>
         <Links>
-          <Button width={'10rem'} height={'40px'} colors={'blue'}>
-            구매하기
+          <Button
+            width={'10rem'}
+            height={'40px'}
+            colors={'blue'}
+            onClick={redirectToPool}
+          >
+            예치하기
           </Button>
-          <Button width={'10rem'} height={'40px'} colors={'blue'}>
-            판매하기
+          <Button
+            width={'10rem'}
+            height={'40px'}
+            colors={'blue'}
+            onClick={redirectToswap}
+          >
+            스왑하기
           </Button>
         </Links>
       </Card>

@@ -17,34 +17,14 @@ export const DropsContents = () => {
 
   const airdropData = [
     {
-      symbol: 'HWT',
+      symbol: 'ASD_Team4',
       tx: '0x99c0fe94c0d868c01d3545b4f1f3e9bf63911c65272a0d7ada40f25516e85a14',
       mintAmount: '100,000.00000000',
-      dropAmount: '10',
-      startDate: '2023. 02. 14',
-      endDate: '2023. 02. 20',
-      rewardAcccess: '2023. 04. 21',
-      img: 'mangle',
-    },
-    {
-      symbol: 'EJT',
-      tx: '0x99c0fe94c0d868c01d3545b4f1f3e9bf63911c65272a0d7ada40f25516e85a14',
-      mintAmount: '100,000,000.00000000',
       dropAmount: '100',
-      startDate: '2024. 07. 14',
-      endDate: '2025. 02. 20',
-      rewardAcccess: '2025. 04. 21',
-      img: 'mangle2',
-    },
-    {
-      symbol: 'SWCo',
-      tx: '0x99c0fe94c0d868c01d3545b4f1f3e9bf63911c65272a0d7ada40f25516e85a14',
-      mintAmount: '2,000,000.00000000',
-      dropAmount: '0.324',
-      startDate: '2024. 07. 14',
-      endDate: '2025. 02. 20',
-      rewardAcccess: '2025. 04. 21',
-      img: 'mangle3',
+      startDate: '2023. 07. 16',
+      endDate: '2024. 07. 26',
+      rewardAcccess: '2023. 12. 25',
+      img: 'mangle',
     },
   ];
 
@@ -69,11 +49,3 @@ export const DropsContents = () => {
     </SectionWrap>
   );
 };
-
-{
-  /* <div>
-            드랍스 페어 살펴보기
-            <Box colors='blueBox'></Box>
-            <Box colors='blueBox'></Box>
-  </div> */
-}
