@@ -23,18 +23,26 @@ const contractAddresses = [
 ];
 
 export const Header = () => {
+  // eslint-disable-next-line no-unused-vars
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
   const [network, setNetwork] = useRecoilState(networkState);
   const [popup, setPopup] = useRecoilState(popupState);
+  // eslint-disable-next-line no-unused-vars
   const [wallet, setWallet] = useRecoilState(selectedWallet);
+  // eslint-disable-next-line no-unused-vars
   const [balance, setBalance] = useRecoilState(balanceState);
 
   const fetchNetwork = async () => {
-    const networkId = await window.ethereum.request({
-      method: 'net_version',
-    });
-    return networkId;
+    try {
+      const networkId = await window.ethereum.request({
+        method: 'net_version',
+      });
+      return networkId;
+    } catch (error) {
+      console.error('Failed to fetch network ID: ', error);
+      // Handle or throw error
+    }
   };
 
   const {
@@ -91,32 +99,37 @@ export const Header = () => {
       const newBalance = {};
 
       for (let i = 0; i < contractAddresses.length; i++) {
-        const contract = new ethers.Contract(
-          contractAddresses[i],
-          TokenABI.abi,
-          provider,
-        );
+        try {
+          const contract = new ethers.Contract(
+            contractAddresses[i],
+            TokenABI.abi,
+            provider,
+          );
 
-        const tokenBalance = ethers.utils.formatEther(
-          await contract.balanceOf(account),
-        );
+          const tokenBalance = ethers.utils.formatEther(
+            await contract.balanceOf(account),
+          );
 
-        switch (i) {
-          case 0:
-            newBalance['ARB'] = tokenBalance;
-            break;
-          case 1:
-            newBalance['ETH'] = tokenBalance;
-            break;
-          case 2:
-            newBalance['ASD'] = tokenBalance;
-            break;
-          case 3:
-            newBalance['USDT'] = tokenBalance;
-            break;
-          default:
-            console.log('Unknown token index');
-            return;
+          switch (i) {
+            case 0:
+              newBalance['ARB'] = tokenBalance;
+              break;
+            case 1:
+              newBalance['ETH'] = tokenBalance;
+              break;
+            case 2:
+              newBalance['ASD'] = tokenBalance;
+              break;
+            case 3:
+              newBalance['USDT'] = tokenBalance;
+              break;
+            default:
+              console.log('Unknown token index');
+              return;
+          }
+        } catch (error) {
+          console.error('Failed to update balance: ', error);
+          // Handle or throw error
         }
       }
 
@@ -129,6 +142,13 @@ export const Header = () => {
   }, [account, network, updateBalance]);
 
   useEffect(() => {
+    if (
+      typeof window.ethereum === 'undefined' ||
+      typeof window.trustwallet === 'undefined'
+    ) {
+      console.error('Metamask or Trust Wallet is not installed');
+      return;
+    }
     if (window.trustwallet) {
       window.trustwallet.on('accountsChanged', handleAccountChange);
       window.trustwallet.on('networkChanged', handleNetworkChanged);
@@ -160,6 +180,18 @@ export const Header = () => {
       }
     }
   }, [networkId, error, isLoading, setNetwork]);
+
+  useEffect(() => {
+    if (
+      !process.env.REACT_APP_ARB_TOKEN_ADDRESS ||
+      !process.env.REACT_APP_ETH_TOKEN_ADDRESS ||
+      !process.env.REACT_APP_ASD_TOKEN_ADDRESS ||
+      !process.env.REACT_APP_USDT_TOKEN_ADDRESS
+    ) {
+      console.error('One or more environment variables are not set');
+      return;
+    }
+  }, []);
 
   return (
     <>
@@ -215,19 +247,15 @@ export const Header = () => {
                   }}
                 />
               )}
-              {isLogin
-                ? account && network
-                  ? wallet + ' 연결됨'
-                  : ' wrong network'
-                : '지갑 연결'}
+              {account
+                ? account.substring(0, 6) +
+                  '...' +
+                  account.substring(account.length - 4, account.length)
+                : 'Connect Wallet'}
             </Button>
           </div>
         </HeaderBottom>
-        {popup && (
-          <Popup>
-            <Wallet />
-          </Popup>
-        )}
+        {popup && <Popup contents={<Wallet />} />}
       </HeaderWrap>
     </>
   );
