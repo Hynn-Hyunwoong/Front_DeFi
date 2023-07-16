@@ -6,7 +6,6 @@ import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import factotyABI from "../ABI/contracts/Factory_v1.sol/Factory_v1.json";
-import govABI from "../ABI/contracts/governance.sol/Governance.json"
 import {GovToken, selectedWallet} from "../organisms/store";
 import axios from 'axios';
 
@@ -93,7 +92,6 @@ export const Governance = () => {
   const [list, setList] = useState([]);
   const [wallet, setWallet] = useRecoilState(selectedWallet);
   const [govBalance, setgovBalance] = useRecoilState(GovToken);
-  const govToken = process.env.REACT_APP_VASD_ADDRESS
   const setGov = async() => {
     let provider;
     switch (wallet) {
@@ -122,19 +120,14 @@ export const Governance = () => {
     const result = ethers.utils.formatEther(checkToken)
     setgovBalance(result)
 
-    const govContract = new ethers.Contract(
-      process.env.REACT_APP_GOVERNANCE_ADDRESS,
-      govABI.abi,
-      signer
-    )
-
-    // await govContract.getProposal()
+    
   }
 
   const getProposalList = async() => {
     const {data} = await axios.get(`${process.env.REACT_APP_AXIOS_URL}/proposal/getlist`)
-    console.log("res:::",data)
+    // console.log("res:::",typeof data)
     await setList([...data])
+    // await console.log(list)
   }
 
   useEffect(()=>{
@@ -145,7 +138,7 @@ export const Governance = () => {
   return (
     <div>
       <GovernanceHeader />
-      <GovernanceContent testArr={list} />
+      <GovernanceContent listArr={list} />
     </div>
   );
 };
