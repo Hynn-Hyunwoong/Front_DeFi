@@ -84,6 +84,11 @@ export const balanceState = atom({
   default: { ETH: 0, USDT: 0, ARB: 0, ASD: 0, vASD:0 },
 });
 
+export const GovToken = atom({
+  key: 'GovToken',
+  default: { vASD:0 },
+});
+
 export const listState = atom({
   key: 'listState',
   default: null,
