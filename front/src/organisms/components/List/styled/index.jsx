@@ -179,7 +179,7 @@ export const PoolTokenInfo = styled.div`
 `;
 
 export const Liquidity = styled.div`
-  width: 16%;
+  width: 23%;
   @media (max-width: 768px) {
     ${mobileListOption}
   }
@@ -187,8 +187,10 @@ export const Liquidity = styled.div`
 export const RewardToken = styled.div`
   ${mobileListNone}
   width: 15%;
+
   .logo {
     & > img {
+      margin-left: 0.5rem;
       height: 25px;
     }
   }
@@ -203,6 +205,7 @@ export const Estimated = styled.div`
   width: 15%;
   text-align: right;
   & > strong {
+    margin-left: 1.5rem;
     font-size: 18px;
     font-weight: 350;
   }

@@ -12,7 +12,6 @@ import { useRecoilState } from 'recoil';
 import GovABI from "../../../ABI/contracts/governance.sol/Governance.json";
 import { accountState, GovToken, selectedWallet } from '../../store';
 export const TopicWrite = () => {
-
   const title = useRef()
   const content = useRef()
   const [wallet] = useRecoilState(selectedWallet);
@@ -78,7 +77,6 @@ export const TopicWrite = () => {
     }
     
   }
-
   return (
     <>
       <WriteFormWrap>

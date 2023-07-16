@@ -80,7 +80,7 @@ export const Header = () => {
           break;
         case 'walletConnect':
           provider = new ethers.providers.Web3Provider(
-            window.walletConnectProvider,
+            window.ethereum || window.walletConnect,
           );
           break;
         default:

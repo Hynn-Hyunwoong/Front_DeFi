@@ -6,7 +6,7 @@ export const DashboardWrap = styled.div`
   margin: 10px auto;
   margin-top: 5rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   gap: 2%;
 `;
@@ -47,6 +47,7 @@ export const TrendingBox = styled.div`
   flex: 1;
   height: 100%;
   margin: 0;
+  width: 21rem;
 `;
 
 export const TrendingTitleVariation = styled.div`
@@ -67,9 +68,10 @@ export const TrendingTitle = styled.dt`
 `;
 
 export const TrendingEmphasis = styled.dd`
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #111827;
+  text-align: center;
 `;
 
 export const TrendingVariation = styled.dd`
@@ -155,6 +157,8 @@ export const Table = styled.table`
   width: 80%;
   border-spacing: 0;
   margin: auto;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
 `;
 
 export const TableRow = styled.tr``;
@@ -172,4 +176,59 @@ export const TableData = styled.td`
   text-align: center;
   padding: 1rem;
   border-top: 1px solid #e5e7eb;
+`;
+
+export const TrendingTopic = styled.h2`
+  display: block;
+  width: 80%;
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #6b7280;
+`;
+
+export const TrendingTopic2 = styled.h2`
+  display: block;
+  width: 80%;
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  margin: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #0000ff;
+`;
+
+export const TablesWrapperB = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10%;
+  width: 100%;
+  margin: auto;
+`;
+export const TablesWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1%;
+  width: 100%;
+`;
+
+export const DashboardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2%;
+`;
+
+export const DashboardLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `;

@@ -17,7 +17,7 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { ethers } from 'ethers';
 import FactoryABI from '../../../ABI/contracts/Factory_v1.sol/Factory_v1.json';
-import TokenABI from '../../../ABI/contracts/SelfToken.sol/SelfToken.json';
+import SwapABI from '../../../ABI/contracts/Swap.sol/Swap.json';
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
@@ -41,9 +41,11 @@ const tokens = [
   },
 ];
 
-let tokenContracts = tokens.map((token) => {
-  return new ethers.Contract(token.address, TokenABI.abi, signer);
-});
+let SwapContract = new ethers.Contract(
+  process.env.REACT_APP_SWAP_ADDRESS,
+  SwapABI.abi,
+  signer,
+);
 
 let FacContract = new ethers.Contract(
   process.env.REACT_APP_FACTORY_ADDRESS,
@@ -56,15 +58,27 @@ export const ExchangePoolList = ({ tokenData, setPopup }) => {
   const setToken2 = useSetRecoilState(poolToken2State);
   const transaction = useRecoilValue(transactionState);
   const previousTransactionTimestampRef = useRef();
+  const [monthlyReturnRate, setMonthlyReturnRate] = useState(0);
+  const [annualReturnRate, setAnnualReturnRate] = useState(0);
 
   const [prices, setPrices] = useState([]);
   const [totalPoolAmounts, setTotalPoolAmounts] = useState([]);
+
+  useEffect(() => {
+    const dailyReturnRate = 0.22;
+
+    const monthlyReturnRate = ((1 + dailyReturnRate / 100) ** 30 - 1) * 100;
+    const annualReturnRate = ((1 + dailyReturnRate / 100) ** 365 - 1) * 100;
+
+    setMonthlyReturnRate(monthlyReturnRate.toFixed(2));
+    setAnnualReturnRate(annualReturnRate.toFixed(2));
+  }, []);
 
   const fetchData = async () => {
     try {
       const fetchedPrices = await Promise.all(
         tokens.map(async (token) => {
-          const price = await FacContract[token.name + 'Price']();
+          const price = await SwapContract.tokenInfo(token.symbol);
           const formattedPrice = ethers.utils.formatUnits(price, 8);
           return formattedPrice;
         }),
@@ -129,7 +143,7 @@ export const ExchangePoolList = ({ tokenData, setPopup }) => {
         <Liquidity>
           <p className="mobile">유동성 규모</p>
           <strong className="pointColor">
-            ${' '}
+            ${''}
             {totalPoolAmounts[index] && prices[index]
               ? numberWithCommas(
                   (totalPoolAmounts[index] * prices[index]).toFixed(2),
@@ -141,11 +155,11 @@ export const ExchangePoolList = ({ tokenData, setPopup }) => {
           <div className="logo">{tokenLogoRender(v.token1.logo)}</div>
         </RewardToken>
         <RewardRate>
-          <span>KSP 분배</span> <span>2.90%</span>
+          <span>ASD 분배</span> <span>{monthlyReturnRate}%</span>
         </RewardRate>
         <Estimated>
           <p className="mobile">예상 수익률</p>
-          <strong>123.90</strong> %
+          <strong>{annualReturnRate}</strong> %
         </Estimated>
       </PoolContentWrap>
       <PoolContentWrap width="14%" className="right">
