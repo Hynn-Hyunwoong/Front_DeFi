@@ -28,15 +28,30 @@ export const handleAddLiquidity = async (
   const token1Address = tokenAddressMapping[token1];
   const token2Address = tokenAddressMapping[token2];
 
+  console.log('token1:', token1, 'address:', token1Address);
+  console.log('token2:', token2, 'address:', token2Address);
+  console.log('amount1:', amount1, 'amount2:', amount2);
+
   try {
+    console.log('Trying to add liquidity...');
     const tx = await FacContract.addLiquid_1(
       token2Address,
       ethers.utils.parseEther(amount2.toString()),
       token1Address,
       ethers.utils.parseEther(amount1.toString()),
+      {
+        gasLimit: 1000000,
+        maxFeePerGas: ethers.utils.parseUnits('10', 'gwei'),
+        maxPriorityFeePerGas: ethers.utils.parseUnits('1', 'gwei'),
+      },
     );
 
+    console.log('Transaction sent:', tx);
+
     const receipt = await tx.wait();
+
+    console.log('Transaction receipt:', receipt);
+
     setTransaction(receipt);
 
     if (receipt.status === 1) {
@@ -53,6 +68,7 @@ export const handleAddLiquidity = async (
 
     return receipt;
   } catch (error) {
+    console.error('Transaction failed:', error);
     setTransactionMessage(`Transaction failed: ${error.message}`);
     setShowPopup(false);
   }
