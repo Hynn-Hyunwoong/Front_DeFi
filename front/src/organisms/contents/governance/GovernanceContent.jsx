@@ -7,11 +7,15 @@ import {
   ButtonStyle,
 } from './styled';
 import { useRecoilState } from 'recoil';
-import { listState, dropboxState } from '../../store';
+import { listState, dropboxState, selectedWallet } from '../../store';
+import govABI from "../../../ABI/contracts/governance.sol/Governance.json"
+import { ethers } from "ethers";
+import { useEffect } from 'react';
 
-export const GovernanceContent = ({ testArr }) => {
+export const GovernanceContent = ({ listArr }) => {
   const [list] = useRecoilState(listState);
-  const [dropbox, setDropbox] = useRecoilState(dropboxState);
+  const [dropbox, setDropbox] = useRecoilState(dropboxState)
+  const [wallet, setWallet] = useRecoilState(selectedWallet);;
 
   const statusText = {
     exectued: '통과',
@@ -19,8 +23,49 @@ export const GovernanceContent = ({ testArr }) => {
     canceled: '취소',
   };
 
-  const filteredArr = list ? testArr.filter((v) => v.status === list) : testArr;
-  console.log(filteredArr)
+  let provider;
+  switch (wallet) {
+      case 'metamask':
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      break;
+      case 'trustwallet':
+      provider = new ethers.providers.Web3Provider(window.trustwallet);
+      break;
+      case 'walletConnect':
+      provider = new ethers.providers.Web3Provider(
+          window.walletConnectProvider,
+      );
+      break;
+      default:
+      console.log('Unknown wallet type');
+      return;
+  }
+  const signer = provider.getSigner();
+
+  const govContract = new ethers.Contract(
+    process.env.REACT_APP_GOVERNANCE_ADDRESS,
+    govABI.abi,
+    signer
+  )
+
+  const getProposal = async(index) => {
+    const result = await govContract.getProposalToFE(index)
+    console.log("test",result)
+    return (result)
+  }
+
+
+  const filterList = () => {
+    const filtered = listArr.reduce((acc, val)=>{
+      getProposal(val.Index)
+      return acc
+    },[])
+  }
+
+  filterList()
+
+
+
   return (
     <SectionStyled>
       <ButtonSection>
