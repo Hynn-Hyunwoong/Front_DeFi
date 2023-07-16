@@ -13,7 +13,7 @@ export const GovernanceContent = ({ testArr }) => {
   const [list] = useRecoilState(listState);
   const [dropbox, setDropbox] = useRecoilState(dropboxState);
   // const [dropbox, setDropbox] = useState(dropboxState);
-
+  console.log("list:::",list)
   const statusText = {
     exectued: '통과',
     progress: '진행중',

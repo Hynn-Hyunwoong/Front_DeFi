@@ -9,6 +9,7 @@ import {
   Staking,
   Pool,
   Drops,
+  GovernancePost
 } from '../pages';
 import { Header, Footer } from '../organisms/layouts/baseLayout';
 
@@ -19,6 +20,7 @@ export const AppRouter = () => {
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/governance' element={<Governance />} />
+        <Route path='/governance/:id' element={<GovernancePost />} />
         <Route path='/governance/create' element={<GovernanceCreate />} />
         <Route path='/assets' element={<Assets />} />
         <Route path='/exchange/swap' element={<Swap />} />
@@ -34,4 +36,4 @@ export const AppRouter = () => {
       </Routes>
     </>
   );
-};
+}

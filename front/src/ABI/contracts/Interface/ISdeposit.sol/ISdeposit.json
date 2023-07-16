@@ -1,95 +1,56 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "IStaking",
-  "sourceName": "contracts/Interface/IStaking.sol",
+  "contractName": "ISdeposit",
+  "sourceName": "contracts/Interface/ISdeposit.sol",
   "abi": [
     {
       "inputs": [
         {
           "internalType": "address",
-          "name": "_differLptoken",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
           "name": "_userAccount",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_factoryAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_amount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_month",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "_VASDtokenAddress",
           "type": "address"
         }
       ],
-      "name": "StakeDifferLp",
+      "name": "claimAmountcheck",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "getValue1",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "_firstNum",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_secondNum",
-          "type": "uint256"
-        },
+      "inputs": [
         {
           "internalType": "address",
-          "name": "_firstTokenName",
+          "name": "_userAccount",
           "type": "address"
         },
         {
-          "internalType": "uint256",
-          "name": "_firstTokenMon",
-          "type": "uint256"
-        },
+          "internalType": "address",
+          "name": "_differToken",
+          "type": "address"
+        }
+      ],
+      "name": "getAccountBalance",
+      "outputs": [
         {
           "internalType": "uint256",
-          "name": "_firstAmount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_secondAmount",
+          "name": "",
           "type": "uint256"
         }
       ],
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "getValue2",
+      "name": "returnValue",
       "outputs": [
         {
-          "internalType": "bool",
-          "name": "_isPossible",
-          "type": "bool"
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -101,23 +62,17 @@
         },
         {
           "internalType": "address",
-          "name": "_differLp",
+          "name": "_factoryAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_asdToken",
           "type": "address"
         }
       ],
-      "name": "withDrawBool",
-      "outputs": [
-        {
-          "internalType": "address[]",
-          "name": "tkname",
-          "type": "address[]"
-        },
-        {
-          "internalType": "uint256[]",
-          "name": "tkValue",
-          "type": "uint256[]"
-        }
-      ],
+      "name": "sClaim",
+      "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
@@ -135,16 +90,44 @@
         },
         {
           "internalType": "address",
-          "name": "_differLp",
+          "name": "_differToken",
           "type": "address"
         },
         {
           "internalType": "uint256",
-          "name": "_amount",
+          "name": "_differAmount",
           "type": "uint256"
         }
       ],
-      "name": "withDrawDifferLp",
+      "name": "sDeposit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_userAccount",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_factoryAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_differToken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_differAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withDrawOneToken",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
