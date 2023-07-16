@@ -9,6 +9,7 @@ import {
   Staking,
   Pool,
   Drops,
+  GovernancePost
 } from '../pages';
 import { Header, Footer } from '../organisms/layouts/baseLayout';
 
@@ -30,4 +31,4 @@ export const AppRouter = () => {
       <Footer />
     </>
   );
-};
+}
