@@ -50,11 +50,19 @@ export const StakingListDiv = styled.div`
 `;
 
 // step1
+export const InputValueWrap = styled.div`
+  display: flex;
+`;
+export const SelectStyled = styled.select`
+  border: 1px solid #caccd1;
+  width: 30%;
+`;
 export const InputValue = styled.div`
   ${Flex}
   align-items: center;
   border: 1px solid #caccd1;
   padding: 0 20px;
+  width: 70%;
 `;
 export const InputBalance = styled.div`
   ${Flex}
@@ -101,8 +109,10 @@ export const NextButton = styled.button`
 // step2
 export const ApproveHeader = styled.div`
   ${Flex}
+  align-items: center;
   padding: 15px 0;
   border-bottom: 1px solid #caccd1;
+  margin-bottom: 20px;
 `;
 
 export const ApproveNotice = styled.div`

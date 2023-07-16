@@ -63,22 +63,12 @@ export const ExchangeBox = ({ provider, contract }) => {
         }
       );
       setTransaction((prevTX) => [...prevTX, tx]);
-      console.log(transaction);
     } catch (e) {
       console.log(e.message);
     }
   };
 
   const clickSwap = async () => {
-    // try {
-    //   if (toAmount) {
-    //     swap(fromToken, toToken, toAmount);
-    //   } else if (fromAmount) {
-    //     swap(fromToken, toToken, fromAmount);
-    //   }
-    // } catch (e) {
-    //   console.log(e.message);
-    // }
     try {
       if (toAmount) {
         await mutation.mutateAsync({
@@ -115,3 +105,13 @@ export const ExchangeBox = ({ provider, contract }) => {
     </>
   );
 };
+
+// try {
+//   if (toAmount) {
+//     swap(fromToken, toToken, toAmount);
+//   } else if (fromAmount) {
+//     swap(fromToken, toToken, fromAmount);
+//   }
+// } catch (e) {
+//   console.log(e.message);
+// }

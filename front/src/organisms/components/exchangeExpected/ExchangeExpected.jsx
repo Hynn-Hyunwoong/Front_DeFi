@@ -58,7 +58,7 @@ export const Expected = () => {
       data: exchageRate(),
     },
     { title: '최소 거래 수량', data: exchageAmount() },
-    { title: '수수료', data: '0.03%' },
+    { title: '수수료', data: '1.62 Gwei' },
     { title: '교환 경로', data: `${fromToken} ➤ ${toToken}` },
   ];
 

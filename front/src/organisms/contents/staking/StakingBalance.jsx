@@ -8,13 +8,20 @@ import {
   BalanceDiv,
   ExpectInfoDiv,
 } from './styled';
-import { useSetRecoilState } from 'recoil';
-import { stakingPopup, stakingStep } from '../../store';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { LPtokenState, stakingPopup, stakingStep } from '../../store';
 
-export const StakingBalance = ({ amounts, state, stakingRewardRate }) => {
+export const StakingBalance = ({ stakingRewardRate }) => {
   const setStaking = useSetRecoilState(stakingPopup);
   const setStep = useSetRecoilState(stakingStep);
+  const { ARBLP, ETHLP, USDTLP, vASD } = useRecoilValue(LPtokenState);
   const stakingAlert = () => alert(`수량이 부족합니다.`);
+
+  const state = {
+    staking: ARBLP || ETHLP || USDTLP,
+    unstaking: true, // 기간이 되면 true가 되어야 하는데...
+    reward: ARBLP || ETHLP || USDTLP,
+  };
 
   // STATE는 로그인이 되었느냐, 혹은 수량이 있느냐 확인해서 설정해줘야 함
   const renderButton = (width, title, state, popup) => (
@@ -42,9 +49,13 @@ export const StakingBalance = ({ amounts, state, stakingRewardRate }) => {
     </FlexDiv>
   );
 
-  const renderBalance = (amount) => (
+  const renderBalance = (token, amount) => (
     <BalanceDiv className='balance'>
-      <strong>{amount}</strong> ASD
+      <span>{token}</span>
+      <span>
+        <strong>{amount}</strong>
+        ASD
+      </span>
     </BalanceDiv>
   );
 
@@ -60,7 +71,7 @@ export const StakingBalance = ({ amounts, state, stakingRewardRate }) => {
   return (
     <SectionStyled>
       <HeaderSection>
-        <Box colors='white' width='740px' height='130px'>
+        <Box colors='white' width='740px' height='100%'>
           <BoxDivBalance>
             <BoxSectionBalance className='staking' borderColor='#e6f4fe'>
               {renderHead(
@@ -75,7 +86,9 @@ export const StakingBalance = ({ amounts, state, stakingRewardRate }) => {
                   {renderButton('90', '스테이킹', state.staking, 'step1')}
                 </ButtonDiv>
               )}
-              {renderBalance(amounts.stakingAmount)}
+              {renderBalance('ARB LP Token', ARBLP)}
+              {renderBalance('ETH LP Token', ETHLP)}
+              {renderBalance('USDT LP Token', USDTLP)}
               {renderExpectInfo(
                 '예상 수익률',
                 `연 ${stakingRewardRate.min}% ~ 연 ${stakingRewardRate.max}%`,
@@ -87,8 +100,8 @@ export const StakingBalance = ({ amounts, state, stakingRewardRate }) => {
                 '보상 수량',
                 renderButton('90', '보상 수령', state.reward, 'reward')
               )}
-              {renderBalance(amounts.rewardAmount)}
-              {renderExpectInfo('누적', `${amounts.holeAmount} ASD`)}
+              {renderBalance('total', ARBLP)}
+              {renderExpectInfo('누적', `${ARBLP} ASD`)}
             </BoxSectionBalance>
           </BoxDivBalance>
         </Box>

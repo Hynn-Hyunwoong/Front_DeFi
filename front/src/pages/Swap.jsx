@@ -71,7 +71,7 @@ export const Swap = () => {
         console.log(e.message);
       }
     })();
-  }, [provider, contract, setPrices]);
+  }, [provider, contract]);
 
   // useEffect(() => {
   //   console.log(prices);
