@@ -101,8 +101,47 @@
         },
         {
           "internalType": "address",
+          "name": "_differLp",
+          "type": "address"
+        }
+      ],
+      "name": "withDrawBool",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "tkname",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "tkValue",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_userAccount",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
           "name": "_factoryAddress",
           "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_differLp",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
         }
       ],
       "name": "withDrawDifferLp",

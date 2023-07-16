@@ -19,7 +19,9 @@ export const PopupDeposit = () => {
   const [amount1, setAmount1] = useState(0);
   const [amount2, setAmount2] = useState(0);
   const [showPopup, setShowPopup] = useRecoilState(transactionMessageState);
-  const transactionMessage = useRecoilValue(transactionMessageState);
+  const [transactionMessage, setTransactionMessage] = useRecoilState(
+    transactionMessageState,
+  );
 
   const onAddLiquidityClick = async () => {
     try {
@@ -30,6 +32,7 @@ export const PopupDeposit = () => {
         amount2,
         setTransaction,
         setShowPopup,
+        setTransactionMessage,
       );
     } catch (error) {
       console.error('An error occurred while adding liquidity:', error);

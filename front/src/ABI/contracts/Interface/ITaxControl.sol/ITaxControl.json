@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "ITaxControl",
-  "sourceName": "contracts/Interface/ITaxControl.sol",
+  "sourceName": "contracts/Interface/ITaxcontrol.sol",
   "abi": [
     {
       "inputs": [
