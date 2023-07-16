@@ -57,8 +57,9 @@ export const PoolHeaderBoxDiv = styled.div`
 // pool
 export const PoolTableHeader = styled.div`
   font-size: 13px;
-  width: 100%;
+  width: 85%;
   display: flex;
+  justify-content: space-around;
   color: #767c83;
 
   .pair {
@@ -70,7 +71,7 @@ export const PoolTableHeader = styled.div`
   }
   .rewardToken {
     width: calc(18% - 10px);
-    margin-left: 50px;
+    margin-left: 70px;
   }
   .rewardRate {
     width: calc(15% - 10px);

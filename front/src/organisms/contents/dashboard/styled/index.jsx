@@ -6,7 +6,7 @@ export const DashboardWrap = styled.div`
   margin: 10px auto;
   margin-top: 5rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   gap: 2%;
 `;
@@ -47,6 +47,7 @@ export const TrendingBox = styled.div`
   flex: 1;
   height: 100%;
   margin: 0;
+  width: 17rem;
 `;
 
 export const TrendingTitleVariation = styled.div`
@@ -172,4 +173,52 @@ export const TableData = styled.td`
   text-align: center;
   padding: 1rem;
   border-top: 1px solid #e5e7eb;
+`;
+
+export const TrendingTopic = styled.h2`
+  display: block;
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #6b7280;
+`;
+
+export const TrendingTopic2 = styled.h2`
+  display: block;
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #0000ff;
+`;
+
+export const TablesWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1%;
+  width: 100%;
+`;
+
+export const DashboardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2%;
+`;
+
+export const DashboardLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `;
