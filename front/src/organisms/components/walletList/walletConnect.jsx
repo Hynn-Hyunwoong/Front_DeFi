@@ -43,7 +43,6 @@ export const WalletConnect = () => {
       ETH: process.env.REACT_APP_ETH_TOKEN_ADDRESS,
       ASD: process.env.REACT_APP_ASD_TOKEN_ADDRESS,
       USDT: process.env.REACT_APP_USDT_TOKEN_ADDRESS,
-      vASD: process.env.REACT_APP_VASD_TOKEN_ADDRESS,
     };
 
     let newBalance = { ...balance };

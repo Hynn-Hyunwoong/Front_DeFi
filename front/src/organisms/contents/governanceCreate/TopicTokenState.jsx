@@ -12,13 +12,13 @@ export const TopicTokenState = () => {
     <>
       <TokenStateWrap>
         <TokenLeftWrap>
-          <TokenStateAlignLeft>보유 Governance</TokenStateAlignLeft>
-          <TokenCurrentValue>100 Token</TokenCurrentValue>
+          <TokenStateAlignLeft>보유 투표권</TokenStateAlignLeft>
+          <TokenCurrentValue>100 vASD</TokenCurrentValue>
         </TokenLeftWrap>
         <TokenLine />
         <TokenRightWrap>
-          <TokenStateAlignLeft>보유 투표권</TokenStateAlignLeft>
-          <TokenCurrentValue>100 Token</TokenCurrentValue>
+          <TokenStateAlignLeft>소모 투표권</TokenStateAlignLeft>
+          <TokenCurrentValue>1 vASD</TokenCurrentValue>
         </TokenRightWrap>
       </TokenStateWrap>
     </>

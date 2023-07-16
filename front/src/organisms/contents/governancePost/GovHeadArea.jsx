@@ -5,8 +5,6 @@ import {balanceState} from "../../store"
 
 export const GovHeadArea = () => {
 
-    const [balance] = useRecoilState(balanceState)
-    console.log(balance)
 
     return <>
         <PostHeadArea>

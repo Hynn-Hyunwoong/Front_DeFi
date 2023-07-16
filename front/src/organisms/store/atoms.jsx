@@ -89,6 +89,11 @@ export const LPbalanceState = atom({
   default: { LPETH: 0, LPUSDT: 0, LPARB: 0, VASD: 0 },
 });
 
+export const GovToken = atom({
+  key: 'GovToken',
+  default: { vASD:0 },
+});
+
 export const listState = atom({
   key: 'listState',
   default: null,
