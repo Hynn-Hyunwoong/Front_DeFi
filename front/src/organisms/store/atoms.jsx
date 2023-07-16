@@ -81,7 +81,7 @@ export const ToTokenState = atom({
 
 export const balanceState = atom({
   key: 'balanceState',
-  default: { ETH: 0, USDT: 0, ARB: 0, ASD: 0 },
+  default: { ETH: 0, USDT: 0, ARB: 0, ASD: 0, vASD:0 },
 });
 
 export const listState = atom({

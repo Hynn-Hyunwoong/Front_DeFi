@@ -20,6 +20,7 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/governance" element={<Governance />} />
+        <Route path="/governance/:id" element={<GovernancePost />} />
         <Route path="/governance/create" element={<GovernanceCreate />} />
         <Route path="/exchange/swap" element={<Swap />} />
         <Route path="/exchange/pool" element={<Pool />} />
