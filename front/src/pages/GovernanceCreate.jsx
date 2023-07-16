@@ -7,10 +7,12 @@ import {
   TopicTokenState,
   TopicWrite,
 } from '../organisms/contents/governanceCreate';
+import { Link } from 'react-router-dom';
 
 export const GovernanceCreate = () => {
   // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsloading] = useRecoilState(loadingState);
+
 
   return (
     <>
@@ -18,7 +20,7 @@ export const GovernanceCreate = () => {
         <Loader />
       ) : (
         <WritePreviewWrap>
-          <div>👈Back</div>
+          <Link to="/governance">👈Back</Link>
           <BackspaceWrap />
           <TopicDefine />
           <TopicTokenState />
