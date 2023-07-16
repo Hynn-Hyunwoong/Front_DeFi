@@ -1,4 +1,4 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useState } from 'react';
 import {
   Button,
@@ -15,21 +15,33 @@ import {
   InputBalance,
   InputValue,
   NextButton,
+  InputValueWrap,
+  SelectStyled,
 } from './styled';
-import { optionTermsState, stakingValueState } from '../../store';
+import {
+  LPtokenState,
+  optionTermsState,
+  optionTimesState,
+  selectedLPTokenState,
+  stakingValueState,
+} from '../../store';
 
-const testData = {
-  ASDbalance: 442,
-};
+// const testData = {
+//   ASDbalance: 442,
+// };
 
 const buttonList = ['입금하기', '거래하기'];
 
 export const Step1 = ({ option, reward, closePopup, setStep, date }) => {
   // eslint-disable-next-line no-unused-vars
-  const [optionTerm, setoptioonTerm] = useRecoilState(optionTermsState);
+  const LPtokenAmount = useRecoilValue(LPtokenState);
+  const optionTime = useRecoilValue(optionTimesState);
+  const [optionTerm, setoptionTerm] = useRecoilState(optionTermsState);
   const [stakingValue] = useRecoilState(stakingValueState);
   const [noticeChenck, setNoticeChenck] = useState(false);
   const [nextChenck, setNextCheck] = useState(false);
+  const [lpToken, setLpToken] = useRecoilState(selectedLPTokenState);
+  // const [lpToken, setLpToken] = useState('');
 
   const buttonMap = buttonList.map((v, index) => {
     return (
@@ -39,19 +51,31 @@ export const Step1 = ({ option, reward, closePopup, setStep, date }) => {
     );
   });
 
+  const LpTokenSelectHandler = (e) => {
+    setLpToken(e.target.value);
+  };
+
   return (
     <>
       <PopupHeader>스테이킹</PopupHeader>
       <StakingContent>
         <article className='inputValue'>
-          <InputValue>
-            <InputBox placeholder={'정수 단위로만 입력이 가능합니다'} /> ASD
-            {/*입력한 값은 다음 컴포넌트에 넘겨줘야 함*/}
-          </InputValue>
+          <InputValueWrap>
+            <SelectStyled onChange={LpTokenSelectHandler}>
+              <option>선택</option>
+              <option value='ARBLP'>ARB LP Token</option>
+              <option value='ETHLP'> ETH LP Token</option>
+              <option value='USDTLP'>USDT LP Token</option>
+            </SelectStyled>
+            <InputValue>
+              <InputBox placeholder={'정수 단위로만 입력이 가능합니다'} /> ASD
+              {/*입력한 값은 다음 컴포넌트에 넘겨줘야 함*/}
+            </InputValue>
+          </InputValueWrap>
           <InputBalance>
             <div className='balance'>
               <span>보유</span>
-              <span>{testData.ASDbalance}</span>
+              <span>{lpToken ? LPtokenAmount[lpToken] : '0'}</span>
             </div>
             <div className='button'>{buttonMap}</div>
           </InputBalance>
@@ -98,7 +122,7 @@ export const Step1 = ({ option, reward, closePopup, setStep, date }) => {
               </StakingListDiv>
               <StakingListDiv>
                 <p>획득 투표권</p>
-                <p>0 vASD</p>
+                <p>{1 * optionTime} vASD</p>
               </StakingListDiv>
             </div>
           </Summary>
@@ -114,8 +138,8 @@ export const Step1 = ({ option, reward, closePopup, setStep, date }) => {
       </StakingContent>
       <NextButton
         onClick={() => {
-          if (Number(stakingValue) > testData.ASDbalance) {
-            alert('잔액이 부족합니다'); // 데이터 타입 잘 보기! => number가 맞는지
+          if (Number(stakingValue) > LPtokenAmount[lpToken]) {
+            alert('수량이 부족합니다'); // 데이터 타입 잘 보기! => number가 맞는지
             return;
           }
           noticeChenck && nextChenck && setStep('step2');

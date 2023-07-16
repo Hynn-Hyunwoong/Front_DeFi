@@ -91,7 +91,7 @@ export const LPbalanceState = atom({
 
 export const GovToken = atom({
   key: 'GovToken',
-  default: { vASD:0 },
+  default: { vASD: 0 },
 });
 
 export const listState = atom({
@@ -174,4 +174,20 @@ export const tokenPricesState = atom({
 export const transactionMessageState = atom({
   key: 'transactionMessage',
   default: '',
+});
+
+// 엘피토큰 수량
+export const LPtokenState = atom({
+  key: 'LPtokenState',
+  default: {},
+});
+// 스테이킹 팝업에서 선택한 엘피토큰 종류
+export const selectedLPTokenState = atom({
+  key: 'selectedLPTokenState',
+  default: null,
+});
+// 언스테이킹 팝업에서 선택한 엘피토큰 종류
+export const selectedUnstakingLPtokenState = atom({
+  key: 'selectedUnstakingLPtokenState',
+  default: null,
 });
