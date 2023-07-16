@@ -27,7 +27,7 @@ export const PopupDeposit = () => {
 
   const onAddLiquidityClick = async () => {
     try {
-      await handleAddLiquidity(
+      const result = await handleAddLiquidity(
         token1,
         amount1,
         token2,
@@ -36,12 +36,16 @@ export const PopupDeposit = () => {
         setShowPopup,
         setTransactionMessage,
       );
-    } catch (error) {
-      console.error('An error occurred while adding liquidity:', error);
+      if (result) {
+        handleClose();
+      }
+    } catch (e) {
+      console.error('An error occurred while adding liquidity:', e);
     }
   };
 
   const handleClose = () => {
+    console.log(123);
     setShowPopup(false);
   };
 

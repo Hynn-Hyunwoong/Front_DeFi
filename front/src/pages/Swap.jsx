@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { useEffect } from 'react';
-import { BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import {
   ExchangeBottom,
   ExchangeBox,
@@ -15,6 +15,7 @@ const signer = provider.getSigner();
 
 export const Swap = () => {
   const [provider, contract] = useProvider();
+  // eslint-disable-next-line no-unused-vars
   const [prices, setPrices] = useRecoilState(tokenPricesState);
 
   const tokens = [
@@ -39,7 +40,7 @@ export const Swap = () => {
   let swapContract = new ethers.Contract(
     process.env.REACT_APP_SWAP_ADDRESS,
     swapABI.abi,
-    signer
+    signer,
   );
 
   const fetchData = async () => {
@@ -49,7 +50,7 @@ export const Swap = () => {
           const price = await swapContract.tokenInfo(token.symbol);
           const formattedPrice = ethers.utils.formatUnits(price, 8);
           return formattedPrice;
-        })
+        }),
       );
       setPrices({
         ETH: fetchedPrices[1],
@@ -73,17 +74,11 @@ export const Swap = () => {
     })();
   }, [provider, contract]);
 
-  // useEffect(() => {
-  //   console.log(prices);
-  // }, [prices]);
-
   return (
-    <div className='swap'>
+    <div className="swap">
       <ExchangeTop />
       <ExchangeBox provider={provider} contract={contract} />
       <ExchangeBottom provider={provider} contract={contract} />
     </div>
   );
 };
-
-// // 관리해야 할 상태 : 로딩중인지 아닌지, input에 입력된 값이 from인지 to인지, amount값, token1이 뭔지(from), token2가 뭔지(to)
