@@ -5,8 +5,8 @@ export const Logo = () => {
   return (
     <Link to="/">
       <LogoWrap>
-        <LogoImg src="/images/logo-solar.png" />
-        <LogoText src="/images/LogoText.png" />
+        <LogoImg src="/images/logo-solar.png" alt="solarLogo" />
+        <LogoText src="/images/Logotext.png" alt="Text" />
       </LogoWrap>
     </Link>
   );
