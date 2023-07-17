@@ -36,9 +36,10 @@ export const Step2 = ({ closePopup, date, provider, contract }) => {
         ethers.utils.parseEther(stakingValue),
         stakingTerms,
         {
+          gasLimit: 1000000,
           maxFeePerGas: ethers.utils.parseUnits('10', 'gwei'),
           maxPriorityFeePerGas: ethers.utils.parseUnits('1', 'gwei'),
-        }
+        },
       );
     } catch (e) {
       console.log(e.message);
@@ -50,7 +51,7 @@ export const Step2 = ({ closePopup, date, provider, contract }) => {
       `스테이킹 버튼`,
       `amount:${stakingValue} `,
       `개월수: ${stakingTerms}`,
-      `선택한 lp : ${lpToken}`
+      `선택한 lp : ${lpToken}`,
     );
     fatchStaking();
   };
@@ -61,10 +62,10 @@ export const Step2 = ({ closePopup, date, provider, contract }) => {
 
       {approve ? (
         <>
-          <StakingContent className='staking'>
+          <StakingContent className="staking">
             <article>
               <ApproveHeader>
-                <h4 className='pointBlue'>스테이킹</h4>
+                <h4 className="pointBlue">스테이킹</h4>
               </ApproveHeader>
               <ApproveHeader>
                 <p>{stakingValue}</p> <p>ASD</p>
@@ -102,10 +103,10 @@ export const Step2 = ({ closePopup, date, provider, contract }) => {
         </>
       ) : (
         <>
-          <StakingContent className='approve'>
+          <StakingContent className="approve">
             <article>
               <ApproveHeader>
-                <h4 className='pointBlue'>토큰 승인</h4>
+                <h4 className="pointBlue">토큰 승인</h4>
               </ApproveHeader>
               <ApproveHeader>
                 <p>Token</p> <p>ASD</p>

@@ -14,4 +14,5 @@ export const TransactionArea = styled.div`
 
 export const TransactionBox = styled.div`
     display: inline-block;
+    font-size: 12px;
 `

@@ -7,53 +7,63 @@ import { useRecoilState } from 'recoil';
 import { stakingPopup, searchKeyword } from '../../store';
 import { ethers } from 'ethers';
 import TokenABI from '../../../ABI/contracts/SelfToken.sol/SelfToken.json';
-import FacABI from '../../../ABI/contracts/Factory_v1.sol/Factory_v1.json';
-import PoolABI from '../../../ABI/contracts/Pool.sol/Pool.json';
-import SwapABI from '../../../ABI/contracts/Swap.sol/Swap.json';
-import TokenPriceOracle from '../../../ABI/contracts/TokenPriceOracle.sol/TokenPriceOracle.json';
 
-const provider = new ethers.providers.Web3Provider(window.ethereum);
-const signer = provider.getSigner();
-const LPARB = process.env.REACT_APP_LP_ARB_ADDRESS;
-const LPETH = process.env.REACT_APP_LP_ETH_ADDRESS;
-const LPUSDT = process.env.REACT_APP_LP_USDT_ADDRESS;
-const ASD = process.env.REACT_APP_ASD_TOKEN_ADDRESS;
+if (window.ethereum) {
+  window.ethereum
+    .enable()
+    .then(() => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
 
-const tokens = [
-  {
-    name: 'Usdt',
-    symbol: 'USDT',
-    address: LPUSDT,
-  },
-  {
-    name: 'Eth',
-    symbol: 'ETH',
-    address: LPETH,
-  },
-  {
-    name: 'Arb',
-    symbol: 'ARB',
-    address: LPARB,
-  },
-  {
-    name: 'ASD',
-    symbol: 'ASD',
-    address: ASD,
-  },
-];
+      const LPARB = process.env.REACT_APP_LP_ARB_ADDRESS;
+      const LPETH = process.env.REACT_APP_LP_ETH_ADDRESS;
+      const LPUSDT = process.env.REACT_APP_LP_USDT_ADDRESS;
+      const ASD = process.env.REACT_APP_ASD_TOKEN_ADDRESS;
 
-const tokenContracts = tokens.map((token) => {
-  return new ethers.Contract(token.address, TokenABI.abi, signer);
-});
+      const tokens = [
+        {
+          name: 'Usdt',
+          symbol: 'USDT',
+          address: LPUSDT,
+        },
+        {
+          name: 'Eth',
+          symbol: 'ETH',
+          address: LPETH,
+        },
+        {
+          name: 'Arb',
+          symbol: 'ARB',
+          address: LPARB,
+        },
+        {
+          name: 'ASD',
+          symbol: 'ASD',
+          address: ASD,
+        },
+      ];
 
-tokens.map(async (token, index) => {
-  try {
-    const totalSupply = await tokenContracts[index].totalSupply();
-    return totalSupply;
-  } catch (error) {
-    console.error(`Error fetching total supply of ${token.name}:`, error);
-  }
-});
+      const tokenContracts = tokens.map((token) => {
+        return new ethers.Contract(token.address, TokenABI.abi, signer);
+      });
+
+      tokens.map(async (token, index) => {
+        try {
+          const totalSupply = await tokenContracts[index].totalSupply();
+          return totalSupply;
+        } catch (error) {
+          console.error(`Error fetching total supply of ${token.name}:`, error);
+        }
+      });
+    })
+    .catch((error) => {
+      console.error('User rejected request:', error);
+    });
+} else {
+  console.error(
+    'Non-Ethereum browser detected. Consider trying Metamask or another Ethereum browser.',
+  );
+}
 
 export const PoolList = ({ tokenData }) => {
   const [staking, setStaking] = useRecoilState(stakingPopup);

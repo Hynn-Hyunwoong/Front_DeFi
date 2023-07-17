@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { GovToken, selectedWallet } from '../organisms/store';
+import { GovToken, selectedWallet, proposalList } from '../organisms/store';
 import styled from 'styled-components';
 import {
   GovHeadArea,
@@ -30,14 +30,11 @@ export const Wrapper = styled.div`
 `;
 
 export const GovernancePost = () => {
-  // eslint-disable-next-line no-unused-vars
   const { id } = useParams();
-  // eslint-disable-next-line no-unused-vars
   const [wallet, setWallet] = useRecoilState(selectedWallet);
-  // eslint-disable-next-line no-unused-vars
   const [govBalance, setgovBalance] = useRecoilState(GovToken);
-  // eslint-disable-next-line no-unused-vars
-  const govToken = process.env.REACT_APP_VASD_ADDRESS;
+  const [proposal] = useRecoilState(proposalList);
+  const prop = proposal[id-1]
   const setGov = async () => {
     let provider;
     switch (wallet) {
@@ -76,12 +73,12 @@ export const GovernancePost = () => {
     <>
       <Wrapper>
         <GovPostWrapper>
-          <GovHeadArea />
+          <GovHeadArea title={prop.title} start={prop.start} end={prop.end}/>
           <GovVotingArea />
-          <GovTransactionBox />
-          <GovTextArea />
-          <GovDetailArea />
-          <GovSchedule />
+          <GovTransactionBox tx={prop.transaction}/>
+          <GovTextArea body={prop.body}/>
+          <GovDetailArea prop={prop}/>
+          <GovSchedule prop={prop}/>
         </GovPostWrapper>
       </Wrapper>
     </>

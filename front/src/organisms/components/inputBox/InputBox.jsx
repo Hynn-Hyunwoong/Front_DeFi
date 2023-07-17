@@ -1,8 +1,9 @@
 import { useRecoilState } from 'recoil';
 import { InputStyled } from './styled';
 import { stakingValueState } from '../../store';
+import { useState } from 'react';
 
-export const InputBox = ({ placeholder, width }) => {
+export const InputBox = ({ placeholder, width, value, onChange }) => {
   const [stakingValue, setStakingValue] = useRecoilState(stakingValueState);
   const inputChange = (e) => {
     setStakingValue(e.target.value);
@@ -11,11 +12,11 @@ export const InputBox = ({ placeholder, width }) => {
   return (
     <InputStyled
       placeholder={placeholder}
-      type='number'
+      type="number"
       min={0}
       width={width}
-      value={stakingValue}
-      onChange={inputChange}
+      value={value}
+      onChange={onChange}
     />
   );
 };

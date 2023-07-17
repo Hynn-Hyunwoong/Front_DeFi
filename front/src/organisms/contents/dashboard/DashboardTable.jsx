@@ -20,20 +20,20 @@ const signer = provider.getSigner();
 
 const tokens = [
   {
-    name: 'Usdt',
+    name: 'USDT',
     avatar: '/images/logo-tether.png',
     symbol: 'USDT',
     address: process.env.REACT_APP_LP_USDT_ADDRESS,
   },
   {
-    name: 'Eth',
+    name: 'ETH',
     avatar: '/images/logo-ethereum.png',
     symbol: 'ETH',
     address: process.env.REACT_APP_LP_ETH_ADDRESS,
   },
 
   {
-    name: 'Arb',
+    name: 'ARB',
     avatar: '/images/logo-arbitrum.png',
     symbol: 'ARB',
     address: process.env.REACT_APP_LP_ARB_ADDRESS,
@@ -43,13 +43,13 @@ const tokens = [
 let SwapContract = new ethers.Contract(
   process.env.REACT_APP_SWAP_ADDRESS,
   SwapABI.abi,
-  signer,
+  signer
 );
 
 let FacContract = new ethers.Contract(
   process.env.REACT_APP_FACTORY_ADDRESS,
   FactoryABI.abi,
-  signer,
+  signer
 );
 
 export const DashboardTable = () => {
@@ -64,7 +64,7 @@ export const DashboardTable = () => {
           const price = await SwapContract.tokenInfo(token.symbol);
           const formattedPrice = ethers.utils.formatUnits(price, 8);
           return formattedPrice;
-        }),
+        })
       );
 
       const fetchedTotalPoolAmounts = await Promise.all(
@@ -74,7 +74,7 @@ export const DashboardTable = () => {
           ]();
           const formattedSupply = ethers.utils.formatUnits(totalSupply, 0);
           return formattedSupply;
-        }),
+        })
       );
 
       const dailyReturnRate = 0.22;
@@ -93,7 +93,7 @@ export const DashboardTable = () => {
     name: token.name,
     totalDeposit: (totalPoolAmounts[index] * prices[index]).toLocaleString(
       undefined,
-      { minimumFractionDigits: 2, maximumFractionDigits: 2 },
+      { minimumFractionDigits: 2, maximumFractionDigits: 2 }
     ),
     liquidityPoolToken: Number(totalPoolAmounts[index]).toLocaleString(),
     volume: Number(totalPoolAmounts[index]).toLocaleString(),
@@ -108,9 +108,11 @@ export const DashboardTable = () => {
           <TableHeader></TableHeader>
           <TableHeader>토큰명</TableHeader>
           <TableHeader>총 예치규모</TableHeader>
-          <TableHeader>유동성 풀 토큰</TableHeader>
-          <TableHeader>거래량</TableHeader>
-          <TableHeader>수수료</TableHeader>
+          <TableHeader className='liquidityPoolToken'>
+            유동성 풀 토큰
+          </TableHeader>
+          <TableHeader className='volume'>거래량</TableHeader>
+          <TableHeader className='fee'>수수료</TableHeader>
           <TableHeader>예상 수익률</TableHeader>
         </TableRow>
       </thead>
@@ -124,15 +126,15 @@ export const DashboardTable = () => {
               <AvatarName>{data.name}</AvatarName>
             </TableData>
             <TableData>
-              <AvatarTitle>{data.totalDeposit}</AvatarTitle>
+              <AvatarTitle>{data.totalDeposit} $</AvatarTitle>
             </TableData>
-            <TableData>
+            <TableData className='liquidityPoolToken'>
               <AvatarStatus>{data.liquidityPoolToken}</AvatarStatus>
             </TableData>
-            <TableData>
+            <TableData className='volume'>
               <AvatarRole>{data.volume}</AvatarRole>
             </TableData>
-            <TableData>
+            <TableData className='fee'>
               <AvatarRole>{data.fee}</AvatarRole>
             </TableData>
             <TableData>

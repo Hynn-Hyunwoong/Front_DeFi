@@ -7,6 +7,8 @@ import {
   TrendingTopic2,
   DashboardContainer,
   TablesWrapper,
+  TrendingContent,
+  TablesWrapperB,
 } from './styled';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -17,10 +19,10 @@ const names = ['Ethereum', 'Arbitrum', 'Tether(USDT)', 'Solar ASD']; // names fo
 
 const getCoinData = async (symbol) => {
   const currentlyCoinPriceResponse = await axios.get(
-    `${APIURL}/token/today/${symbol}`,
+    `${APIURL}/token/today/${symbol}`
   );
   const trendingResponse = await axios.get(
-    `${APIURL}/token/priceChangePercentage/${symbol}`,
+    `${APIURL}/token/priceChangePercentage/${symbol}`
   );
   return {
     currentlyCoinPrice: currentlyCoinPriceResponse.data.dailyEndPriceUSD,
@@ -52,21 +54,25 @@ export const DashboardTrend = () => {
   return (
     <>
       <DashboardContainer>
-        <TrendingTopic2>Token 실시간 가격 현황</TrendingTopic2>
-        <TablesWrapper>
+        <TrendingTopic2>
+          <strong className='pointColor'>Token 실시간 가격 현황</strong>
+        </TrendingTopic2>
+        <TablesWrapperB>
           {trendingData.map((data, index) => (
             <TrendingBox key={index}>
               <TrendingTitle>{data.title}</TrendingTitle>
-              <TrendingEmphasis>$ {data.value}</TrendingEmphasis>
-              <TrendingVariation isPositive={data.isPositive}>
-                <TrendingVariationIcon>
-                  {data.isPositive ? '+' : '-'}
-                </TrendingVariationIcon>
-                {Math.abs(data.trending)}%{' '}
-              </TrendingVariation>
+              <TrendingContent>
+                <TrendingEmphasis>$ {data.value}</TrendingEmphasis>
+                <TrendingVariation isPositive={data.isPositive}>
+                  <TrendingVariationIcon>
+                    {data.isPositive ? '+' : '-'}
+                  </TrendingVariationIcon>
+                  {Math.abs(data.trending)}%{' '}
+                </TrendingVariation>
+              </TrendingContent>
             </TrendingBox>
           ))}
-        </TablesWrapper>
+        </TablesWrapperB>
       </DashboardContainer>
     </>
   );

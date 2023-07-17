@@ -13,6 +13,7 @@ import {
   TrendingTopic2,
   DashboardContainer,
   TablesWrapperB,
+  TrendingContent,
 } from './styled';
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -20,24 +21,24 @@ const provider = new ethers.providers.Web3Provider(window.ethereum);
 let SwapContract = new ethers.Contract(
   process.env.REACT_APP_SWAP_ADDRESS,
   SwapABI.abi,
-  provider,
+  provider
 );
 
 let FacContract = new ethers.Contract(
   process.env.REACT_APP_FACTORY_ADDRESS,
   FacABI.abi,
-  provider,
+  provider
 );
 
 let LPContract = new ethers.Contract(
   process.env.REACT_APP_LP_ETH_ADDRESS,
   TokenABI.abi,
-  provider,
+  provider
 );
 
 const fetchData = async () => {
   const previousDataResponse = await axios.get(
-    `${process.env.REACT_APP_AXIOS_URL}/dashboard/findDate/ETH`,
+    `${process.env.REACT_APP_AXIOS_URL}/dashboard/findDate/ETH`
   );
 
   const amount = await FacContract.lqAmountETH();
@@ -53,13 +54,22 @@ const fetchData = async () => {
   const TotalSupply = supply;
   const TotalRewardLp = LpTokenAmount * formatted;
 
+  const currentData = {
+    TotalDeposit,
+    TotalSupply,
+    TotalRewardLp,
+  };
+
+  await axios.post(`${process.env.REACT_APP_AXIOS_URL}/dashboard/regeditDate`, {
+    token: 'ETH',
+    totalDeposit: TotalDeposit,
+    totalSupply: TotalSupply,
+    totalRewardLp: TotalRewardLp,
+  });
+
   return {
     previousData: previousDataResponse.data,
-    currentData: {
-      TotalDeposit,
-      TotalSupply,
-      TotalRewardLp,
-    },
+    currentData: currentData,
   };
 };
 
@@ -89,23 +99,30 @@ export const DashboardETH = () => {
     };
 
     fetchTrendingData();
+
+    const intervalId = setInterval(fetchTrendingData, 60000);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
     <>
       <DashboardContainer>
-        <TrendingTopic2>ASD & Ethereum Dashboard</TrendingTopic2>
+        <TrendingTopic2>
+          <strong className='pointColor'>ASD & Ethereum</strong> Dashboard
+        </TrendingTopic2>
         <TablesWrapperB>
           {trendingData.map((data, index) => (
             <TrendingBox key={index}>
               <TrendingTitle>{data.title}</TrendingTitle>
-              <TrendingEmphasis>$ {data.value}</TrendingEmphasis>
-              <TrendingVariation isPositive={data.isPositive}>
-                <TrendingVariationIcon>
-                  {data.isPositive ? '+' : '-'}
-                </TrendingVariationIcon>
-                {Math.abs(data.trending)}%{' '}
-              </TrendingVariation>
+              <TrendingContent>
+                <TrendingEmphasis>$ {data.value}</TrendingEmphasis>
+                <TrendingVariation isPositive={data.isPositive}>
+                  <TrendingVariationIcon>
+                    {data.isPositive ? '+' : '-'}
+                  </TrendingVariationIcon>
+                  {Math.abs(data.trending)}%{' '}
+                </TrendingVariation>
+              </TrendingContent>
             </TrendingBox>
           ))}
         </TablesWrapperB>
