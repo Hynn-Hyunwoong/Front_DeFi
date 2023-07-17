@@ -1,13 +1,13 @@
 import {TextAreaWrapper, TextContent, TextTitle} from "./style";
 
 
-export const GovTextArea = () => {
+export const GovTextArea = ({body}) => {
 
     return <>
         <TextAreaWrapper>
             <TextTitle>CLAM 토큰 레벨 변경 C -&#62; B</TextTitle>
             <TextContent>
-            Context and suggestions
+            {/* Context and suggestions
             <br></br>
             <br></br>
             To build the sustainable ecosystem of KLAYswap and BLUEWHALE, we suggest the token level upgrade of CLAM token from level C to level B. By acquiring higher level, CLAM holders will be rewarded with KSP and can contribute to revitalize the ecosystem of both KLAYswap and BLUEWHALE. We also believe that upgrade of token level can promote the inflow of new users to KLAYswap and BLUEWHALE.
@@ -27,7 +27,8 @@ export const GovTextArea = () => {
             <br></br>
             <br></br>
             <br></br>
-            Resources
+            Resources */}
+            {body}
             </TextContent>
         </TextAreaWrapper>
     </>

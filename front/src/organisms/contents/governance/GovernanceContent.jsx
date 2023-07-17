@@ -7,63 +7,74 @@ import {
   ButtonStyle,
 } from './styled';
 import { useRecoilState } from 'recoil';
-import { listState, dropboxState, selectedWallet } from '../../store';
+import { listState, dropboxState, selectedWallet, proposalList } from '../../store';
 import govABI from "../../../ABI/contracts/governance.sol/Governance.json"
 import { ethers } from "ethers";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const GovernanceContent = ({ listArr }) => {
   const [list] = useRecoilState(listState);
   const [dropbox, setDropbox] = useRecoilState(dropboxState)
   const [wallet, setWallet] = useRecoilState(selectedWallet);;
-
+  const [proposal, setProposal] = useRecoilState(proposalList)
+  const [filteredArr, setFilteredArr] = useState([])
   const statusText = {
     exectued: '통과',
     progress: '진행중',
     canceled: '취소',
   };
 
-  let provider;
-  switch (wallet) {
-      case 'metamask':
-      provider = new ethers.providers.Web3Provider(window.ethereum);
-      break;
-      case 'trustwallet':
-      provider = new ethers.providers.Web3Provider(window.trustwallet);
-      break;
-      case 'walletConnect':
-      provider = new ethers.providers.Web3Provider(
-          window.walletConnectProvider,
-      );
-      break;
-      default:
-      console.log('Unknown wallet type');
-      return;
-  }
-  const signer = provider.getSigner();
+  
 
-  const govContract = new ethers.Contract(
-    process.env.REACT_APP_GOVERNANCE_ADDRESS,
-    govABI.abi,
-    signer
-  )
+  const getProposal = async(length) => {
+    let provider;
+    switch (wallet) {
+        case 'metamask':
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        break;
+        case 'trustwallet':
+        provider = new ethers.providers.Web3Provider(window.trustwallet);
+        break;
+        case 'walletConnect':
+        provider = new ethers.providers.Web3Provider(
+            window.walletConnectProvider,
+        );
+        break;
+        default:
+        console.log('Unknown wallet type');
+        return;
+    }
+    const signer = provider.getSigner();
 
-  const getProposal = async(index) => {
-    const result = await govContract.getProposalToFE(index)
-    console.log("test",result)
+    const govContract = new ethers.Contract(
+      process.env.REACT_APP_GOVERNANCE_ADDRESS,
+      govABI.abi,
+      signer
+    )
+    const result = []
+    for(let i=1; i<=length; i++){
+      result.push(await govContract.getProposalToFE(i)) 
+    }
+    
     return (result)
   }
-
-
-  const filterList = () => {
-    const filtered = listArr.reduce((acc, val)=>{
-      getProposal(val.Index)
-      return acc
-    },[])
+  
+  const filterList = async() => {
+    
+    const proposal = await getProposal(listArr.length);
+    // console.log(proposal[1]);
+    const filtered = listArr.map(async (val)=>{
+      console.log('list',val.Index);
+      // console.log('prop',proposal[0])
+      await setFilteredArr([...filteredArr, {...val, start:parseInt(proposal[val.Index-1][1].toString()), end:parseInt(proposal[val.Index-1][2].toString()), status:"canceled", action:proposal[val.Index-1][6]}]); // Edit this line
+      await console.log("test",filteredArr)
+    })
+    setProposal(filteredArr);
   }
 
-  filterList()
-
+  useEffect(()=>{
+    filterList()
+  },[filteredArr])
 
 
   return (
@@ -93,7 +104,7 @@ export const GovernanceContent = ({ listArr }) => {
         </ListHeaderDiv>
         {dropbox && <DropBox statusText={statusText} />}
         <div>
-          {/* <GovernanceList testArr={filteredArr} statusText={statusText} /> */}
+          <GovernanceList statusText={statusText} />
         </div>
       </ListSection>
     </SectionStyled>

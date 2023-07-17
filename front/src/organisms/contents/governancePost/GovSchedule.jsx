@@ -1,8 +1,9 @@
+import { proposalList } from "../../store";
 import {Pdata, ProgressBox, ProgressDatas, ProgressIcon, ProgressInfo, ProgressList, ProgressTitle} from "./style";
 
 
 
-export const GovSchedule = () => {
+export const GovSchedule = ({prop}) => {
 
     return <>
         <ProgressInfo>
@@ -13,7 +14,7 @@ export const GovSchedule = () => {
                 </ProgressBox>
                 <ProgressDatas>
                     <Pdata size="14px" color="#333">2023/07/14 16:32:14</Pdata>
-                    <Pdata size="12px" color="#333">0xc0d114598bc3229c9fc67081f3e45100743da48dba71d506c13fa9d76ef84dcb</Pdata>
+                    <Pdata size="12px" color="#333">{prop.transaction}</Pdata>
                 </ProgressDatas>
             </ProgressList>
 
