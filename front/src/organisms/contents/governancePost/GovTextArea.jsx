@@ -1,11 +1,11 @@
 import {TextAreaWrapper, TextContent, TextTitle} from "./style";
 
 
-export const GovTextArea = ({body}) => {
+export const GovTextArea = ({title, body}) => {
 
     return <>
         <TextAreaWrapper>
-            <TextTitle>CLAM 토큰 레벨 변경 C -&#62; B</TextTitle>
+            <TextTitle>{title}</TextTitle>
             <TextContent>
             {/* Context and suggestions
             <br></br>

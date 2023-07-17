@@ -73,10 +73,10 @@ export const GovernancePost = () => {
     <>
       <Wrapper>
         <GovPostWrapper>
-          <GovHeadArea title={prop.title} start={prop.start} end={prop.end}/>
-          <GovVotingArea />
+          <GovHeadArea title={prop.title} transaction={prop.transaction}/>
+          <GovVotingArea prop={prop}/>
           <GovTransactionBox tx={prop.transaction}/>
-          <GovTextArea body={prop.body}/>
+          <GovTextArea title={prop.title} body={prop.body}/>
           <GovDetailArea prop={prop}/>
           <GovSchedule prop={prop}/>
         </GovPostWrapper>
