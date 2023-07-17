@@ -13,20 +13,19 @@ export const GovernanceCreate = () => {
   // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsloading] = useRecoilState(loadingState);
 
-
   return (
-    <>
+    <div style={{ minHeight: 'calc(100vh - 276px)' }}>
       {isLoading ? (
         <Loader />
       ) : (
         <WritePreviewWrap>
-          <Link to="/governance">👈Back</Link>
+          <Link to='/governance'>👈Back</Link>
           <BackspaceWrap />
           <TopicDefine />
           <TopicTokenState />
           <TopicWrite />
         </WritePreviewWrap>
       )}
-    </>
+    </div>
   );
 };
