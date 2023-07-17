@@ -217,7 +217,7 @@ export const Header = () => {
             >
               {wallet === 'metamask' && (
                 <img
-                  src="/images/logo-metamask.png"
+                  src="/images/logo-metaMask.png"
                   alt="logo-metamask"
                   style={{
                     width: '25px',
