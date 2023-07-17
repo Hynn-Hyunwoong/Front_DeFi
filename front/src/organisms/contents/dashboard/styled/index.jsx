@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const DashboardWrap = styled.div`
-
   width: 100%;
 `;
 
@@ -212,7 +211,6 @@ export const TablesWrapper = styled.div`
 
   margin: 0 auto;
 `;
-
 
 export const DashboardContainer = styled.div`
   display: flex;
