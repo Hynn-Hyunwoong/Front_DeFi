@@ -127,7 +127,7 @@ export const WalletConnect = () => {
   return (
     <>
       <WalletList onClick={handleLogin}>
-        <img src="/images/logo-walletconnect.png" alt="WalletConnect" />
+        <img src="/images/logo-wallet.png" alt="WalletConnect" />
         <p style={{ fontSize: '24px', whiteSpace: 'nowrap' }}>
           {isLogin && wallet === 'walletconnect'
             ? 'WalletConnect 연결됨'

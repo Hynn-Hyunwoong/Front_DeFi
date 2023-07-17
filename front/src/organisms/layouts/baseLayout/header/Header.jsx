@@ -239,7 +239,7 @@ export const Header = () => {
               )}
               {wallet === 'walletConnect' && (
                 <img
-                  src="/images/logo-walletConnect.png"
+                  src="/images/logo-wallet.png"
                   alt="logo-walletconnect"
                   style={{
                     width: '20px',
