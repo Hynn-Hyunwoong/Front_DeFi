@@ -6,7 +6,7 @@ export const Logo = () => {
     <Link to="/">
       <LogoWrap>
         <LogoImg src="/images/logo-solar.png" alt="solarLogo" />
-        <LogoText src="/images/Logotext.png" alt="Text" />
+        <LogoText src="/images/solartext.png" alt="text" />
       </LogoWrap>
     </Link>
   );
