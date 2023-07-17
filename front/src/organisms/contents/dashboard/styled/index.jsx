@@ -1,80 +1,61 @@
 import styled from 'styled-components';
 
 export const DashboardWrap = styled.div`
+
+  width: 100%;
+`;
+
+export const DashboarSection = styled.section`
+  max-width: 80%;
+
   width: 80%;
+
   margin: 10px auto;
   margin-top: 5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 2%;
-`;
-
-export const DashboardLeftWrap = styled.div`
-  width: 49%;
-  overflow: auto;
-`;
-
-export const DashboardRightWrap = styled.div`
-  width: 49%;
-  overflow: auto;
-`;
-
-export const DashboardTrendingWrap = styled.dl`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0px;
-  height: 8rem;
-  max-width: 80%;
-  margin: 0 auto;
-  margin-bottom: 2rem;
-`;
-
-export const DashboardTrendingAll = styled.div`
-  max-width: 80%;
-  height: 20rem;
-  margin: 0 auto;
 `;
 
 export const TrendingBox = styled.div`
   background: transparent;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid #d2edff;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex: 1;
   height: 100%;
-  margin: 0;
-  width: 21rem;
-`;
+  padding: 10px 10px 20px;
+  width: 70%;
+  margin-bottom: 20px;
 
-export const TrendingTitleVariation = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-export const TrendingEmphasisWrap = styled.div`
-  width: 100%;
-  text-align: center;
+  &:nth-last-child(1) {
+    margin-bottom: 0;
+    border: none;
+  }
 `;
 
 export const TrendingTitle = styled.dt`
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 500;
-  color: #6b7280;
+  color: #0194ff;
 `;
 
+export const TrendingContent = styled.dt`
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+`;
 export const TrendingEmphasis = styled.dd`
-  font-size: 2rem;
+  font-size: 20px;
+  letter-spacing: -1px;
   font-weight: 700;
   color: #111827;
   text-align: center;
+  margin-bottom: 3px;
 `;
 
 export const TrendingVariation = styled.dd`
-  font-size: 1rem;
+  font-size: 12px;
   font-weight: 600;
   color: ${(props) => (props.isPositive ? '#10B981' : '#EF4444')};
   display: flex;
@@ -82,19 +63,20 @@ export const TrendingVariation = styled.dd`
 `;
 
 export const TrendingVariationIcon = styled.span`
-  margin-right: 0.5rem;
+  /* margin-right: 0.5rem; */
+  font-size: 12px;
 `;
 
 export const HeaderItem = styled.p`
-  font-size: 1rem;
+  /* font-size: 1rem;
   font-weight: 500;
   color: #6b7280;
   margin-left: 6rem;
-  text-align: center;
+  text-align: center; */
 `;
 
 export const AvatarCard = styled.div`
-  background-color: #ffffff;
+  /* background-color: #ffffff;
   border-radius: 0.5rem;
   padding: 1.5rem;
   display: flex;
@@ -102,7 +84,7 @@ export const AvatarCard = styled.div`
   align-items: center;
   margin-bottom: 1rem;
   max-width: 80%;
-  margin: auto;
+  margin: auto; */
 `;
 
 export const AvatarImage = styled.img`
@@ -113,23 +95,22 @@ export const AvatarImage = styled.img`
 `;
 
 export const AvatarContent = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
+  text-align: center; */
 `;
 
 export const AvatarName = styled.p`
   font-size: 1rem;
-  font-weight: 500;
-  text-align: center;
+  font-weight: bold;
 `;
 
 export const AvatarDescription = styled.p`
-  font-size: 0.875rem;
+  /* font-size: 0.875rem;
   font-weight: 400;
   color: #6b7280;
-  margin-left: 6rem;
+  margin-left: 6rem; */
 `;
 
 export const AvatarTitle = styled.p`
@@ -160,7 +141,16 @@ export const Table = styled.table`
   margin-bottom: 5rem;
 `;
 
-export const TableRow = styled.tr``;
+export const TableRow = styled.tr`
+  @media (max-width: 768px) {
+    & > .liquidityPoolToken {
+      display: none;
+    }
+    & > .fee {
+      display: none;
+    }
+  }
+`;
 
 export const TableHeader = styled.th`
   text-align: center;
@@ -178,7 +168,7 @@ export const TableData = styled.td`
 `;
 
 export const TrendingTopic = styled.h2`
-  display: block;
+  /* display: block;
   width: 80%;
   font-size: 2rem;
   font-weight: 500;
@@ -186,7 +176,7 @@ export const TrendingTopic = styled.h2`
   margin: 0 auto;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  color: #6b7280;
+  color: #6b7280; */
 `;
 
 export const TrendingTopic2 = styled.h2`
@@ -196,16 +186,30 @@ export const TrendingTopic2 = styled.h2`
   font-weight: 500;
   text-align: center;
   margin: auto;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: #0000ff;
+  margin-bottom: 3rem;
+  color: #caccd2;
+  letter-spacing: -0.5px;
 `;
 
 export const TablesWrapperB = styled.div`
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10%;
   width: 100%;
+
+  margin: auto; */
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+`;
+export const TablesWrapper = styled.div`
+  /* display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1%;
+  width: 100%; */
+
   margin: 0 auto;
 `;
 export const TablesWrapper = styled.div`
@@ -214,6 +218,7 @@ export const TablesWrapper = styled.div`
   gap: 15%;
   width: 100%;
   margin: 0 auto;
+
 `;
 
 export const DashboardContainer = styled.div`
@@ -224,11 +229,15 @@ export const DashboardContainer = styled.div`
 `;
 
 export const DashboardLayout = styled.div`
-  display: flex;
+  width: 100%;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  align-items: center; */
+  /* gap: 20px; */
+  background: white;
+  box-shadow: 1px 1px 6px 0px #d6d8dd;
+  margin: 2rem auto;
+  padding: 50px 0;
+  border-radius: 5px;
 `;

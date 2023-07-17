@@ -8,6 +8,9 @@ export const DashboardTableTop = () => {
   return (
     <>
       <DashboardLayout>
+        <DashboardTrend />
+      </DashboardLayout>
+      <DashboardLayout>
         <DashboardUSDT />
       </DashboardLayout>
       <DashboardLayout>
@@ -15,9 +18,6 @@ export const DashboardTableTop = () => {
       </DashboardLayout>
       <DashboardLayout>
         <DashboardETH />
-      </DashboardLayout>
-      <DashboardLayout>
-        <DashboardTrend />
       </DashboardLayout>
     </>
   );

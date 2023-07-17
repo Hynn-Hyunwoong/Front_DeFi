@@ -1,18 +1,35 @@
-import { FooterWrap, ContentWrap } from './styled';
+import { useNavigate } from 'react-router-dom';
+import {
+  FooterWrap,
+  ContentWrap,
+  NameSection,
+  CopyrightSection,
+  MemberInfo,
+} from './styled';
 
 export const Footer = () => {
+  const navigate = useNavigate();
   return (
     <>
       <FooterWrap>
         <ContentWrap>
-          <div>
+          <CopyrightSection>
             <span>ⓒKIWeb-TEAM4. All Rights Reserved</span>
-          </div>
-          <div>
-            <span>최현웅 </span>
-            <span>이은지 </span>
-            <span>이세욱</span>
-          </div>
+          </CopyrightSection>
+          <NameSection>
+            <MemberInfo>
+              <img src='/images/logo-github.png' />
+              <span>최현웅</span>
+            </MemberInfo>
+            <MemberInfo>
+              <img src='/images/logo-github.png' />
+              <span>이은지 </span>
+            </MemberInfo>
+            <MemberInfo>
+              <img src='/images/logo-github.png' />
+              <span>이세욱</span>
+            </MemberInfo>
+          </NameSection>
         </ContentWrap>
       </FooterWrap>
     </>

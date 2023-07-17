@@ -1,4 +1,8 @@
-import { DashboardWrap, DashboardTrendingWrap } from './styled';
+import {
+  DashboarSection,
+  DashboardWrap,
+  DashboardTrendingWrap,
+} from './styled';
 import { DashboardTableTop } from './DashboardTopTable';
 import { DashboardTrend } from './DashboardTrend';
 import { DashboardTable } from './DashboardTable';
@@ -6,9 +10,9 @@ import { DashboardTable } from './DashboardTable';
 export const Dashboard = () => {
   return (
     <>
-      <DashboardWrap>
+      <DashboarSection>
         <DashboardTableTop />
-      </DashboardWrap>
+      </DashboarSection>
       <DashboardTable />
     </>
   );
