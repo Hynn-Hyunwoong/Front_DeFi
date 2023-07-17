@@ -30,7 +30,6 @@ const Contract = new ethers.Contract(
   FacABI.abi,
   signer,
 );
-console.log(Contract);
 
 export const Header = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
