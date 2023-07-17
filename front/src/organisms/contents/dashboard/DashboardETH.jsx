@@ -54,13 +54,22 @@ const fetchData = async () => {
   const TotalSupply = supply;
   const TotalRewardLp = LpTokenAmount * formatted;
 
+  const currentData = {
+    TotalDeposit,
+    TotalSupply,
+    TotalRewardLp,
+  };
+
+  await axios.post(`${process.env.REACT_APP_AXIOS_URL}/dashboard/regeditDate`, {
+    token: 'ETH',
+    totalDeposit: TotalDeposit,
+    totalSupply: TotalSupply,
+    totalRewardLp: TotalRewardLp,
+  });
+
   return {
     previousData: previousDataResponse.data,
-    currentData: {
-      TotalDeposit,
-      TotalSupply,
-      TotalRewardLp,
-    },
+    currentData: currentData,
   };
 };
 
@@ -90,6 +99,9 @@ export const DashboardETH = () => {
     };
 
     fetchTrendingData();
+
+    const intervalId = setInterval(fetchTrendingData, 60000);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (

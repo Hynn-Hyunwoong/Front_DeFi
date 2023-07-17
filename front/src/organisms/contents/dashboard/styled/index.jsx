@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
 export const DashboardWrap = styled.div`
+
   width: 100%;
 `;
 
 export const DashboarSection = styled.section`
   max-width: 80%;
+
+  width: 80%;
+
   margin: 10px auto;
   margin-top: 5rem;
   display: flex;
@@ -130,7 +134,7 @@ export const AvatarRole = styled.p`
 `;
 
 export const Table = styled.table`
-  width: 80%;
+  width: 70%;
   border-spacing: 0;
   margin: auto;
   margin-top: 3rem;
@@ -192,6 +196,7 @@ export const TablesWrapperB = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 10%;
   width: 100%;
+
   margin: auto; */
 
   display: flex;
@@ -204,6 +209,16 @@ export const TablesWrapper = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 1%;
   width: 100%; */
+
+  margin: 0 auto;
+`;
+export const TablesWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  gap: 15%;
+  width: 100%;
+  margin: 0 auto;
+
 `;
 
 export const DashboardContainer = styled.div`

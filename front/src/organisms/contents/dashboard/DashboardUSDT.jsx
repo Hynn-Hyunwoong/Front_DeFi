@@ -54,18 +54,27 @@ const fetchData = async () => {
   const TotalSupply = supply;
   const TotalRewardLp = LpTokenAmount * formatted;
 
+  const currentData = {
+    TotalDeposit,
+    TotalSupply,
+    TotalRewardLp,
+  };
+
+  await axios.post(`${process.env.REACT_APP_AXIOS_URL}/dashboard/regeditDate`, {
+    token: 'USDT',
+    totalDeposit: TotalDeposit,
+    totalSupply: TotalSupply,
+    totalRewardLp: TotalRewardLp,
+  });
+
   return {
     previousData: previousDataResponse.data,
-    currentData: {
-      TotalDeposit,
-      TotalSupply,
-      TotalRewardLp,
-    },
+    currentData: currentData,
   };
 };
 
 const symbols = ['TotalDeposit', 'TotalSupply', 'TotalRewardLp'];
-const names = ['총 예치 규모', '총 예치 코인 수량', '리워드 제공 토큰 규모']; // names for each symbol
+const names = ['총 예치 규모', '총 예치 코인 수량', '리워드 제공 토큰 규모'];
 
 export const DashboardUSDT = () => {
   const [trendingData, setTrendingData] = useState([]);
@@ -90,6 +99,9 @@ export const DashboardUSDT = () => {
     };
 
     fetchTrendingData();
+
+    const intervalId = setInterval(fetchTrendingData, 60000);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
