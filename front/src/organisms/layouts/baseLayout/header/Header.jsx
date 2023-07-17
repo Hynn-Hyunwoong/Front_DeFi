@@ -14,6 +14,7 @@ import {
 import { Wallet } from '../../../contents/popupWallet/Wallet';
 import { useQuery } from '@tanstack/react-query';
 import TokenABI from '../../../../ABI/contracts/SelfToken.sol/SelfToken.json';
+import FacABI from '../../../../ABI/contracts/Factory_v1.sol/Factory_v1.json';
 
 const contractAddresses = [
   process.env.REACT_APP_ARB_TOKEN_ADDRESS,
@@ -22,27 +23,28 @@ const contractAddresses = [
   process.env.REACT_APP_USDT_TOKEN_ADDRESS,
 ];
 
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+const signer = provider.getSigner();
+const Contract = new ethers.Contract(
+  process.env.REACT_APP_FACTORY_ADDRESS,
+  FacABI.abi,
+  signer,
+);
+console.log(Contract);
+
 export const Header = () => {
-  // eslint-disable-next-line no-unused-vars
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const [account, setAccount] = useRecoilState(accountState);
   const [network, setNetwork] = useRecoilState(networkState);
   const [popup, setPopup] = useRecoilState(popupState);
-  // eslint-disable-next-line no-unused-vars
   const [wallet, setWallet] = useRecoilState(selectedWallet);
-  // eslint-disable-next-line no-unused-vars
   const [balance, setBalance] = useRecoilState(balanceState);
 
   const fetchNetwork = async () => {
-    try {
-      const networkId = await window.ethereum.request({
-        method: 'net_version',
-      });
-      return networkId;
-    } catch (error) {
-      console.error('Failed to fetch network ID: ', error);
-      // Handle or throw error
-    }
+    const networkId = await window.ethereum.request({
+      method: 'net_version',
+    });
+    return networkId;
   };
 
   const {
@@ -99,37 +101,32 @@ export const Header = () => {
       const newBalance = {};
 
       for (let i = 0; i < contractAddresses.length; i++) {
-        try {
-          const contract = new ethers.Contract(
-            contractAddresses[i],
-            TokenABI.abi,
-            provider,
-          );
+        const contract = new ethers.Contract(
+          contractAddresses[i],
+          TokenABI.abi,
+          provider,
+        );
 
-          const tokenBalance = ethers.utils.formatEther(
-            await contract.balanceOf(account),
-          );
+        const tokenBalance = ethers.utils.formatEther(
+          await contract.balanceOf(account),
+        );
 
-          switch (i) {
-            case 0:
-              newBalance['ARB'] = tokenBalance;
-              break;
-            case 1:
-              newBalance['ETH'] = tokenBalance;
-              break;
-            case 2:
-              newBalance['ASD'] = tokenBalance;
-              break;
-            case 3:
-              newBalance['USDT'] = tokenBalance;
-              break;
-            default:
-              console.log('Unknown token index');
-              return;
-          }
-        } catch (error) {
-          console.error('Failed to update balance: ', error);
-          // Handle or throw error
+        switch (i) {
+          case 0:
+            newBalance['ARB'] = tokenBalance;
+            break;
+          case 1:
+            newBalance['ETH'] = tokenBalance;
+            break;
+          case 2:
+            newBalance['ASD'] = tokenBalance;
+            break;
+          case 3:
+            newBalance['USDT'] = tokenBalance;
+            break;
+          default:
+            console.log('Unknown token index');
+            return;
         }
       }
 
@@ -142,13 +139,6 @@ export const Header = () => {
   }, [account, network, updateBalance]);
 
   useEffect(() => {
-    if (
-      typeof window.ethereum === 'undefined' ||
-      typeof window.trustwallet === 'undefined'
-    ) {
-      console.error('Metamask or Trust Wallet is not installed');
-      return;
-    }
     if (window.trustwallet) {
       window.trustwallet.on('accountsChanged', handleAccountChange);
       window.trustwallet.on('networkChanged', handleNetworkChanged);
@@ -182,16 +172,29 @@ export const Header = () => {
   }, [networkId, error, isLoading, setNetwork]);
 
   useEffect(() => {
-    if (
-      !process.env.REACT_APP_ARB_TOKEN_ADDRESS ||
-      !process.env.REACT_APP_ETH_TOKEN_ADDRESS ||
-      !process.env.REACT_APP_ASD_TOKEN_ADDRESS ||
-      !process.env.REACT_APP_USDT_TOKEN_ADDRESS
-    ) {
-      console.error('One or more environment variables are not set');
-      return;
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', handleAccountChange);
+      window.ethereum.on('networkChanged', handleNetworkChanged);
+    } else {
+      console.log('Ethereum wallet is not connected.');
     }
-  }, []);
+
+    if (window.trustwallet) {
+      window.trustwallet.on('accountsChanged', handleAccountChange);
+      window.trustwallet.on('networkChanged', handleNetworkChanged);
+    }
+
+    return () => {
+      if (window.ethereum) {
+        window.ethereum.removeListener('accountsChanged', handleAccountChange);
+        window.ethereum.removeListener('networkChanged', handleNetworkChanged);
+      }
+      if (window.trustwallet) {
+        window.trustwallet.off('accountsChanged', handleAccountChange);
+        window.trustwallet.off('networkChanged', handleNetworkChanged);
+      }
+    };
+  }, [handleAccountChange, handleNetworkChanged]);
 
   return (
     <>
@@ -247,15 +250,19 @@ export const Header = () => {
                   }}
                 />
               )}
-              {account
-                ? account.substring(0, 6) +
-                  '...' +
-                  account.substring(account.length - 4, account.length)
-                : 'Connect Wallet'}
+              {isLogin
+                ? account && network
+                  ? wallet + ' 연결됨'
+                  : ' wrong network'
+                : '지갑 연결'}
             </Button>
           </div>
         </HeaderBottom>
-        {popup && <Popup contents={<Wallet />} />}
+        {popup && (
+          <Popup>
+            <Wallet />
+          </Popup>
+        )}
       </HeaderWrap>
     </>
   );

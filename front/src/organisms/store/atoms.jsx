@@ -191,3 +191,8 @@ export const selectedUnstakingLPtokenState = atom({
   key: 'selectedUnstakingLPtokenState',
   default: null,
 });
+
+export const loginRequestPendingState = atom({
+  key: 'loginRequestPendingState',
+  default: false,
+});
