@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 
-export const GovTransactionBox = () => {
+export const GovTransactionBox = ({tx}) => {
 
     return <>
         <TransactionArea>
@@ -13,7 +13,7 @@ export const GovTransactionBox = () => {
             </TransactionBox>       
             <TransactionBox>
                 <Link to={"https://etherscan.io/"}>
-                    TransactionAddress
+                    {tx}
                 </Link>
             </TransactionBox>
         </TransactionArea>

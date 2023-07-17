@@ -99,6 +99,11 @@ export const listState = atom({
   default: null,
 });
 
+export const proposalList = atom({
+  key: "proposalList",
+  default: []
+})
+
 export const dropboxState = atom({
   key: 'dropboxState',
   default: false,

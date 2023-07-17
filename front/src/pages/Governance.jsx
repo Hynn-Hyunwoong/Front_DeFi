@@ -52,7 +52,7 @@ export const Governance = () => {
     const {data} = await axios.get(`${process.env.REACT_APP_AXIOS_URL}/proposal/getlist`)
     // console.log("res:::",typeof data)
     await setList([...data])
-    // await console.log(list)
+    await console.log("backList:::",list)
   }
 
 
@@ -60,7 +60,7 @@ export const Governance = () => {
     setGov();
     (async () => {
       await getProposalList();
-    })();
+    })()
   }, []);
 
   return (
