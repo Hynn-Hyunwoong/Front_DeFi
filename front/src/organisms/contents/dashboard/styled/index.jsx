@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const DashboardWrap = styled.div`
-
   width: 100%;
 `;
 
@@ -211,14 +210,6 @@ export const TablesWrapper = styled.div`
   width: 100%; */
 
   margin: 0 auto;
-`;
-export const TablesWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 2fr);
-  gap: 15%;
-  width: 100%;
-  margin: 0 auto;
-
 `;
 
 export const DashboardContainer = styled.div`

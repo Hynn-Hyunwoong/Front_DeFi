@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 
 export const GovTransactionBox = ({tx}) => {
-
     return <>
         <TransactionArea>
             <TransactionBox>
