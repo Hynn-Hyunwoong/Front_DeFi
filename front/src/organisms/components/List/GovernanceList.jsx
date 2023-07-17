@@ -2,12 +2,47 @@ import { ListContentDiv, FlexDiv, ActionColor } from './styled';
 import { Button } from '../button/Button';
 import {Link} from "react-router-dom";
 import { useRecoilState } from 'recoil';
-import { proposalList } from '../../store';
+import {ethers} from "ethers";
+import { selectedWallet, proposalList } from '../../store';
+import { useState } from 'react';
 
 export const GovernanceList = ({ statusText }) => {
-  const [proposal] = useRecoilState(proposalList);
+  const [proposal, setProposal] = useRecoilState(proposalList);
+  const [wallet, setWallet] = useRecoilState(selectedWallet)
+  const [start, setStart] = useState()
+  const [end, setEnd] = useState()
+  // let start, end;
   console.log('prop',proposal)
-  const listMap = proposal.map((v) => (
+  let provider;
+  switch (wallet) {
+      case 'metamask':
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      break;
+      case 'trustwallet':
+      provider = new ethers.providers.Web3Provider(window.trustwallet);
+      break;
+      case 'walletConnect':
+      provider = new ethers.providers.Web3Provider(
+          window.walletConnectProvider,
+      );
+      break;
+      default:
+      console.log('Unknown wallet type');
+      return;
+  }
+  const listMap = proposal.map((v) => {
+  
+  ;(async ()=>{
+    const tx = await provider.getTransaction(v.transaction)
+    const block = await provider.getBlock(tx.blockNumber)
+    const timeStamp = block.timestamp
+    setStart(new Date(timeStamp * 1000).toLocaleDateString())
+    setEnd(new Date((timeStamp + 86400*3) * 1000).toLocaleDateString())
+    // end = start + 86400*3
+    // console.log(start, end)
+  })()
+    
+    return(
       <ListContentDiv className={`${v.status}`} key={v.Index}>
         <FlexDiv width='56%'>
           <div className='index' style={{ width: '30px' }}>
@@ -28,7 +63,7 @@ export const GovernanceList = ({ statusText }) => {
         </FlexDiv>
         <FlexDiv width='42%'>
           <div className='period'>
-            투표 기간 {v.start} ~ {v.end}
+            투표 기간 {start} ~ {end}
           </div>
           <div className='action' style={{ width: '40px', textAlign: 'center' }}>
             <ActionColor status={`${v.status}`}>
@@ -38,7 +73,7 @@ export const GovernanceList = ({ statusText }) => {
         </FlexDiv>
       </ListContentDiv>
     
-  ));
+  )});
 
-  return listMap;
+    return listMap
 };

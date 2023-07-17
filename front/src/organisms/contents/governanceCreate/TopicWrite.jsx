@@ -51,6 +51,8 @@ export const TopicWrite = () => {
             maxPriorityFeePerGas: ethers.utils.parseUnits('1', 'gwei'),
       })
       console.log(proposal)
+      const result = await proposal.wait()
+      console.log(result)
       return proposal.hash
     }
 
@@ -71,7 +73,7 @@ export const TopicWrite = () => {
     try{
     const response = await axios.post(`${process.env.REACT_APP_AXIOS_URL}/proposal/create`, data)
     console.log(response)
-    window.location.href = '/governance'; // 버튼 클릭 시 '/about' 경로로 이동
+    // window.location.href = '/governance'; // 버튼 클릭 시 '/about' 경로로 이동
     }catch(e){
       console.log(e.message)
     }

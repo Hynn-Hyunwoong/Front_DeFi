@@ -15,16 +15,15 @@ import { useEffect, useState } from 'react';
 export const GovernanceContent = ({ listArr }) => {
   const [list] = useRecoilState(listState);
   const [dropbox, setDropbox] = useRecoilState(dropboxState)
-  const [wallet, setWallet] = useRecoilState(selectedWallet);;
+  const [wallet, setWallet] = useRecoilState(selectedWallet)
   const [proposal, setProposal] = useRecoilState(proposalList)
-  const [filteredArr, setFilteredArr] = useState([])
+  const [filteredArr, setFilteredArr] = useState("")
   const statusText = {
     exectued: '통과',
     progress: '진행중',
     canceled: '취소',
   };
 
-  
 
   const getProposal = async(length) => {
     let provider;
@@ -53,28 +52,28 @@ export const GovernanceContent = ({ listArr }) => {
     )
     const result = []
     for(let i=1; i<=length; i++){
-      result.push(await govContract.getProposalToFE(i)) 
+      const proposal = await govContract.getProposalToFE(i)
+      result.push({...proposal}) 
     }
     
     return (result)
   }
-  
+
   const filterList = async() => {
-    
     const proposal = await getProposal(listArr.length);
-    // console.log(proposal[1]);
-    const filtered = listArr.map(async (val)=>{
-      console.log('list',val.Index);
-      // console.log('prop',proposal[0])
-      await setFilteredArr([...filteredArr, {...val, start:parseInt(proposal[val.Index-1][1].toString()), end:parseInt(proposal[val.Index-1][2].toString()), status:"canceled", action:proposal[val.Index-1][6]}]); // Edit this line
-      await console.log("test",filteredArr)
+    console.log("proposal",proposal)
+    const filtered = [] 
+    listArr.forEach((val)=>{
+      filtered.push({...val, start:parseInt(proposal[val.Index-1][1].toString()), end:parseInt(proposal[val.Index-1][2].toString()), status:"progress", action:proposal[val.Index-1][6]}); // Edit this line
     })
-    setProposal(filteredArr);
+    console.log("filter:::",filtered)
+    setProposal(filtered)
+    setFilteredArr(filtered)
   }
 
   useEffect(()=>{
     filterList()
-  },[filteredArr])
+  },[listArr])
 
 
   return (
@@ -104,7 +103,7 @@ export const GovernanceContent = ({ listArr }) => {
         </ListHeaderDiv>
         {dropbox && <DropBox statusText={statusText} />}
         <div>
-          <GovernanceList statusText={statusText} />
+          <GovernanceList proposal={proposal} statusText={statusText} />
         </div>
       </ListSection>
     </SectionStyled>
