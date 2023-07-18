@@ -35,8 +35,8 @@ export const GovernanceList = ({ statusText }) => {
       const tx = await provider.getTransaction(v.transaction);
       const block = await provider.getBlock(tx.blockNumber);
       const timeStamp = block.timestamp;
-      setStart(new Date(timeStamp * 1000).toLocaleDateString());
-      setEnd(new Date((timeStamp + 86400 * 3) * 1000).toLocaleDateString());
+      // setStart(new Date(timeStamp * 1000).toLocaleDateString());
+      // setEnd(new Date((timeStamp + 86400 * 3) * 1000).toLocaleDateString());
       // end = start + 86400*3
       // console.log(start, end)
     })();
