@@ -16,7 +16,7 @@ export const InputBox = ({ placeholder, width, value, onChange }) => {
       min={0}
       width={width}
       value={value}
-      onChange={onChange}
+      onChange={inputChange}
     />
   );
 };

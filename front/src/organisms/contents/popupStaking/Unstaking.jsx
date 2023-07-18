@@ -11,7 +11,7 @@ import {
 } from './styled';
 import { InputBox, PopupHeader } from '../../components';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { selectedUnstakingLPtokenState } from '../../store';
+import { selectedUnstakingLPtokenState, stakingValueState } from '../../store';
 import stakingABI from '../../../ABI/contracts/Staking.sol/Staking.json';
 import FacABI from '../../../ABI/contracts/Factory_v1.sol/Factory_v1.json';
 import { ethers } from 'ethers';
@@ -37,17 +37,18 @@ export const Unstaking = ({ closePopup, provider, contract }) => {
   const [unstakingLpToken, setLpToken] = useRecoilState(
     selectedUnstakingLPtokenState,
   );
-  const [inputValue, setInputValue] = useState('');
+  // const [inputValue, setInputValue] = useState('');
+  const unstakingValue = useRecoilValue(stakingValueState);
 
   const LpTokenSelectHandler = (e) => {
     setLpToken(e.target.value);
     console.log(`Selected LP token: ${e.target.value}`);
   };
 
-  const inputValueHandler = (e) => {
-    setInputValue(e.target.value);
-    console.log(`Input value: ${e.target.value}`);
-  };
+  // const inputValueHandler = (e) => {
+  //   setInputValue(e.target.value);
+  //   console.log(`Input value: ${e.target.value}`);
+  // };
 
   const unstakingHandler = async () => {
     const lpAddress = LPaddress[unstakingLpToken];
@@ -57,17 +58,17 @@ export const Unstaking = ({ closePopup, provider, contract }) => {
     }
     console.log(`LP token address: ${lpAddress}`);
 
-    const amount = Number(inputValue);
-    if (isNaN(amount)) {
-      console.log('Invalid input value');
-      return;
-    }
-    console.log(`Withdrawal amount: ${amount}`);
+    // const amount = Number(inputValue);
+    // if (isNaN(amount)) {
+    //   console.log('Invalid input value');
+    //   return;
+    // }
+    // console.log(`Withdrawal amount: ${amount}`);
 
     try {
       const tx = await factoryContract.withDrawLiquid(
         lpAddress,
-        ethers.utils.parseEther(amount.toString()),
+        ethers.utils.parseEther(unstakingValue),
         process.env.REACT_APP_ASD_TOKEN_ADDRESS,
         {
           gasLimit: 1000000,
@@ -99,7 +100,7 @@ export const Unstaking = ({ closePopup, provider, contract }) => {
               <option value="USDTLP">USDT LP Token</option>
             </SelectStyled>
             <InputValue>
-              <InputBox onChange={inputValueHandler} value={inputValue} />
+              <InputBox />
             </InputValue>
           </InputValueWrap>
         </article>
