@@ -34,7 +34,7 @@ export const GovernancePost = () => {
   const [wallet, setWallet] = useRecoilState(selectedWallet);
   const [govBalance, setgovBalance] = useRecoilState(GovToken);
   const [proposal] = useRecoilState(proposalList);
-  const prop = proposal[id-1]
+  const prop = proposal[id - 1];
   const setGov = async () => {
     let provider;
     switch (wallet) {
@@ -46,7 +46,7 @@ export const GovernancePost = () => {
         break;
       case 'walletConnect':
         provider = new ethers.providers.Web3Provider(
-          window.walletConnectProvider,
+          window.walletConnectProvider
         );
         break;
       default:
@@ -57,10 +57,10 @@ export const GovernancePost = () => {
     const contract = new ethers.Contract(
       process.env.REACT_APP_FACTORY_ADDRESS,
       factotyABI.abi,
-      signer,
+      signer
     );
     const checkToken = await contract.checkToken(
-      process.env.REACT_APP_VASD_ADDRESS,
+      process.env.REACT_APP_VASD_ADDRESS
     );
     const result = ethers.utils.formatEther(checkToken);
     setgovBalance(result);
@@ -70,17 +70,17 @@ export const GovernancePost = () => {
     setGov();
   }, []);
   return (
-    <>
+    <div style={{ minHeight: 'calc(100vh - 276px)' }}>
       <Wrapper>
         <GovPostWrapper>
-          <GovHeadArea title={prop.title} transaction={prop.transaction}/>
-          <GovVotingArea prop={prop}/>
-          <GovTransactionBox tx={prop.transaction}/>
-          <GovTextArea title={prop.title} body={prop.body}/>
-          <GovDetailArea prop={prop}/>
-          <GovSchedule prop={prop}/>
+          <GovHeadArea title={prop.title} transaction={prop.transaction} />
+          <GovVotingArea prop={prop} />
+          <GovTransactionBox tx={prop.transaction} />
+          <GovTextArea title={prop.title} body={prop.body} />
+          <GovDetailArea prop={prop} />
+          <GovSchedule prop={prop} />
         </GovPostWrapper>
       </Wrapper>
-    </>
+    </div>
   );
 };
